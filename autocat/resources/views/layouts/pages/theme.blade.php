@@ -30,6 +30,12 @@
         <div class="main-panel">
           <div class="content-wrapper">
             <!-- Main -->
+            <div class="page-header">
+              <h3 class="page-title">
+                <span class="page-title-icon bg-gradient-success text-white me-2">
+                  @yield('title')
+              </h3>
+            </div>
             <!-- Main End -->
           </div>
           <!-- content-wrapper ends -->

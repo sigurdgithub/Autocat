@@ -58,15 +58,15 @@
           </div>
         </a>
         <div class="dropdown-menu navbar-dropdown" aria-labelledby="profileDropdown">
-          <a class="dropdown-item" href="#">
+          <a class="dropdown-item" href="pleeggezinAccount">
             <i class="mdi mdi-account me-2 text-success"></i> Account overzicht </a>
           <div class="dropdown-divider"></div>
-          <a class="dropdown-item" href="#">
+          <a class="dropdown-item" href="login">
             <i class="mdi mdi-power me-2 text-primary"></i> Log uit </a>
         </div>
       </li>
       <li class="nav-item nav-logout d-none d-lg-block">
-        <a class="nav-link" href="#">
+        <a class="nav-link" href="login">
           <i class="mdi mdi-power"></i>
         </a>
       </li>
