@@ -1,1 +1,1 @@
-@extends ('layouts.pages.theme')
+@extends('layouts.pages.theme')

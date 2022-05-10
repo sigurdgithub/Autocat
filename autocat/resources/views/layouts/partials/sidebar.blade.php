@@ -1,6 +1,3 @@
-@extends('layouts.pages.theme')
-
-@section('sidebar')
 <!-- partial:partials/_sidebar.html -->
 <nav class="sidebar sidebar-offcanvas" id="sidebar">
     <ul class="nav">
@@ -27,4 +24,3 @@
     </ul>
 </nav>
 <!-- partial -->
-@endsection

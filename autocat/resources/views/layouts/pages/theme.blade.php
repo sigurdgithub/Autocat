@@ -21,22 +21,20 @@
   <body>
     <div class="container-scroller">
         <!-- Navbar -->
-        @yield('navbar')
+        @include('layouts.partials.navbar')
         <!-- Navbar End -->
       <div class="container-fluid page-body-wrapper">
         <!-- Sidebar -->
-        @yield('sidebar')
+        @include('layouts.partials.sidebar')
         <!-- Sidebar End -->
         <div class="main-panel">
           <div class="content-wrapper">
             <!-- Main -->
-            @yield('catDetail')
-            @yield('catOverview')
             <!-- Main End -->
           </div>
           <!-- content-wrapper ends -->
           <!-- Footer -->
-          @yield('footer')
+          @include('layouts.partials.footer')
           <!-- Footer End -->
         </div>
         <!-- main-panel ends -->
