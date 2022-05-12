@@ -49,11 +49,12 @@ Route::get('/asielDashboard', function (){
 
 
 
-
-
-
-
-
+// Login 
 Route::get('/Login', function (){
     return view('login');
 });
+
+// Login FosterFamilies
+Route::post('/fosterDashboard', [LoginController::class,'authenticate']);
+
+// Login 
