@@ -1,11 +1,14 @@
 @extends('layouts.pages.theme')
-    @section('title')
-        <i class="mdi mdi-paw"></i>
-        </span>Kat Detail
-    @endsection
 
     @section('content')
     <!--HERO-->
+    <div class="page-header">
+        <h3 class="page-title">
+            <span class="page-title-icon bg-gradient-danger text-white me-2">
+                <i class="mdi mdi-paw"></i>
+            </span> Kat Detail        
+        </h3>
+    </div>
     <div class="content-wrapper">
         <div class="row">
             <h1>Mijn naam is <span></span></h1>

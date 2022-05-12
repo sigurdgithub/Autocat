@@ -4603,7 +4603,7 @@ textarea.form-control-lg {
   color: #fe7c96;
   border-color: #fe7c96; }
   .btn-outline-danger:hover {
-    color: #000;
+    color: ;
     background-color: #fe7c96;
     border-color: #fe7c96; }
   .btn-check:focus + .btn-outline-danger, .btn-outline-danger:focus {
@@ -4611,7 +4611,7 @@ textarea.form-control-lg {
     box-shadow: 0 0 0 0.25rem rgba(254, 124, 150, 0.5); }
   .btn-check:checked + .btn-outline-danger,
   .btn-check:active + .btn-outline-danger, .btn-outline-danger:active, .btn-outline-danger.active, .btn-outline-danger.dropdown-toggle.show {
-    color: #000;
+    color: ;
     background-color: #fe7c96;
     border-color: #fe7c96; }
     .btn-check:checked + .btn-outline-danger:focus,
@@ -13227,7 +13227,7 @@ code {
 
 .form-check-danger.form-check label input[type="checkbox"] + .input-helper:before,
 .form-check-danger.form-check label input[type="radio"] + .input-helper:before {
-  border-color: theme-color(danger); }
+  border-color: #fe7096; }
 
 .form-check-danger.form-check label input[type="checkbox"]:checked + .input-helper:before,
 .form-check-danger.form-check label input[type="radio"]:checked + .input-helper:before {
@@ -14116,6 +14116,11 @@ dl {
   -webkit-transition: width 0.25s ease, background 0.25s ease;
   -moz-transition: width 0.25s ease, background 0.25s ease;
   -ms-transition: width 0.25s ease, background 0.25s ease; }
+  .sidebar a {
+    color: #fe7c96;
+    text-decoration: none; }
+    a:hover {
+      color: white; }
   .sidebar .nav {
     overflow: hidden;
     -ms-flex-wrap: nowrap;
