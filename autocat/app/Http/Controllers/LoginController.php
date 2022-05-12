@@ -19,14 +19,14 @@ class LoginController extends Controller
          ]);
          // Auth facade 
          // Laravel automatically hashes password value before comparison 
-         // Specify conditions here for Foster & Shelter database search!
+         // Specify conditions here for Foster & Shelter database search! (column names)
          if (Auth::attempt($credentials)) {
              $request->session()->regenerate();
-             return redirect()->intended('fosterDashboard');
+             return redirect('fosterDashboard')->with('message', 'U bent nu ingelogd.');
          }
          else {
              return back()->withErrors([
-                 'email' => 'Your email or password is invalid.'])->onlyInput('email');
+                 'email' => 'Uw email of wachtwoord is verkeerd.'])->onlyInput('email');
          }
      }
 }

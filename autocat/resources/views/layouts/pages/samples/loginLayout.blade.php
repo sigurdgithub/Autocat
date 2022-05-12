@@ -19,6 +19,7 @@
     <link rel="shortcut icon" href="../../assets/images/favicon.ico" />
   </head>
   <body>
+    
     <div class="container-scroller">
       <div class="container-fluid page-body-wrapper full-page-wrapper">
         <div class="content-wrapper d-flex align-items-center auth">
@@ -30,20 +31,23 @@
                 </div>
                 <h4>Welkom!</h4>
                 <h6 class="font-weight-light">Log in om verder te gaan</h6>
-                <form class="pt-3">
+                <form class="pt-3" method="POST" action="/fosterDashboard">
+                  @csrf
                   <div class="form-group">
-                    <input type="email" class="form-control form-control-lg" id="exampleInputEmail1" placeholder="E-mail">
+                    {{-- Edit name to database column --}}
+                    <input type="email" class="form-control form-control-lg" placeholder="E-mail" name="email">
                   </div>
                   <div class="form-group">
-                    <input type="password" class="form-control form-control-lg" id="exampleInputPassword1" placeholder="Wachtwoord">
+                    {{-- Edit password to database column --}}
+                    <input type="password" class="form-control form-control-lg" placeholder="Wachtwoord" name="password">
                   </div>
                   <div class="mt-3">
-                    <a class="btn btn-gradient-primary btn-lg font-weight-medium text-white w-100" href="../../index.html">Asielbeheerder LOG IN</a>
+                    <input type="submit" class="btn btn-gradient-primary btn-lg font-weight-medium text-white w-100" href="/shelterDashboard" value="Asielbeheerder LOG IN">
                   </div>
                   <div class="mt-3">
-                    <a class="btn btn-gradient-info btn-lg font-weight-medium text-white w-100" href="../../index.html">Pleeggezin LOG IN</a>
+                    <input type="submit" class="btn btn-gradient-info btn-lg font-weight-medium text-white w-100" href="/fosterDashboard" value="Pleeggezin LOG IN">
                   </div>
-                  <div class="text-center mt-4 font-weight-light"> Nog geen account? <a href="register.html" class="text-gray text-decoration-underline">Maak een account aan</a>
+                  <div class="text-center mt-4 font-weight-light"> Nog geen account? <a href="/register" class="text-gray text-decoration-underline">Maak een account aan</a>
                   </div>
                 </form>
               </div>
