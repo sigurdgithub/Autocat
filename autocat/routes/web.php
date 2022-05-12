@@ -49,15 +49,10 @@ Route::get('/asielDashboard', function (){
     return view('shelterDashboard');
 });
 
-
-
-
-
-
-
-
-
-
-Route::get('/Login', function (){
+Route::get('/login', function (){
     return view('login');
+});
+
+Route::get('/privacy', function (){
+    return view('privacy');
 });

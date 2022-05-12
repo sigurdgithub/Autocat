@@ -11304,7 +11304,7 @@ code {
 /* Footer */
 .footer {
   background: #f5f5f5;
-  color: color(dark);
+  color: black;
   border-top: 1px solid #e7dee9;
   padding: 30px 1rem;
   transition: all 0.25s ease;
@@ -11314,7 +11314,7 @@ code {
   font-size: calc(0.875rem - 0.05rem);
   font-family: "ubuntu-regular", sans-serif; }
   .footer a {
-    color: #1bcfb4;
+    color: #9c9fa6;
     font-size: inherit; }
   @media (max-width: 991px) {
     .footer {
