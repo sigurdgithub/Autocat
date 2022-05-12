@@ -13,6 +13,10 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+Route::get('/', function (){
+    return view('welcome');
+});
+
 Route::get('/katDetail', function (){
     return view('catDetail');
 });
@@ -44,12 +48,7 @@ Route::get('/asielAccount', function (){
 Route::get('/asielDashboard', function (){
     return view('shelterDashboard');
 });
-
-
-
-
-
-// Login 
+ 
 Route::get('/Login', function (){
     return view('login');
 });
@@ -58,3 +57,10 @@ Route::get('/Login', function (){
 Route::post('/fosterDashboard', [LoginController::class,'authenticate']);
 
 // Login 
+Route::get('/login', function (){
+    return view('login');
+});
+
+Route::get('/privacy', function (){
+    return view('privacy');
+});
