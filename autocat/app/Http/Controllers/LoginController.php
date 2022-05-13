@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class LoginController extends Controller
 {
@@ -22,7 +23,7 @@ class LoginController extends Controller
          // Specify conditions here for Foster & Shelter database search! (column names)
          if (Auth::attempt($credentials)) {
              $request->session()->regenerate();
-             return redirect('fosterDashboard')->with('message', 'U bent nu ingelogd.');
+             return redirect()->intended('login');
          }
          else {
              return back()->withErrors([

@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\LoginController;
 
 /*
 |--------------------------------------------------------------------------
@@ -32,14 +33,11 @@ Route::get('/pleeggezinAccount', function (){
 Route::get('/pleeggezinDashboard', function (){
     return view('fosterDashboard');
 });
-
+ 
 Route::get('/pleeggezinnenOverzicht', function (){
     return view('fosterOverview');
 });
 
-Route::get('/login', function (){
-    return view('login');
-});
 
 Route::get('/asielAccount', function (){
     return view('shelterAccount');
@@ -49,11 +47,8 @@ Route::get('/asielDashboard', function (){
     return view('shelterDashboard');
 });
  
-Route::get('/Login', function (){
-    return view('login');
-});
 
-// Login FosterFamilies
+// Login 
 Route::post('/fosterDashboard', [LoginController::class,'authenticate']);
 
 // Login 
