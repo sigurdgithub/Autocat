@@ -22,6 +22,15 @@
                         </div>
                         <div class="modal-body">
                             <div class="form-floating">
+                                <select class="form-select" id="fosterSelect" aria-label="Floating label select example">
+                                    <option selected>Selecteer een pleeggezin</option>
+                                    <option value="1">One</option>
+                                    <option value="2">Two</option>
+                                    <option value="3">Three</option>
+                                </select>
+                                <label for="fosterSelect">Pleeggezin</label>
+                            </div>
+                            <div class="form-floating">
                                 <select class="form-select" id="catSelect" aria-label="Floating label select example">
                                     <option selected>Selecteer een kat</option>
                                     <option value="1">One</option>
