@@ -16,7 +16,7 @@ class CatPreference extends Model
      * @var array
      */
     protected $fillable = [
-        'cat_id', 'preference'
+        'cat_id', 'bottleFeeding', 'pregnancy', 'intensiveCare', 'noIntensiveCare', 'isolation', 'kids', 'dogs', 'cats', 'lapCat', 'playfulCat', 'outdoorCat', 'calmCat', 'bedroomAccess'
     ];
 
     /**
