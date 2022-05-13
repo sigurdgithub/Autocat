@@ -13,7 +13,7 @@ class Notification extends Model
      * @var array
      */
     protected $fillable = [
-        'catId', 'type','fosterId','sentByShelter', 'message'
+        'cat_Id', 'type','fosterFamily_Id','sentByShelter', 'message'
     ];
 
     /**
