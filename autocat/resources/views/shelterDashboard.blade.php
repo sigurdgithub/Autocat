@@ -136,4 +136,156 @@
                 </div>
             </div>
         </div> 
+                <!-- CAT DISPLAY BASED ON ADOPTER SELECTION-->
+    <div class="row">
+        <div class="col-md-6 stretch-card grid-margin">
+            <div class="card">
+                <div class="card-body">
+                    <div class="row">
+                        <h4 class="col-md-8 text-muted">Selecteer hier de kat</h4>
+                        <div class="col-md-4">
+                        <select class="select-option form-control bg-gradient-danger text-white">
+                            <option class="option">Selecteer</option>
+                            <option class="option"></option>
+                        </select>
+                        </div>
+                    </div>
+                    <ng-container>
+                        <div class="card mt-5">
+                            <div class="card-body card-border-danger">
+                                <p class="card-description"> Algemene Informatie </p>
+                                <div class="row">
+                                    <div class="col-md-6">Geboortedatum</div>
+                                    <div class="col-md-6"></div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6">Gender</div>
+                                    <div class="col-md-6"></div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6">Ras</div>
+                                    <div class="col-md-6"></div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6">Chipnummer</div>
+                                    <div class="col-md-6"></div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6">Socialisatie</div>
+                                    <div class="col-md-6"></div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6">Gewicht</div>
+                                    <div class="col-md-6"> gram</div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6">Gesteriliseerd</div>
+                                    <div class="col-md-6"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card mt-5">
+                            <div class="card-body card-border-danger">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <p class="card-description">Aandachtspunten</p>
+                                        <ul class="list-star">
+                                            <li></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <p class="card-description">Eigenschappen</p>
+                                    <ul class="list-star">
+                                        <li></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="mt-5"><a> Volledige fiche van </a></div>
+                    </ng-container>
+                </div>
+            </div>
+        </div>
+        <!-- FOSTER DISPLAY BASED ON CAT SELECTION-->
+        <div class="col-md-6 stretch-card grid-margin">
+            <div class="card">
+                <div class="card-body">
+                    <div class="row">
+                        <h4 class="col-md-8 text-muted">Selecteer hier het pleeggezin</h4>
+                        <div class="col-md-4">
+                            <select class="select-option form-control bg-gradient-info text-white">
+                                <option class="option">Selecteer</option>
+                                <option class="option"></option>
+                            </select>
+                        </div>
+                    </div>
+                    <ng-container>
+                        <div class="card mt-5">
+                            <div class="card-body card-border-info">
+                                <p class="card-description"> Algemene informatie </p>
+                                <div class="row">
+                                    <div class="col-md-6">Naam</div>                  
+                                    <div class="col-md-6"></div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6">Adres</div>
+                                    <div class="col-md-6">
+                                        <div></div>
+                                        <div></div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6">Geboortedatum</div>
+                                    <div class="col-md-6"></div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6">Email</div>
+                                    <div class="col-md-6"></div>
+                                </div>
+                                <div class="row mt-3">
+                                    <div class="col-md-6">Aantal beschikbare plaatsen </div>
+                                    <div class="col-md-6"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card mt-5">
+                            <div class="card-body card-border-info">
+                                <p class="card-description">Staat open voor</p>
+                                <ul class="list-star">
+                                    <li class="row">
+                                        <div class="col-md-10"></div>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div> 
+                            <!-- Roommates & Pets -->
+                        <div class="card mt-5">
+                            <div class="card-body card-border-info">
+                                <p class="card-description">Huisdieren</p>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                    <p></p>
+                                    </div>
+                                    <div class="col-md-6">
+                                    <p> jaar oud </p>
+                                    </div>
+                                </div>
+                                <p class="card-description">Huisgenoten</p>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <p></p>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <p>jaar oud </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="mt-5"><a> Volledige fiche van </a></div>
+                    </ng-container>
+                </div>
+            </div>
+        </div>
+    </div>
     @endsection
