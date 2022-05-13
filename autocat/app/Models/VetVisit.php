@@ -1,10 +1,10 @@
 <?php
 
-namespace App;
+namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class VerVisit extends Model
+class VetVisit extends Model
 {
 
     /**
@@ -23,6 +23,5 @@ class VerVisit extends Model
      */
     protected $hidden = [];
 
-    protected $table = 'vetVisits';
 
 }
