@@ -49,7 +49,7 @@
                   <div class="mt-3">
                     <input type="submit" class="btn btn-gradient-info btn-lg font-weight-medium text-white w-100" value="Pleeggezin LOG IN">
                   </div>
-                  <div class="text-center mt-4 font-weight-light"> Nog geen account? <a href="/register" class="text-gray text-decoration-underline">Maak een account aan</a>
+                  <div class="text-center mt-4 font-weight-light"> Nog geen account? <a href="/register" class="text-decoration-underline">Maak een account aan</a>
                   </div>
                 </form>
               </div>

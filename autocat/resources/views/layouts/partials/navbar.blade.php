@@ -59,10 +59,10 @@
         </a>
         <div class="dropdown-menu navbar-dropdown" aria-labelledby="profileDropdown">
           <a class="{{Request::path() === 'pleeggezinAccount'? 'dropdown-item active active':'dropdown-item'}}" href="pleeggezinAccount">
-            <i class="mdi mdi-account me-2 text-success"></i> Account overzicht </a>
+            <i class="mdi mdi-account me-2"></i> Account overzicht </a>
           <div class="dropdown-divider"></div>
           <a class="{{Request::path() === 'login'? 'dropdown-item active active':'dropdown-item'}}" href="login">
-            <i class="mdi mdi-power me-2 text-primary"></i> Log uit </a>
+            <i class="mdi mdi-power me-2"></i> Log uit </a>
         </div>
       </li>
       <li class="nav-item nav-logout d-none d-lg-block">
