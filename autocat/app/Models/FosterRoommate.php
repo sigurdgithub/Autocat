@@ -1,6 +1,6 @@
 <?php
 
-namespace App;
+namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
@@ -26,7 +26,5 @@ class FosterRoommate extends Model
      * @var array
      */
     protected $hidden = [];
-
-    protected $table = 'fosterRoommates';
 
 }

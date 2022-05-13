@@ -1,10 +1,10 @@
 <?php
 
-namespace App;
+namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Weihing extends Model
+class Weighing extends Model
 {
 
     /**
@@ -23,6 +23,5 @@ class Weihing extends Model
      */
     protected $hidden = [];
 
-    protected $table = 'weighings';
 
 }
