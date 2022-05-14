@@ -8,11 +8,11 @@
                 </span> Dashboard        
             </h3>
         </div>
+        <h3 class="text-muted">Meldingen</h3>
         <div class="grid-margin stretch-card">
             <div class="card">
                 <div class="card-body">
-                    <h4 class="card-title">Meldingen</h4>
-<!-- Modal for creation of new notifications -->
+                    <!-- Modal for creation of new notifications -->
                     <div class="modal fade" id="notificationModal" tabindex="-1" aria-labelledby="notificationModalLabel" aria-hidden="true">
                     <div class="modal-dialog">
                         <div class="modal-content">
@@ -54,8 +54,8 @@
                             </div>
                         </div>
                         <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                            <button type="button" class="btn btn-primary">Save changes</button>
+                            <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Sluit</button>
+                            <button type="button" class="btn btn-outline-success">Sla op</button>
                         </div>
                         </div>
                     </div>
@@ -69,7 +69,7 @@
                             <th>Type melding</th>
                             <th>Bericht</th>
                             <th>
-                                <button class="btn btn-icon btn-lg btn-gradient-primary" data-bs-toggle="modal" data-bs-target="#notificationModal">
+                                <button class="btn btn-icon btn-lg btn-gradient-success" data-bs-toggle="modal" data-bs-target="#notificationModal">
                                     <i class="mdi mdi-message-plus"></i>
                                 </button>
                             </th>
@@ -138,6 +138,7 @@
         </div> 
                 <!-- CAT DISPLAY BASED ON ADOPTER SELECTION-->
     <div class="row">
+        <h3 class="text-muted">Match Maker</h3>
         <div class="col-md-6 stretch-card grid-margin">
             <div class="card">
                 <div class="card-body">
@@ -264,21 +265,13 @@
                             <div class="card-body card-border-info">
                                 <p class="card-description">Huisdieren</p>
                                 <div class="row">
-                                    <div class="col-md-6">
-                                    <p></p>
-                                    </div>
-                                    <div class="col-md-6">
-                                    <p> jaar oud </p>
-                                    </div>
+                                    <div class="col-md-6"></div>
+                                    <div class="col-md-6"> jaar oud</div>
                                 </div>
                                 <p class="card-description">Huisgenoten</p>
                                 <div class="row">
-                                    <div class="col-md-6">
-                                        <p></p>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <p>jaar oud </p>
-                                    </div>
+                                    <div class="col-md-6"></div>
+                                    <div class="col-md-6">jaar oud</div>
                                 </div>
                             </div>
                         </div>
