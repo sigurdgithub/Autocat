@@ -1,8 +1,8 @@
 
 <nav class="navbar default-layout-navbar col-lg-12 col-12 p-0 fixed-top d-flex flex-row">
   <div class="text-center navbar-brand-wrapper d-flex align-items-center justify-content-center border-bottom">
-    <a class="navbar-brand brand-logo" href="/"><img src="assets/images/autoCatLogo/autoCatLogo_horizontaal.png" alt="logo" /></a>
-    <a class="navbar-brand brand-logo-mini" href="/"><img src="assets/images/autoCatLogo/autoCatLogo_small.png" alt="logo" /></a>
+    <a class="navbar-brand brand-logo" href="/"><img src="assets/images/autoCatLogo/autoCatLogo_horizontaal_grey.png" alt="logo" /></a>
+    <a class="navbar-brand brand-logo-mini" href="/"><img src="assets/images/autoCatLogo/autoCatLogo_small_grey.png" alt="logo" /></a>
   </div>
   <div class="navbar-menu-wrapper d-flex align-items-stretch border-bottom">
     <button class="navbar-toggler navbar-toggler align-self-center" type="button" data-toggle="minimize">

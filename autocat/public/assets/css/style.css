@@ -4916,17 +4916,17 @@ textarea.form-control-lg {
   padding: 0.25rem 1rem;
   clear: both;
   font-weight: 400;
-  color: #343a40;
+  color: darkgrey;
   text-align: inherit;
   text-decoration: none;
   white-space: nowrap;
   background-color: transparent;
   border: 0; }
   .dropdown-item:hover, .dropdown-item:focus {
-    color: darkgrey !important;
+    color: #343a40 !important;
     background-color: #e9ecef; }
   .dropdown-item.active, .dropdown-item:active {
-    color: black;
+    color: #343a40;
     text-decoration: none;
     background-color: #f5f5f5; }
   .dropdown-item.disabled, .dropdown-item:disabled {
@@ -14205,11 +14205,21 @@ dl {
           content: "\f140"; }
       .sidebar .nav .nav-item.active {
         background: #ffffff; }
-        .sidebar .nav .nav-item.active > .nav-link .menu-title {
+        .sidebar .nav .nav-item.danger.active > .nav-link .menu-title {
+          color: #fe7c96;
+          font-family: "ubuntu-medium", sans-serif; }
+        .sidebar .nav .nav-item.danger.active > .nav-link i {
+          color: #fe7c96; }
+        .sidebar .nav .nav-item.success.active > .nav-link .menu-title {
           color: #1bcfb4;
           font-family: "ubuntu-medium", sans-serif; }
-        .sidebar .nav .nav-item.active > .nav-link i {
+        .sidebar .nav .nav-item.success.active > .nav-link i {
           color: #1bcfb4; }
+        .sidebar .nav .nav-item.info.active > .nav-link .menu-title {
+          color: #198ae3;
+          font-family: "ubuntu-medium", sans-serif; }
+        .sidebar .nav .nav-item.info.active > .nav-link i {
+          color: #198ae3; }
       .sidebar .nav .nav-item:hover {
         background: #fcfcfc; }
       .sidebar .nav .nav-item.nav-profile .nav-link {

@@ -29,7 +29,7 @@
             <div class="col-lg-4 mx-auto">
               <div class="auth-form-light text-left p-5">
                 <div class="brand-logo">
-                  <img src="assets/images/autoCatLogo/autoCatLogo_horizontaal.png">
+                  <img src="assets/images/autoCatLogo/autoCatLogo_horizontaal_grey.png">
                 </div>
                 <h4>Welkom!</h4>
                 <h6 class="font-weight-light">Log in om verder te gaan</h6>
