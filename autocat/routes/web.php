@@ -15,7 +15,7 @@ use App\Http\Controllers\LoginController;
 */
 
 Route::get('/', function (){
-    return view('welcome');
+    return view('login');
 });
 
 Route::get('/katDetail', function (){
@@ -52,8 +52,8 @@ Route::get('/asielDashboard', function (){
 Route::post('/fosterDashboard', [LoginController::class,'authenticate']);
 
 // Login 
-Route::get('/login', function (){
-    return view('login');
+Route::get('/welcome', function (){
+    return view('welcome');
 });
 
 Route::get('/privacy', function (){
