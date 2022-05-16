@@ -8,6 +8,12 @@
         </a>
       </li>
       <li class="nav-item danger">
+        <a class="{{Request::path() === 'katDetail'? 'nav-link active active':'nav-link'}}" href="katDetail">
+          <span class="menu-title">Kat Aanmelden</span>
+          <i class="mdi mdi-plus-box menu-icon"></i>
+        </a>
+      </li>
+      <li class="nav-item danger">
         <a class="{{Request::path() === 'kattenOverzicht'? 'nav-link active active':'nav-link'}}" href="kattenOverzicht">
           <span class="menu-title">Katten Overzicht</span>
           <i class="mdi mdi-paw menu-icon"></i>
@@ -18,9 +24,6 @@
           <span class="menu-title">Pleeggezinnen Overzicht</span>
           <i class="mdi mdi-home-variant menu-icon"></i>
         </a>
-      </li>
-          <button class="btn btn-lg btn-outline-danger mt-4"><a href="katDetail">Kat aanmelden</a></button>
-      </li>
     </ul>
 </nav>
 <!-- partial -->
