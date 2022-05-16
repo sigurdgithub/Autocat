@@ -3,31 +3,84 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Hash;
+use Session;
+use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 
 class LoginController extends Controller
 {
-    /**
-     * Handle an authentication attempt.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */     
-     public function authenticate(Request $request) {
-         $credentials = $request->validate([
-             'email' => ['required', 'email'],
-             'password' => ['required'],
-         ]);
-         // Auth facade 
-         // Laravel automatically hashes password value before comparison 
-         // Specify conditions here for Foster & Shelter database search! (column names)
-         if (Auth::attempt($credentials)) {
-             $request->session()->regenerate();
-             return redirect()->intended('login');
-         }
-         else {
-             return back()->withErrors([
-                 'email' => 'Uw email of wachtwoord is verkeerd.'])->onlyInput('email');
-         }
-     }
-}
+
+    public function index()
+    {
+        return view('login');
+    }
+
+
+    public function customLogin(Request $request)
+    {
+        $request->validate([
+            'email' => 'required',
+            'password' => 'required',
+        ]);
+
+        $credentials = $request->only('email', 'password');
+        if (Auth::attempt($credentials)) {
+            return redirect()->intended('fosterDashboard')
+                ->with('message', 'You are now signed in.');
+        }
+
+        return back()->withErrors(['email' => 'Invalid credentials'])->onlyInput('email');
+    }
+
+
+
+    /*  public function registration()
+    {
+        return view('auth.registration');
+    }
+       
+ 
+    public function customRegistration(Request $request)
+    {  
+        $request->validate([
+            'name' => 'required',
+            'email' => 'required|email|unique:users',
+            'password' => 'required|min:6',
+        ]);
+            
+        $data = $request->all();
+        $check = $this->create($data);
+          
+        return redirect("dashboard")->withSuccess('have signed-in');
+    }
+ 
+ 
+    public function create(array $data)
+    {
+      return User::create([
+        'name' => $data['name'],
+        'email' => $data['email'],
+        'password' => Hash::make($data['password'])
+      ]);
+    }     */
+
+
+    public function dashboard()
+    {
+        if (Auth::check()) {
+            return view('dashboard');
+        }
+
+        return redirect("login")->withSuccess('are not allowed to access');
+    }
+
+
+    /*  public function signOut() {
+        Session::flush();
+        Auth::logout();
+   
+        return Redirect('login');
+    }
+} */
+};

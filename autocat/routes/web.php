@@ -1,5 +1,7 @@
 <?php
 
+namespace App\Http\Controllers;
+
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LoginController;
 
@@ -14,48 +16,53 @@ use App\Http\Controllers\LoginController;
 |
 */
 
-Route::get('/', function (){
+// Login
+
+Route::get('login', [LoginController::class, 'index'])->name('login');
+Route::post('custom-login', [LoginController::class, 'customLogin'])->name('login.custom');
+/* Route::get('registration', [LoginController::class, 'registration'])->name('register-user');
+Route::post('custom-registration', [LoginController::class, 'customRegistration'])->name('register.custom');
+Route::get('signout', [LoginController::class, 'signOut'])->name('signout');
+ */
+
+/* Route::get('/login', function () {
+    return view('login');
+});
+Route::post('/fosterDashboard', [LoginController::class, 'authenticate']); */
+
+Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/katDetail', function (){
+Route::get('/katDetail', function () {
     return view('catDetail');
 });
 
-Route::get('/kattenOverzicht', function (){
+Route::get('/kattenOverzicht', function () {
     return view('catOverview');
 });
 
-Route::get('/pleeggezinAccount', function (){
+Route::get('/pleeggezinAccount', function () {
     return view('fosterAccount');
 });
 
-Route::get('/pleeggezinDashboard', function (){
+Route::get('/pleeggezinDashboard', function () {
     return view('fosterDashboard');
 });
- 
-Route::get('/pleeggezinnenOverzicht', function (){
+
+Route::get('/pleeggezinnenOverzicht', function () {
     return view('fosterOverview');
 });
 
-
-Route::get('/asielAccount', function (){
+Route::get('/asielAccount', function () {
     return view('shelterAccount');
 });
 
-Route::get('/asielDashboard', function (){
+Route::get('/asielDashboard', function () {
     return view('shelterDashboard');
 });
- 
 
-// Login 
-Route::post('/fosterDashboard', [LoginController::class,'authenticate']);
 
-// Login 
-Route::get('/login', function (){
-    return view('login');
-});
-
-Route::get('/privacy', function (){
+Route::get('/privacy', function () {
     return view('privacy');
 });
