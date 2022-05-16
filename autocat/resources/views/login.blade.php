@@ -29,47 +29,72 @@
           <div class="col-lg-4 mx-auto">
             <div class="auth-form-light text-left p-5">
               <div class="brand-logo">
-                <img src="assets/images/autoCatLogo/autoCatLogo_horizontaal.png">
+                <img src="assets/images/autoCatLogo/autoCatLogo_horizontaal_grey.png">
               </div>
               <h4>Welkom!</h4>
               <h6 class="font-weight-light">Log in om verder te gaan</h6>
-              <form class="pt-3" method="POST" action="{{ route('login.custom')}}">
+              <form class="pt-3" method="POST" action="/fosterDashboard">
                 @csrf
                 <div class="form-group">
                   {{-- Edit name to database column --}}
-                  <input type="email" class="form-control form-control-lg" placeholder="E-mail" name="email"
-                    value="{{old('email')}}" required>
-                  @error('email')
-                  <span class="text-danger m-3">{{$message}}</span>
-                  @enderror
+                  <input type="email" class="form-control form-control-lg" placeholder="E-mail" name="email">
                 </div>
                 <div class="form-group">
                   {{-- Edit password to database column --}}
-                  <input type="password" class="form-control form-control-lg" placeholder="Wachtwoord" name="password"
-                    value="{{old('password')}}" required>
-                  @error('password')
-                  <span class="text-danger m-3">{{$message}}</span>
-                  @enderror
+                  <input type="password" class="form-control form-control-lg" placeholder="Wachtwoord" name="password">
                 </div>
                 {{-- <div class="mt-3">
                   <input type="submit" class="btn btn-gradient-primary btn-lg font-weight-medium text-white w-100"
-                    value="Asielbeheerder LOG IN">
+                    href="/shelterDashboard" value="Asielbeheerder LOG IN">
                 </div> --}}
                 <div class="mt-3">
                   <input type="submit" class="btn btn-gradient-info btn-lg font-weight-medium text-white w-100"
-                    value="LOG IN">
+                    value="Pleeggezin LOG IN">
                 </div>
                 <div class="text-center mt-4 font-weight-light"> Nog geen account? <a href="/register"
-                    class="text-gray text-decoration-underline">Maak een account aan</a>
+                    class="text-decoration-underline">Maak een account aan</a>
                 </div>
               </form>
             </div>
+            <h4>Welkom!</h4>
+            <h6 class="font-weight-light">Log in om verder te gaan</h6>
+            <form class="pt-3" method="POST" action="{{ route('login.custom')}}">
+              @csrf
+              <div class="form-group">
+                {{-- Edit name to database column --}}
+                <input type="email" class="form-control form-control-lg" placeholder="E-mail" name="email"
+                  value="{{old('email')}}" required>
+                @error('email')
+                <span class="text-danger m-3">{{$message}}</span>
+                @enderror
+              </div>
+              <div class="form-group">
+                {{-- Edit password to database column --}}
+                <input type="password" class="form-control form-control-lg" placeholder="Wachtwoord" name="password"
+                  value="{{old('password')}}" required>
+                @error('password')
+                <span class="text-danger m-3">{{$message}}</span>
+                @enderror
+              </div>
+              {{-- <div class="mt-3">
+                <input type="submit" class="btn btn-gradient-primary btn-lg font-weight-medium text-white w-100"
+                  value="Asielbeheerder LOG IN">
+              </div> --}}
+              <div class="mt-3">
+                <input type="submit" class="btn btn-gradient-info btn-lg font-weight-medium text-white w-100"
+                  value="LOG IN">
+              </div>
+              <div class="text-center mt-4 font-weight-light"> Nog geen account? <a href="/register"
+                  class="text-gray text-decoration-underline">Maak een account aan</a>
+              </div>
+            </form>
           </div>
         </div>
       </div>
-      <!-- content-wrapper ends -->
     </div>
-    <!-- page-body-wrapper ends -->
+    <!-- content-wrapper ends -->
+  </div>
+  <!-- page-body-wrapper ends -->
   </div>
   <!-- container-scroller -->
   <!-- plugins:js -->

@@ -1,8 +1,8 @@
 
 <nav class="navbar default-layout-navbar col-lg-12 col-12 p-0 fixed-top d-flex flex-row">
   <div class="text-center navbar-brand-wrapper d-flex align-items-center justify-content-center border-bottom">
-    <a class="navbar-brand brand-logo" href="/"><img src="assets/images/autoCatLogo/autoCatLogo_horizontaal.png" alt="logo" /></a>
-    <a class="navbar-brand brand-logo-mini" href="/"><img src="assets/images/autoCatLogo/autoCatLogo_small.png" alt="logo" /></a>
+    <a class="navbar-brand brand-logo" href="/welcome"><img src="assets/images/autoCatLogo/autoCatLogo_horizontaal_grey.png" alt="logo" /></a>
+    <a class="navbar-brand brand-logo-mini" href="/welcome"><img src="assets/images/autoCatLogo/autoCatLogo_small_grey.png" alt="logo" /></a>
   </div>
   <div class="navbar-menu-wrapper d-flex align-items-stretch border-bottom">
     <button class="navbar-toggler navbar-toggler align-self-center" type="button" data-toggle="minimize">
@@ -59,19 +59,19 @@
         </a>
         <div class="dropdown-menu navbar-dropdown" aria-labelledby="profileDropdown">
           <a class="{{Request::path() === 'pleeggezinAccount'? 'dropdown-item active active':'dropdown-item'}}" href="pleeggezinAccount">
-            <i class="mdi mdi-account me-2 text-success"></i> Account overzicht </a>
+            <i class="mdi mdi-account me-2"></i> Account overzicht </a>
           <div class="dropdown-divider"></div>
-          <a class="{{Request::path() === 'login'? 'dropdown-item active active':'dropdown-item'}}" href="login">
-            <i class="mdi mdi-power me-2 text-primary"></i> Log uit </a>
+          <a class="{{Request::path() === ''? 'dropdown-item active active':'dropdown-item'}}" href="/">
+            <i class="mdi mdi-power me-2"></i> Log uit </a>
         </div>
       </li>
       <li class="nav-item nav-logout d-none d-lg-block">
-        <a class="{{Request::path() === 'login'? 'nav-link active active':'nav-link'}}" href="login">
+        <a class="{{Request::path() === ''? 'nav-link active active':'nav-link'}}" href="/">
           <i class="mdi mdi-power"></i>
         </a>
       </li>
     </ul>
-    <button class="navbar-toggler navbar-toggler-right d-lg-none align-self-center" type="button" data-toggle="offcanvas">
+    <button class="navbar-toggler navbar-toggler-right d-lg-none align-self-center" type="/" data-toggle="offcanvas">
       <span class="mdi mdi-menu"></span>
     </button>
   </div>

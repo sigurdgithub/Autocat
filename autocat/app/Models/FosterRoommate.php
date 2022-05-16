@@ -17,7 +17,7 @@ class FosterRoommate extends Model
      * @var array
      */
     protected $fillable = [ 
-        'fosterFamilyId', 'relation', 'age'
+        'fosterFamily_Id', 'relation', 'age'
     ];
 
     /**

@@ -18,7 +18,7 @@ class FosterPet extends Model
      * @var array
      */
     protected $fillable = [
-        'fosterFamilyId', 'species', 'age'
+        'fosterFamily_Id', 'species', 'age'
     ];
 
     /**

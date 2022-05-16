@@ -1923,7 +1923,7 @@ sup {
   top: -.5em; }
 
 a {
-  color: white;
+  color: #8c8c8c;
   text-decoration: none; }
   a:hover {
     color: black; }
@@ -4619,7 +4619,7 @@ textarea.form-control-lg {
       -webkit-box-shadow: 0 0 0 0.25rem rgba(254, 124, 150, 0.5);
       box-shadow: 0 0 0 0.25rem rgba(254, 124, 150, 0.5); }
   .btn-outline-danger:disabled, .btn-outline-danger.disabled {
-    color: #fe7c96;
+    color: black;
     background-color: transparent; }
 
 .btn-outline-light {
@@ -4916,19 +4916,19 @@ textarea.form-control-lg {
   padding: 0.25rem 1rem;
   clear: both;
   font-weight: 400;
-  color: #343a40;
+  color: darkgrey;
   text-align: inherit;
   text-decoration: none;
   white-space: nowrap;
   background-color: transparent;
   border: 0; }
   .dropdown-item:hover, .dropdown-item:focus {
-    color: #1e2125;
+    color: #343a40 !important;
     background-color: #e9ecef; }
   .dropdown-item.active, .dropdown-item:active {
-    color: #fff;
+    color: #343a40;
     text-decoration: none;
-    background-color: #0d6efd; }
+    background-color: #f5f5f5; }
   .dropdown-item.disabled, .dropdown-item:disabled {
     color: #adb5bd;
     pointer-events: none;
@@ -5707,6 +5707,14 @@ textarea.form-control-lg {
   .card > .card-header + .list-group,
   .card > .list-group + .card-footer {
     border-top: 0; }
+
+.card-border-danger {
+  border: 1px solid #fe7c96;
+  border-radius: 0.3125rem; }
+
+.card-border-info {
+  border: 1px solid #198ae3;
+  border-radius: 0.3125rem; }
 
 .card-body {
   -webkit-box-flex: 1;
@@ -11115,7 +11123,7 @@ input:focus {
 
 /* Typography */
 body {
-  font-size: 1rem;
+  font-size: 0.875rem;
   font-family: "ubuntu-regular", sans-serif;
   font-weight: initial;
   line-height: normal;
@@ -11280,7 +11288,7 @@ code {
   border-radius: 4px; }
 
 .page-header {
-  margin: 0 0 1.5rem 0; }
+  margin: 0 0 4rem 0; }
   .page-header .breadcrumb {
     border: 0;
     margin-bottom: 0; }
@@ -11302,7 +11310,7 @@ code {
       line-height: 36px; }
 
 /* Footer */
-.footer {
+footer {
   background: #f5f5f5;
   color: black;
   border-top: 1px solid #e7dee9;
@@ -11313,11 +11321,13 @@ code {
   -ms-transition: all 0.25s ease;
   font-size: calc(0.875rem - 0.05rem);
   font-family: "ubuntu-regular", sans-serif; }
-  .footer a {
+  footer a {
     color: #9c9fa6;
     font-size: inherit; }
+    footer a:hover {
+      color: black; }
   @media (max-width: 991px) {
-    .footer {
+    footer {
       margin-left: 0;
       width: 100%; } }
 
@@ -12373,7 +12383,7 @@ code {
 .btn-outline-success:hover, .btn-outline-success:focus, .btn-outline-success:active {
   background: -webkit-gradient(linear, left top, right top, from(#84d9d2), to(#07cdae));
   background: linear-gradient(to right, #84d9d2, #07cdae);
-  color: #000000; }
+  color: white !important; }
 
 .btn-inverse-info {
   background-color: rgba(25, 138, 227, 0.2);
@@ -12408,7 +12418,7 @@ code {
 .btn-outline-info:hover, .btn-outline-info:focus, .btn-outline-info:active {
   background: -webkit-gradient(linear, left top, right top, from(#90caf9), color-stop(99%, #047edf));
   background: linear-gradient(to right, #90caf9, #047edf 99%);
-  color: #000000; }
+  color: white !important; }
 
 .btn-inverse-warning {
   background-color: rgba(254, 215, 19, 0.2);
@@ -12478,7 +12488,7 @@ code {
 .btn-outline-danger:hover, .btn-outline-danger:focus, .btn-outline-danger:active {
   background: -webkit-gradient(linear, left top, right top, from(#ffbf96), to(#fe7096));
   background: linear-gradient(to right, #ffbf96, #fe7096);
-  color: #000000; }
+  color: white !important; }
 
 .btn-inverse-light {
   background-color: rgba(248, 249, 250, 0.2);
@@ -14119,7 +14129,7 @@ dl {
   .sidebar a {
     color: #fe7c96;
     text-decoration: none; }
-    a:hover {
+    .sidebar a:hover {
       color: white; }
   .sidebar .nav {
     overflow: hidden;
@@ -14195,11 +14205,21 @@ dl {
           content: "\f140"; }
       .sidebar .nav .nav-item.active {
         background: #ffffff; }
-        .sidebar .nav .nav-item.active > .nav-link .menu-title {
+        .sidebar .nav .nav-item.danger.active > .nav-link .menu-title {
+          color: #fe7c96;
+          font-family: "ubuntu-medium", sans-serif; }
+        .sidebar .nav .nav-item.danger.active > .nav-link i {
+          color: #fe7c96; }
+        .sidebar .nav .nav-item.success.active > .nav-link .menu-title {
           color: #1bcfb4;
           font-family: "ubuntu-medium", sans-serif; }
-        .sidebar .nav .nav-item.active > .nav-link i {
+        .sidebar .nav .nav-item.success.active > .nav-link i {
           color: #1bcfb4; }
+        .sidebar .nav .nav-item.info.active > .nav-link .menu-title {
+          color: #198ae3;
+          font-family: "ubuntu-medium", sans-serif; }
+        .sidebar .nav .nav-item.info.active > .nav-link i {
+          color: #198ae3; }
       .sidebar .nav .nav-item:hover {
         background: #fcfcfc; }
       .sidebar .nav .nav-item.nav-profile .nav-link {
@@ -14451,5 +14471,7 @@ dl {
   -webkit-box-flex: 1;
   -ms-flex-positive: 1;
   flex-grow: 1; }
+
+
 
 /*# sourceMappingURL=style.css.map */
