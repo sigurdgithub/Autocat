@@ -15,7 +15,18 @@ class CatController extends Controller
         $cats = Cat::where($matchCase)->get();
         //$notifications = Notification::all();
         
-        //dd($notifications);
+        //dd($cats);
+        return $cats;
+        //return view('fosterDashboard', ['cats' => $cats]);
+
+    }
+    public static function getCatsByFosterIdModal($fosterId)
+    {
+        $matchCase = ['fosterFamily_id'=> $fosterId];
+        $cats = Cat::select('id','name')->where($matchCase)->get();
+        //$notifications = Notification::all();
+        
+        //dd($cats);
         return $cats;
         //return view('fosterDashboard', ['cats' => $cats]);
 

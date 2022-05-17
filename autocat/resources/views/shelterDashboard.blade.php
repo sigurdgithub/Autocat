@@ -301,4 +301,31 @@
             </div>
         </div>
     </div>
+    <script type="text/javascript">
+    $(document).ready(function() {
+        $('select[name="fosterFamily"]').on('change', function() {
+            var fosterId = $(this).val();
+            if(fosterId) {
+                $.ajax({
+                    url: '/asielDashboard/ajax/'+fosterId,
+                    type: "GET",
+                    dataType: "json",
+                    success:function(data) {
+
+                        
+                        $('select[name="cat"]').empty();
+                        $.each(data, function(key, value) {
+                            $('select[name="cat"]').append('<option value="'+ value['id'] +'">'+ (value['name']) +'</option>');
+                        });
+
+
+                    }
+                });
+            }else{
+                $('select[name="cat"]').empty();
+            }
+        });
+    });
+</script>
+
     @endsection

@@ -12,7 +12,7 @@ class Cat extends Model
     }
 
     public function fosterFamily() {
-        return $this->belongsTo(FosterFamily::class);
+        return $this->belongsTo(FosterFamily::class, 'fosterFamily_id');
     }
 
     public function pictures() {

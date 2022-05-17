@@ -41,10 +41,6 @@ Route::get('/pleeggezinnenOverzicht', function () {
 });
 
 
-Route::get('/asielAccount', function () {
-    return view('shelterAccount');
-});
-
 Route::get('/asielDashboard', function () {
     return view('shelterDashboard');
 });
@@ -58,7 +54,8 @@ Route::get('/privacy', function () {
 });
 
 Route::get('/notifications/{fosterId}', [NotificationController::class, 'showByFosterId'])->name('notifications');
-Route::get('/notifications', [NotificationController::class, 'showShelterNotifications'])->name('shelterNotifications');
+Route::get('/asielDashboard', [NotificationController::class, 'showShelterNotifications'])->name('shelterNotifications');
+Route::get('/asielDashboard/ajax/{fosterId}', [NotificationController::class, 'getCatsByFosterId']);
 Route::delete('/notifications_delete/{id}', [NotificationController::class, 'delete'])->name('delete');
 Route::post('/addNotification', [NotificationController::class, 'store'])->name('addNotification');
 Route::post('/addNotificationShelter', [NotificationController::class, 'storeShelter'])->name('addNotificationShelter');

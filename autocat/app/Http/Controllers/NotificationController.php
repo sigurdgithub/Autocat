@@ -32,18 +32,18 @@ class NotificationController extends Controller
     {
         // Validate the request...
  
-        $flight = new Notification;
+        $notification = new Notification;
  
-        $flight->cat_id = $request->cat;
-        $flight->type = $request->type;
-        $flight->message = $request->message;
+        $notification->cat_id = $request->cat;
+        $notification->type = $request->type;
+        $notification->message = $request->message;
         
-        $flight->sentByShelter = 0;
+        $notification->sentByShelter = 0;
         
-        $flight->fosterFamily_id = $request->fosterFamily;
+        $notification->fosterFamily_id = $request->fosterFamily;
 
  
-        $flight->save();
+        $notification->save();
         return redirect()->route('notifications', ['fosterId' => $request->fosterFamily]);
     }
     /**
@@ -56,18 +56,18 @@ class NotificationController extends Controller
     {
         // Validate the request...
  
-        $flight = new Notification;
+        $notification = new Notification;
  
-        $flight->cat_id = $request->cat;
-        $flight->type = $request->type;
-        $flight->message = $request->message;
+        $notification->cat_id = $request->cat;
+        $notification->type = $request->type;
+        $notification->message = $request->message;
         
-        $flight->sentByShelter = 1;
+        $notification->sentByShelter = 1;
         
-        $flight->fosterFamily_id = $request->fosterFamily;
+        $notification->fosterFamily_id = $request->fosterFamily;
 
  
-        $flight->save();
+        $notification->save();
         return redirect()->route('shelterNotifications');
     }
 
@@ -101,6 +101,11 @@ class NotificationController extends Controller
         //dd($resultCats);
         return view('shelterDashboard', ['notifications' => $notifications, 'cats' => $cats, 'fosterFamilies' => $fosterFamilies]);
 
+    }
+
+    public function getCatsByFosterId($fosterId) {
+        $cats = CatController::getCatsByFosterIdModal($fosterId);
+        return json_encode($cats);
     }
 
 }
