@@ -32,6 +32,7 @@
                 <img src="assets/images/autoCatLogo/autoCatLogo_horizontaal_grey.png">
               </div>
               <h4>Welkom!</h4>
+              <h5 class="font-weight-light">Log in om verder te gaan</h5>
               <form class="pt-3" method="POST" action="{{ route('login.custom')}}">
                 @csrf
                 <div class="form-group">
@@ -58,11 +59,17 @@
                   <input type="submit" class="btn btn-gradient-info btn-lg font-weight-medium text-white w-100"
                     value="LOG IN">
                 </div>
-                <div class="text-center mt-4 font-weight-light"> Nog geen account? <a href="/register"
-                    class="text-gray text-decoration-underline">Maak een account aan</a>
+                <div class="text-center mt-4 font-weight-light">
+                  <h5 class="font-weight-light">Nog geen account?</h5>
+                  <a href="/asielDashboard" class="text-gray text-decoration-underline">Maak een account aan als
+                    <b>asielbeheerder</b></a><br>
+                  <br>
+                  <a href="/pleeggezinDashboard" class="text-gray text-decoration-underline text-bottom">Maak een
+                    account aan als <b>pleeggezin</b></a>
+
                 </div>
               </form>
-              <h6 class="font-weight-light">Log in om verder te gaan</h6>
+
 
             </div>
 
