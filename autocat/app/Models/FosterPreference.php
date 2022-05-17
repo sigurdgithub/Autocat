@@ -26,5 +26,7 @@ class FosterPreference extends Model
      */
     protected $hidden = [];
 
+    protected $table = 'fosterPreferences';
+
 
 }

@@ -7,12 +7,16 @@ use Illuminate\Database\Eloquent\Model;
 class Cat extends Model
 {
 
-    public function preferences() {
-        return $this->morphMany(CatPreference::class, 'cat');
+    public function notifications() {
+        return $this->hasMany(Notification::class, 'cat');
+    }
+
+    public function fosterFamily() {
+        return $this->belongsTo(FosterFamily::class, 'fosterFamily_id');
     }
 
     public function pictures() {
-        return $this->morphMany(CatPicture::class, 'cat');
+        return $this->hasMany(CatPicture::class, 'cat');
     }
     /**
      * The attributes that are mass assignable.
@@ -21,7 +25,7 @@ class Cat extends Model
      */
     protected $fillable = ['gender','name','dateOfBirth','breed','furColor', 'furLength', 'chipNumber', 'adoptionStatus', 'notifierName', 'notifierPhone',
                             'socialization', 'startWeight', 'sterilized', 'extraInfo', 'medication', 'personality', 'solo', 'withPet', 'withBuddy',
-                            'gardenAccess', 'buddyId', 'image'
+                            'gardenAccess', 'buddyId', 'image', 'fosterFamily_id'
     ];
 
     /**
@@ -31,5 +35,6 @@ class Cat extends Model
      */
     protected $hidden = [];
 
+    protected $table = 'cats';
 
 }
