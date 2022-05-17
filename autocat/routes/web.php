@@ -60,3 +60,4 @@ Route::get('/privacy', function () {
 Route::get('/notifications/{fosterId}', [NotificationController::class, 'showByFosterId'])->name('notifications');
 Route::get('/notifications', [NotificationController::class, 'showShelterNotifications']);
 Route::delete('/notifications_delete/{id}', [NotificationController::class, 'delete'])->name('delete');
+Route::post('/addNotification', [NotificationController::class, 'store'])->name('addNotification');

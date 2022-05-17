@@ -21,7 +21,7 @@ class Cat extends Model
      */
     protected $fillable = ['gender','name','dateOfBirth','breed','furColor', 'furLength', 'chipNumber', 'adoptionStatus', 'notifierName', 'notifierPhone',
                             'socialization', 'startWeight', 'sterilized', 'extraInfo', 'medication', 'personality', 'solo', 'withPet', 'withBuddy',
-                            'gardenAccess', 'buddyId', 'image'
+                            'gardenAccess', 'buddyId', 'image', 'fosterFamily_id'
     ];
 
     /**

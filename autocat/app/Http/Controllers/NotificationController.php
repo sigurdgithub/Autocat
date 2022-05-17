@@ -16,12 +16,37 @@ class NotificationController extends Controller
         $matchCase = ['fosterFamily_id'=> $fosterId, 'sentByShelter' => 1];
         $notifications = Notification::where($matchCase)->get();
         //$notifications = Notification::all();
-        
+        $cats = CatController::getCatsByFosterId($fosterId);
         //dd($notifications);
-        return view('fosterDashboard', ['notifications' => $notifications]);
+        return view('fosterDashboard', ['notifications' => $notifications, 'cats' => $cats,'fosterFamily' => $fosterId]);
 
     }
     
+    /**
+     * Store a new flight in the database.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function store(Request $request)
+    {
+        // Validate the request...
+ 
+        $flight = new Notification;
+ 
+        $flight->cat_id = $request->cat;
+        $flight->type = $request->type;
+        $flight->message = $request->message;
+        
+        $flight->sentByShelter = 0;
+        
+        $flight->fosterFamily_id = $request->fosterFamily;
+
+ 
+        $flight->save();
+        return redirect()->route('notifications', ['fosterId' => $request->fosterFamily]);
+    }
+
     public function delete($id) {
         $notifications = Notification::find($id)->delete();
         $notifications = Notification::all();
