@@ -21,18 +21,21 @@
                             <h5 class="modal-title" id="notificationModalLabel">Nieuwe melding</h5>
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
+                        <form action="{{ route('addNotification')}}" method="post" enctype="multipart/form"required>
+                        @csrf
+                        <input type="hidden" name="fosterFamily" value="{{$fosterFamily}}">
                         <div class="modal-body">
                             <div class="form-floating">
-                                <select class="form-select" id="catSelect" aria-label="Floating label select example">
+                                <select class="form-select" name="cat" id="catSelect" aria-label="Floating label select example">
                                     <option selected>Selecteer een kat</option>
-                                    <option value="1">One</option>
-                                    <option value="2">Two</option>
-                                    <option value="3">Three</option>
+                                    @foreach ($cats as $cat)
+                                        <option value="{{ $cat->id }}">{{ $cat->name }}</option>
+                                    @endforeach
                                 </select>
                                 <label for="catSelect">Katnaam</label>
                             </div>
                             <div class="form-floating">
-                                <select class="form-select" id="notificationTypeSelect" aria-label="Floating label select example">
+                                <select class="form-select" name="type" id="notificationTypeSelect" aria-label="Floating label select example">
                                     <option selected>Selecteer een Type melding</option>
                                     <option value="1">One</option>
                                     <option value="2">Two</option>
@@ -41,14 +44,15 @@
                                 <label for="notificationTypeSelect">Melding-type</label>
                             </div>
                             <div class="form-floating">
-                                <textarea class="form-control" placeholder="Leave a comment here" id="notificationMessage" style="height: 100px"></textarea>
+                                <textarea class="form-control" name="message" placeholder="Leave a comment here" id="notificationMessage" style="height: 100px"></textarea>
                                 <label for="notificationMessage">Comments</label>
                             </div>
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                            <button type="button" class="btn btn-primary">Save changes</button>
+                            <button type="submit"  class="btn btn-primary">Save changes</button>
                         </div>
+                        </form>
                         </div>
                     </div>
                     </div>

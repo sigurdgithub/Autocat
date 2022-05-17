@@ -23,6 +23,7 @@ return new class extends Migration
             $table->string('chipNumber');
             $table->string('preferences');
             $table->string('adoptionStatus');
+            $table->foreignId('fosterFamily_id');
             $table->timestamps();
         });
     }
