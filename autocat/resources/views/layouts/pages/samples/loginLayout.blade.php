@@ -17,6 +17,11 @@
     <link rel="stylesheet" href="../../assets/css/style.css">
     <!-- End layout styles -->
     <link rel="shortcut icon" href="../../assets/images/favicon.ico" />
+    <style type="text/css">
+    .text-gray:hover { color: green;
+
+    } 
+    </style>
   </head>
   <body>
     

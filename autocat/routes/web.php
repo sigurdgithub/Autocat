@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\NotificationController;
 use App\Http\Controllers\LoginController;
 
 /*
@@ -55,3 +56,7 @@ Route::get('/welcome', function () {
 Route::get('/privacy', function () {
     return view('privacy');
 });
+
+Route::get('/notifications/{fosterId}', [NotificationController::class, 'showByFosterId'])->name('notifications');
+Route::get('/notifications', [NotificationController::class, 'showShelterNotifications']);
+Route::delete('/notifications_delete/{id}', [NotificationController::class, 'delete'])->name('delete');

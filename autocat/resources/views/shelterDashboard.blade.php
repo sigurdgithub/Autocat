@@ -76,6 +76,19 @@
                             </tr>
                         </thead>
                         <tbody>
+                            @foreach ($notifications as $notification)
+                            <tr>
+                                <td>{{$notification->fosterFamily->firstName}} {{$notification->fosterFamily->lastName}}</td>
+                                <td>{{$notification->cat->name}}</td>
+                                <td>{{$notification->type}}</td>
+                                <td>{{$notification->message}}</td>
+                                <td>                          
+                                    <a type="button" href="{{route('delete', $notification->id)}}" class="btn btn-inverse-info btn-icon">
+                                        <i class="mdi mdi-delete"></i>
+                                    </a>
+                                </td>                      
+                            </tr>
+                            @endforeach
                             <tr>
                                 <td>Liesbeth P</td>
                                 <td>Malou</td>

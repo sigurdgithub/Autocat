@@ -26,5 +26,8 @@ class CatPicture extends Model
      */
     protected $hidden = [];
 
+    protected $table = 'catPictures';
+
+
 
 }

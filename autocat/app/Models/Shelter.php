@@ -23,5 +23,7 @@ class Shelter extends Model
      */
     protected $hidden = [];
 
+    protected $table = 'shelters';
+
 
 }

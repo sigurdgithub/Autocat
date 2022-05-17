@@ -1,8 +1,8 @@
 
 <nav class="navbar default-layout-navbar col-lg-12 col-12 p-0 fixed-top d-flex flex-row">
   <div class="text-center navbar-brand-wrapper d-flex align-items-center justify-content-center border-bottom">
-    <a class="navbar-brand brand-logo" href="/welcome"><img src="assets/images/autoCatLogo/autoCatLogo_horizontaal_grey.png" alt="logo" /></a>
-    <a class="navbar-brand brand-logo-mini" href="/welcome"><img src="assets/images/autoCatLogo/autoCatLogo_small_grey.png" alt="logo" /></a>
+    <a class="navbar-brand brand-logo" href="/"><img src="../assets/images/autoCatLogo/autoCatLogo_horizontaal.png" alt="logo" /></a>
+    <a class="navbar-brand brand-logo-mini" href="/"><img src="../assets/images/autoCatLogo/autoCatLogo_small.png" alt="logo" /></a>
   </div>
   <div class="navbar-menu-wrapper d-flex align-items-stretch border-bottom">
     <button class="navbar-toggler navbar-toggler align-self-center" type="button" data-toggle="minimize">
@@ -19,7 +19,7 @@
           <div class="dropdown-divider"></div>
           <a class="dropdown-item preview-item">
             <div class="preview-thumbnail">
-              <img src="assets/images/faces/face4.jpg" alt="image" class="profile-pic">
+              <img src="../assets/images/faces/face4.jpg" alt="image" class="profile-pic">
             </div>
             <div class="preview-item-content d-flex align-items-start flex-column justify-content-center">
               <h6 class="preview-subject ellipsis mb-1 font-weight-normal">Nieuw bericht van <b>Massimo</b></h6>
@@ -28,7 +28,7 @@
           <div class="dropdown-divider"></div>
           <a class="dropdown-item preview-item">
             <div class="preview-thumbnail">
-              <img src="assets/images/faces/face2.jpg" alt="image" class="profile-pic">
+              <img src="../assets/images/faces/face2.jpg" alt="image" class="profile-pic">
             </div>
             <div class="preview-item-content d-flex align-items-start flex-column justify-content-center">
               <h6 class="preview-subject ellipsis mb-1 font-weight-normal">Nieuw bericht van <b>Wesley</b></h6>
@@ -37,7 +37,7 @@
           <div class="dropdown-divider"></div>
           <a class="dropdown-item preview-item">
             <div class="preview-thumbnail">
-              <img src="assets/images/faces/face3.jpg" alt="image" class="profile-pic">
+              <img src="../assets/images/faces/face3.jpg" alt="image" class="profile-pic">
             </div>
             <div class="preview-item-content d-flex align-items-start flex-column justify-content-center">
               <h6 class="preview-subject ellipsis mb-1 font-weight-normal">Nieuw bericht van <b>Jari</b></h6>
@@ -50,7 +50,7 @@
       <li class="nav-item nav-profile dropdown">
         <a class="nav-link dropdown-toggle" id="profileDropdown" href="#" data-bs-toggle="dropdown" aria-expanded="false">
           <div class="nav-profile-img">
-            <img src="assets/images/faces/face1.jpg" alt="image">
+            <img src="../assets/images/faces/face1.jpg" alt="image">
             <span class="availability-status online"></span>
           </div>
           <div class="nav-profile-text">

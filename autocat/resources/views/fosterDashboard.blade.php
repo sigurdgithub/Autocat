@@ -66,16 +66,23 @@
                             </tr>
                         </thead>
                         <tbody>
+                            @foreach ($notifications as $notification)
                             <tr>
-                                <td>Malou</td>
-                                <td>Profiel up to date?</td>
-                                <td>lorem ipsum dolor sit amet</td>
-                                <td>                          
-                                    <button type="button" class="btn btn-inverse-info btn-icon">
-                                        <i class="mdi mdi-delete"></i>
-                                    </button>
+                                <td>{{$notification->cat->name}}</td>
+                                <td>{{$notification->type}}</td>
+                                <td>{{$notification->message}}</td>
+                                <td>
+                                    <form action="{{route('delete', $notification->id)}}" method="POST">
+                                        @method('DELETE')
+                                        @csrf
+                                        <button class="btn btn-inverse-info btn-icon btn-lg">
+                                            <i class="mdi mdi-delete"></i>
+                                        </button>
+                                    </form>                          
+                                    
                                 </td>                      
                             </tr>
+                            @endforeach
                             <tr>
                                 <td>Caramel</td>
                                 <td>Vraag voor opvang</td>
