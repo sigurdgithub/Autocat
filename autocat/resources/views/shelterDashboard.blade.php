@@ -8,11 +8,11 @@
                 </span> Dashboard        
             </h3>
         </div>
+        <h3 class="text-muted">Meldingen</h3>
         <div class="grid-margin stretch-card">
             <div class="card">
                 <div class="card-body">
-                    <h4 class="card-title">Meldingen</h4>
-<!-- Modal for creation of new notifications -->
+                    <!-- Modal for creation of new notifications -->
                     <div class="modal fade" id="notificationModal" tabindex="-1" aria-labelledby="notificationModalLabel" aria-hidden="true">
                     <div class="modal-dialog">
                         <div class="modal-content">
@@ -54,8 +54,8 @@
                             </div>
                         </div>
                         <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                            <button type="button" class="btn btn-primary">Save changes</button>
+                            <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Sluit</button>
+                            <button type="button" class="btn btn-outline-success">Sla op</button>
                         </div>
                         </div>
                     </div>
@@ -69,7 +69,7 @@
                             <th>Type melding</th>
                             <th>Bericht</th>
                             <th>
-                                <button class="btn btn-icon btn-lg btn-gradient-primary" data-bs-toggle="modal" data-bs-target="#notificationModal">
+                                <button class="btn btn-icon btn-lg btn-gradient-success" data-bs-toggle="modal" data-bs-target="#notificationModal">
                                     <i class="mdi mdi-message-plus"></i>
                                 </button>
                             </th>
@@ -149,4 +149,149 @@
                 </div>
             </div>
         </div> 
+                <!-- CAT DISPLAY BASED ON ADOPTER SELECTION-->
+    <div class="row">
+        <h3 class="text-muted">Match Maker</h3>
+        <div class="col-md-6 stretch-card grid-margin">
+            <div class="card">
+                <div class="card-body">
+                    <div class="row">
+                        <h4 class="col-md-8 text-muted">Selecteer hier de kat</h4>
+                        <div class="col-md-4">
+                        <select class="select-option form-control bg-gradient-danger text-white">
+                            <option class="option">Selecteer</option>
+                            <option class="option"></option>
+                        </select>
+                        </div>
+                    </div>
+                    <ng-container>
+                        <div class="card mt-5">
+                            <div class="card-body card-border-danger">
+                                <p class="card-description"> Algemene Informatie </p>
+                                <div class="row">
+                                    <div class="col-md-6">Geboortedatum</div>
+                                    <div class="col-md-6"></div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6">Gender</div>
+                                    <div class="col-md-6"></div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6">Ras</div>
+                                    <div class="col-md-6"></div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6">Chipnummer</div>
+                                    <div class="col-md-6"></div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6">Socialisatie</div>
+                                    <div class="col-md-6"></div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6">Gewicht</div>
+                                    <div class="col-md-6"> gram</div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6">Gesteriliseerd</div>
+                                    <div class="col-md-6"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card mt-5">
+                            <div class="card-body card-border-danger">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <p class="card-description">Aandachtspunten</p>
+                                        <ul class="list-star">
+                                            <li></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <p class="card-description">Eigenschappen</p>
+                                    <ul class="list-star">
+                                        <li></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="mt-5"><a> Volledige fiche van </a></div>
+                    </ng-container>
+                </div>
+            </div>
+        </div>
+        <!-- FOSTER DISPLAY BASED ON CAT SELECTION-->
+        <div class="col-md-6 stretch-card grid-margin">
+            <div class="card">
+                <div class="card-body">
+                    <div class="row">
+                        <h4 class="col-md-8 text-muted">Selecteer hier het pleeggezin</h4>
+                        <div class="col-md-4">
+                            <select class="select-option form-control bg-gradient-info text-white">
+                                <option class="option">Selecteer</option>
+                                <option class="option"></option>
+                            </select>
+                        </div>
+                    </div>
+                    <ng-container>
+                        <div class="card mt-5">
+                            <div class="card-body card-border-info">
+                                <p class="card-description"> Algemene informatie </p>
+                                <div class="row">
+                                    <div class="col-md-6">Naam</div>                  
+                                    <div class="col-md-6"></div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6">Adres</div>
+                                    <div class="col-md-6">
+                                        <div></div>
+                                        <div></div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6">Geboortedatum</div>
+                                    <div class="col-md-6"></div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6">Email</div>
+                                    <div class="col-md-6"></div>
+                                </div>
+                                <div class="row mt-3">
+                                    <div class="col-md-6">Aantal beschikbare plaatsen </div>
+                                    <div class="col-md-6"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card mt-5">
+                            <div class="card-body card-border-info">
+                                <p class="card-description">Staat open voor</p>
+                                <ul class="list-star">
+                                    <li class="row">
+                                        <div class="col-md-10"></div>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div> 
+                            <!-- Roommates & Pets -->
+                        <div class="card mt-5">
+                            <div class="card-body card-border-info">
+                                <p class="card-description">Huisdieren</p>
+                                <div class="row">
+                                    <div class="col-md-6"></div>
+                                    <div class="col-md-6"> jaar oud</div>
+                                </div>
+                                <p class="card-description">Huisgenoten</p>
+                                <div class="row">
+                                    <div class="col-md-6"></div>
+                                    <div class="col-md-6">jaar oud</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="mt-5"><a> Volledige fiche van </a></div>
+                    </ng-container>
+                </div>
+            </div>
+        </div>
+    </div>
     @endsection

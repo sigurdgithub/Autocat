@@ -13,7 +13,7 @@ class Weighing extends Model
      * @var array
      */
     protected $fillable = [
-        'catId', 'date', 'weight', 'comments'
+        'cat_Id', 'date', 'weight', 'comments'
     ];
 
     /**
