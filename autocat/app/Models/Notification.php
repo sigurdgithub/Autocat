@@ -7,11 +7,11 @@ use Illuminate\Database\Eloquent\Model;
 class Notification extends Model
 {
     public function fosterFamily() {
-        return $this->belongsTo(FosterFamily::class);
+        return $this->belongsTo(FosterFamily::class, 'fosterFamily_id');
     }
 
     public function cat() {
-        return $this->belongsTo(Cat::class);
+        return $this->belongsTo(Cat::class, 'cat_id');
     }
 
     /**

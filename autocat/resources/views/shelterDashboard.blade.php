@@ -81,7 +81,7 @@
                         <tbody>
                             @foreach ($notifications as $notification)
                             <tr>
-                                {{-- <td>{{$notification->fosterFamily->firstName}} {{$notification->fosterFamily->lastName}}</td> --}}
+                                <td>{{$notification->fosterFamily->firstName}} {{$notification->fosterFamily->lastName}}</td>
                                 <td>{{$notification->cat->name}}</td>
                                 <td>{{$notification->type}}</td>
                                 <td>{{$notification->message}}</td>
