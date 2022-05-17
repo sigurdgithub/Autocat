@@ -23,7 +23,7 @@ class NotificationController extends Controller
     }
     
     /**
-     * Store a new flight in the database.
+     * Store a new Notification in the database.
      *
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
@@ -46,26 +46,60 @@ class NotificationController extends Controller
         $flight->save();
         return redirect()->route('notifications', ['fosterId' => $request->fosterFamily]);
     }
+    /**
+     * Store a new  shelterNotification in the database.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function storeShelter(Request $request)
+    {
+        // Validate the request...
+ 
+        $flight = new Notification;
+ 
+        $flight->cat_id = $request->cat;
+        $flight->type = $request->type;
+        $flight->message = $request->message;
+        
+        $flight->sentByShelter = 1;
+        
+        $flight->fosterFamily_id = $request->fosterFamily;
+
+ 
+        $flight->save();
+        return redirect()->route('shelterNotifications');
+    }
 
     public function delete($id) {
-        $notifications = Notification::find($id)->delete();
-        $notifications = Notification::all();
-        foreach ($notifications as $notification) {
-            $fId = $notification->fosterFamily_id;
-        }
+        $notification = Notification::find($id);
+        $sentByShelter = $notification->sentByShelter;
+        $fId = $notification->fosterFamily_id;
+        $notification->delete();
         //dd($notifications[0]->fosterFamilyId);
-        return redirect()->route('notifications', ['fosterId' => $fId]);
+        if ($sentByShelter) {
+            return redirect()->route('notifications', ['fosterId' => $fId]);
+        }
+        else {
+            return redirect()->route('shelterNotifications');
+        }
     }
 
     public function showShelterNotifications()
     {
-        $matchCase = ['sentByShelter' => 1];
+        $matchCase = ['sentByShelter' => 0];
         $notifications = Notification::where($matchCase)->get();
         //$notifications = Notification::all();
-        //dd($notifications[0]->fosterFamily);
-        
-        //dd($notifications);
-        return view('shelterDashboard', ['notifications' => $notifications]);
+        $cats = CatController::getCats();
+        $resultCats = array();
+        foreach ($cats as $cat) {
+            $fosterFamilies = FosterFamilyController::getFosterFamiliesByCatId($cat->id);
+            $resultCats[] = ['catId' => $cat->id, 'catName' => $cat->name, 
+            'fosterId' => $cat->fosterFamily_id, 'fosterFirstName' => $fosterFamilies->firstName, 'fosterLastName' => $fosterFamilies->lastName];
+        }
+        $fosterFamilies = FosterFamilyController::getFosterFamilies();
+        //dd($resultCats);
+        return view('shelterDashboard', ['notifications' => $notifications, 'cats' => $cats, 'fosterFamilies' => $fosterFamilies]);
 
     }
 

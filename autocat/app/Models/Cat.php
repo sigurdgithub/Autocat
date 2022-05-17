@@ -11,6 +11,10 @@ class Cat extends Model
         return $this->hasMany(Notification::class, 'cat');
     }
 
+    public function fosterFamily() {
+        return $this->belongsTo(FosterFamily::class);
+    }
+
     public function pictures() {
         return $this->hasMany(CatPicture::class, 'cat');
     }

@@ -20,6 +20,11 @@ class CatController extends Controller
         //return view('fosterDashboard', ['cats' => $cats]);
 
     }
+    public static function getCats()
+    {
+        $cats = Cat::all();
+        return $cats;
+    }
     
 
 }
