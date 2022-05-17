@@ -8,10 +8,10 @@
                 </span> Dashboard        
             </h3>
         </div>
+        <h3 class="text-muted">Meldingen</h3>
         <div class="grid-margin stretch-card">
             <div class="card">
                 <div class="card-body">
-                    <h4 class="card-title">Meldingen</h4>
                     </p>
                     <!-- Modal for creation of new notifications -->
                     <div class="modal fade" id="notificationModal" tabindex="-1" aria-labelledby="notificationModalLabel" aria-hidden="true">
@@ -59,7 +59,7 @@
                             <th>Type melding</th>
                             <th>Bericht</th>
                             <th>
-                                <button class="btn btn-icon btn-lg btn-gradient-primary" data-bs-toggle="modal" data-bs-target="#notificationModal">
+                                <button class="btn btn-icon btn-lg btn-gradient-info" data-bs-toggle="modal" data-bs-target="#notificationModal">
                                     <i class="mdi mdi-message-plus"></i>
                                 </button>
                             </th>
