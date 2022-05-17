@@ -323,12 +323,14 @@
                 <h5 class="text-muted">Overzicht</h5>
                 <div class="stretch-card grid-margin">
                     <div class="card-body card-border-danger">
-                        <ul class="list-star">
+                        <ul>
                             <li class="row">
                                 <div class="col-md-3">Datum: </div>
                                 <div class="col-md-3">Gewicht: </div>
-                                <div class="col-md-3">Opmerking: </div>
-                                <div class="col-md-2" position="relative" style="z-index: 1; cursor: pointer;"><span>&#10006;</span></div>
+                                <div class="col-md-5">Opmerking: </div>
+                                <button class="col-md-1 btn btn-inverse-danger btn-icon btn-lg">
+                                    <i class="mdi mdi-delete"></i>
+                                </button>                            
                             </li>
                         </ul>
                     </div>
@@ -368,12 +370,14 @@
                 <h5 class="text-muted">Overzicht</h5>
                 <div class="stretch-card grid-margin">
                     <div class="card-body card-border-danger">
-                        <ul class="list-star">
+                        <ul>
                             <li class="row">
                                 <div class="col-md-3">Datum: </div>
                                 <div class="col-md-3">Reden: </div>
-                                <div class="col-md-3">Opmerking: </div>
-                                <div class="col-md-2" position="relative" style="z-index: 1; cursor: pointer;"><span>&#10006;</span></div>
+                                <div class="col-md-5">Opmerking: </div>
+                                <button class="col-md-1 btn btn-inverse-danger btn-icon btn-lg">
+                                    <i class="mdi mdi-delete"></i>
+                                </button>                            
                             </li>
                         </ul>
                     </div>
