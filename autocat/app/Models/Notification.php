@@ -6,6 +6,13 @@ use Illuminate\Database\Eloquent\Model;
 
 class Notification extends Model
 {
+    public function fosterFamily() {
+        return $this->belongsTo(FosterFamily::class);
+    }
+
+    public function cat() {
+        return $this->belongsTo(Cat::class);
+    }
 
     /**
      * The attributes that are mass assignable.
@@ -13,7 +20,7 @@ class Notification extends Model
      * @var array
      */
     protected $fillable = [
-        'catId', 'type','fosterId','sentByShelter', 'message'
+        'cat_id', 'type','fosterFamily_id','sentByShelter', 'message'
     ];
 
     /**
@@ -22,6 +29,9 @@ class Notification extends Model
      * @var array
      */
     protected $hidden = [];
+    
+    protected $table = 'notifications';
+
 
 
 }

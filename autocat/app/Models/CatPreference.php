@@ -26,5 +26,7 @@ class CatPreference extends Model
      */
     protected $hidden = [];
 
+    protected $table = 'catPreferences';
+
 
 }

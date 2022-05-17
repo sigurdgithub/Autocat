@@ -8,15 +8,15 @@ class FosterFamily extends Model
 {
 
     public function pets() {
-        return $this->morphMany(FosterPet::class, 'fosterFamily');
+        return $this->hasMany(FosterPet::class, 'fosterFamily');
     }
 
     public function roommates() {
-        return $this->morphMany(FosterRoommate::class, 'fosterFamily');
+        return $this->hasMany(FosterRoommate::class, 'fosterFamily');
     }
 
-    public function preferences() {
-        return $this->morphMany(FosterPreference::class, 'fosterFamily');
+    public function notifications() {
+        return $this->hasMany(Notification::class, 'fosterFamily');
     }
 
     /**
@@ -34,6 +34,9 @@ class FosterFamily extends Model
      * @var array
      */
     protected $hidden = [];
+
+    protected $table = 'fosterFamilies';
+
 
 
 }

@@ -23,5 +23,7 @@ class Weighing extends Model
      */
     protected $hidden = [];
 
+    protected $table = 'weighings';
+
 
 }

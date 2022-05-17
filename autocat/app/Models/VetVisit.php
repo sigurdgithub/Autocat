@@ -23,5 +23,7 @@ class VetVisit extends Model
      */
     protected $hidden = [];
 
+    protected $table = 'vetVisits';
+
 
 }

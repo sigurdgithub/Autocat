@@ -27,4 +27,7 @@ class FosterRoommate extends Model
      */
     protected $hidden = [];
 
+    protected $table = 'fosterRoommates';
+
+
 }
