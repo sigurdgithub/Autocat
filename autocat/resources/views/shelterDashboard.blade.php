@@ -8,6 +8,9 @@
                 </span> Dashboard        
             </h3>
         </div>
+        <script type="text/javascript">
+        var current_cat = null;
+        </script>
         <h3 class="text-muted">Meldingen</h3>
         <div class="grid-margin stretch-card">
             <div class="card">
@@ -165,11 +168,11 @@
                     <div class="row">
                         <h4 class="col-md-8 text-muted">Selecteer hier de kat</h4>
                         <div class="col-md-4">
-                        <select class="select-option form-control bg-gradient-danger text-white">
+                        <select id="selectedCatMatch" name="catMatch" class="select-option form-control bg-gradient-danger text-white">
                             <option class="option">Selecteer</option>
                             @foreach ($cats as $cat)
                                 {{-- TODO: Make this == whatever the value a cat has for fosterFamily_id if not yet assigned --}}
-                                @if ($cat->fosterFamily_id != null)
+                                @if ($cat->fosterFamily_id == null)
                                     <option class="option" value="{{$cat->id}}">{{$cat->name}}</option>
                                 @endif
                             @endforeach
@@ -182,31 +185,31 @@
                                 <p class="card-description"> Algemene Informatie </p>
                                 <div class="row">
                                     <div class="col-md-6">Geboortedatum</div>
-                                    <div class="col-md-6"></div>
+                                    <div id="dateOfBirthCat" class="col-md-6"></div>
                                 </div>
                                 <div class="row">
                                     <div class="col-md-6">Gender</div>
-                                    <div class="col-md-6"></div>
+                                    <div id="genderCat" class="col-md-6"></div>
                                 </div>
                                 <div class="row">
                                     <div class="col-md-6">Ras</div>
-                                    <div class="col-md-6"></div>
+                                    <div id="breedCat" class="col-md-6"></div>
                                 </div>
                                 <div class="row">
                                     <div class="col-md-6">Chipnummer</div>
-                                    <div class="col-md-6"></div>
+                                    <div id="chipNumberCat" class="col-md-6"></div>
                                 </div>
                                 <div class="row">
                                     <div class="col-md-6">Socialisatie</div>
-                                    <div class="col-md-6"></div>
+                                    <div id="socializationCat" class="col-md-6"></div>
                                 </div>
                                 <div class="row">
                                     <div class="col-md-6">Gewicht</div>
-                                    <div class="col-md-6"> gram</div>
+                                    <div id="startWeightCat" class="col-md-6"> gram</div>
                                 </div>
                                 <div class="row">
                                     <div class="col-md-6">Gesteriliseerd</div>
-                                    <div class="col-md-6"></div>
+                                    <div  id="sterilizedCat" class="col-md-6"></div>
                                 </div>
                             </div>
                         </div>
@@ -324,6 +327,7 @@
 
                         
                         $('select[name="cat"]').empty();
+                        $('select[name="cat"]').append('<option class="option">Selecteer een kat</option>');
                         $.each(data, function(key, value) {
                             $('select[name="cat"]').append('<option value="'+ value['id'] +'">'+ (value['name']) +'</option>');
                         });
@@ -333,6 +337,37 @@
                 });
             }else{
                 $('select[name="cat"]').empty();
+            }
+        });
+        $('select[name="catMatch"]').on('change', function() {
+            var catId = $(this).val();
+            if(catId) {
+                $.ajax({
+                    url: '/cat/ajax/'+catId,
+                    type: "GET",
+                    dataType: "json",
+                    success:function(data) {
+                        current_cat = data;
+                        $('#dateOfBirthCat').empty();
+                        $('#dateOfBirthCat').append(current_cat.dateOfBirth.toString());
+                        $('#genderCat').empty();
+                        $('#genderCat').append(current_cat.gender);
+                        $('#breedCat').empty();
+                        $('#breedCat').append(current_cat.breed);
+                        $('#chipNumberCat').empty();
+                        $('#chipNumberCat').append(current_cat.chipNumber)
+                        $('#socializationCat').empty();
+                        $('#socializationCat').append(current_cat.socialization);
+                        $('#startWeightCat').empty();
+                        $('#startWeightCat').append(current_cat.startWeight + " Gram");
+                        $('#sterilizedCat').empty();
+                        $('#sterilizedCat').append(current_cat.sterilized);
+                        // TODO: add more if extra properties are selected
+
+                    }
+                });
+            }else{
+                current_cat = null;
             }
         });
     });
