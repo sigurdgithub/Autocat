@@ -167,7 +167,12 @@
                         <div class="col-md-4">
                         <select class="select-option form-control bg-gradient-danger text-white">
                             <option class="option">Selecteer</option>
-                            <option class="option"></option>
+                            @foreach ($cats as $cat)
+                                {{-- TODO: Make this == whatever the value a cat has for fosterFamily_id if not yet assigned --}}
+                                @if ($cat->fosterFamily_id != null)
+                                    <option class="option" value="{{$cat->id}}">{{$cat->name}}</option>
+                                @endif
+                            @endforeach
                         </select>
                         </div>
                     </div>

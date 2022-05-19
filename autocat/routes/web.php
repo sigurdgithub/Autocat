@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\NotificationController;
+use App\Http\Controllers\DashBoardController;
 use App\Http\Controllers\LoginController;
 
 /*
@@ -53,9 +53,9 @@ Route::get('/privacy', function () {
     return view('privacy');
 });
 
-Route::get('/notifications/{fosterId}', [NotificationController::class, 'showByFosterId'])->name('notifications');
-Route::get('/asielDashboard', [NotificationController::class, 'showShelterNotifications'])->name('shelterNotifications');
-Route::get('/asielDashboard/ajax/{fosterId}', [NotificationController::class, 'getCatsByFosterId']);
-Route::delete('/notifications_delete/{id}', [NotificationController::class, 'delete'])->name('delete');
-Route::post('/addNotification', [NotificationController::class, 'store'])->name('addNotification');
-Route::post('/addNotificationShelter', [NotificationController::class, 'storeShelter'])->name('addNotificationShelter');
+Route::get('/notifications/{fosterId}', [DashBoardController::class, 'showByFosterId'])->name('notifications');
+Route::get('/asielDashboard', [DashBoardController::class, 'showShelterNotifications'])->name('shelterNotifications');
+Route::get('/asielDashboard/ajax/{fosterId}', [DashBoardController::class, 'getCatsByFosterId']);
+Route::delete('/notifications_delete/{id}', [DashBoardController::class, 'delete'])->name('delete');
+Route::post('/addNotification', [DashBoardController::class, 'store'])->name('addNotification');
+Route::post('/addNotificationShelter', [DashBoardController::class, 'storeShelter'])->name('addNotificationShelter');
