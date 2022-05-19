@@ -1,8 +1,9 @@
-
 <nav class="navbar default-layout-navbar col-lg-12 col-12 p-0 fixed-top d-flex flex-row">
   <div class="text-center navbar-brand-wrapper d-flex align-items-center justify-content-center border-bottom">
-    <a class="navbar-brand brand-logo" href="welcome"><img src="../assets/images/autoCatLogo/autoCatLogo_horizontaal_grey.png" alt="logo" /></a>
-    <a class="navbar-brand brand-logo-mini" href="welcome"><img src="../assets/images/autoCatLogo/autoCatLogo_small_grey.png" alt="logo" /></a>
+    <a class="navbar-brand brand-logo" href="welcome"><img
+        src="../assets/images/autoCatLogo/autoCatLogo_horizontaal_grey.png" alt="logo" /></a>
+    <a class="navbar-brand brand-logo-mini" href="welcome"><img
+        src="../assets/images/autoCatLogo/autoCatLogo_small_grey.png" alt="logo" /></a>
   </div>
   <div class="navbar-menu-wrapper d-flex align-items-stretch border-bottom">
     <button class="navbar-toggler navbar-toggler align-self-center" type="button" data-toggle="minimize">
@@ -10,7 +11,8 @@
     </button>
     <ul class="navbar-nav navbar-nav-right">
       <li class="nav-item dropdown">
-        <a class="nav-link count-indicator dropdown-toggle" id="messageDropdown" href="#" data-bs-toggle="dropdown" aria-expanded="false">
+        <a class="nav-link count-indicator dropdown-toggle" id="messageDropdown" href="#" data-bs-toggle="dropdown"
+          aria-expanded="false">
           <i class="mdi mdi-email-outline"></i>
           <span class="count-symbol bg-warning"></span>
         </a>
@@ -48,7 +50,8 @@
         </div>
       </li>
       <li class="nav-item nav-profile dropdown">
-        <a class="nav-link dropdown-toggle" id="profileDropdown" href="#" data-bs-toggle="dropdown" aria-expanded="false">
+        <a class="nav-link dropdown-toggle" id="profileDropdown" href="#" data-bs-toggle="dropdown"
+          aria-expanded="false">
           <div class="nav-profile-img">
             <img src="../assets/images/faces/face1.jpg" alt="image">
             <span class="availability-status online"></span>
@@ -58,7 +61,8 @@
           </div>
         </a>
         <div class="dropdown-menu navbar-dropdown" aria-labelledby="profileDropdown">
-          <a class="{{Request::path() === 'pleeggezinAccount'? 'dropdown-item active active':'dropdown-item'}}" href="pleeggezinAccount">
+          <a class="{{Request::path() === 'pleeggezinAccount'? 'dropdown-item active active':'dropdown-item'}}"
+            href="pleeggezinAccount">
             <i class="mdi mdi-account me-2"></i> Account overzicht </a>
           <div class="dropdown-divider"></div>
           <a class="{{Request::path() === ''? 'dropdown-item active active':'dropdown-item'}}" href="/">
@@ -66,9 +70,16 @@
         </div>
       </li>
       <li class="nav-item nav-logout d-none d-lg-block">
-        <a class="{{Request::path() === ''? 'nav-link active active':'nav-link'}}" href="/">
-          <i class="mdi mdi-power"></i>
-        </a>
+        <form method="POST" action="{{ route('logout') }}">
+          @csrf
+
+          <a class="nav-link active active nav-link" :href="route('logout')"
+            onclick="event.preventDefault();this.closest('form').submit();">
+            <i id='logout' class="mdi mdi-power"></i>
+
+          </a>
+        </form>
+
       </li>
     </ul>
     <button class="navbar-toggler navbar-toggler-right d-lg-none align-self-center" type="/" data-toggle="offcanvas">
