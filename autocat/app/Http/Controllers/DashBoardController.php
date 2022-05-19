@@ -9,12 +9,14 @@ use App\Models\FosterFamily;
 use Illuminate\Database\Eloquent\Builder;
 
 
-class NotificationController extends Controller
+class DashBoardController extends Controller
 {
-    public static function getNotificationsByFosterId($fosterId)
+    public function showByFosterId($fosterId)
     {
-        $matchCase = ['fosterFamily_id'=> $fosterId, 'sentByShelter' => 1];
-        return Notification::where($matchCase)->get();
+        $notifications = NotificationController::getNotificationsByFosterId($fosterId);
+        $cats = CatController::getCatsByFosterId($fosterId);
+        //dd($notifications);
+        return view('fosterDashboard', ['notifications' => $notifications, 'cats' => $cats,'fosterFamily' => $fosterId]);
     }
     
     /**
@@ -80,10 +82,14 @@ class NotificationController extends Controller
         }
     }
 
-    public static function getShelterNotifications()
+    public function showShelterNotifications()
     {
-        $matchCase = ['sentByShelter' => 0];
-        return Notification::where($matchCase)->get();
+        $notifications = NotificationController::getShelterNotifications();
+        $cats = CatController::getCats();
+        $fosterFamilies = FosterFamilyController::getFosterFamilies();
+        //dd($resultCats);
+        return view('shelterDashboard', ['notifications' => $notifications, 'cats' => $cats, 'fosterFamilies' => $fosterFamilies]);
+
     }
 
     public function getCatsByFosterId($fosterId) {

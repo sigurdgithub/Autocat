@@ -37,9 +37,9 @@
                             <div class="form-floating">
                                 <select class="form-select" name="type" id="notificationTypeSelect" aria-label="Floating label select example">
                                     <option selected>Selecteer een Type melding</option>
-                                    <option value="1">One</option>
-                                    <option value="2">Two</option>
-                                    <option value="3">Three</option>
+                                    <option value="Vraag voor opvang">Vraag voor opvang</option>
+                                    <option value="Afspraak adoptant">Afspraak adoptant</option>
+                                    <option value="Adoptant goedgekeurd">Adoptant goedgekeurd</option>
                                 </select>
                                 <label for="notificationTypeSelect">Melding-type</label>
                             </div>

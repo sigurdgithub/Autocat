@@ -1,7 +1,13 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+<<<<<<< HEAD
 use App\Http\Controllers\NotificationController;
+=======
+use App\Http\Controllers\DashBoardController;
+use App\Http\Controllers\CatController;
+use App\Http\Controllers\LoginController;
+>>>>>>> dd8e0e207c846d77d1bdac63d353b34482a3d6e1
 
 
 /*
@@ -53,15 +59,46 @@ Route::get('/privacy', function () {
     return view('privacy');
 });
 
-Route::get('/notifications/{fosterId}', [NotificationController::class, 'showByFosterId'])->name('notifications');
-Route::get('/asielDashboard', [NotificationController::class, 'showShelterNotifications'])->name('shelterNotifications');
-Route::get('/asielDashboard/ajax/{fosterId}', [NotificationController::class, 'getCatsByFosterId']);
-Route::delete('/notifications_delete/{id}', [NotificationController::class, 'delete'])->name('delete');
-Route::post('/addNotification', [NotificationController::class, 'store'])->name('addNotification');
-Route::post('/addNotificationShelter', [NotificationController::class, 'storeShelter'])->name('addNotificationShelter');
+Route::get('/katDetail', function () {
+    return view('catDetail');
+});
+
+Route::get('/kattenOverzicht', function () {
+    return view('catOverview');
+});
+
+Route::get('/pleeggezinAccount', function () {
+    return view('fosterAccount');
+});
 
 Route::get('/pleeggezinDashboard', function () {
     return view('fosterDashboard');
-})->middleware(['auth'])->name('pleeggezinDashboard');
-// Makes Auth Routing work
+});
+
+Route::get('/pleeggezinnenOverzicht', function () {
+    return view('fosterOverview');
+});
+
+
+Route::get('/asielDashboard', function () {
+    return view('shelterDashboard');
+});
+
+Route::get('/welcome', function () {
+    return view('welcome');
+});
+
+Route::get('/privacy', function () {
+    return view('privacy');
+});
+
+Route::get('/notifications/{fosterId}', [DashBoardController::class, 'showByFosterId'])->name('notifications');
+Route::get('/asielDashboard', [DashBoardController::class, 'showShelterNotifications'])->name('shelterNotifications');
+Route::get('/asielDashboard/ajax/{fosterId}', [DashBoardController::class, 'getCatsByFosterId']);
+Route::get('/cat/ajax/{id}', [CatController::class, 'getCatById']);
+Route::delete('/notifications_delete/{id}', [DashBoardController::class, 'delete'])->name('delete');
+Route::post('/addNotification', [DashBoardController::class, 'store'])->name('addNotification');
+Route::post('/addNotificationShelter', [DashBoardController::class, 'storeShelter'])->name('addNotificationShelter');
+
+
 require __DIR__.'/auth.php';

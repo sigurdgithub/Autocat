@@ -36,6 +36,8 @@ class CatController extends Controller
         $cats = Cat::all();
         return $cats;
     }
-    
+    public function getCatById($id) {
+        return Cat::findOrFail($id);
+    }
 
 }
