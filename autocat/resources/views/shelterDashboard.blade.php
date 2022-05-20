@@ -245,7 +245,7 @@
                     <div class="row">
                         <h4 class="col-md-8 text-muted">Selecteer hier het pleeggezin</h4>
                         <div class="col-md-4">
-                            <select class="select-option form-control bg-gradient-info text-white">
+                            <select name="fosterFamilyMatch" class="select-option form-control bg-gradient-info text-white">
                                 <option class="option">Selecteer</option>
                                  @foreach ($fosterFamilies as $family)
                                 {{-- TODO: Make this == whatever the value a cat has for fosterFamily_id if not yet assigned --}}
@@ -262,26 +262,26 @@
                                 <p class="card-description"> Algemene informatie </p>
                                 <div class="row">
                                     <div class="col-md-6">Naam</div>                  
-                                    <div class="col-md-6"></div>
+                                    <div id="nameFoster" class="col-md-6"></div>
                                 </div>
                                 <div class="row">
                                     <div class="col-md-6">Adres</div>
                                     <div class="col-md-6">
-                                        <div></div>
-                                        <div></div>
+                                        <div id="addressOneFoster"></div>
+                                        <div id="addressTwoFoster"></div>
                                     </div>
                                 </div>
                                 <div class="row">
                                     <div class="col-md-6">Geboortedatum</div>
-                                    <div class="col-md-6"></div>
+                                    <div id="dateOfBirthFoster" class="col-md-6"></div>
                                 </div>
                                 <div class="row">
                                     <div class="col-md-6">Email</div>
-                                    <div class="col-md-6"></div>
+                                    <div id="emailFoster" class="col-md-6"></div>
                                 </div>
                                 <div class="row mt-3">
                                     <div class="col-md-6">Aantal beschikbare plaatsen </div>
-                                    <div class="col-md-6"></div>
+                                    <div id="availableSpotsFoster" class="col-md-6"></div>
                                 </div>
                             </div>
                         </div>
@@ -370,6 +370,37 @@
                 });
             }else{
                 current_cat = null;
+            }
+        });
+        $('select[name="fosterFamilyMatch"]').on('change', function() {
+            var fosterFamilyId = $(this).val();
+            if(fosterFamilyId) {
+                $.ajax({
+                    url: '/fosterfamily/ajax/'+fosterFamilyId,
+                    type: "GET",
+                    dataType: "json",
+                    success:function(data) {
+                        current_foster = data;
+                        $('#dateOfBirthFoster').empty();
+                        $('#dateOfBirthFoster').append(current_foster.dateOfBirth.toString());
+                        $('#nameFoster').empty();
+                        $('#nameFoster').append(current_foster.firstName + ' ' + current_foster.lastName);
+                        $('#addressOneFoster').empty();
+                        $('#addressOneFoster').append(current_foster.street + ' ' + current_foster.number);
+                        $('#addressTwoFoster').empty();
+                        $('#addressTwoFoster').append(current_foster.zipCode + ' ' + current_foster.city);
+                        $('#emailFoster').empty();
+                        $('#emailFoster').append(current_foster.email);
+                        $('#availableSpotsFoster').empty();
+                        $('#availableSpotsFoster').append(current_foster.availableSpots);
+                        //$('#sterilizedCat').empty();
+                        //$('#sterilizedCat').append(current_foster.sterilized);
+                        // TODO: add more if extra properties are selected
+
+                    }
+                });
+            }else{
+                current_foster = null;
             }
         });
     });
