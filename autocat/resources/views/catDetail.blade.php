@@ -19,7 +19,14 @@
                     <label class="col-md-4 col-form-label-lg">Adoptie status</label>
                     <div class="col-md-8">
                         <select class="form-control form-control-sm">
-                            <option></option>
+                            <option>Selecteer</option>
+                            <option>Aangemeld</option>  
+                            <option>Bij Pleeggezin</option>                                                     
+                            <option>In Asiel</option>
+                            <option>Klaar voor adoptie</option>
+                            <option>In optie</option>  
+                            <option>Adoptie goedgekeurd</option>  
+                            <option>Bij Adoptiegezin</option>                         
                         </select>
                     </div>
                 </div>
@@ -56,7 +63,7 @@
                         <div class="form-group">
                             <label class="form-label">Ras</label>
                             <select class="form-control form-control-sm">
-                                <option></option>
+                                <option>Selecteer</option>
                             </select>
                         </div>
                     </div>
@@ -70,7 +77,9 @@
                         <div class="form-group">
                             <label class="form-label">Vachtlengte</label>
                             <select class="form-control form-control-sm">
-                                <option></option>
+                                <option>Selecteer</option>
+                                <option>Kort</option>
+                                <option>Lang</option>
                             </select>
                         </div>
                     </div>
@@ -86,7 +95,9 @@
                         <div class="form-group">
                             <label class="form-label">Geslacht</label>
                             <select class="form-control form-control-sm">
-                                <option></option>
+                                <option>Selecteer</option>
+                                <option>Kattin</option>
+                                <option>Kater</option>
                             </select>
                         </div>
                     </div>
@@ -94,7 +105,10 @@
                         <div class="form-group">
                             <label class="form-label">Socialisatie</label>
                             <select class="form-control form-control-sm">
-                                <option></option>
+                                <option>Selecteer</option>
+                                <option>Tam</option>
+                                <option>Bang</option>
+                                <option>Wild</option>
                             </select>
                         </div>
                     </div>
@@ -243,6 +257,7 @@
                             <label class="col-md-4 col-form-label">Buddy</label>
                             <div class="col-md-4">
                                 <select class="form-control form-control-sm">
+                                    <option>Selecteer</option>
                                     <option></option>
                                 </select>
                             </div>
@@ -351,7 +366,7 @@
                     </div>
                     <div class="col-md-6">
                         <div class="form-group">
-                            <label class="form-label">Opmerkingen</label>
+                            <label class="form-label">Opmerking</label>
                             <textarea class="form-control"></textarea>
                         </div> 
                     </div>
@@ -394,13 +409,19 @@
                     <div class="form-group">
                         <label class="form-label">Reden</label>
                         <select class="form-control form-control-sm">
-                            <option></option>
+                            <option>Selecteer</option>
+                            <option>Vaccinatie</option>
+                            <option>Chip</option>
+                            <option>Vaccinatie & chip</option>
+                            <option>Sterilisatie</option>
+                            <option>Ziekte</option>
+                            <option>Andere</option>
                         </select>                                    
                     </div>
                 </div>
                 <div class="col-md-6">
                     <div class="form-group">
-                        <label class="form-label">Opmerkingen</label>
+                        <label class="form-label">Opmerking</label>
                         <textarea class="form-control"></textarea>
                     </div> 
                 </div>
