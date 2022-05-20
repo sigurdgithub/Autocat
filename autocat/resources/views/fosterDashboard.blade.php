@@ -32,25 +32,31 @@
                                         <option value="{{ $cat->id }}">{{ $cat->name }}</option>
                                     @endforeach
                                 </select>
-                                <label for="catSelect">Katnaam</label>
+                                <label for="catSelect">Kat</label>
                             </div>
                             <div class="form-floating">
                                 <select class="form-select" name="type" id="notificationTypeSelect" aria-label="Floating label select example">
-                                    <option selected>Selecteer een Type melding</option>
-                                    <option value="Vraag voor opvang">Vraag voor opvang</option>
-                                    <option value="Afspraak adoptant">Afspraak adoptant</option>
+                                    <option selected>Selecteer een Melding Type</option>
+                                    <option value="Profiel is up to date">Profiel is up to date</option>
+                                    <option value="Opvang geaccepteerd">Opvang geaccepteerd</option>
+                                    <option value="Opvang geweigerd">Opvang geweigerd</option>
+                                    <option value="Weging">Weging</option>
+                                    <option value="Dierenarts bezoek">Dierenarts bezoek</option>
+                                    <option value="Afspraak adoptant gemaakt">Afspraak adoptant gemaakt</option>
                                     <option value="Adoptant goedgekeurd">Adoptant goedgekeurd</option>
+                                    <option value="Adoptant afgekeurd">Adoptant afgekeurd</option>
+                                    <option value="Andere">Andere</option>
                                 </select>
-                                <label for="notificationTypeSelect">Melding-type</label>
+                                <label for="notificationTypeSelect">Melding Type</label>
                             </div>
                             <div class="form-floating">
                                 <textarea class="form-control" name="message" placeholder="Leave a comment here" id="notificationMessage" style="height: 100px"></textarea>
-                                <label for="notificationMessage">Comments</label>
+                                <label for="notificationMessage">Bericht</label>
                             </div>
                         </div>
                         <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                            <button type="submit"  class="btn btn-primary">Save changes</button>
+                            <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Sluit</button>
+                            <button type="submit"  class="btn btn-outline-info">Verstuur</button>
                         </div>
                         </form>
                         </div>
@@ -60,7 +66,7 @@
                         <thead>
                             <tr>
                             <th>Kat</th>
-                            <th>Type melding</th>
+                            <th>Melding Type</th>
                             <th>Bericht</th>
                             <th>
                                 <button class="btn btn-icon btn-lg btn-gradient-info" data-bs-toggle="modal" data-bs-target="#notificationModal">
