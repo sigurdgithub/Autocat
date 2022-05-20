@@ -12,6 +12,7 @@
       <p><b>Nuttige Links</b></p>
       <div><a href="http://www.dierenartsenavanti.be/" target="_blank">Dierenarts</a></div>
       <div><a href="http://www.kittenlady.org/" target="_blank">Kitten Lady</a></div>
+      <div><a href="https://www.felinova.be/" target="_blank">Felinova</a></div>
       <div><a href="https://www.zooplus.nl/" target="_blank">Zooplus</a></div>
     </div>
     <div class="col-md-3 text-muted mb-4">
@@ -58,7 +59,7 @@
     </div>
   </div>
   <div class="text-center text-muted mt-2">
-    <span><a href="privacy">Privacy</a></span>
+    <span><a href="privacy">Privacyverklaring</a></span>
     <span> - Copyright © AutoCat 2022</span>
   </div>
 </footer>
