@@ -1,13 +1,10 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-<<<<<<< HEAD
 use App\Http\Controllers\NotificationController;
-=======
 use App\Http\Controllers\DashBoardController;
 use App\Http\Controllers\CatController;
 use App\Http\Controllers\LoginController;
->>>>>>> dd8e0e207c846d77d1bdac63d353b34482a3d6e1
 
 
 /*
