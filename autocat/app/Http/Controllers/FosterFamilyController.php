@@ -22,6 +22,8 @@ class FosterFamilyController extends Controller
 
         return $fosterFamily;
     }
-    
+    public function getFosterFamilyById($id) {
+        return FosterFamily::findOrFail($id);
+    }
 
 }

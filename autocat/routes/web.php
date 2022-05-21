@@ -2,8 +2,9 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\NotificationController;
-use App\Http\Controllers\DashBoardController;
 use App\Http\Controllers\CatController;
+use App\Http\Controllers\DashBoardController;
+use App\Http\Controllers\FosterFamilyController;
 use App\Http\Controllers\LoginController;
 
 
@@ -93,6 +94,7 @@ Route::get('/notifications/{fosterId}', [DashBoardController::class, 'showByFost
 Route::get('/asielDashboard', [DashBoardController::class, 'showShelterNotifications'])->name('shelterNotifications');
 Route::get('/asielDashboard/ajax/{fosterId}', [DashBoardController::class, 'getCatsByFosterId']);
 Route::get('/cat/ajax/{id}', [CatController::class, 'getCatById']);
+Route::get('/fosterfamily/ajax/{id}', [FosterFamilyController::class, 'getFosterFamilyById']);
 Route::delete('/notifications_delete/{id}', [DashBoardController::class, 'delete'])->name('delete');
 Route::post('/addNotification', [DashBoardController::class, 'store'])->name('addNotification');
 Route::post('/addNotificationShelter', [DashBoardController::class, 'storeShelter'])->name('addNotificationShelter');

@@ -42,27 +42,27 @@
                                         <option value="{{ $cat->id }}">{{ $cat->name }}</option>
                                     @endforeach
                                 </select>
-                                <label for="catSelect">Katnaam</label>
+                                <label for="catSelect">Kat</label>
                             </div>
                             <div class="form-floating">
                                 <select class="form-select" name="type" id="notificationTypeSelect" aria-label="Floating label select example">
-                                    <option selected>Selecteer een Type melding</option>
+                                    <option selected>Selecteer een Melding Type</option>
                                     <option value="Profiel up to date?">Profiel up to date?</option>
-                                    <option value="Weging">Weging</option>
-                                    <option value="Afspraak adoptant">Afspraak adoptant</option>
-                                    <option value="Opvang geweigerd">Opvang geweigerd</option>
-                                    <option value="Opvang geaccepteerd">Opvang geaccepteerd</option>
+                                    <option value="Vraag voor opvang">Vraag voor opvang</option>
+                                    <option value="Afspraak adoptant maken">Afspraak adoptant maken</option>
+                                    <option value="Adoptie bevestigd">Adoptie bevestigd</option>
+                                    <option value="Andere">Andere</option>
                                 </select>
-                                <label for="notificationTypeSelect">Melding-type</label>
+                                <label for="notificationTypeSelect">Melding Type</label>
                             </div>
                             <div class="form-floating">
                                 <textarea class="form-control" name="message" placeholder="Leave a comment here" id="notificationMessage" style="height: 100px"></textarea>
-                                <label for="notificationMessage">Comments</label>
+                                <label for="notificationMessage">Bericht</label>
                             </div>
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Sluit</button>
-                            <button type="submit" class="btn btn-outline-success">Sla op</button>
+                            <button type="submit" class="btn btn-outline-success">Verstuur</button>
                         </div>
                         </form>
                         </div>
@@ -73,8 +73,8 @@
                         <thead>
                             <tr>
                             <th>Pleeggezin</th>
-                            <th>kat</th>
-                            <th>Type melding</th>
+                            <th>Kat</th>
+                            <th>Melding Type</th>
                             <th>Bericht</th>
                             <th>
                                 <button class="btn btn-icon btn-lg btn-gradient-success" data-bs-toggle="modal" data-bs-target="#notificationModal">
@@ -245,7 +245,7 @@
                     <div class="row">
                         <h4 class="col-md-8 text-muted">Selecteer hier het pleeggezin</h4>
                         <div class="col-md-4">
-                            <select class="select-option form-control bg-gradient-info text-white">
+                            <select name="fosterFamilyMatch" class="select-option form-control bg-gradient-info text-white">
                                 <option class="option">Selecteer</option>
                                  @foreach ($fosterFamilies as $family)
                                 {{-- TODO: Make this == whatever the value a cat has for fosterFamily_id if not yet assigned --}}
@@ -262,26 +262,26 @@
                                 <p class="card-description"> Algemene informatie </p>
                                 <div class="row">
                                     <div class="col-md-6">Naam</div>                  
-                                    <div class="col-md-6"></div>
+                                    <div id="nameFoster" class="col-md-6"></div>
                                 </div>
                                 <div class="row">
                                     <div class="col-md-6">Adres</div>
                                     <div class="col-md-6">
-                                        <div></div>
-                                        <div></div>
+                                        <div id="addressOneFoster"></div>
+                                        <div id="addressTwoFoster"></div>
                                     </div>
                                 </div>
                                 <div class="row">
                                     <div class="col-md-6">Geboortedatum</div>
-                                    <div class="col-md-6"></div>
+                                    <div id="dateOfBirthFoster" class="col-md-6"></div>
                                 </div>
                                 <div class="row">
                                     <div class="col-md-6">Email</div>
-                                    <div class="col-md-6"></div>
+                                    <div id="emailFoster" class="col-md-6"></div>
                                 </div>
                                 <div class="row mt-3">
                                     <div class="col-md-6">Aantal beschikbare plaatsen </div>
-                                    <div class="col-md-6"></div>
+                                    <div id="availableSpotsFoster" class="col-md-6"></div>
                                 </div>
                             </div>
                         </div>
@@ -370,6 +370,37 @@
                 });
             }else{
                 current_cat = null;
+            }
+        });
+        $('select[name="fosterFamilyMatch"]').on('change', function() {
+            var fosterFamilyId = $(this).val();
+            if(fosterFamilyId) {
+                $.ajax({
+                    url: '/fosterfamily/ajax/'+fosterFamilyId,
+                    type: "GET",
+                    dataType: "json",
+                    success:function(data) {
+                        current_foster = data;
+                        $('#dateOfBirthFoster').empty();
+                        $('#dateOfBirthFoster').append(current_foster.dateOfBirth.toString());
+                        $('#nameFoster').empty();
+                        $('#nameFoster').append(current_foster.firstName + ' ' + current_foster.lastName);
+                        $('#addressOneFoster').empty();
+                        $('#addressOneFoster').append(current_foster.street + ' ' + current_foster.number);
+                        $('#addressTwoFoster').empty();
+                        $('#addressTwoFoster').append(current_foster.zipCode + ' ' + current_foster.city);
+                        $('#emailFoster').empty();
+                        $('#emailFoster').append(current_foster.email);
+                        $('#availableSpotsFoster').empty();
+                        $('#availableSpotsFoster').append(current_foster.availableSpots);
+                        //$('#sterilizedCat').empty();
+                        //$('#sterilizedCat').append(current_foster.sterilized);
+                        // TODO: add more if extra properties are selected
+
+                    }
+                });
+            }else{
+                current_foster = null;
             }
         });
     });

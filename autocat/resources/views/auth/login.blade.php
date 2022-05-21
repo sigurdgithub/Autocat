@@ -64,28 +64,24 @@
                 <div class="flex items-center justify-end mt-4">
                   @if (Route::has('password.request'))
                   <a class="underline text-sm text-gray-600 hover:text-gray-900" href="{{ route('password.request') }}">
-                    {{ __('Forgot your password?') }}
+                    {{ __('Wachtwoord vergeten?') }}
                   </a>
                   @endif
                   <div class="mt-3">
-                    <input class="btn btn-gradient-info btn-lg font-weight-medium text-white w-100" type="submit"
+                    <input class="btn btn-gradient-info btn-lg font-weight-medium text-white w-100" type="submit" value="Log In"
                       name="sendLogin">
                   </div>
                   <div class=" text-center mt-4 font-weight-light">
                     <h5 class="font-weight-light">Nog geen account?</h5>
-                    <a href="/asielDashboard" class="text-gray text-decoration-underline">Maak een account aan als
-                      <b>asielbeheerder</b></a><br>
-                    <br>
-                    <a href="/pleeggezinDashboard" class="text-gray text-decoration-underline text-bottom">Maak een
-                      account aan als <b>pleeggezin</b></a>
-
+                    <div class="mt-3">
+                      <p><a href="/asielAccount" class="text-gray text-decoration-underline">Maak een account aan als
+                      <b>asielbeheerder</b></a></p>
+                      <p><a href="/pleeggezinAccount" class="text-gray text-decoration-underline">Maak een
+                      account aan als <b>pleeggezin</b></a></p>
+                    </div>
                   </div>
               </form>
-
-
             </div>
-
-
           </div>
         </div>
       </div>
