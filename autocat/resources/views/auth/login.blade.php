@@ -68,16 +68,16 @@
                   </a>
                   @endif
                   <div class="mt-3">
-                    <input class="btn btn-gradient-info btn-lg font-weight-medium text-white w-100" type="submit" value="Log In"
-                      name="sendLogin">
+                    <input class="btn btn-gradient-info btn-lg font-weight-medium text-white w-100" type="submit"
+                      value="Log In" name="sendLogin">
                   </div>
                   <div class=" text-center mt-4 font-weight-light">
                     <h5 class="font-weight-light">Nog geen account?</h5>
                     <div class="mt-3">
                       <p><a href="/asielAccount" class="text-gray text-decoration-underline">Maak een account aan als
-                      <b>asielbeheerder</b></a></p>
+                          <b>asielbeheerder</b></a></p>
                       <p><a href="/pleeggezinAccount" class="text-gray text-decoration-underline">Maak een
-                      account aan als <b>pleeggezin</b></a></p>
+                          account aan als <b>pleeggezin</b></a></p>
                     </div>
                   </div>
               </form>
