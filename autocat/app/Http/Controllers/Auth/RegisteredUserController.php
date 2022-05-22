@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
-use App\Models\User;
+use App\Models\FosterFamily;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\Request;
@@ -31,21 +31,53 @@ class RegisteredUserController extends Controller
      *
      * @throws \Illuminate\Validation\ValidationException
      */
-    public function store(Request $request)
+    public function storeFoster(Request $request)
     {
         $request->validate([
-            'name' => ['required', 'string', 'max:255'],
+            // Breeze registration
+            /* 'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-            'password' => ['required', 'confirmed', Rules\Password::defaults()],
+            'password' => ['required', 'confirmed', Rules\Password::defaults()], */
+            // Autocat registration
+            'lastName' => ['required', 'string', 'max:255'],
+            'firstName' => ['required', 'string', 'max:255'],
+            'dateOfBirth' => ['required', 'string', 'max:255'],
+            'street' => ['required', 'string', 'max:255'],
+            'number' => ['required', 'string', 'max:255' ],
+            'city' => ['required', 'string', 'max:255'],
+            'zipCode' => ['required', 'string', 'max:255'],
+            'phone' => ['required', 'string', 'max:255'],
+            'zipCode' => ['required', 'string', 'max:255'],
+            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+            'password' => ['required',   Rules\Password::defaults() ],
+            /* 'availableSpots' => ['required', 'integer'],
+            'preferences' => ['required', 'string', 'max:255'], 
+             'picture' => ['required', 'string'] */
+
         ]);
 
-        $user = User::create([
-            'name' => $request->name,
+        $fosterFamily = FosterFamily::create([
+            // Breeze registration
+            /* 'name' => $request->name,
+            'email' => $request->email,
+            'password' => Hash::make($request->password), */
+            // Autocat registration
+            'lastName' => $request->lastName,
+            'firstName' => $request->firstname, '',
+            'dateOfBirth' => $request->dateOfBirth,
+            'street' => $request->street,
+            'number' => $request->number,
+            'city' => $request->city,
+            'zipCode' => $request->zipCode,
+            'phone' => $request->phone,
             'email' => $request->email,
             'password' => Hash::make($request->password),
+            /* 'availableSpots' => 
+            'preferences' */
         ]);
-
-        event(new Registered($user));
+        /* dd($request->all()); */
+        event(new Registered($fosterFamily));
+        
 
         Auth::login($user);
 

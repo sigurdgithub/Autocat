@@ -15,17 +15,17 @@ class ConfirmablePasswordController extends Controller
      *
      * @return \Illuminate\View\View
      */
-    public function show()
+     public function show()
     {
         return view('auth.confirm-password');
     }
-
+  
     /**
      * Confirm the user's password.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @return mixed
-     */
+     * @return mixed*/
+     
     public function store(Request $request)
     {
         if (! Auth::guard('web')->validate([
@@ -40,5 +40,5 @@ class ConfirmablePasswordController extends Controller
         $request->session()->put('auth.password_confirmed_at', time());
 
         return redirect()->intended(RouteServiceProvider::HOME);
-    }
+    } 
 }

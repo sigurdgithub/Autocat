@@ -10,7 +10,7 @@
 </div>
 <!--ACCOUNTDETAILS-->
 <div class="content-wrapper pt-0">
-    <form method="POST" action="">
+    <form method="POST" action="{{ route('register') }}">
         @csrf
         @method ('POST')
         <h3 class="text-muted mt-4">Mijn gegevens</h3>
@@ -22,21 +22,21 @@
                     <div class="col-md-4">
                         <div class="form-group">
                             <label class="form-label">Naam</label>
-                            <input type="text" class="form-control" name="lastName" :value={{old('lastName')}} required
-                                autofocus>
+                            <input type="text" class="form-control" name="lastName" :value="{{old('lastName')}}"
+                                required autofocus>
                         </div>
                     </div>
                     <div class="col-md-4">
                         <div class="form-group">
                             <label class="form-label">Voornaam</label>
-                            <input type="text" class="form-control" name="firstName" :value={{old('firstName')}}
+                            <input type="text" class="form-control" name="firstName" :value="{{old('firstName')}}"
                                 required>
                         </div>
                     </div>
                     <div class="col-md-4">
                         <div class="form-group">
                             <label class="form-label">Geboortedatum</label>
-                            <input type="date" class="form-control" name="dateOfBirth" :value={{old('dateOfBirth')}}
+                            <input type="date" class="form-control" name="dateOfBirth" :value="{{old('dateOfBirth')}}"
                                 required>
                         </div>
                     </div>
@@ -45,25 +45,25 @@
                     <div class="col-md-4">
                         <div class="form-group">
                             <label class="form-label">Straat</label>
-                            <input type="text" class="form-control" name="street" :value={{old('street')}} required>
+                            <input type="text" class="form-control" name="street" :value="{{old('street')}}" required>
                         </div>
                     </div>
                     <div class="col-md-2">
                         <div class="form-group">
                             <label class="form-label">Huisnummer</label>
-                            <input type="text" class="form-control" name="number" :value={{old('number')}} required>
+                            <input type="text" class="form-control" name="number" :value="{{old('number')}}" required>
                         </div>
                     </div>
                     <div class="col-md-2">
                         <div class="form-group">
                             <label class="form-label">Postcode</label>
-                            <input type="text" class="form-control" name="zipCode" :value={{old('zipcode')}} required>
+                            <input type="text" class="form-control" name="zipCode" :value="{{old('zipcode')}}" required>
                         </div>
                     </div>
                     <div class="col-md-4">
                         <div class="form-group">
                             <label class="form-label">Gemeente</label>
-                            <input type="text" class="form-control" name="city" :value={{old('city')}} required>
+                            <input type="text" class="form-control" name="city" :value="{{old('city')}}" required>
                         </div>
                     </div>
                 </div>
@@ -71,13 +71,13 @@
                     <div class="col-md-4">
                         <div class="form-group">
                             <label class="form-label">Telefoonnummer</label>
-                            <input type="text" class="form-control" name="phone" :value={{old('phone')}} required>
+                            <input type="text" class="form-control" name="phone" :value="{{old('phone')}}" required>
                         </div>
                     </div>
                     <div class="col-md-4">
                         <div class="form-group">
                             <label class="form-label">E-mail</label>
-                            <input type="email" class="form-control" name="email" :value={{old('email')}} required>
+                            <input type="email" class="form-control" name="email" :value="{{old('email')}}" required>
                         </div>
                     </div>
                     <div class="col-md-4">
