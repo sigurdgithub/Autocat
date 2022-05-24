@@ -26,10 +26,10 @@ Route::get('/', function () {
 });
  */
 
-Route::get('/kattenOverzicht', function () {
+/*Route::get('/kattenOverzicht', function () {
     return view('catOverview');
-});
-Route::get('/kattenOverzicht2', [CatOverviewController::class, 'getCats']);
+});*/
+Route::get('/kattenOverzicht', [CatOverviewController::class, 'getCats']);
 
 Route::get('/pleeggezinAccount', function () {
     return view('fosterAccount');
