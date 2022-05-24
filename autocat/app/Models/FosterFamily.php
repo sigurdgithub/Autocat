@@ -3,19 +3,23 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Foundation\Auth\User as Authenticatable;
 
-class FosterFamily extends Model
+class FosterFamily extends Authenticatable
 {
 
-    public function pets() {
+    public function pets()
+    {
         return $this->hasMany(FosterPet::class, 'fosterFamily');
     }
 
-    public function roommates() {
+    public function roommates()
+    {
         return $this->hasMany(FosterRoommate::class, 'fosterFamily');
     }
 
-    public function notifications() {
+    public function notifications()
+    {
         return $this->hasMany(Notification::class, 'fosterFamily');
     }
 
@@ -27,6 +31,16 @@ class FosterFamily extends Model
     protected $fillable = [
         'lastName', 'firstName', 'dateOfBirth', 'street', 'number', 'city', 'zipCode', 'phone', 'email', 'password', 'availableSpots', 'preferences'
     ];
+    // Take values from preferences checkboxes
+    public function setPreferencesAttribute($value)
+    {
+        $this->attributes['preferences'] = json_encode($value);
+    }
+
+    public function getPreferencesAttribute($value)
+    {
+        return $this->attributes['preferences'] = json_decode($value);
+    }
 
     /**
      * The attributes excluded from the model's JSON form.
@@ -36,7 +50,4 @@ class FosterFamily extends Model
     protected $hidden = [];
 
     protected $table = 'fosterFamilies';
-
-
-
 }

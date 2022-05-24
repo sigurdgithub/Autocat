@@ -43,15 +43,16 @@ class RegisteredUserController extends Controller
             'firstName' => ['required', 'string', 'max:255'],
             'dateOfBirth' => ['required', 'string', 'max:255'],
             'street' => ['required', 'string', 'max:255'],
-            'number' => ['required', 'string', 'max:255' ],
+            'number' => ['required', 'string', 'max:255'],
             'city' => ['required', 'string', 'max:255'],
             'zipCode' => ['required', 'string', 'max:255'],
             'phone' => ['required', 'string', 'max:255'],
             'zipCode' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-            'password' => ['required',   Rules\Password::defaults() ],
-            /* 'availableSpots' => ['required', 'integer'],
-            'preferences' => ['required', 'string', 'max:255'], 
+            'password' => ['required',   Rules\Password::defaults()],
+            'availableSpots' => ['required', 'string'],
+            'preferences' => ['required'],
+            /* '
              'picture' => ['required', 'string'] */
 
         ]);
@@ -63,7 +64,7 @@ class RegisteredUserController extends Controller
             'password' => Hash::make($request->password), */
             // Autocat registration
             'lastName' => $request->lastName,
-            'firstName' => $request->firstname, '',
+            'firstName' => $request->firstName,
             'dateOfBirth' => $request->dateOfBirth,
             'street' => $request->street,
             'number' => $request->number,
@@ -72,15 +73,15 @@ class RegisteredUserController extends Controller
             'phone' => $request->phone,
             'email' => $request->email,
             'password' => Hash::make($request->password),
-            /* 'availableSpots' => 
-            'preferences' */
+            'availableSpots' => $request->availableSpots,
+            'preferences' => $request->preferences
         ]);
         /* dd($request->all()); */
         event(new Registered($fosterFamily));
-        
 
-        Auth::login($user);
 
-        return redirect(RouteServiceProvider::HOME);
+        Auth::login($fosterFamily);
+
+        return redirect(RouteServiceProvider::fosterHome);
     }
 }

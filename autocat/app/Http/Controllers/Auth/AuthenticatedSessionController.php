@@ -31,11 +31,14 @@ class AuthenticatedSessionController extends Controller
      */
     public function store(LoginRequest $request)
     {
+        // dd($request->session());
         $request->authenticate();
+
 
         $request->session()->regenerate();
 
-        return redirect('login')/* ->intended(/* RouteServiceProvider::HOME ); */;
+
+        return redirect('login')->intended(RouteServiceProvider::fosterHome);
     }
 
     /**
