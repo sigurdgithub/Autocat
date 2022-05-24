@@ -1,6 +1,7 @@
 @extends('layouts.pages.theme')
     @section('content')
         <!--HERO-->
+
         <div class="page-header">
             <h3 class="page-title">
                 <span class="page-title-icon bg-gradient-danger text-white me-2">
@@ -26,7 +27,7 @@
                 <div class="card-body">
                     <div class="row mb-3">
                         <div class="col-md-4">
-                            <select class="btn btn-sm btn-outline-danger">
+                            <select id='multi-select-container-location' class="btn btn-sm btn-outline-danger filter location-search" autocomplete="off" placeholder="Search cities..." multiple data-silent-initial-value-set="true">
                                 <option>Pleeggezin</option>
                                 <option></option>
                                 <option></option>
@@ -199,4 +200,31 @@
                 </div>
             </div>
         </div>
+        <script type="text/javascript">
+            $(document).ready(function() {
+                myOptions = [];
+                myOptionsProvider = [{
+                    label: 'Please select a provider',
+                    value: ''
+                }];
+                VirtualSelect.init({
+                    ele: 'select',
+                    allowNewOption: false,
+                    showValueAsTags: true,
+                    options: myOptionsProvider
+                });
+                /*VirtualSelect.init({
+                    ele: '#multi-select-container-price',
+                    allowNewOption: false,
+                    showValueAsTags: true,
+                    options: myOptions
+                });
+                VirtualSelect.init({
+                    ele: '#multi-select-container-location',
+                    allowNewOption: false,
+                    showValueAsTags: true,
+                    options: myOptions
+                });*/
+            });
+        </script>
     @endsection
