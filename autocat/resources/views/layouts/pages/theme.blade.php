@@ -47,7 +47,8 @@
       </div>
       <!-- content-wrapper ends -->
       <!-- Footer -->
-      @include('layouts.partials.footer')
+      <!-- TODO: Why is this necessary -->
+      {{--@include('layouts.partials.footer')--}}
       <!-- Footer End -->
     </div>
     <!-- main-panel ends -->
