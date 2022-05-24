@@ -1,6 +1,7 @@
 @extends('layouts.pages.theme')
     @section('content')
         <!--HERO-->
+
         <div class="page-header">
             <h3 class="page-title">
                 <span class="page-title-icon bg-gradient-danger text-white me-2">
@@ -26,22 +27,20 @@
                 <div class="card-body">
                     <div class="row mb-3">
                         <div class="col-md-4">
-                            <select class="btn btn-sm btn-outline-danger">
+                            <select id='multi-select-container-location' class="btn btn-sm btn-outline-danger filter location-search" autocomplete="off" placeholder="Selecteer pleeggezin..." multiple data-silent-initial-value-set="true">
                                 <option>Pleeggezin</option>
                                 <option></option>
                                 <option></option>
                             </select>
                         </div>
                         <div class="col-md-4">
-                            <select class="btn btn-sm btn-outline-danger">
-                                <option>Geslacht</option>
+                            <select class="btn btn-sm btn-outline-danger" multiple placeholder="Selecteer Geslacht...">
                                 <option>Kattin</option>
                                 <option>Kater</option>
                             </select>
                         </div>
                         <div class="col-md-4">
-                            <select class="btn btn-sm btn-outline-danger">
-                                <option>Leeftijd</option>
+                            <select class="btn btn-sm btn-outline-danger" multiple placeholder="Selecteer Leeftijd...">
                                 <option>Kitten</option>
                                 <option>Puber</option>
                                 <option>Volwassen</option>
@@ -51,8 +50,7 @@
                     </div>
                     <div class="row mb-5">
                         <div class="col-md-4">
-                            <select class="btn btn-sm btn-outline-danger">
-                                <option>Adoptie status</option>
+                            <select class="btn btn-sm btn-outline-danger" multiple placeholder="Selecteer Adoptiestatus...">
                                 <option>Aangemeld</option>  
                                 <option>Bij Pleeggezin</option>                                                     
                                 <option>In Asiel</option>
@@ -63,8 +61,7 @@
                             </select>
                         </div>
                         <div class="col-md-4">
-                            <select class="btn btn-sm btn-outline-danger">
-                                <option>Adoptie mogelijkheden</option>
+                            <select class="btn btn-sm btn-outline-danger" multiple placeholder="Selecteer Adoptie mogelijkheden...">
                                 <option>Solo Moet</option>
                                 <option>Solo Mag</option>
                                 <option>Solo Nee</option>
@@ -80,8 +77,7 @@
                             </select>
                         </div>
                         <div class="col-md-4">
-                            <select class="btn btn-sm btn-outline-danger">
-                                <option>Karakter</option>
+                            <select class="btn btn-sm btn-outline-danger" multiple placeholder="Selecteer Karakter...">
                                 <option>Schootkat</option>  
                                 <option>Speelse kat</option>                                                     
                                 <option>Buitenkat</option>
@@ -108,23 +104,35 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-md-4 stretch-card grid-margin">
-                            <div class="card card-img-holder">
-                                <div class="card">
-                                    <div class="card-header bg-gradient-danger">
-                                        <img src="assets/images/dashboard/circle.svg" class="card-img-absolute" alt="circle-image" />
-                                        <div class="row">
-                                            <h4 class="col-md-6 font-weight-normal mb-3"><b>Caramel</b></h4>
-                                            <h5 class="col-md-6 font-weight-normal mb-3"><b>4 weken</b></h5>
-                                        </div>                              </div>
-                                    <div class="card-footer card-border-danger">
-                                        <div>Aangemeld</div>
-                                        <div><a href="" class="text-black"><u>nvt</u></a></div>
-                                        <div class="mt-3"><a href=""><u>Meer info</u></a></div>
+                        {{-- Make a card for each cat in the database --}}
+                        @foreach ($cats as $cat)
+                            <div class="col-md-4 stretch-card grid-margin">
+                                <div class="card card-img-holder">
+                                    <div class="card">
+                                        <div class="card-header bg-gradient-danger">
+                                            <img src="assets/images/dashboard/circle.svg" class="card-img-absolute" alt="circle-image" />
+                                            <div class="row">
+                                                <h4 class="col-md-6 font-weight-normal mb-3"><b>{{$cat->name}}</b></h4>
+                                                <h5 class="col-md-6 font-weight-normal mb-3"><b>{{$cat->dateOfBirth}}</b></h5>
+                                            </div>                              
+                                        </div>
+                                        <div class="card-footer card-border-danger">
+                                            <div>{{$cat->adoptionStatus}}</div>
+                                            @if ($cat->fosterFamily_id != null)
+                                                {{-- TODO: add route once detail of foster family is available --}}
+                                                <div><a href="{{--route()--}}" class="text-black"><u>{{$cat->fosterFamily->firstName }} {{$cat->fosterFamily->lastName }}</u></a></div>
+
+                                            @else
+                                                <div><a href="" class="text-black"><u>nvt</u></a></div>
+                                            @endif
+
+                                            <div class="mt-3"><a href=""><u>Meer info</u></a></div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        @endforeach
+                        
                         <div class="col-md-4 stretch-card grid-margin">
                             <div class="card card-img-holder">
                                 <div class="card">
@@ -199,4 +207,31 @@
                 </div>
             </div>
         </div>
+        <script type="text/javascript">
+            $(document).ready(function() {
+                myOptions = [];
+                myOptionsProvider = [{
+                    label: 'Please select a provider',
+                    value: ''
+                }];
+                VirtualSelect.init({
+                    ele: 'select',
+                    allowNewOption: false,
+                    showValueAsTags: true,
+                    options: myOptions
+                });
+                /*VirtualSelect.init({
+                    ele: '#multi-select-container-price',
+                    allowNewOption: false,
+                    showValueAsTags: true,
+                    options: myOptions
+                });
+                VirtualSelect.init({
+                    ele: '#multi-select-container-location',
+                    allowNewOption: false,
+                    showValueAsTags: true,
+                    options: myOptions
+                });*/
+            });
+        </script>
     @endsection

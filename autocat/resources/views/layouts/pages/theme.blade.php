@@ -12,6 +12,8 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"
     integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ=="
     crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <link rel="stylesheet" href="../assets/css/virtual-select.min.css">
+  <script src="../assets/js/virtual-select.min.js"></script>
   <!-- endinject -->
   <!-- Plugin css for this page -->
   <!-- End plugin css for this page -->
@@ -26,16 +28,12 @@
 <body>
   <div class="container-scroller">
     <!-- Navbar -->
-
     @include('layouts.partials.navbar')
     <!-- Navbar End -->
-
     <div class="container-fluid page-body-wrapper">
       <!-- Sidebar -->
-      @if (Auth::check())
       @include('layouts.partials.sidebar')
       <!-- Sidebar End -->
-      @endif
       <div class="main-panel">
         <div class="content-wrapper">
           <!-- Main -->
@@ -47,9 +45,14 @@
         @include('layouts.partials.footer')
         <!-- Footer End -->
       </div>
-      <!-- main-panel ends -->
+      <!-- content-wrapper ends -->
+      <!-- Footer -->
+      @include('layouts.partials.footer')
+      <!-- Footer End -->
     </div>
-    <!-- page-body-wrapper ends -->
+    <!-- main-panel ends -->
+  </div>
+  <!-- page-body-wrapper ends -->
   </div>
   <!-- container-scroller -->
   <!-- plugins:js -->

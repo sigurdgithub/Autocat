@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\NotificationController;
 use App\Http\Controllers\CatController;
+use App\Http\Controllers\CatOverviewController;
 use App\Http\Controllers\DashBoardController;
 use App\Http\Controllers\FosterFamilyController;
 use App\Http\Controllers\LoginController;
@@ -24,13 +25,11 @@ Route::get('/', function () {
     return view('login');
 });
  */
-Route::get('/katDetail', function () {
-    return view('catDetail');
-});
 
 Route::get('/kattenOverzicht', function () {
     return view('catOverview');
 });
+Route::get('/kattenOverzicht2', [CatOverviewController::class, 'getCats']);
 
 Route::get('/pleeggezinAccount', function () {
     return view('fosterAccount');
@@ -44,49 +43,19 @@ Route::get('/pleeggezinnenOverzicht', function () {
     return view('fosterOverview');
 });
 
+Route::get('/asielAccount', function () {
+    return view('shelterAccount');
+});
 
 Route::get('/asielDashboard', function () {
     return view('shelterDashboard');
 });
 
-Route::get('/welcome', function () {
+Route::get('/welkom', function () {
     return view('welcome');
 });
 
-Route::get('/privacy', function () {
-    return view('privacy');
-});
-
-Route::get('/katDetail', function () {
-    return view('catDetail');
-});
-
-Route::get('/kattenOverzicht', function () {
-    return view('catOverview');
-});
-
-Route::get('/pleeggezinAccount', function () {
-    return view('fosterAccount');
-});
-
-Route::get('/pleeggezinDashboard', function () {
-    return view('fosterDashboard');
-});
-
-Route::get('/pleeggezinnenOverzicht', function () {
-    return view('fosterOverview');
-});
-
-
-Route::get('/asielDashboard', function () {
-    return view('shelterDashboard');
-});
-
-Route::get('/welcome', function () {
-    return view('welcome');
-});
-
-Route::get('/privacy', function () {
+Route::get('/privacyverklaring', function () {
     return view('privacy');
 });
 
@@ -99,5 +68,13 @@ Route::delete('/notifications_delete/{id}', [DashBoardController::class, 'delete
 Route::post('/addNotification', [DashBoardController::class, 'store'])->name('addNotification');
 Route::post('/addNotificationShelter', [DashBoardController::class, 'storeShelter'])->name('addNotificationShelter');
 
+//catDetail routes
+Route::get('katDetail', function () {
+    $cats = CatController::getCats();
+    return view('catDetail', compact('cats'));
+});
+
+Route::post('/katDetail',[CatController::class,'storeCat'])->name('storeCat');
+Route::get('/katDetail/{id}',[CatController::class,'showCatById'])->name('showCatById');
 
 require __DIR__.'/auth.php';
