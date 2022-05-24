@@ -15,8 +15,8 @@ return new class extends Migration
     {
         Schema::create('fosterFamilies', function (Blueprint $table) {
             $table->id();
-            $table->string('firstName');
             $table->string('lastName');
+            $table->string('firstName');
             $table->date('dateOfBirth');
             $table->string('street');
             $table->string('number');

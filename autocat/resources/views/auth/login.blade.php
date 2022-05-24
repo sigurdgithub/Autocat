@@ -34,9 +34,11 @@
               <h4>Welkom!</h4>
               <h5 class="font-weight-light">Log in om verder te gaan</h5>
               <!-- Session Status -->
+
               <x-auth-session-status class="mb-4" :status="session('status')" />
 
               <!-- Validation Errors -->
+
               <x-auth-validation-errors class="mb-4" :errors="$errors" />
               <form class="pt-3" method="POST" action="{{ route('login') }}">
                 @csrf
