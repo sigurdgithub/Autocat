@@ -18,14 +18,18 @@ class Cat extends Model
     public function pictures() {
         return $this->hasMany(CatPicture::class, 'cat');
     }
+
+    public function catPreference() {
+        return $this->belongsTo(CatPreference::class);
+    }
     /**
      * The attributes that are mass assignable.
      *
      * @var array
      */
     protected $fillable = ['gender','name','dateOfBirth','breed','furColor', 'furLength', 'chipNumber', 'adoptionStatus', 'notifierName', 'notifierPhone',
-                            'socialization', 'startWeight', 'sterilized', 'extraInfo', 'medication', 'personality', 'solo', 'withPet', 'withBuddy',
-                            'gardenAccess', 'buddyId', 'image', 'fosterFamily_id'
+                            'socialization', 'startWeight', 'sterilized', 'extraInfo', 'medication', 'personality', 'solo', 'withPet', 'gardenAccess', 
+                            'buddyId', 'image', 'fosterFamily_id'
     ];
 
     /**
