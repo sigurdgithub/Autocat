@@ -104,23 +104,35 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-md-4 stretch-card grid-margin">
-                            <div class="card card-img-holder">
-                                <div class="card">
-                                    <div class="card-header bg-gradient-danger">
-                                        <img src="assets/images/dashboard/circle.svg" class="card-img-absolute" alt="circle-image" />
-                                        <div class="row">
-                                            <h4 class="col-md-6 font-weight-normal mb-3"><b>Caramel</b></h4>
-                                            <h5 class="col-md-6 font-weight-normal mb-3"><b>4 weken</b></h5>
-                                        </div>                              </div>
-                                    <div class="card-footer card-border-danger">
-                                        <div>Aangemeld</div>
-                                        <div><a href="" class="text-black"><u>nvt</u></a></div>
-                                        <div class="mt-3"><a href=""><u>Meer info</u></a></div>
+                        {{-- Make a card for each cat in the database --}}
+                        @foreach ($cats as $cat)
+                            <div class="col-md-4 stretch-card grid-margin">
+                                <div class="card card-img-holder">
+                                    <div class="card">
+                                        <div class="card-header bg-gradient-danger">
+                                            <img src="assets/images/dashboard/circle.svg" class="card-img-absolute" alt="circle-image" />
+                                            <div class="row">
+                                                <h4 class="col-md-6 font-weight-normal mb-3"><b>{{$cat->name}}</b></h4>
+                                                <h5 class="col-md-6 font-weight-normal mb-3"><b>{{$cat->dateOfBirth}}</b></h5>
+                                            </div>                              
+                                        </div>
+                                        <div class="card-footer card-border-danger">
+                                            <div>{{$cat->adoptionStatus}}</div>
+                                            @if ($cat->fosterFamily_id != null)
+                                                {{-- TODO: add route once detail of foster family is available --}}
+                                                <div><a href="{{--route()--}}" class="text-black"><u>{{$cat->fosterFamily->firstName }} {{$cat->fosterFamily->lastName }}</u></a></div>
+
+                                            @else
+                                                <div><a href="" class="text-black"><u>nvt</u></a></div>
+                                            @endif
+
+                                            <div class="mt-3"><a href=""><u>Meer info</u></a></div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        @endforeach
+                        
                         <div class="col-md-4 stretch-card grid-margin">
                             <div class="card card-img-holder">
                                 <div class="card">

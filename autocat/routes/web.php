@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\NotificationController;
 use App\Http\Controllers\CatController;
+use App\Http\Controllers\CatOverviewController;
 use App\Http\Controllers\DashBoardController;
 use App\Http\Controllers\FosterFamilyController;
 use App\Http\Controllers\LoginController;
@@ -31,6 +32,7 @@ Route::get('/katDetail', function () {
 Route::get('/kattenOverzicht', function () {
     return view('catOverview');
 });
+Route::get('/kattenOverzicht2', [CatOverviewController::class, 'getCats']);
 
 Route::get('/pleeggezinAccount', function () {
     return view('fosterAccount');
