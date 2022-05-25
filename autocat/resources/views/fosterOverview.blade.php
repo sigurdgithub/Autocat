@@ -26,7 +26,7 @@
                 <div class="card-body">
                     <div class="row mb-5">
                         <div class="col-md-4">
-                            <select class="btn btn-sm btn-outline-info">
+                            <select class="btn btn-sm btn-outline-info fosterFilter" multiple placeholder="Selecteer een aantal plaatsen...">
                                 <option>Beschikbare plaatsen</option>
                                 <option>1 beschikbare plaats</option>
                                 <option>2 beschikbare plaatsen</option>
@@ -40,7 +40,7 @@
                             </select>
                         </div>
                         <div class="col-md-4">
-                            <select class="btn btn-sm btn-outline-info">
+                            <select class="btn btn-sm btn-outline-info fosterFilter" multiple placeholder="Selecteer katvoorkeur(en)...">
                                 <option>Staat open voor</option>
                                 <option>Volwassen</option>
                                 <option>Zwanger</option>
@@ -54,7 +54,7 @@
                             </select>
                         </div>
                         <div class="col-md-4">
-                            <select class="btn btn-sm btn-outline-info">
+                            <select class="btn btn-sm btn-outline-info fosterFilter" multiple placeholder="Selecteer thuissituatie...">
                                 <option>Gezinssituatie</option>
                                 <option>Geen kinderen</option>  
                                 <option>Geen huisdieren</option>                                                     
@@ -64,6 +64,23 @@
                         </div>
                     </div>
                     <div class="row">
+                    @foreach ($fosterFamilies as $fosterFamily) 
+                        <div class="col-md-4 stretch-card grid-margin">
+                            <div class="card card-img-holder">
+                                <div class="card">
+                                    <div class="card-header bg-gradient-info">
+                                        <img src="assets/images/dashboard/circle.svg" class="card-img-absolute" alt="circle-image" />
+                                        <h4 class="font-weight-normal mb-3"><b>{{$fosterFamily->firstName}} {{$fosterFamily->lastName}}</b></h4>
+                                    </div>
+                                    <div class="card-footer card-border-info">
+                                        <div class="mb-3">{{$fosterFamily->availableSpots}} beschikbare plaatsen</div>
+                                            {{-- TODO: add route once detail of foster family is available --}}
+                                            <div><a href="{{--route()--}}" class="text-black"><u>Meer info</u></a></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    @endforeach
                         <div class="col-md-4 stretch-card grid-margin">
                             <div class="card card-img-holder">
                                 <div class="card">
@@ -154,4 +171,15 @@
                 </div>
             </div>
         </div>
+        <script type="text/javascript">
+        $(document).ready(function() {
+            myOptions = [];
+            VirtualSelect.init({
+                        ele: '.fosterFilter',
+                        allowNewOption: false,
+                        showValueAsTags: true,
+                        options: myOptions
+            });
+        });
+        </script>
     @endsection
