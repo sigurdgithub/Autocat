@@ -106,21 +106,21 @@
                         <div class="form-check form-check-info">
                             <label class="form-check-label">
                                 <input type="checkbox" class="form-check-input" name="preferences[]" value="adult"
-                                    :value="{{old('preferences')}}">Volwassen</label>
+                                    :value="{{old('preferences.0')}}">Volwassen</label>
                         </div>
                     </div>
                     <div class="col-md-4">
                         <div class="form-check form-check-info">
                             <label class="form-check-label">
                                 <input type="checkbox" class="form-check-input" name="preferences[]" value="pregnant"
-                                    :value="{{old('preferences')}}">Zwanger</label>
+                                    :value="{{old('preferences.1')}}">Zwanger</label>
                         </div>
                     </div>
                     <div class="col-md-4">
                         <div class="form-check form-check-info">
                             <label class="form-check-label">
                                 <input type="checkbox" class="form-check-input" name="preferences[]" value="kitten"
-                                    :value="{{old('preferences')}}">Kitten</label>
+                                    :value="{{old('preferences.2')}}">Kitten</label>
                         </div>
                     </div>
                 </div>
@@ -129,21 +129,21 @@
                         <div class="form-check form-check-info">
                             <label class="form-check-label">
                                 <input type="checkbox" class="form-check-input" name="preferences[]"
-                                    value="bottleFeeding" :value="{{old('preferences')}}">Flesvoeding</label>
+                                    value="bottleFeeding" :value="{{old('preferences.3')}}">Flesvoeding</label>
                         </div>
                     </div>
                     <div class="col-md-4">
                         <div class="form-check form-check-info">
                             <label class="form-check-label">
                                 <input type="checkbox" class="form-check-input" name="preferences[]" value="scared"
-                                    :value="{{old('preferences')}}">Bang</label>
+                                    :value="{{old('preferences.4')}}">Bang</label>
                         </div>
                     </div>
                     <div class="col-md-4">
                         <div class="form-check form-check-info">
                             <label class="form-check-label">
                                 <input type="checkbox" class="form-check-input" name="preferences[]" value="feral"
-                                    :value="{{old('preferences')}}">Wild</label>
+                                    :value="{{old('preferences.5')}}">Wild</label>
                         </div>
                     </div>
                 </div>
@@ -152,7 +152,7 @@
                         <div class="form-check form-check-info">
                             <label class="form-check-label">
                                 <input type="checkbox" class="form-check-input" name="preferences[]"
-                                    value="intensiveCare" :value="{{old('preferences')}}">Ziek met intensieve
+                                    value="intensiveCare" :value="{{old('preferences.6')}}">Ziek met intensieve
                                 verzorging</label>
                         </div>
                     </div>
@@ -160,7 +160,7 @@
                         <div class="form-check form-check-info">
                             <label class="form-check-label">
                                 <input type="checkbox" class="form-check-input" name="preferences[]"
-                                    value="noIntensiveCare" :value="{{old('preferences')}}">Ziek zonder intensieve
+                                    value="noIntensiveCare" :value="{{old('preferences.7')}}">Ziek zonder intensieve
                                 verzorging</label>
                         </div>
                     </div>
@@ -168,7 +168,7 @@
                         <div class="form-check form-check-info">
                             <label class="form-check-label">
                                 <input type="checkbox" class="form-check-input" name="preferences[]" value="isolation"
-                                    :value="{{old('preferences')}}">Isolatie</label>
+                                    :value="{{old('preferences.8')}}">Isolatie</label>
                         </div>
                     </div>
                 </div>

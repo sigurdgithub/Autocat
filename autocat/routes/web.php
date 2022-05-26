@@ -38,9 +38,9 @@ Route::get('/pleeggezinAccount', function () {
 Route::get('/pleeggezinDashboard', function () {
     return view('fosterDashboard');
 });
-
+// TODO Change this to be used with a a controller if necessary
 Route::get('/pleeggezinnenOverzicht', function () {
-    return view('fosterOverview');
+    return view('fosterOverview', ['fosterFamilies' => FosterFamilyController::getFosterFamilies()]);
 });
 
 Route::get('/asielAccount', function () {
