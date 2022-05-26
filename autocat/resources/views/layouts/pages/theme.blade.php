@@ -27,6 +27,8 @@
 
 <body>
   <div class="container-scroller">
+    {{-- Change view for not-logged in users --}}
+    @if (Auth::check())
     <!-- Navbar -->
     @include('layouts.partials.navbar')
     <!-- Navbar End -->
@@ -34,8 +36,11 @@
       <!-- Sidebar -->
       @include('layouts.partials.sidebar')
       <!-- Sidebar End -->
+
       <div class="main-panel">
+        @endif
         <div class="content-wrapper">
+
           <!-- Main -->
           @yield('content')
           <!-- Main End -->
