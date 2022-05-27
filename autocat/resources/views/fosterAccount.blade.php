@@ -10,8 +10,6 @@
 </div>
 <!--ACCOUNTDETAILS-->
 <div class="content-wrapper pt-0">
-    <!-- Validation Errors -->
-    <x-auth-validation-errors class="mb-4" :errors="$errors" />
     {{-- FosterFamily Form --}}
     <form method="POST" action="{{ route('register') }}">
         @csrf

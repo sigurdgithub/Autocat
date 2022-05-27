@@ -14,7 +14,7 @@ return [
     */
 
     'failed' => 'De combinatie van e-mailadres en wachtwoord is niet geldig.',
-    'password' => 'Vul alsjeblieft een geldig wachtwoord in.',
-    'throttle' => 'Too many login attempts. Please try again in :seconds seconds.',
+    'password' => 'Vul alstublieft een geldig wachtwoord in.',
+    'throttle' => 'Teveel login pogingen. Probeer opnieuw in :seconds seconden.',
 
 ];
