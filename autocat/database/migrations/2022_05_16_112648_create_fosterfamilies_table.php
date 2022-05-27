@@ -23,10 +23,7 @@ return new class extends Migration
             $table->string('city');
             $table->string('zipCode');
             $table->string('phone');
-            $table->string('email')->unique();
-            $table->string('password');
             $table->integer('availableSpots');
-            $table->string('preferences');
             $table->timestamps();
         });
     }

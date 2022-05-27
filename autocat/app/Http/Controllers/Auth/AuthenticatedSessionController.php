@@ -7,13 +7,10 @@ use App\Http\Requests\Auth\LoginRequest;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use App\Models\User;
-use Illuminate\Auth\Passwords\CanResetPassword;
 
 class AuthenticatedSessionController extends Controller
 {
     /**
-     * Same as old LoginController
      * Display the login view.
      *
      * @return \Illuminate\View\View
@@ -31,14 +28,11 @@ class AuthenticatedSessionController extends Controller
      */
     public function store(LoginRequest $request)
     {
-        // dd($request->session());
         $request->authenticate();
-
 
         $request->session()->regenerate();
 
-
-        return redirect('login')->intended(RouteServiceProvider::fosterHome);
+        return redirect()->intended(RouteServiceProvider::HOME);
     }
 
     /**
@@ -55,6 +49,6 @@ class AuthenticatedSessionController extends Controller
 
         $request->session()->regenerateToken();
 
-        return redirect('login');
+        return redirect('/');
     }
 }

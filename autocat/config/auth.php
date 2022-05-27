@@ -15,7 +15,7 @@ return [
 
     'defaults' => [
         'guard' => 'web',
-        'passwords' => 'fosterFamilies',
+        'passwords' => 'users',
     ],
 
     /*
@@ -38,7 +38,7 @@ return [
     'guards' => [
         'web' => [
             'driver' => 'session',
-            'provider' => 'fosterFamilies'
+            'provider' => 'users',
         ],
     ],
 
@@ -60,15 +60,15 @@ return [
     */
 
     'providers' => [
-        'fosterFamilies' => [
+        'users' => [
             'driver' => 'eloquent',
-            'model' => App\Models\FosterFamily::class
+            'model' => App\Models\User::class,
         ],
 
-        /* 'users' => [
-            'driver' => 'eloquent',
-            'model' => 'users',
-        ], */
+        // 'users' => [
+        //     'driver' => 'database',
+        //     'table' => 'users',
+        // ],
     ],
 
     /*
@@ -87,8 +87,8 @@ return [
     */
 
     'passwords' => [
-        'fosterFamilies' => [
-            'provider' => 'fosterFamilies',
+        'users' => [
+            'provider' => 'users',
             'table' => 'password_resets',
             'expire' => 60,
             'throttle' => 60,
