@@ -6,7 +6,7 @@ use App\Http\Controllers\CatController;
 use App\Http\Controllers\CatOverviewController;
 use App\Http\Controllers\DashBoardController;
 use App\Http\Controllers\FosterFamilyController;
-use App\Http\Controllers\LoginController;
+
 
 
 /*
@@ -18,21 +18,18 @@ use App\Http\Controllers\LoginController;
 | routes are loaded by the RouteServiceProvider within a group which
 | contains the "web" middleware group. Now create something great!
 |
-*/
-/* // Login
-Route::post('custom-login', [LoginController::class, 'customLogin'])->name('login.custom');
-Route::get('/', function () {
-    return view('login');
-});
- */
+
+
+
 
 /*Route::get('/kattenOverzicht', function () {
     return view('catOverview');
 });*/
+
 Route::get('/kattenOverzicht', [CatOverviewController::class, 'getCats']);
 
 Route::get('/pleeggezinAccount', function () {
-    return view('fosterAccount');
+    return view('auth.fosterAccount');
 });
 
 Route::get('/pleeggezinDashboard', function () {
@@ -74,7 +71,7 @@ Route::get('katDetail', function () {
     return view('catDetail', compact('cats'));
 });
 
-Route::post('/katDetail',[CatController::class,'storeCat'])->name('storeCat');
-Route::get('/katDetail/{id}',[CatController::class,'showCatById'])->name('showCatById');
+Route::post('/katDetail', [CatController::class, 'storeCat'])->name('storeCat');
+Route::get('/katDetail/{id}', [CatController::class, 'showCatById'])->name('showCatById');
 
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';

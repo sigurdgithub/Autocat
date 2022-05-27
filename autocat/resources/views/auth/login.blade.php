@@ -78,7 +78,7 @@
                     <div class="mt-3">
                       <p><a href="/asielAccount" class="text-gray text-decoration-underline">Maak een account aan als
                           <b>asielbeheerder</b></a></p>
-                      <p><a href="/pleeggezinAccount" class="text-gray text-decoration-underline">Maak een
+                      <p><a href="{{ route('register') }}" class="text-gray text-decoration-underline">Maak een
                           account aan als <b>pleeggezin</b></a></p>
                     </div>
                   </div>
