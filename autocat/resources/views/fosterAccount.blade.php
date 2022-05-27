@@ -2,11 +2,16 @@
 @section('content')
 <!--HERO-->
 <div class="page-header">
+
     <h3 class="page-title">
         <span class="page-title-icon bg-gradient-info text-white me-2">
             <i class="mdi mdi-account"></i>
-        </span> Account
+        </span>@if (Auth::check()) Account @else Registreer als pleeggezin @endif
     </h3>
+    @if (!Auth::check())
+    <h4><a href="/" class="text-gray text-decoration-underline">Terug naar login</a></h4>
+    @endif
+
 </div>
 <!--ACCOUNTDETAILS-->
 <div class="content-wrapper pt-0">
@@ -259,8 +264,9 @@
                 </button>
             </div>
         </div>
+
         <button type="submit" class="btn btn-gradient-info float-end mt-5">
-            Sla op
+            @if (Auth::check()) Sla op @else Registreren @endif
         </button>
     </form>
 </div>
