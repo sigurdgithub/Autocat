@@ -36,13 +36,13 @@ class RegisteredUserController extends Controller
         $request->validate([
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', Rules\Password::defaults()],
-            'fosterFamily_id' => ['required', 'foreignId']
+            'fosterFamily_id' => ['foreignId']
         ]);
 
         $user = User::create([
             'email' => $request->email,
             'password' => Hash::make($request->password),
-            'fosterFamily_id' => $request->fosterFamily_id
+            /* 'fosterFamily_id' => $request->fosterFamily_id */
         ]);
 
         event(new Registered($user));
