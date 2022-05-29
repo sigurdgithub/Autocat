@@ -125,7 +125,7 @@
                                                 <div><a href="" class="text-black"><u>nvt</u></a></div>
                                             @endif
 
-                                            <div class="mt-3"><a href=""><u>Meer info</u></a></div>
+                                            <div class="mt-3"><a href="katDetail/{{$cat->id}}"><u>Meer info</u></a></div>
                                         </div>
                                     </div>
                                 </div>
