@@ -28,7 +28,6 @@
                     <div class="row mb-3">
                         <div class="col-md-4">
                             <select id='multi-select-container-location' class="btn btn-sm btn-outline-danger filter location-search" autocomplete="off" placeholder="Selecteer pleeggezin..." multiple data-silent-initial-value-set="true">
-                                <option>Pleeggezin</option>
                                 <option></option>
                                 <option></option>
                             </select>
