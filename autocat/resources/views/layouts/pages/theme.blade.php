@@ -27,8 +27,8 @@
 
 <body>
   <div class="container-scroller">
-    {{-- Change view for not-logged in users --}}
-    @if (Auth::check())
+    {{-- Change view for not-logged in users
+    @if (Auth::check()) --}}
     <!-- Navbar -->
     @include('layouts.partials.navbar')
     <!-- Navbar End -->
@@ -38,7 +38,7 @@
       <!-- Sidebar End -->
 
       <div class="main-panel">
-        @endif
+        {{-- @endif --}}
         <div class="content-wrapper">
 
           <!-- Main -->
