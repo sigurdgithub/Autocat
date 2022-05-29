@@ -82,15 +82,23 @@ class CatController extends Controller
         // dd($cat->latest()->first()->id);
 
         //$lastcat = Cat::findOrFail($cat->latest()->first()->id);
+        $cat = $cat->latest()->first();
         $cats = Cat::all();
-        $lastcat = $cat->latest()->first();
-        return view('catDetail', compact('lastcat', 'cats'));
+        
+        return view('catDetail', compact('cat', 'cats'));
     }
 
     public function showCatById($id)
     {
-        $cat = Cat::findOrFail($id);
-        $cats = Cat::all();
-        return view('catDetail', ['cat' => $cat, 'cats' => $cats]);
+        $cat = Cat::where('id', $id)->firstOrFail();
+        $allCats = Cat::all();
+        $adoptionStatus = (['Aangemeld','Bij Pleeggezin','In Asiel','Klaar voor adoptie','In optie','Adoptie goedgekeurd','Bij Adoptiegezin']);
+        $breed = (['Europees korthaar', 'Abessijn', 'Amerikaanse bobtail', 'American Curl', 'American wirehair', 'Amerikaans korthaar', 'Ashera', 'Asian', 'Australian Mist', 'Balinees', 'Bengaal', 'Blauwe Rus', 'Boheemse Rex', 'Bombay', 'Britse korthaar', 'Britse langhaar', 'Burmees', 'Burmilla', 'California Spangled', 'Ceylon', 'Chartreux', 'Cornish Rex', 'Cymric', 'Devon Rex', 'Don Sphynx', 'Dragon Li', 'Egyptische Mau', 'Exotic', 'German Rex', 'Havana Brown', 'Heilige Birmaan', 'Highlander', 'Japanse Bobtail', 'Kanaani', 'Khao Manee', 'Korat', 'Kurillen stompstaartkat', 'LaPerm', 'Lykoi', 'Maine Coon', 'Mandalay', 'Manx', 'Mekong bobtail', 'Munchkin', 'Nebelung', 'Neva Masquerade', 'Noorse boskat', 'Ocicat', 'Ojos Azules', 'Oosters korthaar', 'Oosters langhaar', 'Pers', 'Peterbald', 'Pixie-Bob', 'Ragamuffin', 'Ragdoll', 'Savannah', 'Scottish Fold', 'Selkirk Rex', 'Serengeti', 'Seychellois', 'Siamees', 'Siberische kat', 'Singapura', 'Snowshoe', 'Sokoke', 'Somali', 'Sphynx', 'Thai', 'Tibetaan', 'Tiffanie', 'Tonkanees', 'Turkse Angora', 'Turkse Van', 'Ural Rex', 'York Chocolate']);
+        $furLength = (['Kort','Lang']);
+        $gender = (['Kattin','Kater']);
+        $socialization = (['Tam','Bang','Wild']);
+        $reason = (['Vaccinatie','Chip','Vaccinatie & chip','Sterilisatie','']);
+
+        return view('catDetail', compact('cat','allCats','adoptionStatus','breed','furLength','gender','socialization','reason'));
     }
 }
