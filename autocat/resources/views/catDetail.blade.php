@@ -262,8 +262,8 @@
                                 <div class="col-md-4">
                                     <select class="form-control form-control-sm" name="buddyId" value="{{ old('buddyId') }}">
                                         <option value="0">Selecteer</option>
-                                        @foreach ($allCats as $allCat)
-                                            <option value="{{$allCat->id}}" @if(isset($cat))@if($cat->buddyId == $allCat->id) selected @endif @else "" @endif>{{$allCat->name}}</option>
+                                        @foreach ($cats as $buddy)
+                                            <option value="{{$buddy->id}}" @if(isset($cat))@if($cat->buddyId == $buddy->id) selected @endif @else "" @endif>{{$buddy->name}}</option>
                                         @endforeach
                                     </select>
                                 </div>
@@ -339,28 +339,80 @@
             </div>
         </div>
 
-        <!-- HEALTH DIARY : VETVISIT-->
-        <div class="content-wrapper">
-            <h3 class="text-muted">Wegingen</h3>
-            <div class="card">
-                <div class="card-body">
-                    <h5 class="text-muted">Overzicht</h5>
-                    <div class="stretch-card grid-margin">
-                        <div class="card-body card-border-danger">
-                            <ul>
-                                <li class="row">
-                                    <div class="col-md-3">Datum: </div>
-                                    <div class="col-md-3">Gewicht: </div>
-                                    <div class="col-md-5">Opmerking: </div>
-                                    <button class="col-md-1 btn btn-inverse-danger btn-icon btn-lg">
-                                        <i class="mdi mdi-delete"></i>
-                                    </button>                            
-                                </li>
-                            </ul>
+        <!-- HEALTH DIARY : WEIGHING-->
+        @if(isset($cat))
+            <div class="content-wrapper">
+                <h3 class="text-muted">Wegingen</h3>
+                <div class="card">
+                    <div class="card-body">                        
+                        <h5 class="text-muted">Overzicht</h5>
+                        <div class="stretch-card grid-margin">
+                            <div class="card-body card-border-danger">
+                                @foreach ( $weighings as $weighing)
+                                    <ul>
+                                        <li class="row">
+                                            <div class="col-md-3">Datum: {{ $weighing->date }}</div>
+                                            <div class="col-md-3">Gewicht: {{ $weighing->weighing }} g</div>
+                                            <div class="col-md-5">Opmerking: {{ $weighing->comments}} </div>
+                                            <button class="col-md-1 btn btn-inverse-danger btn-icon btn-lg">
+                                                <i class="mdi mdi-delete"></i>
+                                            </button>                            
+                                        </li>
+                                    </ul>
+                                @endforeach
+                            </div>
                         </div>
+                        <h5 class="text-muted mb-4">Nieuw toevoegen</h5>
+                        <div class="row">
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label class="form-label">Datum</label>
+                                    <input type="date" class="form-control" name="date">
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label class="form-label">Gewicht (gram)</label>
+                                    <input type="number" min="0" class="form-control" name="weight">
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="form-label">Opmerking</label>
+                                    <textarea class="form-control" name="comments"></textarea>
+                                </div> 
+                            </div>
+                        </div>
+                        <button type="submit" class="btn btn-outline-danger">
+                        Toevoegen
+                        </button>
                     </div>
-                    <h5 class="text-muted mb-4">Nieuw toevoegen</h5>
-                    <div class="row">
+                </div>
+            </div>
+            <!-- HEALTH DIARY : VETVISIT -->
+            <div class="content-wrapper">
+                <h3 class="text-muted">Dierenarts bezoeken</h3>
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="text-muted">Overzicht</h5>
+                        <div class="stretch-card grid-margin">
+                            <div class="card-body card-border-danger">
+                                @foreach ( $vetVisits as $vetVisit)
+                                    <ul>
+                                        <li class="row">
+                                            <div class="col-md-3">Datum: {{ $vetVisit->date}} </div>
+                                            <div class="col-md-3">Reden: {{ $vetVisit->reason}}</div>
+                                            <div class="col-md-5">Opmerking: {{ $vetVisit->comments }}</div>
+                                            <button class="col-md-1 btn btn-inverse-danger btn-icon btn-lg">
+                                                <i class="mdi mdi-delete"></i>
+                                            </button>                            
+                                        </li>
+                                    </ul>
+                                @endforeach
+                            </div>
+                        </div>
+                        <h5 class="text-muted mb-4">Nieuw toevoegen</h5>
+                        <div class="row">
                         <div class="col-md-3">
                             <div class="form-group">
                                 <label class="form-label">Datum</label>
@@ -369,8 +421,13 @@
                         </div>
                         <div class="col-md-3">
                             <div class="form-group">
-                                <label class="form-label">Gewicht (gram)</label>
-                                <input type="number" min="0" class="form-control" name="weight">
+                                <label class="form-label">Reden</label>
+                                <select class="form-control form-control-sm" name="reason">
+                                    <option value="0">Selecteer</option>
+                                        {{-- @foreach ($reason as $reaso)
+                                            <option value="{{$allCat->id}}" @if(isset($cat))@if($cat->buddyId == $allCat->id) selected @endif @else "" @endif>{{$allCat->name}}</option>
+                                        @endforeach --}}
+                                </select>                                    
                             </div>
                         </div>
                         <div class="col-md-6">
@@ -379,65 +436,14 @@
                                 <textarea class="form-control" name="comments"></textarea>
                             </div> 
                         </div>
+                        </div>
+                        <button type="submit" class="btn btn-outline-danger">
+                        Toevoegen
+                        </button>
                     </div>
-                    <button type="submit" class="btn btn-outline-danger">
-                    Toevoegen
-                    </button>
                 </div>
             </div>
-        </div>
-        <!-- HEALTH DIARY : WEIGHINGS -->
-        <div class="content-wrapper">
-            <h3 class="text-muted">Dierenarts bezoeken</h3>
-            <div class="card">
-                <div class="card-body">
-                    <h5 class="text-muted">Overzicht</h5>
-                    <div class="stretch-card grid-margin">
-                        <div class="card-body card-border-danger">
-                            <ul>
-                                <li class="row">
-                                    <div class="col-md-3">Datum: </div>
-                                    <div class="col-md-3">Reden: </div>
-                                    <div class="col-md-5">Opmerking: </div>
-                                    <button class="col-md-1 btn btn-inverse-danger btn-icon btn-lg">
-                                        <i class="mdi mdi-delete"></i>
-                                    </button>                            
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                    <h5 class="text-muted mb-4">Nieuw toevoegen</h5>
-                    <div class="row">
-                    <div class="col-md-3">
-                        <div class="form-group">
-                            <label class="form-label">Datum</label>
-                            <input type="date" class="form-control" name="date">
-                        </div>
-                    </div>
-                    <div class="col-md-3">
-                        <div class="form-group">
-                            <label class="form-label">Reden</label>
-                            <select class="form-control form-control-sm" name="reason">
-                                <option value="0">Selecteer</option>
-                                    {{-- @foreach ($reason as $reaso)
-                                        <option value="{{$allCat->id}}" @if(isset($cat))@if($cat->buddyId == $allCat->id) selected @endif @else "" @endif>{{$allCat->name}}</option>
-                                    @endforeach --}}
-                            </select>                                    
-                        </div>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="form-group">
-                            <label class="form-label">Opmerking</label>
-                            <textarea class="form-control" name="comments"></textarea>
-                        </div> 
-                    </div>
-                    </div>
-                    <button type="submit" class="btn btn-outline-danger">
-                    Toevoegen
-                    </button>
-                </div>
-            </div>
-        </div>
+        @endif
 
         <!-- PHOTO ALBUM
         <h2>Foto Album</h2>
