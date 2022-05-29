@@ -26,6 +26,10 @@ class FosterFamily extends Authenticatable
         return $this->hasMany(Notification::class, 'fosterFamily');
     }
 
+    public function preferences() {
+        return $this->hasOne(FosterPreference::class);
+    }
+
     /**
      * The attributes that are mass assignable.
      *
