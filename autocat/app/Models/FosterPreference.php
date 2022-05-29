@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class FosterPreference extends Model
 {
     public function fosterFamily() {
-        return $this->morphTo();
+        return $this->belongsTo(FosterFamily::class, 'fosterFamily_id');
     }
 
     /**

@@ -19,8 +19,8 @@ class Cat extends Model
         return $this->hasMany(CatPicture::class, 'cat');
     }
 
-    public function catPreference() {
-        return $this->belongsTo(CatPreference::class);
+    public function preferences() {
+        return $this->hasOne(CatPreference::class);
     }
     /**
      * The attributes that are mass assignable.

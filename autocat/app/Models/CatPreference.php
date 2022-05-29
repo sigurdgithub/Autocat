@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class CatPreference extends Model
 {
     public function cat() {
-        return $this->morphTo();
+        return $this->belongsTo(Cat::class, 'cat_id');
     }
 
     /**
