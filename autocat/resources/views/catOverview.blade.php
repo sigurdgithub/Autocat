@@ -28,7 +28,6 @@
                     <div class="row mb-3">
                         <div class="col-md-4">
                             <select id='multi-select-container-location' class="btn btn-sm btn-outline-danger filter location-search" autocomplete="off" placeholder="Selecteer pleeggezin..." multiple data-silent-initial-value-set="true">
-                                <option>Pleeggezin</option>
                                 <option></option>
                                 <option></option>
                             </select>
@@ -126,7 +125,7 @@
                                                 <div><a href="" class="text-black"><u>nvt</u></a></div>
                                             @endif
 
-                                            <div class="mt-3"><a href=""><u>Meer info</u></a></div>
+                                            <div class="mt-3"><a href="katDetail/{{$cat->id}}"><u>Meer info</u></a></div>
                                         </div>
                                     </div>
                                 </div>

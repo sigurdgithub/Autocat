@@ -13,7 +13,7 @@ class VetVisit extends Model
      * @var array
      */
     protected $fillable = [
-        'cat_Id', 'date', 'reason', 'comments'
+        'cat_id', 'date', 'reason', 'comments'
     ];
 
     /**
