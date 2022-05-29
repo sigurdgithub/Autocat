@@ -16,7 +16,7 @@
 <!--ACCOUNTDETAILS-->
 <div class="content-wrapper pt-0">
     {{-- FosterFamily Form --}}
-    <form method="POST" action="">
+    <form method="POST" action="{{ route('registerFoster') }}">
         @csrf
         <h3 class="text-muted mt-4">Mijn gegevens</h3>
         <div class="card">
@@ -106,7 +106,7 @@
                             :value="{{old('availableSpots')}}" #txtWeight>
                     </div>
                 </div>
-                <form method="POST" action="">
+                <form method="POST" action="{{route('registerFosterPreference')}}">
                     @csrf
                     <div class="row">
                         <div class="col-md-4">

@@ -25,7 +25,7 @@ return new class extends Migration
             $table->boolean('intensiveCare')->default(0);
             $table->boolean('noIntensiveCare')->default(0);
             $table->boolean('isolation')->default(0);
-            $table->$table->timestamps();
+            $table->timestamps();
         });
     }
 
