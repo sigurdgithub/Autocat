@@ -17,6 +17,7 @@
 <div class="content-wrapper pt-0">
     {{-- FosterFamily Form --}}
     <form method="POST" action="">
+        @csrf
         <h3 class="text-muted mt-4">Mijn gegevens</h3>
         <div class="card">
             <div class="card-body">
@@ -75,6 +76,7 @@
                             <input type="text" class="form-control" name="phone" :value="{{old('phone')}}">
                         </div>
                     </div>
+
                     {{-- Register Form --}}
                     <form method="post" action="{{route('register')}}">
                         @csrf
@@ -104,77 +106,79 @@
                             :value="{{old('availableSpots')}}" #txtWeight>
                     </div>
                 </div>
-                <div class="row">
-                    <div class="col-md-4">
-                        <div class="form-check form-check-info">
-                            <label class="form-check-label">
-                                <input type="checkbox" class="form-check-input" name="preferences[]" value="adult"
-                                    :value="{{old('preferences.0')}}">Volwassen</label>
+                <form method="POST" action="">
+                    @csrf
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="form-check form-check-info">
+                                <label class="form-check-label">
+                                    <input type="checkbox" class="form-check-input" name="preferences[]" value="adult"
+                                        :value="{{old('preferences.0')}}">Volwassen</label>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-check form-check-info">
+                                <label class="form-check-label">
+                                    <input type="checkbox" class="form-check-input" name="preferences[]"
+                                        value="pregnant" :value="{{old('preferences.1')}}">Zwanger</label>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-check form-check-info">
+                                <label class="form-check-label">
+                                    <input type="checkbox" class="form-check-input" name="preferences[]" value="kitten"
+                                        :value="{{old('preferences.2')}}">Kitten</label>
+                            </div>
                         </div>
                     </div>
-                    <div class="col-md-4">
-                        <div class="form-check form-check-info">
-                            <label class="form-check-label">
-                                <input type="checkbox" class="form-check-input" name="preferences[]" value="pregnant"
-                                    :value="{{old('preferences.1')}}">Zwanger</label>
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="form-check form-check-info">
+                                <label class="form-check-label">
+                                    <input type="checkbox" class="form-check-input" name="preferences[]"
+                                        value="bottleFeeding" :value="{{old('preferences.3')}}">Flesvoeding</label>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-check form-check-info">
+                                <label class="form-check-label">
+                                    <input type="checkbox" class="form-check-input" name="preferences[]" value="scared"
+                                        :value="{{old('preferences.4')}}">Bang</label>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-check form-check-info">
+                                <label class="form-check-label">
+                                    <input type="checkbox" class="form-check-input" name="preferences[]" value="feral"
+                                        :value="{{old('preferences.5')}}">Wild</label>
+                            </div>
                         </div>
                     </div>
-                    <div class="col-md-4">
-                        <div class="form-check form-check-info">
-                            <label class="form-check-label">
-                                <input type="checkbox" class="form-check-input" name="preferences[]" value="kitten"
-                                    :value="{{old('preferences.2')}}">Kitten</label>
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="form-check form-check-info">
+                                <label class="form-check-label">
+                                    <input type="checkbox" class="form-check-input" name="preferences[]"
+                                        value="intensiveCare" :value="{{old('preferences.6')}}">Ziek met intensieve
+                                    verzorging</label>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-check form-check-info">
+                                <label class="form-check-label">
+                                    <input type="checkbox" class="form-check-input" name="preferences[]"
+                                        value="noIntensiveCare" :value="{{old('preferences.7')}}">Ziek zonder intensieve
+                                    verzorging</label>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-check form-check-info">
+                                <label class="form-check-label">
+                                    <input type="checkbox" class="form-check-input" name="preferences[]"
+                                        value="isolation" :value="{{old('preferences.8')}}">Isolatie</label>
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-4">
-                        <div class="form-check form-check-info">
-                            <label class="form-check-label">
-                                <input type="checkbox" class="form-check-input" name="preferences[]"
-                                    value="bottleFeeding" :value="{{old('preferences.3')}}">Flesvoeding</label>
-                        </div>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="form-check form-check-info">
-                            <label class="form-check-label">
-                                <input type="checkbox" class="form-check-input" name="preferences[]" value="scared"
-                                    :value="{{old('preferences.4')}}">Bang</label>
-                        </div>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="form-check form-check-info">
-                            <label class="form-check-label">
-                                <input type="checkbox" class="form-check-input" name="preferences[]" value="feral"
-                                    :value="{{old('preferences.5')}}">Wild</label>
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-4">
-                        <div class="form-check form-check-info">
-                            <label class="form-check-label">
-                                <input type="checkbox" class="form-check-input" name="preferences[]"
-                                    value="intensiveCare" :value="{{old('preferences.6')}}">Ziek met intensieve
-                                verzorging</label>
-                        </div>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="form-check form-check-info">
-                            <label class="form-check-label">
-                                <input type="checkbox" class="form-check-input" name="preferences[]"
-                                    value="noIntensiveCare" :value="{{old('preferences.7')}}">Ziek zonder intensieve
-                                verzorging</label>
-                        </div>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="form-check form-check-info">
-                            <label class="form-check-label">
-                                <input type="checkbox" class="form-check-input" name="preferences[]" value="isolation"
-                                    :value="{{old('preferences.8')}}">Isolatie</label>
-                        </div>
-                    </div>
-                </div>
             </div>
         </div>
         <h3 class="text-muted mt-5">Huisgenoten</h3>
@@ -263,6 +267,8 @@
         <button type="submit" class="btn btn-gradient-info float-end mt-5">
             @if (Auth::check()) Sla op @else Registreren @endif
         </button>
+    </form>
+    </form>
     </form>
 </div>
 @endsection
