@@ -6,7 +6,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class FosterPreference extends Model
 {
-    public function fosterFamily() {
+    public function fosterFamily()
+    {
         return $this->belongsTo(FosterFamily::class, 'fosterFamily_id');
     }
 
@@ -26,7 +27,5 @@ class FosterPreference extends Model
      */
     protected $hidden = [];
 
-    protected $table = 'fosterPreferences';
-
-
+    protected $table = 'foster_preferences';
 }

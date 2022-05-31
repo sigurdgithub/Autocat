@@ -17,7 +17,7 @@ class RouteServiceProvider extends ServiceProvider
      *
      * @var string
      */
-    public const fosterHome = 'pleeggezinDashboard';
+    public const fosterHome = 'pleeggezinAccount';
     public const shelterHome = 'asielDashboard';
     public const HOME = 'login';
 
