@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Cat;
+use App\Models\CatPreference;
 use Illuminate\Database\Eloquent\Builder;
 
 
@@ -42,6 +43,12 @@ class CatController extends Controller
     public function getCatById($id) 
     {
         return Cat::findOrFail($id);
+    }
+    public function getPreferenceByCatId($id) {
+        //dd(Cat::findOrFail($id)->preferences);
+        //dump(Cat::findOrFail($id)->preferences);
+        return json_encode(Cat::findOrFail($id)->preferences);
+        //return CatPreference::where('cat_id', $id)->firstOrFail();
     }
 
     public function storeCat(Request $request)

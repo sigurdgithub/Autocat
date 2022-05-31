@@ -20,7 +20,7 @@ class Cat extends Model
     }
 
     public function preferences() {
-        return $this->hasOne(CatPreference::class);
+        return $this->hasOne(CatPreference::class, 'cat_id');
     }
     /**
      * The attributes that are mass assignable.

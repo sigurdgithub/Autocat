@@ -23,7 +23,7 @@
                             <h5 class="modal-title" id="notificationModalLabel">Nieuwe melding</h5>
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
-                        <form action="{{ route('addNotificationShelter')}}" method="post" enctype="multipart/form"required>
+                        <form action="{{ route('addNotificationShelter')}}" method="post" enctype="multipart/form" required>
                         @csrf
                         <div class="modal-body">
                             <div class="form-floating">
@@ -227,7 +227,7 @@
                                 </div>
                                 <div class="col-md-6">
                                     <p class="card-description">Eigenschappen</p>
-                                    <ul class="list-star">
+                                    <ul class="list-star" id="catPreferences">
                                         <li></li>
                                     </ul>
                                 </div>
@@ -317,6 +317,27 @@
         </div>
     </div>
     <script type="text/javascript">
+    function getPreferencesCat(catId) {
+        $.ajax({
+                    url: '/catPref/ajax/'+ catId,
+                    type: "GET",
+                    dataType: "json",
+                    success:function(data) {
+                        $('#catPreferences').empty();
+                        let string = (data.bottleFeeding ? ' wel ' : ' niet ');
+                        $('#catPreferences').append('<li>Is' + string + 'gesteriliseerd</li>');
+                        //$('#catPreferences').append(JSON.stringify(data));
+                        console.log(data);
+                        //$('#sterilizedCat').empty();
+                        //$('#sterilizedCat').append(current_foster.sterilized);
+                        //$('#sterilizedCat').empty();
+                        //$('#sterilizedCat').append(current_foster.sterilized);
+                        //$('#sterilizedCat').empty();
+                        //$('#sterilizedCat').append(current_foster.sterilized);
+                        
+                    }
+                });
+    }
     $(document).ready(function() {
         $('select[name="fosterFamily"]').on('change', function() {
             var fosterId = $(this).val();
@@ -365,11 +386,20 @@
                         $('#sterilizedCat').empty();
                         $('#sterilizedCat').append(current_cat.sterilized);
                         // TODO: add more if extra properties are selected
-
+                        //$('#catPreferences').empty();
+                        //$('#catPreferences').append('<li>Is' + (current_cat.preferences.bottleFeeding ? ' ' : ' niet ') + 'gesteriliseerd</li>');
+                        //$('#sterilizedCat').empty();
+                        //$('#sterilizedCat').append(current_foster.sterilized);
+                        //$('#sterilizedCat').empty();
+                        //$('#sterilizedCat').append(current_foster.sterilized);
+                        //$('#sterilizedCat').empty();
+                        //$('#sterilizedCat').append(current_foster.sterilized);
+                        getPreferencesCat(current_cat.id);
                     }
                 });
             }else{
                 current_cat = null;
+                console.log("OOPs");
             }
         });
         $('select[name="fosterFamilyMatch"]').on('change', function() {
@@ -396,7 +426,7 @@
                         //$('#sterilizedCat').empty();
                         //$('#sterilizedCat').append(current_foster.sterilized);
                         // TODO: add more if extra properties are selected
-
+                        
                     }
                 });
             }else{
