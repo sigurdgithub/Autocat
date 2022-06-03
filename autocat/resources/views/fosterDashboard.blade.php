@@ -23,7 +23,7 @@
                         </div>
                         <form action="{{ route('addNotification')}}" method="post" enctype="multipart/form"required>
                         @csrf
-                        <input type="hidden" name="fosterFamily" :value="{{$fosterFamily}}">
+                        <input type="hidden" name="fosterFamily" value="{{$fosterFamily}}">
                         <div class="modal-body">
                             <div class="form-floating">
                                 <select class="form-select" name="cat" id="catSelect" aria-label="Floating label select example">
