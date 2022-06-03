@@ -112,7 +112,7 @@
                                             <img src="assets/images/dashboard/circle.svg" class="card-img-absolute" alt="circle-image" />
                                             <div class="row">
                                                 <h4 class="col-md-6 font-weight-normal mb-3"><b>{{$cat->name}}</b></h4>
-                                                <h5 class="col-md-6 font-weight-normal mb-3"><b>{{$cat->dateOfBirth}}</b></h5>
+                                                <h5 class="col-md-6 font-weight-normal mb-3"><b>{{\App\Http\Controllers\CatController::getCatAgeString($cat->dateOfBirth)}}</b></h5>
                                             </div>                              
                                         </div>
                                         <div class="card-footer card-border-danger">
