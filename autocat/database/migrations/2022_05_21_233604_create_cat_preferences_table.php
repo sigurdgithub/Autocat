@@ -13,22 +13,22 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('cat_preferences', function (Blueprint $table) {
+        Schema::create('catpreferences', function (Blueprint $table) {
             $table->id();
-            $table->integer('cat_id')->default(0);
-            $table->boolean('bottleFeeding')->default(0);
-            $table->boolean('pregnancy')->default(0);
-            $table->boolean('intensiveCare')->default(0);
-            $table->boolean('noIntensiveCare')->default(0);
-            $table->boolean('isolation')->default(0);
-            $table->boolean('kids')->default(0);
-            $table->boolean('dogs')->default(0);
-            $table->boolean('cats')->default(0);
-            $table->boolean('lapCat')->default(0);
-            $table->boolean('playfulCat')->default(0);
-            $table->boolean('outdoorCat')->default(0);
-            $table->boolean('calmCat')->default(0);
-            $table->boolean('bedroomAccess')->default(0);
+            $table->foreignId('cat_id')->unique();
+            $table->boolean('bottleFeeding')->nullable();
+            $table->boolean('pregnancy')->nullable();
+            $table->boolean('intensiveCare')->nullable();
+            $table->boolean('noIntensiveCare')->nullable();
+            $table->boolean('isolation')->nullable();
+            $table->boolean('kids')->nullable();
+            $table->boolean('dogs')->nullable();
+            $table->boolean('cats')->nullable();
+            $table->boolean('lapCat')->nullable();
+            $table->boolean('playfulCat')->nullable();
+            $table->boolean('outdoorCat')->nullable();
+            $table->boolean('calmCat')->nullable();
+            $table->boolean('bedroomAccess')->nullable();
             $table->timestamps();
         });
     }
@@ -40,6 +40,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('cat_preferences');
+        Schema::dropIfExists('catpreferences');
     }
 };

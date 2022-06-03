@@ -17,7 +17,7 @@ return new class extends Migration
             $table->id();
             $table->integer('cat_id');
             $table->date('date');
-            $table->integer('weighing');
+            $table->integer('weight');
             $table->string('comments');
             $table->timestamps();
         });
