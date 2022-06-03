@@ -6,6 +6,7 @@ use App\Http\Controllers\CatController;
 use App\Http\Controllers\CatOverviewController;
 use App\Http\Controllers\DashBoardController;
 use App\Http\Controllers\FosterFamilyController;
+use App\Http\Controllers\MedicalController;
 
 
 
@@ -68,8 +69,7 @@ Route::post('/addNotificationShelter', [DashBoardController::class, 'storeShelte
 
 //catDetail routes
 Route::get('katDetail', function () {
-/*     $catId = $cat->id;
- */    $cats = CatController::getCats();
+    $cats = CatController::getCats();
     $adoptionStatus = (['Aangemeld','Bij Pleeggezin','In Asiel','Klaar voor adoptie','In optie','Adoptie goedgekeurd','Bij Adoptiegezin']);
     $breed = (['Europees korthaar', 'Abessijn', 'Amerikaanse bobtail', 'American Curl', 'American wirehair', 'Amerikaans korthaar', 'Ashera', 'Asian', 'Australian Mist', 'Balinees', 'Bengaal', 'Blauwe Rus', 'Boheemse Rex', 'Bombay', 'Britse korthaar', 'Britse langhaar', 'Burmees', 'Burmilla', 'California Spangled', 'Ceylon', 'Chartreux', 'Cornish Rex', 'Cymric', 'Devon Rex', 'Don Sphynx', 'Dragon Li', 'Egyptische Mau', 'Exotic', 'German Rex', 'Havana Brown', 'Heilige Birmaan', 'Highlander', 'Japanse Bobtail', 'Kanaani', 'Khao Manee', 'Korat', 'Kurillen stompstaartkat', 'LaPerm', 'Lykoi', 'Maine Coon', 'Mandalay', 'Manx', 'Mekong bobtail', 'Munchkin', 'Nebelung', 'Neva Masquerade', 'Noorse boskat', 'Ocicat', 'Ojos Azules', 'Oosters korthaar', 'Oosters langhaar', 'Pers', 'Peterbald', 'Pixie-Bob', 'Ragamuffin', 'Ragdoll', 'Savannah', 'Scottish Fold', 'Selkirk Rex', 'Serengeti', 'Seychellois', 'Siamees', 'Siberische kat', 'Singapura', 'Snowshoe', 'Sokoke', 'Somali', 'Sphynx', 'Thai', 'Tibetaan', 'Tiffanie', 'Tonkanees', 'Turkse Angora', 'Turkse Van', 'Ural Rex', 'York Chocolate']);
     $furLength = (['Kort','Lang']);
@@ -80,7 +80,12 @@ Route::get('katDetail', function () {
     return view('catDetail', compact('cats', 'adoptionStatus', 'breed', 'furLength', 'gender', 'socialization'));
 });
 
+/* Route::get('/katDetail', [CatController::class, 'storeCatPreferences'])->name('storeCatPreferences');*/
 Route::post('/katDetail', [CatController::class, 'storeCat'])->name('storeCat');
 Route::get('/katDetail/{id}', [CatController::class, 'showCatById'])->name('showCatById');
+
+//Medical routes
+Route::get('/weighing_delete/{id}', [MedicalController::class, 'deleteWeighing'])->name('weighing_delete');
+Route::get('/vetVisit_delete/{id}', [MedicalController::class, 'deleteVetVisit'])->name('vetVisit_delete');
 
 require __DIR__ . '/auth.php';

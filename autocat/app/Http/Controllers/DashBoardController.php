@@ -16,9 +16,9 @@ class DashBoardController extends Controller
         $notifications = NotificationController::getNotificationsByFosterId($fosterId);
         $cats = CatController::getCatsByFosterId($fosterId);
         //dd($notifications);
-        return view('fosterDashboard', ['notifications' => $notifications, 'cats' => $cats,'fosterFamily' => $fosterId]);
+        return view('fosterDashboard', ['notifications' => $notifications, 'cats' => $cats, 'fosterFamily' => $fosterId]);
     }
-    
+
     /**
      * Store a new Notification in the database.
      *
@@ -28,18 +28,18 @@ class DashBoardController extends Controller
     public function store(Request $request)
     {
         // Validate the request...
- 
+
         $notification = new Notification;
- 
+
         $notification->cat_id = $request->cat;
         $notification->type = $request->type;
         $notification->message = $request->message;
-        
+
         $notification->sentByShelter = 0;
-        
+
         $notification->fosterFamily_id = $request->fosterFamily;
 
- 
+
         $notification->save();
         return redirect()->route('notifications', ['fosterId' => $request->fosterFamily]);
     }
@@ -52,23 +52,24 @@ class DashBoardController extends Controller
     public function storeShelter(Request $request)
     {
         // Validate the request...
- 
+
         $notification = new Notification;
- 
+
         $notification->cat_id = $request->cat;
         $notification->type = $request->type;
         $notification->message = $request->message;
-        
+
         $notification->sentByShelter = 1;
-        
+
         $notification->fosterFamily_id = $request->fosterFamily;
 
- 
+
         $notification->save();
         return redirect()->route('shelterNotifications');
     }
 
-    public function delete($id) {
+    public function delete($id)
+    {
         $notification = Notification::find($id);
         $sentByShelter = $notification->sentByShelter;
         $fId = $notification->fosterFamily_id;
@@ -76,8 +77,7 @@ class DashBoardController extends Controller
         //dd($notifications[0]->fosterFamilyId);
         if ($sentByShelter) {
             return redirect()->route('notifications', ['fosterId' => $fId]);
-        }
-        else {
+        } else {
             return redirect()->route('shelterNotifications');
         }
     }
@@ -89,12 +89,11 @@ class DashBoardController extends Controller
         $fosterFamilies = FosterFamilyController::getFosterFamilies();
         //dd($resultCats);
         return view('shelterDashboard', ['notifications' => $notifications, 'cats' => $cats, 'fosterFamilies' => $fosterFamilies]);
-
     }
 
-    public function getCatsByFosterId($fosterId) {
+    public function getCatsByFosterId($fosterId)
+    {
         $cats = CatController::getCatsByFosterIdModal($fosterId);
         return json_encode($cats);
     }
-
 }

@@ -146,28 +146,28 @@
                     </div>
                     <div class="row mt-3">
                         <div class="col-md-2">Speciale noden</div>
-                        <div class="col-md-5">
-                            <div class="form-check form-check-danger">
-                                <label class="form-check-label">
-                                <input type="checkbox" class="form-check-input" name="bottleFeeding" value="1" @if(isset($cat)){{ ($cat->bottleFeeding=="1")? "checked" : "" }} @endif>Flesvoeding</label>
+                            <div class="col-md-5">
+                                <div class="form-check form-check-danger">
+                                    <label class="form-check-label">
+                                    <input type="checkbox" class="form-check-input" name="bottleFeeding" value="1" @if(isset($cat)){{ ($catPreference->bottleFeeding=="1")? "checked" : "" }} @endif>Flesvoeding</label>
+                                </div>
+                                <div class="form-check form-check-danger">
+                                    <label class="form-check-label">
+                                    <input type="checkbox" class="form-check-input" name="pregnancy" value="1" @if(isset($cat)){{ ($catPreference->pregnancy=="1")? "checked" : "" }} @endif>Zwangerschap</label>
+                                </div>
+                                <div class="form-check form-check-danger">
+                                    <label class="form-check-label">
+                                    <input type="checkbox" class="form-check-input" name="intensiveCare" value="1" @if(isset($cat)){{ ($catPreference->intensiveCare=="1")? "checked" : "" }} @endif>Ziek met intensieve verzorging</label>
+                                </div>
+                                <div class="form-check form-check-danger">
+                                    <label class="form-check-label">
+                                    <input type="checkbox" class="form-check-input" name="noIntensiveCare" value="1" @if(isset($cat)){{ ($catPreference->noIntensiveCare=="1")? "checked" : "" }} @endif>Ziek zonder intensieve verzorging</label>
+                                </div>
+                                <div class="form-check form-check-danger">
+                                    <label class="form-check-label">
+                                    <input type="checkbox" class="form-check-input" name="isolation" value="1" @if(isset($cat)){{ ($catPreference->isolation=="1")? "checked" : "" }} @endif>Isolatie</label>
+                                </div>
                             </div>
-                            <div class="form-check form-check-danger">
-                                <label class="form-check-label">
-                                <input type="checkbox" class="form-check-input" name="pregnancy" value="1" @if(isset($cat)){{ ($cat->pregnancy=="1")? "checked" : "" }} @endif>Zwangerschap</label>
-                            </div>
-                            <div class="form-check form-check-danger">
-                                <label class="form-check-label">
-                                <input type="checkbox" class="form-check-input" name="intensiveCare" value="1" @if(isset($cat)){{ ($cat->intensiveCare=="1")? "checked" : "" }} @endif>Ziek met intensieve verzorging</label>
-                            </div>
-                            <div class="form-check form-check-danger">
-                                <label class="form-check-label">
-                                <input type="checkbox" class="form-check-input" name="noIntensiveCare" value="1" @if(isset($cat)){{ ($cat->noIntensiveCare=="1")? "checked" : "" }} @endif>Ziek zonder intensieve verzorging</label>
-                            </div>
-                            <div class="form-check form-check-danger">
-                                <label class="form-check-label">
-                                <input type="checkbox" class="form-check-input" name="isolation" value="1" @if(isset($cat)){{ ($cat->isolation=="1")? "checked" : "" }} @endif>Isolatie</label>
-                            </div>
-                        </div>
                         <div class="col-md-5">
                             <div class="form-group">
                                 <label for="">Andere</label>
@@ -302,36 +302,36 @@
                             <h5>Kan geplaatst worden met</h5>
                             <div class="form-check form-check-danger">
                                 <label class="form-check-label">
-                                <input type="checkbox" class="form-check-input" name="kids" value="1" @if(isset($cat)){{ ($cat->kids=="1")? "checked" : "" }} @endif>Jonge kinderen</label>
+                                <input type="checkbox" class="form-check-input" name="kids" value="1" @if(isset($cat)){{ ($catPreference->kids=="1")? "checked" : "" }} @endif>Jonge kinderen</label>
                             </div>
                             <div class="form-check form-check-danger">
                                 <label class="form-check-label">
-                                <input type="checkbox" class="form-check-input" name="dogs" value="1" @if(isset($cat)){{ ($cat->dogs=="1")? "checked" : "" }} @endif>Honden</label>
+                                <input type="checkbox" class="form-check-input" name="dogs" value="1" @if(isset($cat)){{ ($catPreference->dogs=="1")? "checked" : "" }} @endif>Honden</label>
                             </div>
                             <div class="form-check form-check-danger">
                                 <label class="form-check-label">
-                                <input type="checkbox" class="form-check-input" name="cats" value="1" @if(isset($cat)){{ ($cat->cats=="1")? "checked" : "" }} @endif>Katten</label>
+                                <input type="checkbox" class="form-check-input" name="cats" value="1" @if(isset($cat)){{ ($catPreference->cats=="1")? "checked" : "" }} @endif>Katten</label>
                             </div>
                             <h5 class="mt-5">Karakter</h5>
                             <div class="form-check form-check-danger">
                                 <label class="form-check-label">
-                                <input type="checkbox" class="form-check-input" name="lapCat" value="1" @if(isset($cat)){{ ($cat->lapCat=="1")? "checked" : "" }} @endif>Schootkat</label>
+                                <input type="checkbox" class="form-check-input" name="lapCat" value="1" @if(isset($cat)){{ ($catPreference->lapCat=="1")? "checked" : "" }} @endif>Schootkat</label>
                             </div>
                             <div class="form-check form-check-danger">
                                 <label class="form-check-label">
-                                <input type="checkbox" class="form-check-input" name="playfulCat" value="1" @if(isset($cat)){{ ($cat->playfulcat=="1")? "checked" : "" }} @endif>Speelse kat</label>
+                                <input type="checkbox" class="form-check-input" name="playfulCat" value="1" @if(isset($cat)){{ ($catPreference->playfulcat=="1")? "checked" : "" }} @endif>Speelse kat</label>
                             </div>
                             <div class="form-check form-check-danger">
                                 <label class="form-check-label">
-                                <input type="checkbox" class="form-check-input" name="outdoorCat" value="1" @if(isset($cat)){{ ($cat->outdoorCat=="1")? "checked" : "" }} @endif>Buitenkat</label>
+                                <input type="checkbox" class="form-check-input" name="outdoorCat" value="1" @if(isset($cat)){{ ($catPreference->outdoorCat=="1")? "checked" : "" }} @endif>Buitenkat</label>
                             </div>
                             <div class="form-check form-check-danger">
                                 <label class="form-check-label">
-                                <input type="checkbox" class="form-check-input" name="calmCat" value="1" @if(isset($cat)){{ ($cat->calmCat=="1")? "checked" : "" }} @endif>Rustige kat</label>
+                                <input type="checkbox" class="form-check-input" name="calmCat" value="1" @if(isset($cat)){{ ($catPreference->calmCat=="1")? "checked" : "" }} @endif>Rustige kat</label>
                             </div>
                             <div class="form-check form-check-danger">
                                 <label class="form-check-label">
-                                <input type="checkbox" class="form-check-input" name="bedroomAccess" value="1" @if(isset($cat)){{ ($cat->bedroomCat=="1")? "checked" : "" }} @endif>Wil in de slaapkamer</label>
+                                <input type="checkbox" class="form-check-input" name="bedroomAccess" value="1" @if(isset($cat)){{ ($catPreference->bedroomCat=="1")? "checked" : "" }} @endif>Wil in de slaapkamer</label>
                             </div>
                         </div>
                     </div>
@@ -353,39 +353,41 @@
                                         <li class="row">
                                             <div class="col-md-3">Datum: {{ $weighing->date }}</div>
                                             <div class="col-md-3">Gewicht: {{ $weighing->weighing }} g</div>
-                                            <div class="col-md-5">Opmerking: {{ $weighing->comments}} </div>
-                                            <button class="col-md-1 btn btn-inverse-danger btn-icon btn-lg">
-                                                <i class="mdi mdi-delete"></i>
-                                            </button>                            
+                                            <div class="col-md-5">Opmerking: {{ $weighing->comments}} </div>  
+                                            <a href='/weighing_delete/{{$weighing->id}}' class="col-md-1 btn btn-inverse-danger btn-icon btn-lg"><i class="mdi mdi-delete"></i></a>                 
                                         </li>
                                     </ul>
                                 @endforeach
                             </div>
                         </div>
-                        <h5 class="text-muted mb-4">Nieuw toevoegen</h5>
-                        <div class="row">
-                            <div class="col-md-3">
-                                <div class="form-group">
-                                    <label class="form-label">Datum</label>
-                                    <input type="date" class="form-control" name="date">
+                        <form method="post" action="/" enctype="multipart/form-data"> 
+                            @csrf
+                            <input type="hidden" value={{$cat->id}} name="cat_id">                          
+                            <h5 class="text-muted mb-4">Nieuw toevoegen</h5>
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label class="form-label">Datum</label>
+                                        <input type="date" class="form-control" name="date">
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label class="form-label">Gewicht (gram)</label>
+                                        <input type="number" min="0" class="form-control" name="weight">
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="form-label">Opmerking</label>
+                                        <textarea class="form-control" name="comments"></textarea>
+                                    </div> 
                                 </div>
                             </div>
-                            <div class="col-md-3">
-                                <div class="form-group">
-                                    <label class="form-label">Gewicht (gram)</label>
-                                    <input type="number" min="0" class="form-control" name="weight">
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label class="form-label">Opmerking</label>
-                                    <textarea class="form-control" name="comments"></textarea>
-                                </div> 
-                            </div>
-                        </div>
-                        <button type="submit" class="btn btn-outline-danger">
-                        Toevoegen
-                        </button>
+                            <button type="submit" class="btn btn-outline-danger">
+                            Toevoegen
+                            </button>
+                        </form>
                     </div>
                 </div>
             </div>
@@ -403,9 +405,7 @@
                                             <div class="col-md-3">Datum: {{ $vetVisit->date}} </div>
                                             <div class="col-md-3">Reden: {{ $vetVisit->reason}}</div>
                                             <div class="col-md-5">Opmerking: {{ $vetVisit->comments }}</div>
-                                            <button class="col-md-1 btn btn-inverse-danger btn-icon btn-lg">
-                                                <i class="mdi mdi-delete"></i>
-                                            </button>                            
+                                            <a href='/vetVisit_delete/{{$vetVisit->id}}' class="col-md-1 btn btn-inverse-danger btn-icon btn-lg"><i class="mdi mdi-delete"></i></a>                            
                                         </li>
                                     </ul>
                                 @endforeach

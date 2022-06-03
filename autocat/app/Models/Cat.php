@@ -22,6 +22,15 @@ class Cat extends Model
     public function preferences() {
         return $this->hasOne(CatPreference::class, 'cat_id');
     }
+
+    public function vetVisits() {
+        return $this->hasMany(VetVisit::class, 'cat_id');
+    }
+
+    public function weighings() {
+        return $this->hasMany(Weighing::class, 'cat_id');
+    }
+    
     /**
      * The attributes that are mass assignable.
      *

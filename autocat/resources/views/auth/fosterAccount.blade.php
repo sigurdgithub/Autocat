@@ -16,7 +16,7 @@
 <!--ACCOUNTDETAILS-->
 <div class="content-wrapper pt-0">
     {{-- FosterFamily Form --}}
-    <form method="POST" action="{{ route('registerFoster') }}">
+    <form method="POST" action="{{ route('register') }}">
         @csrf
         <h3 class="text-muted mt-4">Mijn gegevens</h3>
         <div class="card">
@@ -78,8 +78,8 @@
                     </div>
 
                     {{-- Register Form --}}
-                    <form method="post" action="{{route('register')}}">
-                        @csrf
+                    {{-- <form method="post" action="{{route('register')}}">
+                        @csrf --}}
                         <div class="col-md-4">
                             <div class="form-group">
                                 <label class="form-label">E-mail</label>
@@ -106,28 +106,34 @@
                             :value="{{old('availableSpots')}}" #txtWeight>
                     </div>
                 </div>
-                <form method="POST" action="{{route('registerFosterPreference')}}">
-                    @csrf
+                {{-- <form method="POST" action="{{route('register')}}">
+                    @csrf --}}
                     <div class="row">
                         <div class="col-md-4">
                             <div class="form-check form-check-info">
                                 <label class="form-check-label">
-                                    <input type="checkbox" class="form-check-input" name="preferences[]" value="adult"
-                                        :value="{{old('preferences.0')}}">Volwassen</label>
+                                    <input type="checkbox" class="form-check-input" name="adult" value="1"
+                                        @if(isset($fosterFamily)){{ ($fosterPreference->adult=="1")? "checked" : "" }}
+                                    @endif
+                                    :value="{{old('adult')}}">Volwassen</label>
                             </div>
                         </div>
                         <div class="col-md-4">
                             <div class="form-check form-check-info">
                                 <label class="form-check-label">
-                                    <input type="checkbox" class="form-check-input" name="preferences[]"
-                                        value="pregnant" :value="{{old('preferences.1')}}">Zwanger</label>
+                                    <input type="checkbox" class="form-check-input" name="pregnant" value="1"
+                                        @if(isset($fosterFamily)){{ ($fosterPreference->pregnant=="1")? "checked" : ""
+                                    }} @endif
+                                    :value="{{old('pregnant')}}">Zwanger</label>
                             </div>
                         </div>
                         <div class="col-md-4">
                             <div class="form-check form-check-info">
                                 <label class="form-check-label">
-                                    <input type="checkbox" class="form-check-input" name="preferences[]" value="kitten"
-                                        :value="{{old('preferences.2')}}">Kitten</label>
+                                    <input type="checkbox" class="form-check-input" name="kitten" value="1"
+                                        @if(isset($fosterFamily)){{ ($fosterPreference->kitten=="1")? "checked" : "" }}
+                                    @endif
+                                    :value="{{old('kitten')}}">Kitten</label>
                             </div>
                         </div>
                     </div>
@@ -135,22 +141,29 @@
                         <div class="col-md-4">
                             <div class="form-check form-check-info">
                                 <label class="form-check-label">
-                                    <input type="checkbox" class="form-check-input" name="preferences[]"
-                                        value="bottleFeeding" :value="{{old('preferences.3')}}">Flesvoeding</label>
+                                    <input type="checkbox" class="form-check-input" name="bottleFeeding" value="1"
+                                        @if(isset($fosterFamily)){{ ($fosterPreference->bottleFeeding=="1")? "checked" :
+                                    "" }}
+                                    @endif
+                                    :value="{{old('bottleFeeding')}}">Flesvoeding</label>
                             </div>
                         </div>
                         <div class="col-md-4">
                             <div class="form-check form-check-info">
                                 <label class="form-check-label">
-                                    <input type="checkbox" class="form-check-input" name="preferences[]" value="scared"
-                                        :value="{{old('preferences.4')}}">Bang</label>
+                                    <input type="checkbox" class="form-check-input" name="scared" value="1"
+                                        @if(isset($fosterFamily)){{ ($fosterPreference->scared=="1")? "checked" : "" }}
+                                    @endif
+                                    :value="{{old('scared')}}">Bang</label>
                             </div>
                         </div>
                         <div class="col-md-4">
                             <div class="form-check form-check-info">
                                 <label class="form-check-label">
-                                    <input type="checkbox" class="form-check-input" name="preferences[]" value="feral"
-                                        :value="{{old('preferences.5')}}">Wild</label>
+                                    <input type="checkbox" class="form-check-input" name="feral" value="1"
+                                        @if(isset($fosterFamily)){{ ($fosterPreference->feral=="1")? "checked" : "" }}
+                                    @endif
+                                    :value="{{old('feral')}}">Wild</label>
                             </div>
                         </div>
                     </div>
@@ -158,24 +171,33 @@
                         <div class="col-md-4">
                             <div class="form-check form-check-info">
                                 <label class="form-check-label">
-                                    <input type="checkbox" class="form-check-input" name="preferences[]"
-                                        value="intensiveCare" :value="{{old('preferences.6')}}">Ziek met intensieve
+                                    <input type="checkbox" class="form-check-input" name="intensiveCare" value="1"
+                                        @if(isset($fosterFamily)){{ ($fosterPreference->intensiveCare=="1")? "checked" :
+                                    "" }}
+                                    @endif
+                                    :value="{{old('intensiveCare')}}">Ziek met intensieve
                                     verzorging</label>
                             </div>
                         </div>
                         <div class="col-md-4">
                             <div class="form-check form-check-info">
                                 <label class="form-check-label">
-                                    <input type="checkbox" class="form-check-input" name="preferences[]"
-                                        value="noIntensiveCare" :value="{{old('preferences.7')}}">Ziek zonder intensieve
+                                    <input type="checkbox" class="form-check-input" name="noIntensiveCare" value="1"
+                                        @if(isset($fosterFamily)){{ ($fosterPreference->noIntensiveCare=="1")? "checked"
+                                    : "" }}
+                                    @endif
+                                    :value="{{old('noIntensiveCare')}}">Ziek zonder
+                                    intensieve
                                     verzorging</label>
                             </div>
                         </div>
                         <div class="col-md-4">
                             <div class="form-check form-check-info">
                                 <label class="form-check-label">
-                                    <input type="checkbox" class="form-check-input" name="preferences[]"
-                                        value="isolation" :value="{{old('preferences.8')}}">Isolatie</label>
+                                    <input type="checkbox" class="form-check-input" name="isolation" value="1"
+                                        @if(isset($fosterFamily)){{ ($fosterPreference->isolation=="1")? "checked" : ""
+                                    }} @endif
+                                    :value="{{old('isolation')}}">Isolatie</label>
                             </div>
                         </div>
                     </div>
@@ -267,8 +289,6 @@
         <button type="submit" class="btn btn-gradient-info float-end mt-5">
             @if (Auth::check()) Sla op @else Registreren @endif
         </button>
-    </form>
-    </form>
     </form>
 </div>
 @endsection

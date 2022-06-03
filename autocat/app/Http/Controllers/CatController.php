@@ -100,12 +100,25 @@ class CatController extends Controller
             'buddyId' => $request->input('buddyId'),
             'image' => $request->input('image')
             ]);
-        
-        $cat->save();
-        // dd($cat->latest()->first()->id);
 
-        //$lastcat = Cat::findOrFail($cat->latest()->first()->id);
-        $cat = $cat->latest()->first();
+        $catPreference = CatPreference::firstOrCreate(
+            [
+            'cat_id' => $cat->id,
+            'bottleFeeding' => $request->input('bottleFeeding'),
+            'pregnancy' => $request->input('pregnancy'),
+            'intensiveCare' => $request->input('intensiveCare'),
+            'noIntensiveCare' => $request->input('noIntensiveCare'),
+            'isolation' => $request->input('isolation'),
+            'kids' => $request->input('kids'),
+            'dogs' => $request->input('dogs'),
+            'cats' => $request->input('cats'),
+            'lapCat' => $request->input('lapCat'),
+            'playfulCat' => $request->input('playfulCat'),
+            'outdoorCat' => $request->input('outdoorCat'),
+            'calmCat' => $request->input('calmCat'),
+            'bedroomAccess' => $request->input('bedroomAccess')
+        ]);
+
         $cats = Cat::all();
         $adoptionStatus = (['Aangemeld','Bij Pleeggezin','In Asiel','Klaar voor adoptie','In optie','Adoptie goedgekeurd','Bij Adoptiegezin']);
         $breed = (['Europees korthaar', 'Abessijn', 'Amerikaanse bobtail', 'American Curl', 'American wirehair', 'Amerikaans korthaar', 'Ashera', 'Asian', 'Australian Mist', 'Balinees', 'Bengaal', 'Blauwe Rus', 'Boheemse Rex', 'Bombay', 'Britse korthaar', 'Britse langhaar', 'Burmees', 'Burmilla', 'California Spangled', 'Ceylon', 'Chartreux', 'Cornish Rex', 'Cymric', 'Devon Rex', 'Don Sphynx', 'Dragon Li', 'Egyptische Mau', 'Exotic', 'German Rex', 'Havana Brown', 'Heilige Birmaan', 'Highlander', 'Japanse Bobtail', 'Kanaani', 'Khao Manee', 'Korat', 'Kurillen stompstaartkat', 'LaPerm', 'Lykoi', 'Maine Coon', 'Mandalay', 'Manx', 'Mekong bobtail', 'Munchkin', 'Nebelung', 'Neva Masquerade', 'Noorse boskat', 'Ocicat', 'Ojos Azules', 'Oosters korthaar', 'Oosters langhaar', 'Pers', 'Peterbald', 'Pixie-Bob', 'Ragamuffin', 'Ragdoll', 'Savannah', 'Scottish Fold', 'Selkirk Rex', 'Serengeti', 'Seychellois', 'Siamees', 'Siberische kat', 'Singapura', 'Snowshoe', 'Sokoke', 'Somali', 'Sphynx', 'Thai', 'Tibetaan', 'Tiffanie', 'Tonkanees', 'Turkse Angora', 'Turkse Van', 'Ural Rex', 'York Chocolate']);
@@ -113,15 +126,16 @@ class CatController extends Controller
         $gender = (['Kattin','Kater']);
         $socialization = (['Tam','Bang','Wild']);
         $reason = (['Vaccinatie','Chip','Vaccinatie & chip','Sterilisatie','']);
-        $weighings = MedicalController::showWeigingsByCatId($cat->latest()->first());
-        $vetVisits = MedicalController::showVetVisitsByCatId($cat->latest()->first());
+        $weighings = MedicalController::showWeigingsByCatId($cat->id);
+        $vetVisits = MedicalController::showVetVisitsByCatId($cat->id);
         
-        return view('catDetail', compact('cat', 'cats','adoptionStatus','breed','furLength','gender','socialization','reason','weighings','vetVisits'));
+        return view('catDetail', compact('cat', 'catPreference', 'cats','adoptionStatus','breed','furLength','gender','socialization','reason','weighings','vetVisits'));
     }
 
     public function showCatById($id)
     {
         $cat = Cat::where('id', $id)->firstOrFail();
+        $catPreference = CatPreference::where('cat_id',$id)->firstOrFail();
         $cats = Cat::all();
         $adoptionStatus = (['Aangemeld','Bij Pleeggezin','In Asiel','Klaar voor adoptie','In optie','Adoptie goedgekeurd','Bij Adoptiegezin']);
         $breed = (['Europees korthaar', 'Abessijn', 'Amerikaanse bobtail', 'American Curl', 'American wirehair', 'Amerikaans korthaar', 'Ashera', 'Asian', 'Australian Mist', 'Balinees', 'Bengaal', 'Blauwe Rus', 'Boheemse Rex', 'Bombay', 'Britse korthaar', 'Britse langhaar', 'Burmees', 'Burmilla', 'California Spangled', 'Ceylon', 'Chartreux', 'Cornish Rex', 'Cymric', 'Devon Rex', 'Don Sphynx', 'Dragon Li', 'Egyptische Mau', 'Exotic', 'German Rex', 'Havana Brown', 'Heilige Birmaan', 'Highlander', 'Japanse Bobtail', 'Kanaani', 'Khao Manee', 'Korat', 'Kurillen stompstaartkat', 'LaPerm', 'Lykoi', 'Maine Coon', 'Mandalay', 'Manx', 'Mekong bobtail', 'Munchkin', 'Nebelung', 'Neva Masquerade', 'Noorse boskat', 'Ocicat', 'Ojos Azules', 'Oosters korthaar', 'Oosters langhaar', 'Pers', 'Peterbald', 'Pixie-Bob', 'Ragamuffin', 'Ragdoll', 'Savannah', 'Scottish Fold', 'Selkirk Rex', 'Serengeti', 'Seychellois', 'Siamees', 'Siberische kat', 'Singapura', 'Snowshoe', 'Sokoke', 'Somali', 'Sphynx', 'Thai', 'Tibetaan', 'Tiffanie', 'Tonkanees', 'Turkse Angora', 'Turkse Van', 'Ural Rex', 'York Chocolate']);
@@ -132,6 +146,7 @@ class CatController extends Controller
         $weighings = MedicalController::showWeigingsByCatId($id);
         $vetVisits = MedicalController::showVetVisitsByCatId($id);
 
-        return view('catDetail', compact('cat','cats','adoptionStatus','breed','furLength','gender','socialization','reason','weighings','vetVisits'));
+        return view('catDetail', compact('cat', 'catPreference', 'cats','adoptionStatus','breed','furLength','gender','socialization','reason','weighings','vetVisits'));
     }
+
 }
