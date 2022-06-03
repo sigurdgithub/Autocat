@@ -22,4 +22,38 @@ class MedicalController extends Controller
         $matchCase = ['cat_id'=> $catId];
         return VetVisit::where($matchCase)->get();
     }
+
+    public function deleteWeighing($id) {
+        $weighing = Weighing::find($id);
+        $cat_id = $weighing->cat_id;
+        $weighing->delete();
+        return redirect()->route('showCatById', ['id' => $cat_id]);
+    }
+
+    public function deleteVetVisit($id) {
+        $vetVisit = VetVisit::find($id);
+        $cat_id = $vetVisit->cat_id;
+        $vetVisit->delete();
+        return redirect()->route('showCatById', ['id' => $cat_id]);
+    }
+
+    public function storeWeighing(Request $request)
+    {   
+        $validation = $request->validate([
+            'date'=> 'required',
+            'weighing'=>'required',
+            'comments'=>'required'
+        ]);
+
+        $timestamp = now()->timestamp;
+
+        $weighing = Weighing::firstOrCreate(
+            ['cat_id' => $request->input('cat_id'),
+            'date' => $request->input('date'),
+            'weighing' => $request->input('weighing'),
+            'comments' => $request->input('comments')
+            ]);
+
+        return redirect()->route('showCatById');
+    }
 }
