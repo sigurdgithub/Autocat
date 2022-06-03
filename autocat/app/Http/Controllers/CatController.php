@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Cat;
 use App\Models\CatPreference;
 use Illuminate\Database\Eloquent\Builder;
+use Carbon\Carbon;
 
 
 class CatController extends Controller
@@ -21,6 +22,21 @@ class CatController extends Controller
         //return view('fosterDashboard', ['cats' => $cats]);
 
     }
+
+    public static function getCatAgeString($birthDate) {
+        $carbonBirthDate = Carbon::parse($birthDate);
+        $diffYears = $carbonBirthDate->DiffInYears(Carbon::now());
+        $diffMonths = $carbonBirthDate->diffInMonths(Carbon::now());
+        $diffWeeks = $carbonBirthDate->diffInWeeks(Carbon::now());
+        if ($diffYears > 0) {
+            return $diffYears.' jaar';
+        } else if($diffMonths > 0) {
+            return $diffMonths.(($diffMonths > 1) ?' maanden':' maand');
+        } else {
+            return $diffWeeks.(($diffWeeks > 1) ?' weken':' week');
+        }
+    }
+
 
     public static function getCatsByFosterIdModal($fosterId)
     {
