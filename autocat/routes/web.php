@@ -87,5 +87,7 @@ Route::get('/katDetail/{id}', [CatController::class, 'showCatById'])->name('show
 //Medical routes
 Route::get('/weighing_delete/{id}', [MedicalController::class, 'deleteWeighing'])->name('weighing_delete');
 Route::get('/vetVisit_delete/{id}', [MedicalController::class, 'deleteVetVisit'])->name('vetVisit_delete');
+Route::post('/addWeighing', [MedicalController::class, 'storeWeighing'])->name('storeWeighing');
+Route::post('/addVetVisit', [MedicalController::class, 'storeVetVisit'])->name('storeVetVisit');
 
 require __DIR__ . '/auth.php';

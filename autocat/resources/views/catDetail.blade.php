@@ -338,7 +338,17 @@
                 </div>
             </div>
         </div>
-
+        <div class="row mt-5">
+            <input type="submit" class="btn btn-gradient-danger w-25 mx-auto" value="Sla op">
+        </div>
+        
+        <!-- BUTTON - UPDATE -->
+{{--         <div class="row mt-5">
+            <button type="submit" class="btn btn-gradient-danger w-25 mx-auto">
+            Sla wijzigingen op
+            </button>
+        </div> --}}
+    </form>
         <!-- HEALTH DIARY : WEIGHING-->
         @if(isset($cat))
             <div class="content-wrapper">
@@ -360,7 +370,7 @@
                                 @endforeach
                             </div>
                         </div>
-                        <form method="post" action="/" enctype="multipart/form-data"> 
+                        <form id='weighingForm' method="post" action="{{route('storeWeighing')}}"> 
                             @csrf
                             <input type="hidden" value={{$cat->id}} name="cat_id">                          
                             <h5 class="text-muted mb-4">Nieuw toevoegen</h5>
@@ -384,7 +394,7 @@
                                     </div> 
                                 </div>
                             </div>
-                            <button type="submit" class="btn btn-outline-danger">
+                            <button form='weighingForm' type="submit" class="btn btn-outline-danger">
                             Toevoegen
                             </button>
                         </form>
@@ -411,35 +421,39 @@
                                 @endforeach
                             </div>
                         </div>
-                        <h5 class="text-muted mb-4">Nieuw toevoegen</h5>
-                        <div class="row">
-                        <div class="col-md-3">
-                            <div class="form-group">
-                                <label class="form-label">Datum</label>
-                                <input type="date" class="form-control" name="date">
+                        <form id='vetVisitForm' method="post" action="{{route('storeVetVisit')}}"> 
+                            @csrf
+                            <input type="hidden" value={{$cat->id}} name="cat_id">
+                            <h5 class="text-muted mb-4">Nieuw toevoegen</h5>
+                            <div class="row">
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label class="form-label">Datum</label>
+                                    <input type="date" class="form-control" name="date">
+                                </div>
                             </div>
-                        </div>
-                        <div class="col-md-3">
-                            <div class="form-group">
-                                <label class="form-label">Reden</label>
-                                <select class="form-control form-control-sm" name="reason">
-                                    <option value="0">Selecteer</option>
-                                        {{-- @foreach ($reason as $reaso)
-                                            <option value="{{$allCat->id}}" @if(isset($cat))@if($cat->buddyId == $allCat->id) selected @endif @else "" @endif>{{$allCat->name}}</option>
-                                        @endforeach --}}
-                                </select>                                    
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label class="form-label">Reden</label>
+                                    <select class="form-control form-control-sm" name="reason">
+                                        <option value="0">Selecteer</option>
+                                        @foreach ($reason as $reaso)
+                                            <option value="{{$reaso}}" @if(isset($cat))@if($cat->reason == $reaso) selected @endif @else "" @endif>{{$reaso}}</option>
+                                        @endforeach
+                                    </select>                                    
+                                </div>
                             </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label class="form-label">Opmerking</label>
-                                <textarea class="form-control" name="comments"></textarea>
-                            </div> 
-                        </div>
-                        </div>
-                        <button type="submit" class="btn btn-outline-danger">
-                        Toevoegen
-                        </button>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="form-label">Opmerking</label>
+                                    <textarea class="form-control" name="comments"></textarea>
+                                </div> 
+                            </div>
+                            </div>
+                            <button id="vetVisitForm" type="submit" class="btn btn-outline-danger">
+                            Toevoegen
+                            </button>
+                        </form>
                     </div>
                 </div>
             </div>
@@ -450,15 +464,5 @@
         <button type="button" class="btn btn-gradient-danger">Upload foto</button> -->
 
         <!-- BUTTON - ADD -->
-        <div class="row mt-5">
-            <input type="submit" class="btn btn-gradient-danger w-25 mx-auto" value="Sla op">
-        </div>
         
-        <!-- BUTTON - UPDATE -->
-{{--         <div class="row mt-5">
-            <button type="submit" class="btn btn-gradient-danger w-25 mx-auto">
-            Sla wijzigingen op
-            </button>
-        </div> --}}
-    </form>
     @endsection
