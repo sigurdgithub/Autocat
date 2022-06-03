@@ -17,7 +17,7 @@ class FosterPreference extends Model
      * @var array
      */
     protected $fillable = [
-        'fosterFamily_id', 'adult', 'kitten', 'bottleFeeding', 'scared', 'feral', 'intensiveCare', 'noIntensiveCare', 'isolation', 'pregnancy'
+        'fosterFamily_id', 'adult', 'pregnant', 'kitten', 'bottleFeeding', 'scared', 'feral', 'intensiveCare', 'noIntensiveCare', 'isolation',
     ];
 
     /**
