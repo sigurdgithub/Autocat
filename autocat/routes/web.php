@@ -76,8 +76,9 @@ Route::get('katDetail', function () {
     $gender = (['Kattin','Kater']);
     $socialization = (['Tam','Bang','Wild']);
     $reason = (['Vaccinatie','Chip','Vaccinatie & chip','Sterilisatie','']);
+    $fosterFamilies = FosterFamilyController::getFosterFamilies();
 
-    return view('catDetail', compact('cats', 'adoptionStatus', 'breed', 'furLength', 'gender', 'socialization'));
+    return view('catDetail', compact('cats', 'adoptionStatus', 'breed', 'furLength', 'gender', 'socialization','fosterFamilies'));
 });
 
 /* Route::get('/katDetail', [CatController::class, 'storeCatPreferences'])->name('storeCatPreferences');*/

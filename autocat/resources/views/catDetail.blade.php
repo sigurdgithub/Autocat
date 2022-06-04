@@ -13,14 +13,31 @@
         @csrf
         <div class="content-wrapper pt-0">
             <div class="row">
-                <div class="col-md-7">
-                    <h1>Mijn naam is {{$cat->name ?? ''}}<span></span></h1>
-                </div>
-                <div class="col-md-5">
+                @if(isset($cat))
+                    <div class="col-md-7">
+                        <h1>Mijn naam is {{$cat->name ?? ''}}<span></span></h1>
+                    </div>
+                @else
+                    <div class="col-md-7">
+                        <h1>Meld nieuwe kat aan</h1>
+                    </div>
+                @endif
+            </div>
+            <div class="row mt-3">
+                <div class="col-md-6">
+                    <label class="form-label">Adoptiestatus</label>
                     <select class="form-control form-control-sm" name="adoptionStatus" value="{{ old('adoptionStatus') }}">
-                        <option value="0">Selecteer</option>
                         @foreach ($adoptionStatus as $adopt)
                             <option value="{{$adopt}}" @if(isset($cat))@if($cat->adoptionStatus == $adopt) selected @endif @else "" @endif>{{$adopt}}</option>
+                        @endforeach
+                    </select>
+                </div>
+                <div class="col-md-6">
+                    <label class="form-label">Pleeggezin</label>
+                    <select class="form-control form-control-sm" name="fosterFamily_id" value="{{ old('fosterFamily_id') }}">
+                        <option value="0">Selecteer</option>
+                        @foreach ($fosterFamilies as $fosterFamily)
+                            <option value="{{$fosterFamily->id}}" @if(isset($cat))@if($cat->fosterFamily_id == $fosterFamily->id) selected @endif @else "" @endif>{{$fosterFamily->firstName}} {{$fosterFamily->lastName}}</option>
                         @endforeach
                     </select>
                 </div>
@@ -34,8 +51,11 @@
                     <div class="row mt-3">
                         <div class="col-md-4">
                             <div class="form-group">
-                                <label class="form-label">Naam</label>
-                                <input type="text" class="form-control" name="name" value="{{ old('name') }}{{$cat->name ?? ''}}">
+                                <label class="form-label" for="name">Naam</label>
+                                <input type="text" class="form-control" id="name" name="name" value="{{ old('name') }}{{$cat->name ?? ''}}">
+                                <div class="valid-feedback">
+                                    Looks good!
+                                  </div>
                             </div>
                         </div>
                         <div class="col-md-4">
@@ -364,7 +384,7 @@
                                             <div class="col-md-3">Datum: {{ $weighing->date }}</div>
                                             <div class="col-md-3">Gewicht: {{ $weighing->weighing }} g</div>
                                             <div class="col-md-5">Opmerking: {{ $weighing->comments}} </div>  
-                                            <a href='/weighing_delete/{{$weighing->id}}' class="col-md-1 btn btn-inverse-danger btn-icon btn-lg"><i class="mdi mdi-delete"></i></a>                 
+                                            <a href='/weighing_delete/{{$weighing->id}}' class="col-md-1 btn btn-inverse-danger btn-icon btn-lg pt-2"><i class="mdi mdi-delete"></i></a>                 
                                         </li>
                                     </ul>
                                 @endforeach
@@ -415,7 +435,7 @@
                                             <div class="col-md-3">Datum: {{ $vetVisit->date}} </div>
                                             <div class="col-md-3">Reden: {{ $vetVisit->reason}}</div>
                                             <div class="col-md-5">Opmerking: {{ $vetVisit->comments }}</div>
-                                            <a href='/vetVisit_delete/{{$vetVisit->id}}' class="col-md-1 btn btn-inverse-danger btn-icon btn-lg"><i class="mdi mdi-delete"></i></a>                            
+                                            <a href='/vetVisit_delete/{{$vetVisit->id}}' class="col-md-1 btn btn-inverse-danger btn-icon btn-lg pt-2"><i class="mdi mdi-delete"></i></a>                            
                                         </li>
                                     </ul>
                                 @endforeach
@@ -438,7 +458,7 @@
                                     <select class="form-control form-control-sm" name="reason">
                                         <option value="0">Selecteer</option>
                                         @foreach ($reason as $reaso)
-                                            <option value="{{$reaso}}" @if(isset($cat))@if($cat->reason == $reaso) selected @endif @else "" @endif>{{$reaso}}</option>
+                                            <option value="{{$reaso}}">{{$reaso}}</option>
                                         @endforeach
                                     </select>                                    
                                 </div>
