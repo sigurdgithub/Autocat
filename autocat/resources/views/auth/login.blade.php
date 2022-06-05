@@ -40,7 +40,7 @@
               <!-- Validation Errors -->
 
               <x-auth-validation-errors class="mb-4" :errors="$errors" />
-              <form class="pt-3" method="POST" action="{{ route('login') }}">
+              <form class="pt-3" method="POST" action="{{ route('login.store') }}">
                 @csrf
                 {{-- Email Address --}}
                 <div class="form-group">
