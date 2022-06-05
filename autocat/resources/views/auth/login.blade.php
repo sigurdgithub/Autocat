@@ -76,9 +76,10 @@
                   <div class=" text-center mt-4 font-weight-light">
                     <h5 class="font-weight-light">Nog geen account?</h5>
                     <div class="mt-3">
-                      <p><a href="/asielAccount" class="text-gray text-decoration-underline">Maak een account aan als
+                      <p><a href="{{route('registerShelter')}}" class="text-gray text-decoration-underline">Maak een
+                          account aan als
                           <b>asielbeheerder</b></a></p>
-                      <p><a href="{{ route('register') }}" class="text-gray text-decoration-underline">Maak een
+                      <p><a href="{{ route('registerFoster') }}" class="text-gray text-decoration-underline">Maak een
                           account aan als <b>pleeggezin</b></a></p>
                     </div>
                   </div>
