@@ -20,10 +20,16 @@ class RegisteredUserController extends Controller
      *
      * @return \Illuminate\View\View
      */
-    public function create()
+    public function createFoster()
     {
         return view(('auth.fosterAccount'));
     }
+
+    public function createShelter()
+    {
+        return view(('auth.shelterAccount'));
+    }
+
 
     /**
      * Handle an incoming registration request.
