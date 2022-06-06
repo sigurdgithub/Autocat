@@ -181,7 +181,6 @@
                         </select>
                         </div>
                     </div>
-                    <ng-container>
                         <div class="card mt-5">
                             <div class="card-body card-border-danger">
                                 <p class="card-description"> Algemene Informatie </p>
@@ -220,7 +219,7 @@
                                 <div class="row">
                                     <div class="col-md-6">
                                         <p class="card-description">Aandachtspunten</p>
-                                        <ul class="list-star">
+                                        <ul class="list-star" id="catAttention">
                                             <li></li>
                                         </ul>
                                     </div>
@@ -234,7 +233,6 @@
                             </div>
                         </div>
                         <div class="mt-5"><a> Volledige fiche van </a></div>
-                    </ng-container>
                 </div>
             </div>
         </div>
@@ -324,8 +322,21 @@
                     dataType: "json",
                     success:function(data) {
                         $('#catPreferences').empty();
-                        let string = (data.bottleFeeding ? ' wel ' : ' niet ');
-                        $('#catPreferences').append('<li>Is' + string + 'gesteriliseerd</li>');
+                        $('#catAttention').empty();
+                        let string = (data.kids ? ' wel ' : ' niet ');
+                        $('#catPreferences').append('<li>kan ' + string + 'geplaatst worden met kinderen</li>');
+                        string = (data.dogs ? ' wel ' : ' niet ');
+                        $('#catPreferences').append('<li>kan ' + string + 'geplaatst worden met honden</li>');
+                        string = (data.cats ? ' wel ' : ' niet ');
+                        $('#catPreferences').append('<li>kan ' + string + 'geplaatst worden met katten</li>');
+                        if (data.intensiveCare) {
+                            $('#catAttention').append('<li>Heeft intensieve verzorging nodig</li>');
+                        }
+                        if (data.noIntensiveCare) {
+                            $('#catAttention').append('<li>Is ziek maar heeft geen intensieve verzorging nodig</li>');
+                        }
+                        string = (data.cats ? ' wel ' : ' niet ');
+                        $('#catPreferences').append('<li>kan ' + string + 'geplaatst worden met katten</li>');
                         //$('#catPreferences').append(JSON.stringify(data));
                         console.log(data);
                         //$('#sterilizedCat').empty();
