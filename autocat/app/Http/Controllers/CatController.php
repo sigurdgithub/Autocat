@@ -98,7 +98,8 @@ class CatController extends Controller
             'withPet' => $request->input('withPet'),
             'gardenAccess' => $request->input('gardenAccess'),
             'buddyId' => $request->input('buddyId'),
-            'image' => $request->input('image')
+            'image' => $request->input('image'),
+            'fosterFamily_id' => $request->input('fosterFamily_id')
             ]);
 
         $catPreference = CatPreference::firstOrCreate(
@@ -128,8 +129,9 @@ class CatController extends Controller
         $reason = (['Vaccinatie','Chip','Vaccinatie & chip','Sterilisatie','']);
         $weighings = MedicalController::showWeigingsByCatId($cat->id);
         $vetVisits = MedicalController::showVetVisitsByCatId($cat->id);
+        $fosterFamilies = FosterFamilyController::getFosterFamilies();
         
-        return view('catDetail', compact('cat', 'catPreference', 'cats','adoptionStatus','breed','furLength','gender','socialization','reason','weighings','vetVisits'));
+        return view('catDetail', compact('cat', 'catPreference', 'cats','adoptionStatus','breed','furLength','gender','socialization','reason','weighings','vetVisits','fosterFamilies'));
     }
 
     public function showCatById($id)
@@ -145,8 +147,9 @@ class CatController extends Controller
         $reason = (['Vaccinatie','Chip','Vaccinatie & chip','Sterilisatie','']);
         $weighings = MedicalController::showWeigingsByCatId($id);
         $vetVisits = MedicalController::showVetVisitsByCatId($id);
+        $fosterFamilies = FosterFamilyController::getFosterFamilies();
 
-        return view('catDetail', compact('cat', 'catPreference', 'cats','adoptionStatus','breed','furLength','gender','socialization','reason','weighings','vetVisits'));
+        return view('catDetail', compact('cat', 'catPreference', 'cats','adoptionStatus','breed','furLength','gender','socialization','reason','weighings','vetVisits','fosterFamilies'));
     }
 
 }

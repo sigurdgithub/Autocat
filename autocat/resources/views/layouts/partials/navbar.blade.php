@@ -10,7 +10,7 @@
       <span class="mdi mdi-menu"></span>
     </button>
     <ul class="navbar-nav navbar-nav-right">
-      <li class="nav-item dropdown">
+      {{-- <li class="nav-item dropdown">
         <a class="nav-link count-indicator dropdown-toggle" id="messageDropdown" href="#" data-bs-toggle="dropdown"
           aria-expanded="false">
           <i class="mdi mdi-email-outline"></i>
@@ -48,7 +48,7 @@
           <div class="dropdown-divider"></div>
           <h6 class="p-3 mb-0 text-center">4 nieuwe berichten</h6>
         </div>
-      </li>
+      </li> --}}
       <li class="nav-item nav-profile dropdown">
         <a class="nav-link dropdown-toggle" id="profileDropdown" href="#" data-bs-toggle="dropdown"
           aria-expanded="false">
