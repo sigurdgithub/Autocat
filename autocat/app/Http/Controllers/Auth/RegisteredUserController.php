@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Models\FosterFamily;
+use App\Models\Shelter;
 use App\Models\User;
 use App\Models\FosterPreference;
 use App\Providers\RouteServiceProvider;
@@ -39,7 +40,7 @@ class RegisteredUserController extends Controller
      *
      * @throws \Illuminate\Validation\ValidationException
      */
-    public function store(Request $request)
+    public function storeFoster(Request $request)
     {
 
         // FOSTERFAMILY TABLE //
@@ -96,12 +97,12 @@ class RegisteredUserController extends Controller
             'isolation' => ['integer']
         ]);
 
-        FosterPreference::create([
+        $FosterPreference = FosterPreference::create([
             'fosterFamily_id' => $foster->id,
             'adult' => $request->adult,
             'pregnant' => $request->pregnant,
             'kitten' => $request->kitten,
-            'bottleFeeding' => $request->noIntensiveCare,
+            'bottleFeeding' => $request->bottleFeeding,
             'scared' => $request->scared,
             'feral' => $request->feral,
             'intensiveCare' => $request->intensiveCare,
@@ -114,5 +115,59 @@ class RegisteredUserController extends Controller
         Auth::login($user);
 
         return redirect(RouteServiceProvider::fosterHome);
+    }
+
+    public function storeShelter(Request $request)
+    {
+
+        // SHELTERS TABLE //
+        $request->validate([
+            'shelterName' => ['required', 'string'],
+            'shelterPhone' => ['required', 'string'],
+            'hkNumber' => ['required', 'string'],
+            'shelterFirstName' => ['required', 'string'],
+            'shelterLastName' => ['required', 'string'],
+            'shelterDateOfBirth' => ['required', 'date'],
+            'shelterStreet' => ['required', 'string'],
+            'shelterNumber' => ['required', 'string'],
+            'shelterCity' => ['required', 'string'],
+            'shelterZipCode' => ['required', 'string'],
+            'phoneNumber' => ['required', 'string'],
+            'picture' => ['nullable', 'string'],
+        ]);
+
+        Shelter::create([
+            'shelterName' => $request->shelterName,
+            'shelterPhone' => $request->shelterPhone,
+            'hkNumber' => $request->hkNumber,
+            'shelterFirstName' => $request->shelterFirstName,
+            'shelterLastName' => $request->shelterLastName,
+            'shelterDateOfBirth' => $request->shelterDateOfBirth,
+            'shelterStreet' => $request->shelterStreet,
+            'shelterNumber' => $request->shelterNumber,
+            'shelterCity' => $request->shelterCity,
+            'shelterZipCode' => $request->shelterZipCode,
+            'phoneNumber' => $request->phoneNumber,
+            'picture' => $request->picture,
+        ]);
+
+        // USER TABLE //
+        $request->validate([
+            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+            'password' => ['required', Rules\Password::defaults()],
+            'fosterFamily_id' => 'null'
+        ]);
+
+        $user = User::create([
+            'email' => $request->email,
+            'password' => Hash::make($request->password),
+            'fosterFamily_id' => null
+        ]);
+
+        event(new Registered($user));
+
+        Auth::login($user);
+
+        return redirect(RouteServiceProvider::shelterHome);
     }
 }

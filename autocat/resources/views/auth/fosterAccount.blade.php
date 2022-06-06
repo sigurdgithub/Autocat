@@ -16,7 +16,7 @@
 <!--ACCOUNTDETAILS-->
 <div class="content-wrapper pt-0">
     {{-- FosterFamily Form --}}
-    <form method="POST" action="{{ route('registerFoster') }}">
+    <form method="POST" action="{{ route('storeFoster') }}">
         @csrf
         <h3 class="text-muted mt-4">Mijn gegevens</h3>
         <div class="card">
