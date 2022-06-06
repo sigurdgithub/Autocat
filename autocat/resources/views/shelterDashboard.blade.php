@@ -232,7 +232,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="mt-5"><a> Volledige fiche van </a></div>
+                        <div class="mt-5"><a id='catLink'> Volledige fiche van </a></div>
                 </div>
             </div>
         </div>
@@ -382,6 +382,7 @@
                     dataType: "json",
                     success:function(data) {
                         current_cat = data;
+                        console.log(current_cat);
                         $('#dateOfBirthCat').empty();
                         $('#dateOfBirthCat').append(current_cat.dateOfBirth.toString());
                         $('#genderCat').empty();
@@ -397,14 +398,8 @@
                         $('#sterilizedCat').empty();
                         $('#sterilizedCat').append(current_cat.sterilized);
                         // TODO: add more if extra properties are selected
-                        //$('#catPreferences').empty();
-                        //$('#catPreferences').append('<li>Is' + (current_cat.preferences.bottleFeeding ? ' ' : ' niet ') + 'gesteriliseerd</li>');
-                        //$('#sterilizedCat').empty();
-                        //$('#sterilizedCat').append(current_foster.sterilized);
-                        //$('#sterilizedCat').empty();
-                        //$('#sterilizedCat').append(current_foster.sterilized);
-                        //$('#sterilizedCat').empty();
-                        //$('#sterilizedCat').append(current_foster.sterilized);
+                        $('#catLink').append(current_cat.name);
+                        $('#catLink').attr('href', '/katDetail/'+current_cat.id);
                         getPreferencesCat(current_cat.id);
                     }
                 });

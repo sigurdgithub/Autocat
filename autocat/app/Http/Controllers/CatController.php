@@ -7,43 +7,45 @@ use App\Models\Cat;
 use App\Models\CatPreference;
 use Illuminate\Database\Eloquent\Builder;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\DB;
 
 
 class CatController extends Controller
 {
     public static function getCatsByFosterId($fosterId)
     {
-        $matchCase = ['fosterFamily_id'=> $fosterId];
+        $matchCase = ['fosterFamily_id' => $fosterId];
         $cats = Cat::where($matchCase)->get();
         //$notifications = Notification::all();
-        
+
         //dd($cats);
         return $cats;
         //return view('fosterDashboard', ['cats' => $cats]);
 
     }
 
-    public static function getCatAgeString($birthDate) {
+    public static function getCatAgeString($birthDate)
+    {
         $carbonBirthDate = Carbon::parse($birthDate);
         $diffYears = $carbonBirthDate->DiffInYears(Carbon::now());
         $diffMonths = $carbonBirthDate->diffInMonths(Carbon::now());
         $diffWeeks = $carbonBirthDate->diffInWeeks(Carbon::now());
         if ($diffYears > 0) {
-            return $diffYears.' jaar';
-        } else if($diffMonths > 0) {
-            return $diffMonths.(($diffMonths > 1) ?' maanden':' maand');
+            return $diffYears . ' jaar';
+        } else if ($diffMonths > 0) {
+            return $diffMonths . (($diffMonths > 1) ? ' maanden' : ' maand');
         } else {
-            return $diffWeeks.(($diffWeeks > 1) ?' weken':' week');
+            return $diffWeeks . (($diffWeeks > 1) ? ' weken' : ' week');
         }
     }
 
 
     public static function getCatsByFosterIdModal($fosterId)
     {
-        $matchCase = ['fosterFamily_id'=> $fosterId];
-        $cats = Cat::select('id','name')->where($matchCase)->get();
+        $matchCase = ['fosterFamily_id' => $fosterId];
+        $cats = Cat::select('id', 'name')->where($matchCase)->get();
         //$notifications = Notification::all();
-        
+
         //dd($cats);
         return $cats;
         //return view('fosterDashboard', ['cats' => $cats]);
@@ -56,11 +58,234 @@ class CatController extends Controller
         return $cats;
     }
 
-    public function getCatById($id) 
+    private static function filterPlacement($value, $query)
+    {
+        if (is_array($value)) {
+            $first = true;
+            foreach ($value as $val) {
+                if (str_starts_with($val, 'Solo')) {
+                    if ($first) {
+                        $first = false;
+                        $query = $query->where('Solo', explode(' ', $val)[1]);
+                    } else {
+                        $query = $query->orWhere('Solo', explode(' ', $val)[1]);
+                    }
+                } else if (str_starts_with($val, 'Huisdier')) {
+                    if ($first) {
+                        $first = false;
+                        $query = $query->where('withPet', explode(' ', $val)[1]);
+                    } else {
+                        $query = $query->orWhere('withPet', explode(' ', $val)[1]);
+                    }
+                } else if (str_starts_with($val, 'Tuin')) {
+                    if ($first) {
+                        $first = false;
+                        $query = $query->where('gardenAccess', explode(' ', $val)[1]);
+                    } else {
+                        $query = $query->orWhere('gardenAccess', explode(' ', $val)[1]);
+                    }
+                }
+            }
+            return $query;
+        } else {
+            if (str_starts_with($value, 'Solo')) {
+                return $query->where('Solo', explode(' ', $value)[1]);
+            } else if (str_starts_with($value, 'Huisdier')) {
+                return $query->where('withPet', explode(' ', $value)[1]);
+            } else if (str_starts_with($value, 'Tuin')) {
+                return $query->where('gardenAccess', explode(' ', $value)[1]);
+            }
+        }
+    }
+
+    private static function filterCharacter($value, $query)
+    {
+        if (is_array($value)) {
+            $query->where(function ($query) use ($value) {
+                $first = true;
+                foreach ($value as $val) {
+                    switch ($val) {
+                        case 'playfulCat':
+                            if ($first) {
+                                $first = false;
+                                $query = $query->where('catPreferences.playfulCat', 1);
+                            } else {
+                                $query = $query->orWhere('catPreferences.playfulCat', 1);
+                            }
+                            break;
+                        case 'lapCat':
+                            if ($first) {
+                                $first = false;
+                                $query = $query->where('catPreferences.lapCat', 1);
+                            } else {
+                                $query = $query->orWhere('catPreferences.lapCat', 1);
+                            }
+                            break;
+                        case 'outdoorCat';
+                            //dd("play");
+                            if ($first) {
+                                $first = false;
+                                $query = $query->where('catPreferences.outdoorCat', 1);
+                            } else {
+                                $query = $query->orWhere('catPreferences.outdoorCat', 1);
+                            }
+                            break;
+                        case 'calmCat':
+                            if ($first) {
+                                $first = false;
+                                $query = $query->where('catPreferences.calmCat', 1);
+                            } else {
+                                $query = $query->orWhere('catPreferences.calmCat', 1);
+                            }
+                            break;
+                        case 'bedroomAccess':
+                            if ($first) {
+                                $first = false;
+                                $query = $query->where('catPreferences.bedroomAccess', 1);
+                            } else {
+                                $query = $query->orWhere('catPreferences.bedroomAccess', 1);
+                            }
+                            break;
+                    }
+                }
+            });
+            return $query;
+        } else {
+            switch ($value) {
+                case 'playfulCat':
+                    return $query->where('catPreferences.playfulCat', 1);
+                case 'lapCat':
+                    return $query->where('catPreferences.lapCat', 1);
+                case 'outdoorCat':
+                    return $query->where('catPreferences.outdoorCat', 1);
+                case 'calmCat':
+                    return $query->where('catPreferences.calmCat', 1);
+                case 'bedroomAccess':
+                    return $query->where('catPreferences.bedroomAccess', 1);
+            }
+        }
+    }
+    private static function filterAge($value, $query)
+    {
+        if (is_array($value)) {
+            $first = true;
+            foreach ($value as $val) {
+                switch ($val) {
+                    case 'kitten':
+                        if ($first) {
+                            $first = false;
+                            $query = $query->whereDate('dateOfBirth', '<=', Carbon::now()->subYear()->toDateString());
+                        } else {
+                            $query = $query->orWhereDate('dateOfBirth', '<=', Carbon::now()->subYear()->toDateString());
+                        }
+                    case 'adolescent':
+                        if ($first) {
+                            $first = false;
+                            $query = $query->whereBetween('dateOfBirth', [Carbon::now()->subYear()->toDateString(), Carbon::now()->subYears(2)->toDateString()]);
+                        } else {
+                            $query = $query->orWhereBetween('dateOfBirth', [Carbon::now()->subYear()->toDateString(), Carbon::now()->subYears(2)->toDateString()]);
+                        }
+                    case 'adult':
+                        if ($first) {
+                            $first = false;
+                            $query = $query->whereBetween('dateOfBirth', [Carbon::now()->subYear(2)->toDateString(), Carbon::now()->subYears(8)->toDateString()]);
+                        } else {
+                            $query = $query->orWhereBetween('dateOfBirth', [Carbon::now()->subYear(2)->toDateString(), Carbon::now()->subYears(8)->toDateString()]);
+                        }
+                    case 'senior':
+                        if ($first) {
+                            $first = false;
+                            $query = $query->whereDate('dateOfBirth', '>', Carbon::now()->subYears(8)->toDateString());
+                        } else {
+                            $query = $query->orWhereDate('dateOfBirth', '>', Carbon::now()->subYears(8)->toDateString());
+                        }
+                }
+            }
+            return $query;
+        } else {
+            switch ($value) {
+                case 'kitten':
+                    $query = $query->whereDate('dateOfBirth', '<=', Carbon::now()->subYear()->toDateString());
+                    return $query;
+                case 'adolescent':
+                    $query = $query->whereBetween('dateOfBirth', [Carbon::now()->subYear()->toDateString(), Carbon::now()->subYears(2)->toDateString()]);
+                    return $query;
+                case 'adult':
+                    $query = $query->whereBetween('dateOfBirth', [Carbon::now()->subYear(2)->toDateString(), Carbon::now()->subYears(8)->toDateString()]);
+                    return $query;
+                case 'senior':
+                    $query = $query->whereDate('dateOfBirth', '>', Carbon::now()->subYears(8)->toDateString());
+                    return $query;
+            }
+        }
+    }
+
+    private static function basicFilter($value, $query, $columnName)
+    {
+        if (!isset($value)) {
+            return $query;
+        }
+        if (is_array($value)) {
+            $first = true;
+            foreach ($value as $val) {
+                if ($first) {
+                    $first  = false;
+                    $query = $query->where($columnName, $val);
+                } else {
+                    $query = $query->orWhere($columnName, $val);
+                }
+            }
+        } else {
+            $query = $query->where($columnName, $value);
+        }
+        return $query;
+    }
+
+    public function filterCats(Request $request)
+    {
+        /*$validation = $request->validate([
+            'status'      => 'required',
+            'email'     => 'required',
+            'mobile'    => 'required',
+            'message'   => 'required',
+          ]);*/
+        $data = $request->all();
+        $cats = DB::table('cats')->join('catPreferences', 'cats.id', '=', 'catPreferences.cat_id');
+        // Filter 
+        //dd($data);
+        if (isset($data['character'])) {
+            $cats = CatController::filterCharacter($data['character'], $cats);
+        }
+        if (isset($data['gender'])) {
+            $cats = CatController::basicFilter($data['gender'], $cats, 'gender');
+        }
+        if (isset($data['status'])) {
+            $cats = CatController::basicFilter($data['status'], $cats, 'adoptionStatus');
+        }
+        if (isset($data['fosterFamily'])) {
+            $cats = CatController::basicFilter($data['fosterFamily'], $cats, 'fosterFamily_id');
+        }
+
+        if (isset($data['placement'])) {
+            $cats = CatController::filterPlacement($data['placement'], $cats);
+        }
+        if (isset($data['age'])) {
+            $cats = CatController::filterAge($data['age'], $cats);
+        }
+        //dd($cats->toSql());
+
+        // Use a join to include all the needed fields that are filtered on
+
+        $result = $cats->get();
+        return json_encode($result);
+    }
+
+    public function getCatById($id)
     {
         return Cat::findOrFail($id);
     }
-    public function getPreferenceByCatId($id) {
+    public function getPreferenceByCatId($id)
+    {
         //dd(Cat::findOrFail($id)->preferences);
         //dump(Cat::findOrFail($id)->preferences);
         return json_encode(Cat::findOrFail($id)->preferences);
@@ -68,88 +293,90 @@ class CatController extends Controller
     }
 
     public function storeCat(Request $request)
-    {   
+    {
         // Validate the request
         $validation = $request->validate([
-            'name'=> 'required',
-            'adoptionStatus'=>'required'
+            'name' => 'required',
+            'adoptionStatus' => 'required'
         ]);
 
         $timestamp = now()->timestamp;
 
         // Store
         $cat = Cat::firstOrCreate(
-            ['gender' => $request->input('gender'),
-            'name' => $request->input('name'),
-            'dateOfBirth' => $request->input('dateOfBirth'),
-            'furColor' => $request->input('furColor'),
-            'furLength' => $request->input('furLength'),
-            'chipNumber' => $request->input('chipNumber'),
-            'adoptionStatus' => $request->input('adoptionStatus'),
-            'notifierName' => $request->input('notifierName'),
-            'notifierPhone' => $request->input('notifierPhone'),
-            'socialization' => $request->input('socialization'),
-            'startWeight' => $request->input('startWeight'),
-            'sterilized' => $request->input('sterilized'),
-            'extraInfo' => $request->input('extraInfo'),
-            'medication' => $request->input('medication'),
-            'personality' => $request->input('personality'),
-            'solo' => $request->input('solo'),
-            'withPet' => $request->input('withPet'),
-            'gardenAccess' => $request->input('gardenAccess'),
-            'buddyId' => $request->input('buddyId'),
-            'image' => $request->input('image'),
-            'fosterFamily_id' => $request->input('fosterFamily_id')
-            ]);
+            [
+                'gender' => $request->input('gender'),
+                'name' => $request->input('name'),
+                'dateOfBirth' => $request->input('dateOfBirth'),
+                'furColor' => $request->input('furColor'),
+                'furLength' => $request->input('furLength'),
+                'chipNumber' => $request->input('chipNumber'),
+                'adoptionStatus' => $request->input('adoptionStatus'),
+                'notifierName' => $request->input('notifierName'),
+                'notifierPhone' => $request->input('notifierPhone'),
+                'socialization' => $request->input('socialization'),
+                'startWeight' => $request->input('startWeight'),
+                'sterilized' => $request->input('sterilized'),
+                'extraInfo' => $request->input('extraInfo'),
+                'medication' => $request->input('medication'),
+                'personality' => $request->input('personality'),
+                'solo' => $request->input('solo'),
+                'withPet' => $request->input('withPet'),
+                'gardenAccess' => $request->input('gardenAccess'),
+                'buddyId' => $request->input('buddyId'),
+                'image' => $request->input('image'),
+                'fosterFamily_id' => $request->input('fosterFamily_id')
+            ]
+        );
 
         $catPreference = CatPreference::firstOrCreate(
             [
-            'cat_id' => $cat->id,
-            'bottleFeeding' => $request->input('bottleFeeding'),
-            'pregnancy' => $request->input('pregnancy'),
-            'intensiveCare' => $request->input('intensiveCare'),
-            'noIntensiveCare' => $request->input('noIntensiveCare'),
-            'isolation' => $request->input('isolation'),
-            'kids' => $request->input('kids'),
-            'dogs' => $request->input('dogs'),
-            'cats' => $request->input('cats'),
-            'lapCat' => $request->input('lapCat'),
-            'playfulCat' => $request->input('playfulCat'),
-            'outdoorCat' => $request->input('outdoorCat'),
-            'calmCat' => $request->input('calmCat'),
-            'bedroomAccess' => $request->input('bedroomAccess')
-        ]);
+                'cat_id' => $cat->id,
+                'bottleFeeding' => $request->input('bottleFeeding'),
+                'pregnancy' => $request->input('pregnancy'),
+                'intensiveCare' => $request->input('intensiveCare'),
+                'noIntensiveCare' => $request->input('noIntensiveCare'),
+                'isolation' => $request->input('isolation'),
+                'kids' => $request->input('kids'),
+                'dogs' => $request->input('dogs'),
+                'cats' => $request->input('cats'),
+                'lapCat' => $request->input('lapCat'),
+                'playfulCat' => $request->input('playfulCat'),
+                'outdoorCat' => $request->input('outdoorCat'),
+                'calmCat' => $request->input('calmCat'),
+                'bedroomAccess' => $request->input('bedroomAccess')
+            ]
+        );
 
         $cats = Cat::all();
-        $adoptionStatus = (['Aangemeld','Bij Pleeggezin','In Asiel','Klaar voor adoptie','In optie','Adoptie goedgekeurd','Bij Adoptiegezin']);
+        $adoptionStatus = (['Aangemeld', 'Bij Pleeggezin', 'In Asiel', 'Klaar voor adoptie', 'In optie', 'Adoptie goedgekeurd', 'Bij Adoptiegezin']);
         $breed = (['Europees korthaar', 'Abessijn', 'Amerikaanse bobtail', 'American Curl', 'American wirehair', 'Amerikaans korthaar', 'Ashera', 'Asian', 'Australian Mist', 'Balinees', 'Bengaal', 'Blauwe Rus', 'Boheemse Rex', 'Bombay', 'Britse korthaar', 'Britse langhaar', 'Burmees', 'Burmilla', 'California Spangled', 'Ceylon', 'Chartreux', 'Cornish Rex', 'Cymric', 'Devon Rex', 'Don Sphynx', 'Dragon Li', 'Egyptische Mau', 'Exotic', 'German Rex', 'Havana Brown', 'Heilige Birmaan', 'Highlander', 'Japanse Bobtail', 'Kanaani', 'Khao Manee', 'Korat', 'Kurillen stompstaartkat', 'LaPerm', 'Lykoi', 'Maine Coon', 'Mandalay', 'Manx', 'Mekong bobtail', 'Munchkin', 'Nebelung', 'Neva Masquerade', 'Noorse boskat', 'Ocicat', 'Ojos Azules', 'Oosters korthaar', 'Oosters langhaar', 'Pers', 'Peterbald', 'Pixie-Bob', 'Ragamuffin', 'Ragdoll', 'Savannah', 'Scottish Fold', 'Selkirk Rex', 'Serengeti', 'Seychellois', 'Siamees', 'Siberische kat', 'Singapura', 'Snowshoe', 'Sokoke', 'Somali', 'Sphynx', 'Thai', 'Tibetaan', 'Tiffanie', 'Tonkanees', 'Turkse Angora', 'Turkse Van', 'Ural Rex', 'York Chocolate']);
-        $furLength = (['Kort','Lang']);
-        $gender = (['Kattin','Kater']);
-        $socialization = (['Tam','Bang','Wild']);
-        $reason = (['Vaccinatie','Chip','Vaccinatie & chip','Sterilisatie','']);
+        $furLength = (['Kort', 'Lang']);
+        $gender = (['Kattin', 'Kater']);
+        $socialization = (['Tam', 'Bang', 'Wild']);
+        $reason = (['Vaccinatie', 'Chip', 'Vaccinatie & chip', 'Sterilisatie', '']);
         $weighings = MedicalController::showWeigingsByCatId($cat->id);
         $vetVisits = MedicalController::showVetVisitsByCatId($cat->id);
         $fosterFamilies = FosterFamilyController::getFosterFamilies();
-        
-        return view('catDetail', compact('cat', 'catPreference', 'cats','adoptionStatus','breed','furLength','gender','socialization','reason','weighings','vetVisits','fosterFamilies'));
+
+        return view('catDetail', compact('cat', 'catPreference', 'cats', 'adoptionStatus', 'breed', 'furLength', 'gender', 'socialization', 'reason', 'weighings', 'vetVisits', 'fosterFamilies'));
     }
 
     public function showCatById($id)
     {
         $cat = Cat::where('id', $id)->firstOrFail();
-        $catPreference = CatPreference::where('cat_id',$id)->firstOrFail();
+        $catPreference = CatPreference::where('cat_id', $id)->firstOrFail();
         $cats = Cat::all();
-        $adoptionStatus = (['Aangemeld','Bij Pleeggezin','In Asiel','Klaar voor adoptie','In optie','Adoptie goedgekeurd','Bij Adoptiegezin']);
+        $adoptionStatus = (['Aangemeld', 'Bij Pleeggezin', 'In Asiel', 'Klaar voor adoptie', 'In optie', 'Adoptie goedgekeurd', 'Bij Adoptiegezin']);
         $breed = (['Europees korthaar', 'Abessijn', 'Amerikaanse bobtail', 'American Curl', 'American wirehair', 'Amerikaans korthaar', 'Ashera', 'Asian', 'Australian Mist', 'Balinees', 'Bengaal', 'Blauwe Rus', 'Boheemse Rex', 'Bombay', 'Britse korthaar', 'Britse langhaar', 'Burmees', 'Burmilla', 'California Spangled', 'Ceylon', 'Chartreux', 'Cornish Rex', 'Cymric', 'Devon Rex', 'Don Sphynx', 'Dragon Li', 'Egyptische Mau', 'Exotic', 'German Rex', 'Havana Brown', 'Heilige Birmaan', 'Highlander', 'Japanse Bobtail', 'Kanaani', 'Khao Manee', 'Korat', 'Kurillen stompstaartkat', 'LaPerm', 'Lykoi', 'Maine Coon', 'Mandalay', 'Manx', 'Mekong bobtail', 'Munchkin', 'Nebelung', 'Neva Masquerade', 'Noorse boskat', 'Ocicat', 'Ojos Azules', 'Oosters korthaar', 'Oosters langhaar', 'Pers', 'Peterbald', 'Pixie-Bob', 'Ragamuffin', 'Ragdoll', 'Savannah', 'Scottish Fold', 'Selkirk Rex', 'Serengeti', 'Seychellois', 'Siamees', 'Siberische kat', 'Singapura', 'Snowshoe', 'Sokoke', 'Somali', 'Sphynx', 'Thai', 'Tibetaan', 'Tiffanie', 'Tonkanees', 'Turkse Angora', 'Turkse Van', 'Ural Rex', 'York Chocolate']);
-        $furLength = (['Kort','Lang']);
-        $gender = (['Kattin','Kater']);
-        $socialization = (['Tam','Bang','Wild']);
-        $reason = (['Vaccinatie','Chip','Vaccinatie & chip','Sterilisatie','']);
+        $furLength = (['Kort', 'Lang']);
+        $gender = (['Kattin', 'Kater']);
+        $socialization = (['Tam', 'Bang', 'Wild']);
+        $reason = (['Vaccinatie', 'Chip', 'Vaccinatie & chip', 'Sterilisatie', '']);
         $weighings = MedicalController::showWeigingsByCatId($id);
         $vetVisits = MedicalController::showVetVisitsByCatId($id);
         $fosterFamilies = FosterFamilyController::getFosterFamilies();
 
-        return view('catDetail', compact('cat', 'catPreference', 'cats','adoptionStatus','breed','furLength','gender','socialization','reason','weighings','vetVisits','fosterFamilies'));
+        return view('catDetail', compact('cat', 'catPreference', 'cats', 'adoptionStatus', 'breed', 'furLength', 'gender', 'socialization', 'reason', 'weighings', 'vetVisits', 'fosterFamilies'));
     }
-
 }

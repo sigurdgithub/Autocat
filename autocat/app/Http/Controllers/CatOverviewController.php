@@ -86,7 +86,8 @@ class CatOverviewController extends Controller
     {
         $cats = CatController::getCats();
         //dd($resultCats);
-        return view('catOverview', ['cats' => $cats]);
+        $fosterfamilies = FosterFamilyController::getFosterFamilies();
+        return view('catOverview', ['cats' => $cats, 'fosterFamilies' => $fosterfamilies]);
 
     }
 
