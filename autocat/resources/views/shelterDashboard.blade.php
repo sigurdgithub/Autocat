@@ -206,7 +206,7 @@
                                 </div>
                                 <div class="row">
                                     <div class="col-md-6">Gewicht</div>
-                                    <div id="startWeightCat" class="col-md-6"> gram</div>
+                                    <div id="startWeightCat" class="col-md-6"></div>
                                 </div>
                                 <div class="row">
                                     <div class="col-md-6">Gesteriliseerd</div>
@@ -216,15 +216,13 @@
                         </div>
                         <div class="card mt-5">
                             <div class="card-body card-border-danger">
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        <p class="card-description">Aandachtspunten</p>
-                                        <ul class="list-star" id="catAttention">
-                                            <li></li>
-                                        </ul>
-                                    </div>
+                                <div >
+                                    <p class="card-description">Aandachtspunten</p>
+                                    <ul class="list-star" id="catAttention">
+                                        <li></li>
+                                    </ul>
                                 </div>
-                                <div class="col-md-6">
+                                <div>
                                     <p class="card-description">Eigenschappen</p>
                                     <ul class="list-star" id="catPreferences">
                                         <li></li>
