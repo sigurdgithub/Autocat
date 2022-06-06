@@ -26,7 +26,7 @@
                 <div class="card-body">
                     <div class="row mb-5">
                         <div class="col-md-4">
-                            <select class="btn btn-sm btn-outline-info fosterFilter" multiple placeholder="Selecteer een aantal plaatsen...">
+                            <select class="fosterFilter" multiple placeholder="Selecteer een aantal plaatsen...">
                                 <option>1 beschikbare plaats</option>
                                 <option>2 beschikbare plaatsen</option>
                                 <option>3 beschikbare plaatsen</option>
@@ -39,7 +39,7 @@
                             </select>
                         </div>
                         <div class="col-md-4">
-                            <select class="btn btn-sm btn-outline-info fosterFilter" multiple placeholder="Selecteer katvoorkeur(en)...">
+                            <select class="fosterFilter" multiple placeholder="Selecteer katvoorkeur(en)...">
                                 <option>Volwassen</option>
                                 <option>Zwanger</option>
                                 <option>Kitten</option>
@@ -52,7 +52,7 @@
                             </select>
                         </div>
                         <div class="col-md-4">
-                            <select class="btn btn-sm btn-outline-info fosterFilter" multiple placeholder="Selecteer thuissituatie...">
+                            <select class="fosterFilter" multiple placeholder="Selecteer thuissituatie...">
                                 <option>Geen kinderen</option>  
                                 <option>Geen huisdieren</option>                                                     
                                 <option>Geen honden</option>

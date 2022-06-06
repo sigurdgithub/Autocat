@@ -11307,8 +11307,8 @@ code {
     height: 36px;
     border-radius: 4px;
     text-align: center;
-    -webkit-box-shadow: 0px 3px 8.3px 0.7px rgba(163, 93, 255, 0.35);
-    box-shadow: 0px 3px 8.3px 0.7px rgba(163, 93, 255, 0.35); }
+    -webkit-box-shadow: 0px 3px 8.3px 0.7px darkgrey;
+    box-shadow: 0px 3px 8.3px 0.7px darkgrey; }
     .page-title .page-title-icon i {
       font-size: .9375rem;
       line-height: 36px; }

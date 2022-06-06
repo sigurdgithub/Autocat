@@ -20,10 +20,16 @@ class RegisteredUserController extends Controller
      *
      * @return \Illuminate\View\View
      */
-    public function create()
+    public function createFoster()
     {
         return view(('auth.fosterAccount'));
     }
+
+    public function createShelter()
+    {
+        return view(('auth.shelterAccount'));
+    }
+
 
     /**
      * Handle an incoming registration request.
@@ -35,20 +41,6 @@ class RegisteredUserController extends Controller
      */
     public function store(Request $request)
     {
-        // USER TABLE //
-        $request->validate([
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-            'password' => ['required', Rules\Password::defaults()],
-            'fosterFamily_id' => ['foreignId']
-        ]);
-
-        $user = User::create([
-            'email' => $request->email,
-            'password' => Hash::make($request->password),
-            /* 'fosterFamily_id' => $request->fosterFamily_id */
-        ]);
-
-
 
         // FOSTERFAMILY TABLE //
         $request->validate([
@@ -63,7 +55,7 @@ class RegisteredUserController extends Controller
             'availableSpots' => ['required', 'integer'],
         ]);
 
-        FosterFamily::create([
+        $foster = FosterFamily::create([
             'lastName' => $request->lastName,
             'firstName' => $request->firstName,
             'dateOfBirth' => $request->dateOfBirth,
@@ -75,10 +67,24 @@ class RegisteredUserController extends Controller
             'availableSpots' => $request->availableSpots,
         ]);
 
-        // FOSTER_PREFERENCES TABLE //
-        //dd($request);
+        // USER TABLE //
+        /* dd($request); */
         $request->validate([
-            /* 'fosterFamily_id' => ['foreignId'], */
+            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+            'password' => ['required', Rules\Password::defaults()],
+            'fosterFamily_id' => 'integer'
+        ]);
+
+        $user = User::create([
+            'email' => $request->email,
+            'password' => Hash::make($request->password),
+            'fosterFamily_id' => $foster->id
+        ]);
+
+        // FOSTER_PREFERENCES TABLE //
+
+        $request->validate([
+            'fosterFamily_id' => ['integer'],
             'adult' => ['integer'],
             'pregnant' => ['integer'],
             'kitten' => ['integer'],
@@ -91,6 +97,7 @@ class RegisteredUserController extends Controller
         ]);
 
         FosterPreference::create([
+            'fosterFamily_id' => $foster->id,
             'adult' => $request->adult,
             'pregnant' => $request->pregnant,
             'kitten' => $request->kitten,
@@ -108,84 +115,4 @@ class RegisteredUserController extends Controller
 
         return redirect(RouteServiceProvider::fosterHome);
     }
-
-    /*  public function storeFoster(Request $request)
-    {
-        $request->validate([
-            'lastName' => ['required', 'string'],
-            'firstName' => ['required', 'string'],
-            'dateOfBirth' => ['required', 'date'],
-            'street' => ['required', 'string'],
-            'number' => ['required', 'string'],
-            'city' => ['required', 'string'],
-            'zipCode' => ['required', 'string'],
-            'phone' => ['required', 'string'],
-            'availableSpots' => ['required', 'integer'],
-        ]);
-
-        FosterFamily::create([
-            'lastName' => $request->lastName,
-            'firstName' => $request->firstName,
-            'dateOfBirth' => $request->dateOfBirth,
-            'street' => $request->street,
-            'number' => $request->number,
-            'city' => $request->city,
-            'zipCode' => $request->zipCode,
-            'phone' => $request->phone,
-            'availableSpots' => $request->availableSpots,
-        ]);
-
-        $request->validate([
-            'fosterFamily_id' => ['foreignId'],
-            'adult' => ['boolean'],
-            'pregnant' => ['boolean'],
-            'kitten' => ['boolean'],
-            'bottleFeeding' => ['boolean'],
-            'scared' => ['boolean'],
-            'feral' => ['boolean'],
-            'intensiveCare' => ['boolean'],
-            'noIntensiveCare' => ['boolean'],
-            'isolation' => ['boolean'],
-        ]);
-
-        FosterPreference::create([
-            'adult' => $request->adult,
-            'pregnant' => $request->pregnant,
-            'kitten' => $request->kitten,
-            'bottleFeeding' => $request->noIntensiveCare,
-            'scared' => $request->scared,
-            'feral' => $request->feral,
-            'intensiveCare' => $request->intensiveCare,
-            'noIntensiveCare' => $request->noIntensiveCare,
-            'isolation' => $request->isolation,
-        ]);
-    }
-
-    public function storeFosterPreference(Request $request)
-    {
-        $request->validate([
-            'fosterFamily_id' => ['foreignId'],
-            'adult' => ['boolean'],
-            'pregnant' => ['boolean'],
-            'kitten' => ['boolean'],
-            'bottleFeeding' => ['boolean'],
-            'scared' => ['boolean'],
-            'feral' => ['boolean'],
-            'intensiveCare' => ['boolean'],
-            'noIntensiveCare' => ['boolean'],
-            'isolation' => ['boolean'],
-        ]);
-
-        FosterPreference::create([
-            'adult' => $request->adult,
-            'pregnant' => $request->pregnant,
-            'kitten' => $request->kitten,
-            'bottleFeeding' => $request->noIntensiveCare,
-            'scared' => $request->scared,
-            'feral' => $request->feral,
-            'intensiveCare' => $request->intensiveCare,
-            'noIntensiveCare' => $request->noIntensiveCare,
-            'isolation' => $request->isolation,
-        ]);
-    } */
 }

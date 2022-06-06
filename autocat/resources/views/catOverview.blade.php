@@ -27,19 +27,19 @@
                 <div class="card-body">
                     <div class="row mb-3">
                         <div class="col-md-4">
-                            <select id='multi-select-container-location' class="btn btn-sm btn-outline-danger filter location-search" autocomplete="off" placeholder="Selecteer pleeggezin..." multiple data-silent-initial-value-set="true">
+                            <select id='multi-select-container-location' class="filter location-search" autocomplete="off" placeholder="Selecteer pleeggezin..." multiple data-silent-initial-value-set="true">
                                 <option></option>
                                 <option></option>
                             </select>
                         </div>
                         <div class="col-md-4">
-                            <select class="btn btn-sm btn-outline-danger" multiple placeholder="Selecteer Geslacht...">
+                            <select multiple placeholder="Selecteer Geslacht...">
                                 <option>Kattin</option>
                                 <option>Kater</option>
                             </select>
                         </div>
                         <div class="col-md-4">
-                            <select class="btn btn-sm btn-outline-danger" multiple placeholder="Selecteer Leeftijd...">
+                            <select multiple placeholder="Selecteer Leeftijd...">
                                 <option>Kitten</option>
                                 <option>Puber</option>
                                 <option>Volwassen</option>
@@ -49,7 +49,7 @@
                     </div>
                     <div class="row mb-5">
                         <div class="col-md-4">
-                            <select class="btn btn-sm btn-outline-danger" multiple placeholder="Selecteer Adoptiestatus...">
+                            <select multiple placeholder="Selecteer Adoptiestatus...">
                                 <option>Aangemeld</option>  
                                 <option>Bij Pleeggezin</option>                                                     
                                 <option>In Asiel</option>
@@ -60,7 +60,7 @@
                             </select>
                         </div>
                         <div class="col-md-4">
-                            <select class="btn btn-sm btn-outline-danger" multiple placeholder="Selecteer Adoptie mogelijkheden...">
+                            <select multiple placeholder="Selecteer Adoptie mogelijkheden...">
                                 <option>Solo Moet</option>
                                 <option>Solo Mag</option>
                                 <option>Solo Nee</option>
@@ -76,7 +76,7 @@
                             </select>
                         </div>
                         <div class="col-md-4">
-                            <select class="btn btn-sm btn-outline-danger" multiple placeholder="Selecteer Karakter...">
+                            <select multiple placeholder="Selecteer Karakter...">
                                 <option>Schootkat</option>  
                                 <option>Speelse kat</option>                                                     
                                 <option>Buitenkat</option>

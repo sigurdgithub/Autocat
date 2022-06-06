@@ -41,19 +41,35 @@ class MedicalController extends Controller
     {   
         $validation = $request->validate([
             'date'=> 'required',
-            'weighing'=>'required',
+            'weight'=>'required',
             'comments'=>'required'
         ]);
-
-        $timestamp = now()->timestamp;
 
         $weighing = Weighing::firstOrCreate(
             ['cat_id' => $request->input('cat_id'),
             'date' => $request->input('date'),
-            'weighing' => $request->input('weighing'),
+            'weight' => $request->input('weight'),
             'comments' => $request->input('comments')
             ]);
+        
+        return redirect()->route('showCatById', ['id' => $request->input('cat_id')]);
+    }
 
-        return redirect()->route('showCatById');
+    public function storeVetVisit(Request $request)
+    {   
+        $validation = $request->validate([
+            'date'=> 'required',
+            'reason'=>'required',
+            'comments'=>'required'
+        ]);
+
+        $weighing = VetVisit::firstOrCreate(
+            ['cat_id' => $request->input('cat_id'),
+            'date' => $request->input('date'),
+            'reason' => $request->input('reason'),
+            'comments' => $request->input('comments')
+            ]);
+        
+        return redirect()->route('showCatById', ['id' => $request->input('cat_id')]);
     }
 }

@@ -14,14 +14,11 @@ Route::middleware('guest')->group(function () {
     Route::post('register', [RegisteredUserController::class, 'store'])
         ->name('register');
 
-    /* Route::post('registerFoster', [RegisteredUserController::class, 'storeFoster'])
+    Route::get('registerFoster', [RegisteredUserController::class, 'createFoster'])
         ->name('registerFoster');
 
-    Route::post('registerFosterPreference', [RegisteredUserController::class, 'storeFosterPreference'])
-        ->name('registerFosterPreference'); */
-
-    Route::get('register', [RegisteredUserController::class, 'create'])
-        ->name('register');
+    Route::get('registerShelter', [RegisteredUserController::class, 'createShelter'])
+        ->name('registerShelter');
 
     Route::get('', [AuthenticatedSessionController::class, 'create'])
         ->name('login');
