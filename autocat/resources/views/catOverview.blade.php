@@ -229,7 +229,7 @@
                 showValueAsTags: true,
                 options: myOptions
             });*/
-            $('#selectGender').on('change', function() {
+            $('[id^="select"]').on('change', function() {
 
                 // Get input value on change
                 var ageTerm = $('#selectAge').val();
