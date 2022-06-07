@@ -184,7 +184,7 @@
                             {{debug_to_console($cats);}}
                             @foreach ($cats as $cat)
                                 {{-- TODO: Make this == whatever the value a cat has for fosterFamily_id if not yet assigned --}}
-                                @if ($cat->fosterFamily_id != null)
+                                @if ($cat->fosterFamily_id == null)
                                     <option class="option" value="{{$cat->id}}">{{$cat->name}}</option>
                                 @endif
                             @endforeach

@@ -60,6 +60,8 @@ Route::get('/asielDashboard/ajax/{fosterId}', [DashBoardController::class, 'getC
 Route::get('/cat/ajax/{id}', [CatController::class, 'getCatById']);
 Route::get('/cats/ajax/{search}', [CatController::class, 'filterCatsByString']);
 Route::post('/cats/ajax', [CatController::class, 'filterCats']);
+Route::get('/fosterfamilies/ajax/{search}', [FosterFamilyController::class, 'filterFosterFamiliesByString']);
+Route::post('/fosterfamilies/ajax', [FosterFamilyController::class, 'filterFosterFamilies']);
 Route::get('/catPref/ajax/{id}', [CatController::class, 'getPreferenceByCatId']);
 Route::get('/fosterfamily/ajax/{id}', [FosterFamilyController::class, 'getFosterFamilyById']);
 Route::delete('/notifications_delete/{id}', [DashBoardController::class, 'delete'])->name('delete');
