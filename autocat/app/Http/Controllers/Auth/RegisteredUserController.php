@@ -69,17 +69,19 @@ class RegisteredUserController extends Controller
         ]);
 
         // USER TABLE //
-        /* dd($request); */
+
         $request->validate([
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', Rules\Password::defaults()],
-            'fosterFamily_id' => 'integer'
+            'fosterFamily_id' => 'integer',
+            'shelter_id' => 'null'
         ]);
 
         $user = User::create([
             'email' => $request->email,
             'password' => Hash::make($request->password),
-            'fosterFamily_id' => $foster->id
+            'fosterFamily_id' => $foster->id,
+            'shelter_id' => null
         ]);
 
         // FOSTER_PREFERENCES TABLE //
@@ -97,7 +99,7 @@ class RegisteredUserController extends Controller
             'isolation' => ['integer']
         ]);
 
-        $FosterPreference = FosterPreference::create([
+        $fosterPreference = FosterPreference::create([
             'fosterFamily_id' => $foster->id,
             'adult' => $request->adult,
             'pregnant' => $request->pregnant,
@@ -136,7 +138,7 @@ class RegisteredUserController extends Controller
             'picture' => ['nullable', 'string'],
         ]);
 
-        Shelter::create([
+        $shelter = Shelter::create([
             'shelterName' => $request->shelterName,
             'shelterPhone' => $request->shelterPhone,
             'hkNumber' => $request->hkNumber,
@@ -155,13 +157,15 @@ class RegisteredUserController extends Controller
         $request->validate([
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', Rules\Password::defaults()],
-            'fosterFamily_id' => 'null'
+            'fosterFamily_id' => 'null',
+            'shelter_id' => ['integer']
         ]);
 
         $user = User::create([
             'email' => $request->email,
             'password' => Hash::make($request->password),
-            'fosterFamily_id' => null
+            'fosterFamily_id' => null,
+            'shelter_id' => $shelter->id
         ]);
 
         event(new Registered($user));

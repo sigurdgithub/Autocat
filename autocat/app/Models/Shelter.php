@@ -12,6 +12,10 @@ class Shelter extends Model
      *
      * @var array
      */
+    public function shelter_id()
+    {
+        return $this->hasMany(User::class, 'shelter');
+    }
     protected $fillable = [
         'shelterName', 'shelterPhone', 'hkNumber', 'shelterFirstName', 'shelterLastName', 'shelterDateOfBirth', 'shelterStreet', 'shelterNumber', 'shelterCity', 'shelterZipCode', 'phoneNumber', 'picture'
     ];

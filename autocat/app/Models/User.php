@@ -17,10 +17,23 @@ class User extends Authenticatable
      *
      * @var array<int, string>
      */
+    public function fosterFamily()
+    {
+        return $this->belongsTo(FosterFamily::class, 'fosterFamily_id');
+    }
+
+    public function shelter()
+    {
+        return $this->belongsTo(Shelter::class, 'shelter_id');
+    }
+
+
+
     protected $fillable = [
         'email',
         'password',
-        'fosterFamily_id'
+        'fosterFamily_id',
+        'shelter_id'
     ];
 
     /**
