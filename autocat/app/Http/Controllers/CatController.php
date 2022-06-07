@@ -52,6 +52,20 @@ class CatController extends Controller
 
     }
 
+    public function filterCatsByString($string) {
+        $cats = DB::table('cats')->select('cats.*')->leftJoin('fosterFamilies', 'cats.fosterFamily_id', '=', 'fosterFamilies.id');
+        $cats = $cats->where('cats.name', 'LIKE', '%'.$string.'%');
+        $result = $cats->addSelect('fosterFamilies.dateOfBirth AS fosterBirth')->addSelect('fosterFamilies.firstName AS fosterFirstName')->addSelect('fosterFamilies.lastName AS fosterLastName')->get();
+        $array = json_decode(json_encode($result), true);
+        $result = [];
+        foreach ($array as $row) {
+            //dd($row);
+            $row += ['stringDate' => CatController::getCatAgeString($row['dateOfBirth'])];
+            array_push($result, $row);
+        }
+        return json_encode($result);
+    }
+
     public static function getCats()
     {
         $cats = Cat::all();

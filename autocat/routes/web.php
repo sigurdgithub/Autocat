@@ -58,6 +58,7 @@ Route::get('/notifications/{fosterId}', [DashBoardController::class, 'showByFost
 Route::get('/asielDashboard', [DashBoardController::class, 'showShelterNotifications'])->name('shelterNotifications');
 Route::get('/asielDashboard/ajax/{fosterId}', [DashBoardController::class, 'getCatsByFosterId']);
 Route::get('/cat/ajax/{id}', [CatController::class, 'getCatById']);
+Route::get('/cats/ajax/{search}', [CatController::class, 'filterCatsByString']);
 Route::post('/cats/ajax', [CatController::class, 'filterCats']);
 Route::get('/catPref/ajax/{id}', [CatController::class, 'getPreferenceByCatId']);
 Route::get('/fosterfamily/ajax/{id}', [FosterFamilyController::class, 'getFosterFamilyById']);
