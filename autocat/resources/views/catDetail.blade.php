@@ -9,7 +9,11 @@
             </span> Kat Detail        
         </h3>
     </div>
-    <form method="post" action="/katDetail" enctype="multipart/form-data"> 
+    @if(isset($cat))
+    <form method="post" action="/updateCat/{{$cat->id}}" enctype="multipart/form-data">
+    @else
+    <form method="post" action="/katDetail" enctype="multipart/form-data">
+    @endif
         @csrf
         <div class="content-wrapper pt-0">
             <div class="row">
@@ -358,10 +362,15 @@
                 </div>
             </div>
         </div>
+        @if(isset($cat))
+        <div class="row mt-5">
+            <input type="submit" class="btn btn-gradient-danger w-25 mx-auto" value="Update">
+        </div>
+        @else
         <div class="row mt-5">
             <input type="submit" class="btn btn-gradient-danger w-25 mx-auto" value="Sla op">
         </div>
-        
+        @endif
         <!-- BUTTON - UPDATE -->
 {{--         <div class="row mt-5">
             <button type="submit" class="btn btn-gradient-danger w-25 mx-auto">
@@ -369,6 +378,7 @@
             </button>
         </div> --}}
     </form>
+
         <!-- HEALTH DIARY : WEIGHING-->
         @if(isset($cat))
             <div class="content-wrapper">
