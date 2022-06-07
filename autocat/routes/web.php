@@ -91,5 +91,6 @@ Route::get('/weighing_delete/{id}', [MedicalController::class, 'deleteWeighing']
 Route::get('/vetVisit_delete/{id}', [MedicalController::class, 'deleteVetVisit'])->name('vetVisit_delete');
 Route::post('/addWeighing', [MedicalController::class, 'storeWeighing'])->name('storeWeighing');
 Route::post('/addVetVisit', [MedicalController::class, 'storeVetVisit'])->name('storeVetVisit');
+Route::post('/updateCat/{id}', [CatController::class, 'updateCat'])->name('updateCat');
 
 require __DIR__ . '/auth.php';

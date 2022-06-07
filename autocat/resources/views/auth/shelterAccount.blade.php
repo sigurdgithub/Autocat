@@ -14,7 +14,7 @@
 <!--ACCOUNTDETAILS-->
 <div class="content-wrapper pt-0">
     {{-- Shelter Form --}}
-    <form method="POST" action="{{route('registerShelter')}}">
+    <form method="POST" action="{{route('storeShelter')}}">
         @csrf
         <h3 class="text-muted mt-4">Mijn gegevens</h3>
         <div class="card">
@@ -46,19 +46,22 @@
                     <div class="col-md-4">
                         <div class="form-group">
                             <label class="form-label">Naam</label>
-                            <input type="text" class="form-control" name="lastName" :value="{{old('lastName')}}">
+                            <input type="text" class="form-control" name="shelterLastName"
+                                :value="{{old('shelterLastName')}}">
                         </div>
                     </div>
                     <div class="col-md-4">
                         <div class="form-group">
                             <label class="form-label">Voornaam</label>
-                            <input type="text" class="form-control" name="firstName" :value="{{old('firstName')}}">
+                            <input type="text" class="form-control" name="shelterFirstName"
+                                :value="{{old('shelterFirstName')}}">
                         </div>
                     </div>
                     <div class="col-md-4">
                         <div class="form-group">
                             <label class="form-label">Geboortedatum</label>
-                            <input type="date" class="form-control" name="dateOfBirth" :value="{{old('dateOfBirth')}}">
+                            <input type="date" class="form-control" name="shelterDateOfBirth"
+                                :value="{{old('shelterDateOfBirth')}}">
                         </div>
                     </div>
                 </div>
@@ -66,32 +69,36 @@
                     <div class="col-md-4">
                         <div class="form-group">
                             <label class="form-label">Straat</label>
-                            <input type="text" class="form-control" name="street" :value="{{old('street')}}">
+                            <input type="text" class="form-control" name="shelterStreet"
+                                :value="{{old('shelterStreet')}}">
                         </div>
                     </div>
                     <div class="col-md-2">
                         <div class="form-group">
                             <label class="form-label">Huisnummer</label>
-                            <input type="text" class="form-control" name="number" :value="{{old('number')}}">
+                            <input type="text" class="form-control" name="shelterNumber"
+                                :value="{{old('shelterNumber')}}">
                         </div>
                     </div>
                     <div class="col-md-2">
                         <div class="form-group">
                             <label class="form-label">Postcode</label>
-                            <input type="text" class="form-control" name="zipCode" :value="{{old('zipcode')}}">
+                            <input type="text" class="form-control" name="shelterZipCode"
+                                :value="{{old('shelterZipcode')}}">
                         </div>
                     </div>
                     <div class="col-md-4">
                         <div class="form-group">
                             <label class="form-label">Gemeente</label>
-                            <input type="text" class="form-control" name="city" :value="{{old('city')}}">
+                            <input type="text" class="form-control" name="shelterCity" :value="{{old('shelterCity')}}">
                         </div>
                     </div>
                     <div class="row mt-3">
                         <div class="col-md-4">
                             <div class="form-group">
                                 <label class="form-label">Telefoonnummer</label>
-                                <input type="text" class="form-control" name="phone" :value="{{old('phoneNumber')}}">
+                                <input type="text" class="form-control" name="phoneNumber"
+                                    :value="{{old('phoneNumber')}}">
                             </div>
                         </div>
                         <div class="col-md-4">

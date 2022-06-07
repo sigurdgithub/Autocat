@@ -305,29 +305,29 @@ class CatController extends Controller
         // Store
         $cat = Cat::firstOrCreate(
             [
-                'gender' => $request->input('gender'),
-                'name' => $request->input('name'),
-                'dateOfBirth' => $request->input('dateOfBirth'),
-                'furColor' => $request->input('furColor'),
-                'furLength' => $request->input('furLength'),
-                'chipNumber' => $request->input('chipNumber'),
-                'adoptionStatus' => $request->input('adoptionStatus'),
-                'notifierName' => $request->input('notifierName'),
-                'notifierPhone' => $request->input('notifierPhone'),
-                'socialization' => $request->input('socialization'),
-                'startWeight' => $request->input('startWeight'),
-                'sterilized' => $request->input('sterilized'),
-                'extraInfo' => $request->input('extraInfo'),
-                'medication' => $request->input('medication'),
-                'personality' => $request->input('personality'),
-                'solo' => $request->input('solo'),
-                'withPet' => $request->input('withPet'),
-                'gardenAccess' => $request->input('gardenAccess'),
-                'buddyId' => $request->input('buddyId'),
-                'image' => $request->input('image'),
-                'fosterFamily_id' => $request->input('fosterFamily_id')
-            ]
-        );
+            'breed' => $request->input('breed'),    
+            'gender' => $request->input('gender'),
+            'name' => $request->input('name'),
+            'dateOfBirth' => $request->input('dateOfBirth'),
+            'furColor' => $request->input('furColor'),
+            'furLength' => $request->input('furLength'),
+            'chipNumber' => $request->input('chipNumber'),
+            'adoptionStatus' => $request->input('adoptionStatus'),
+            'notifierName' => $request->input('notifierName'),
+            'notifierPhone' => $request->input('notifierPhone'),
+            'socialization' => $request->input('socialization'),
+            'startWeight' => $request->input('startWeight'),
+            'sterilized' => $request->input('sterilized'),
+            'extraInfo' => $request->input('extraInfo'),
+            'medication' => $request->input('medication'),
+            'personality' => $request->input('personality'),
+            'solo' => $request->input('solo'),
+            'withPet' => $request->input('withPet'),
+            'gardenAccess' => $request->input('gardenAccess'),
+            'buddyId' => $request->input('buddyId'),
+            'image' => $request->input('image'),
+            'fosterFamily_id' => $request->input('fosterFamily_id')
+            ]);
 
         $catPreference = CatPreference::firstOrCreate(
             [
@@ -358,8 +358,9 @@ class CatController extends Controller
         $weighings = MedicalController::showWeigingsByCatId($cat->id);
         $vetVisits = MedicalController::showVetVisitsByCatId($cat->id);
         $fosterFamilies = FosterFamilyController::getFosterFamilies();
+        
+        return redirect()->route('showCatById', ['id' => $cat->id]);
 
-        return view('catDetail', compact('cat', 'catPreference', 'cats', 'adoptionStatus', 'breed', 'furLength', 'gender', 'socialization', 'reason', 'weighings', 'vetVisits', 'fosterFamilies'));
     }
 
     public function showCatById($id)
@@ -379,4 +380,66 @@ class CatController extends Controller
 
         return view('catDetail', compact('cat', 'catPreference', 'cats', 'adoptionStatus', 'breed', 'furLength', 'gender', 'socialization', 'reason', 'weighings', 'vetVisits', 'fosterFamilies'));
     }
+
+    public function updateCat(Request $request, $id) 
+    {
+        $cat = Cat::find($id);
+        $cat->breed = $request->input('breed');
+        $cat->gender = $request->input('gender');
+        $cat->name = $request->input('name');
+        $cat->dateOfBirth = $request->input('dateOfBirth');
+        $cat->furColor = $request->input('furColor');
+        $cat->furLength = $request->input('furLength');
+        $cat->chipNumber = $request->input('chipNumber');
+        $cat->adoptionStatus = $request->input('adoptionStatus');
+        $cat->notifierName = $request->input('notifierName');
+        $cat->notifierPhone = $request->input('notifierPhone');
+        $cat->socialization = $request->input('socialization');
+        $cat->startWeight = $request->input('startWeight');
+        $cat->sterilized = $request->input('sterilized');
+        $cat->extraInfo = $request->input('extraInfo');
+        $cat->medication = $request->input('medication');
+        $cat->personality = $request->input('personality');
+        $cat->solo = $request->input('solo');
+        $cat->withPet = $request->input('withPet');
+        $cat->gardenAccess = $request->input('gardenAccess');
+        $cat->buddyId = $request->input('buddyId');
+        $cat->image = $request->input('image');
+        $cat->fosterFamily_id = $request->input('fosterFamily_id');
+        $cat->save();
+
+        $catPreference = CatPreference::find($cat->id);
+        // $catPreference = CatPreference::where('cat_id','=',$cat->id)->firstOrFail();
+        //dd($cat->id);
+        //dd($catPreference);
+        $catPreference->bottleFeeding = $request->input('bottleFeeding');
+        $catPreference->pregnancy = $request->input('pregnancy');
+        $catPreference->intensiveCare = $request->input('intensiveCare');
+        $catPreference->noIntensiveCare = $request->input('noIntensiveCare');
+        $catPreference->isolation = $request->input('isolation');
+        $catPreference->kids = $request->input('kids');
+        $catPreference->dogs = $request->input('dogs');
+        $catPreference->cats = $request->input('cats');
+        $catPreference->lapCat = $request->input('lapCat');
+        $catPreference->playfulCat = $request->input('playfulCat');
+        $catPreference->outdoorCat = $request->input('outdoorCat');
+        $catPreference->calmCat = $request->input('calmCat');
+        $catPreference->bedroomAccess = $request->input('bedroomAccess'); 
+        $catPreference->save();
+
+        $cats = Cat::all();
+        $adoptionStatus = (['Aangemeld','Bij Pleeggezin','In Asiel','Klaar voor adoptie','In optie','Adoptie goedgekeurd','Bij Adoptiegezin']);
+        $breed = (['Europees korthaar', 'Abessijn', 'Amerikaanse bobtail', 'American Curl', 'American wirehair', 'Amerikaans korthaar', 'Ashera', 'Asian', 'Australian Mist', 'Balinees', 'Bengaal', 'Blauwe Rus', 'Boheemse Rex', 'Bombay', 'Britse korthaar', 'Britse langhaar', 'Burmees', 'Burmilla', 'California Spangled', 'Ceylon', 'Chartreux', 'Cornish Rex', 'Cymric', 'Devon Rex', 'Don Sphynx', 'Dragon Li', 'Egyptische Mau', 'Exotic', 'German Rex', 'Havana Brown', 'Heilige Birmaan', 'Highlander', 'Japanse Bobtail', 'Kanaani', 'Khao Manee', 'Korat', 'Kurillen stompstaartkat', 'LaPerm', 'Lykoi', 'Maine Coon', 'Mandalay', 'Manx', 'Mekong bobtail', 'Munchkin', 'Nebelung', 'Neva Masquerade', 'Noorse boskat', 'Ocicat', 'Ojos Azules', 'Oosters korthaar', 'Oosters langhaar', 'Pers', 'Peterbald', 'Pixie-Bob', 'Ragamuffin', 'Ragdoll', 'Savannah', 'Scottish Fold', 'Selkirk Rex', 'Serengeti', 'Seychellois', 'Siamees', 'Siberische kat', 'Singapura', 'Snowshoe', 'Sokoke', 'Somali', 'Sphynx', 'Thai', 'Tibetaan', 'Tiffanie', 'Tonkanees', 'Turkse Angora', 'Turkse Van', 'Ural Rex', 'York Chocolate']);
+        $furLength = (['Kort','Lang']);
+        $gender = (['Kattin','Kater']);
+        $socialization = (['Tam','Bang','Wild']);
+        $reason = (['Vaccinatie','Chip','Vaccinatie & chip','Sterilisatie','']);
+        $weighings = MedicalController::showWeigingsByCatId($id);
+        $vetVisits = MedicalController::showVetVisitsByCatId($id);
+        $fosterFamilies = FosterFamilyController::getFosterFamilies();
+
+
+        return redirect()->route('showCatById', ['id' => $cat->id]);
+    }
+
 }

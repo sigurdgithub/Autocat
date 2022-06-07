@@ -69,7 +69,7 @@
                     </div>
                     </div>
                               </p>
-                    <table class="table table-hover table-responsive-md">
+                    <table class="table table-hover">
                         <thead>
                             <tr>
                             <th>Pleeggezin</th>
@@ -163,14 +163,14 @@
         </div> 
                 <!-- CAT DISPLAY BASED ON ADOPTER SELECTION-->
     <div class="row">
-        <h3 class="text-muted">Match Maker</h3>
+        <h3 class="text-muted mt-5">Match Maker</h3>
         <div class="col-md-6 stretch-card grid-margin">
             <div class="card">
                 <div class="card-body">
                     <div class="row">
                         <h4 class="col-md-8 text-muted">Selecteer hier de kat</h4>
                         <div class="col-md-4">
-                        <select id="selectedCatMatch" name="catMatch" class="select-option form-control bg-gradient-danger text-white">
+                        <select id="selectedCatMatch" name="catMatch" class="select-option form-control">
                             <option class="option">Selecteer</option>
                             @foreach ($cats as $cat)
                                 {{-- TODO: Make this == whatever the value a cat has for fosterFamily_id if not yet assigned --}}
@@ -181,56 +181,73 @@
                         </select>
                         </div>
                     </div>
-                        <div class="card mt-5">
-                            <div class="card-body card-border-danger">
-                                <p class="card-description"> Algemene Informatie </p>
-                                <div class="row">
-                                    <div class="col-md-6">Geboortedatum</div>
-                                    <div id="dateOfBirthCat" class="col-md-6"></div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-md-6">Gender</div>
-                                    <div id="genderCat" class="col-md-6"></div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-md-6">Ras</div>
-                                    <div id="breedCat" class="col-md-6"></div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-md-6">Chipnummer</div>
-                                    <div id="chipNumberCat" class="col-md-6"></div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-md-6">Socialisatie</div>
-                                    <div id="socializationCat" class="col-md-6"></div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-md-6">Gewicht</div>
-                                    <div id="startWeightCat" class="col-md-6"></div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-md-6">Gesteriliseerd</div>
-                                    <div  id="sterilizedCat" class="col-md-6"></div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="card mt-5">
-                            <div class="card-body card-border-danger">
-                                <div >
-                                    <p class="card-description">Aandachtspunten</p>
-                                    <ul class="list-star" id="catAttention">
-                                        <li></li>
-                                    </ul>
-                                </div>
-                                <div>
-                                    <p class="card-description">Eigenschappen</p>
-                                    <ul class="list-star" id="catPreferences">
-                                        <li></li>
-                                    </ul>
+                    <ng-container>
+                        <div class="stretch-card grid-margin mt-5">
+                            <div class="card card-img-holder">
+                                <div class="card">
+                                    <div class="card-header bg-gradient-danger">
+                                        <img src="assets/images/dashboard/circle.svg" class="card-img-absolute" alt="circle-image" />
+                                        <p class="text-white">Algemene Informatie</p>                             
+                                    </div>
+                                    <div class="card-footer card-border-danger">
+                                        <div class="row">
+                                            <div class="col-md-6">Geboortedatum</div>
+                                            <div id="dateOfBirthCat" class="col-md-6"></div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-6">Gender</div>
+                                            <div id="genderCat" class="col-md-6"></div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-6">Ras</div>
+                                            <div id="breedCat" class="col-md-6"></div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-6">Chipnummer</div>
+                                            <div id="chipNumberCat" class="col-md-6"></div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-6">Socialisatie</div>
+                                            <div id="socializationCat" class="col-md-6"></div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-6">Gewicht</div>
+                                            <div id="startWeightCat" class="col-md-6"> gram</div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-6">Gesteriliseerd</div>
+                                            <div  id="sterilizedCat" class="col-md-6"></div>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                        <div class="mt-5"><a id='catLink'> Volledige fiche van </a></div>
+                        <div class="stretch-card grid-margin mt-5">
+                            <div class="card card-img-holder">
+                                <div class="card">
+                                    <div class="card-header bg-gradient-danger">
+                                        <img src="assets/images/dashboard/circle.svg" class="card-img-absolute" alt="circle-image" />
+                                        <p class="text-white">Aandachtspunten</p>                             
+                                    </div>
+                                    <div class="card-footer card-border-danger">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="stretch-card grid-margin mt-5">
+                            <div class="card card-img-holder">
+                                <div class="card">
+                                    <div class="card-header bg-gradient-danger">
+                                        <img src="assets/images/dashboard/circle.svg" class="card-img-absolute" alt="circle-image" />
+                                        <p class="text-white">Eigenschappen</p>                             
+                                    </div>
+                                    <div class="card-footer card-border-danger">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="mt-3"><a href="katDetail/"><u> Volledige fiche van </u></a></div>
+                    </ng-container>
                 </div>
             </div>
         </div>
@@ -241,7 +258,7 @@
                     <div class="row">
                         <h4 class="col-md-8 text-muted">Selecteer hier het pleeggezin</h4>
                         <div class="col-md-4">
-                            <select name="fosterFamilyMatch" class="select-option form-control bg-gradient-info text-white">
+                            <select name="fosterFamilyMatch" class="select-option form-control">
                                 <option class="option">Selecteer</option>
                                  @foreach ($fosterFamilies as $family)
                                 {{-- TODO: Make this == whatever the value a cat has for fosterFamily_id if not yet assigned --}}
@@ -253,56 +270,75 @@
                         </div>
                     </div>
                     <ng-container>
-                        <div class="card mt-5">
-                            <div class="card-body card-border-info">
-                                <p class="card-description"> Algemene informatie </p>
-                                <div class="row">
-                                    <div class="col-md-6">Naam</div>                  
-                                    <div id="nameFoster" class="col-md-6"></div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-md-6">Adres</div>
-                                    <div class="col-md-6">
-                                        <div id="addressOneFoster"></div>
-                                        <div id="addressTwoFoster"></div>
+                        <div class="stretch-card grid-margin mt-5">
+                            <div class="card card-img-holder">
+                                <div class="card">
+                                    <div class="card-header bg-gradient-info">
+                                        <img src="assets/images/dashboard/circle.svg" class="card-img-absolute" alt="circle-image" />
+                                        <p class="text-white">Algemene informatie</p>                             
                                     </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-md-6">Geboortedatum</div>
-                                    <div id="dateOfBirthFoster" class="col-md-6"></div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-md-6">Email</div>
-                                    <div id="emailFoster" class="col-md-6"></div>
-                                </div>
-                                <div class="row mt-3">
-                                    <div class="col-md-6">Aantal beschikbare plaatsen </div>
-                                    <div id="availableSpotsFoster" class="col-md-6"></div>
+                                    <div class="card-footer card-border-info">
+                                        <div class="row">
+                                            <div class="col-md-6">Naam</div>                  
+                                            <div id="nameFoster" class="col-md-6"></div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-6">Adres</div>
+                                            <div class="col-md-6">
+                                                <div id="addressOneFoster"></div>
+                                                <div id="addressTwoFoster"></div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-6">Geboortedatum</div>
+                                            <div id="dateOfBirthFoster" class="col-md-6"></div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-6">Email</div>
+                                            <div id="emailFoster" class="col-md-6"></div>
+                                        </div>
+                                        <div class="row mt-3">
+                                            <div class="col-md-6">Aantal beschikbare plaatsen </div>
+                                            <div id="availableSpotsFoster" class="col-md-6"></div>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                        <div class="card mt-5">
-                            <div class="card-body card-border-info">
-                                <p class="card-description">Staat open voor</p>
-                                <ul class="list-star">
-                                    <li class="row">
-                                        <div class="col-md-10"></div>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div> 
-                            <!-- Roommates & Pets -->
-                        <div class="card mt-5">
-                            <div class="card-body card-border-info">
-                                <p class="card-description">Huisdieren</p>
-                                <div class="row">
-                                    <div class="col-md-6"></div>
-                                    <div class="col-md-6"> jaar oud</div>
+                        <div class="stretch-card grid-margin mt-5">
+                            <div class="card card-img-holder">
+                                <div class="card">
+                                    <div class="card-header bg-gradient-info">
+                                        <img src="assets/images/dashboard/circle.svg" class="card-img-absolute" alt="circle-image" />
+                                        <p class="text-white">Staat open voor</p>                             
+                                    </div>
+                                    <div class="card-footer card-border-info">
+                                    </div>
                                 </div>
-                                <p class="card-description">Huisgenoten</p>
-                                <div class="row">
-                                    <div class="col-md-6"></div>
-                                    <div class="col-md-6">jaar oud</div>
+                            </div>
+                        </div>         
+                            <!-- Roommates & Pets -->
+                        <div class="stretch-card grid-margin mt-5">
+                            <div class="card card-img-holder">
+                                <div class="card">
+                                    <div class="card-header bg-gradient-info">
+                                        <img src="assets/images/dashboard/circle.svg" class="card-img-absolute" alt="circle-image" />
+                                        <p class="text-white">Huisdieren</p>                             
+                                    </div>
+                                    <div class="card-footer card-border-info">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="stretch-card grid-margin mt-5">
+                            <div class="card card-img-holder">
+                                <div class="card">
+                                    <div class="card-header bg-gradient-info">
+                                        <img src="assets/images/dashboard/circle.svg" class="card-img-absolute" alt="circle-image" />
+                                        <p class="text-white">Huisgenoten</p>                             
+                                    </div>
+                                    <div class="card-footer card-border-info">
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -320,21 +356,8 @@
                     dataType: "json",
                     success:function(data) {
                         $('#catPreferences').empty();
-                        $('#catAttention').empty();
-                        let string = (data.kids ? ' wel ' : ' niet ');
-                        $('#catPreferences').append('<li>kan ' + string + 'geplaatst worden met kinderen</li>');
-                        string = (data.dogs ? ' wel ' : ' niet ');
-                        $('#catPreferences').append('<li>kan ' + string + 'geplaatst worden met honden</li>');
-                        string = (data.cats ? ' wel ' : ' niet ');
-                        $('#catPreferences').append('<li>kan ' + string + 'geplaatst worden met katten</li>');
-                        if (data.intensiveCare) {
-                            $('#catAttention').append('<li>Heeft intensieve verzorging nodig</li>');
-                        }
-                        if (data.noIntensiveCare) {
-                            $('#catAttention').append('<li>Is ziek maar heeft geen intensieve verzorging nodig</li>');
-                        }
-                        string = (data.cats ? ' wel ' : ' niet ');
-                        $('#catPreferences').append('<li>kan ' + string + 'geplaatst worden met katten</li>');
+                        let string = (data.bottleFeeding ? ' wel ' : ' niet ');
+                        $('#catPreferences').append('<li>Is' + string + 'gesteriliseerd</li>');
                         //$('#catPreferences').append(JSON.stringify(data));
                         console.log(data);
                         //$('#sterilizedCat').empty();
@@ -380,7 +403,6 @@
                     dataType: "json",
                     success:function(data) {
                         current_cat = data;
-                        console.log(current_cat);
                         $('#dateOfBirthCat').empty();
                         $('#dateOfBirthCat').append(current_cat.dateOfBirth.toString());
                         $('#genderCat').empty();
@@ -396,8 +418,14 @@
                         $('#sterilizedCat').empty();
                         $('#sterilizedCat').append(current_cat.sterilized);
                         // TODO: add more if extra properties are selected
-                        $('#catLink').append(current_cat.name);
-                        $('#catLink').attr('href', '/katDetail/'+current_cat.id);
+                        //$('#catPreferences').empty();
+                        //$('#catPreferences').append('<li>Is' + (current_cat.preferences.bottleFeeding ? ' ' : ' niet ') + 'gesteriliseerd</li>');
+                        //$('#sterilizedCat').empty();
+                        //$('#sterilizedCat').append(current_foster.sterilized);
+                        //$('#sterilizedCat').empty();
+                        //$('#sterilizedCat').append(current_foster.sterilized);
+                        //$('#sterilizedCat').empty();
+                        //$('#sterilizedCat').append(current_foster.sterilized);
                         getPreferencesCat(current_cat.id);
                     }
                 });

@@ -13,7 +13,7 @@ class Shelter extends Model
      * @var array
      */
     protected $fillable = [
-        'shelterName', 'shelterPhone', 'hkNumber', 'firstName', 'lastName', 'dateOfBirth', 'street', 'number', 'city', 'zipCode', 'phoneNumber', 'picture'
+        'shelterName', 'shelterPhone', 'hkNumber', 'shelterFirstName', 'shelterLastName', 'shelterDateOfBirth', 'shelterStreet', 'shelterNumber', 'shelterCity', 'shelterZipCode', 'phoneNumber', 'picture'
     ];
 
     /**
