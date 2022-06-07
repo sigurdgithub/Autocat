@@ -57,7 +57,14 @@
             <span class="availability-status online"></span>
           </div>
           <div class="nav-profile-text">
-            {{-- <p class="mb-1 text-black">{{ Auth::user()->email }}</p> --}}
+            <p class="mb-1 text-black">
+              {{-- @if(Auth::user()->shelter_id != null)
+              {{$shelter->shelterFirstName}} {{$shelter->shelterLastName}}
+              @elseif(Auth::user()->fosterFamily_id !)
+              {{$foster->firstName}} {{$foster->lastName}}
+
+              @endif--}}
+            </p>
           </div>
         </a>
         <div class="dropdown-menu navbar-dropdown" aria-labelledby="profileDropdown">
