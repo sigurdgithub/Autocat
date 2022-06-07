@@ -26,6 +26,11 @@ class FosterFamily extends Authenticatable
         return $this->hasMany(Notification::class, 'fosterFamily');
     }
 
+    public function fosterFamily_id()
+    {
+        return $this->hasMany(User::class, 'fosterFamily');
+    }
+
     public function preferences()
     {
         return $this->hasOne(FosterPreference::class);
