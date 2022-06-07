@@ -162,6 +162,15 @@
             </div>
         </div> 
                 <!-- CAT DISPLAY BASED ON ADOPTER SELECTION-->
+                <?php 
+                function debug_to_console($data) {
+                    $output = $data;
+                    if (is_array($output))
+                        $output = implode(',', $output);
+
+                    echo "<script>console.log('Debug Objects: " . $output . "' );</script>";
+                }
+                ?>
     <div class="row">
         <h3 class="text-muted">Match Maker</h3>
         <div class="col-md-6 stretch-card grid-margin">
@@ -172,9 +181,10 @@
                         <div class="col-md-4">
                         <select id="selectedCatMatch" name="catMatch" class="select-option form-control bg-gradient-danger text-white">
                             <option class="option">Selecteer</option>
+                            {{debug_to_console($cats);}}
                             @foreach ($cats as $cat)
                                 {{-- TODO: Make this == whatever the value a cat has for fosterFamily_id if not yet assigned --}}
-                                @if ($cat->fosterFamily_id == null)
+                                @if ($cat->fosterFamily_id != null)
                                     <option class="option" value="{{$cat->id}}">{{$cat->name}}</option>
                                 @endif
                             @endforeach
@@ -333,8 +343,6 @@
                         if (data.noIntensiveCare) {
                             $('#catAttention').append('<li>Is ziek maar heeft geen intensieve verzorging nodig</li>');
                         }
-                        string = (data.cats ? ' wel ' : ' niet ');
-                        $('#catPreferences').append('<li>kan ' + string + 'geplaatst worden met katten</li>');
                         //$('#catPreferences').append(JSON.stringify(data));
                         console.log(data);
                         //$('#sterilizedCat').empty();

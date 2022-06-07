@@ -250,7 +250,7 @@ class CatController extends Controller
             'message'   => 'required',
           ]);*/
         $data = $request->all();
-        $cats = DB::table('cats')->join('catPreferences', 'cats.id', '=', 'catPreferences.cat_id');
+        $cats = DB::table('cats')->select('cats.*')->join('catPreferences', 'cats.id', '=', 'catPreferences.cat_id')->leftJoin('fosterFamilies', 'cats.fosterFamily_id', '=', 'fosterFamilies.id');
         // Filter 
         //dd($data);
         if (isset($data['character'])) {
@@ -276,7 +276,14 @@ class CatController extends Controller
 
         // Use a join to include all the needed fields that are filtered on
 
-        $result = $cats->get();
+        $result = $cats->addSelect('fosterFamilies.dateOfBirth AS fosterBirth')->addSelect('fosterFamilies.firstName AS fosterFirstName')->addSelect('fosterFamilies.lastName AS fosterLastName')->get();
+        $array = json_decode(json_encode($result), true);
+        $result = [];
+        foreach ($array as $row) {
+            //dd($row);
+            $row += ['stringDate' => CatController::getCatAgeString($row['dateOfBirth'])];
+            array_push($result, $row);
+        }
         return json_encode($result);
     }
 

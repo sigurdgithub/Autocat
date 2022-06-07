@@ -45,9 +45,6 @@ Route::get('/asielAccount', function () {
     return view('shelterAccount');
 });
 
-Route::get('/asielDashboard', function () {
-    return view('shelterDashboard');
-});
 
 Route::get('/welkom', function () {
     return view('welcome');
