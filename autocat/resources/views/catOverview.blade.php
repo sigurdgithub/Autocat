@@ -303,15 +303,28 @@
             $('#searchTerm').on('keyup', function() {
                 var searchTerm = $(this).val();
                 var cats = $("#cats");
-
-                $.ajax({
-                    url: '/cats/ajax/' + searchTerm,
-                    type: "GET",
+                if (searchTerm == '') {
+                    $.ajax({
+                    url: '/cats/ajax/',
+                    type: "POST",
+                    data: {
+                        "_token": "{{ csrf_token() }}"
+                    },
                     dataType: "json",
                     success: function(data) {
                         createAndFillCards(data, cats);
                     }
                 });
+                } else {
+                    $.ajax({
+                        url: '/cats/ajax/' + searchTerm,
+                        type: "GET",
+                        dataType: "json",
+                        success: function(data) {
+                            createAndFillCards(data, cats);
+                        }
+                    });
+                }
             });
         });
     </script>
