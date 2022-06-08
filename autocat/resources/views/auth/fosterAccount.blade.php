@@ -203,92 +203,110 @@
                     </div>
             </div>
         </div>
-        <h3 class="text-muted mt-5">Huisgenoten</h3>
-        <div class="card">
-
-            <div class="card-body">
-
-                <h5 class="text-muted">Overzicht</h5>
-                <div class="stretch-card grid-margin">
-                    <div class="card-body card-border-info">
-                        <ul>
-                            <li class="row">
-                                <div class="col-md-5">Relatie: </div>
-                                <div class="col-md-5">Leeftijd: </div>
-                                <button class="col-md-1 btn btn-inverse-info btn-icon btn-lg">
-                                    <i class="mdi mdi-delete"></i>
-                                </button>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-                <h5 class="text-muted mb-4">Nieuw toevoegen</h5>
-                <div class="row">
-                    <div class="col-md-6">
-                        <div class="form-group">
-                            <label class="form-label">Relatie</label>
-                            <select class="form-control form-control-sm">
-                                <option></option>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="form-group">
-                            <label class="form-label">Geboortedatum</label>
-                            <input type="date" class="form-control">
-                        </div>
-                    </div>
-                </div>
-                <button type="submit" class="btn btn-outline-info">
-                    Toevoegen
-                </button>
-            </div>
-        </div>
-
-        <h3 class="text-muted mt-5">Huisdieren</h3>
-        <div class="card">
-            <div class="card-body">
-                <h5 class="text-muted">Overzicht</h5>
-
-                <div class="stretch-card grid-margin">
-                    <div class="card-body card-border-info">
-                        <ul>
-                            <li class="row">
-                                <div class="col-md-5">Soort: </div>
-                                <div class="col-md-5">Leeftijd: </div>
-                                <button class="col-md-1 btn btn-inverse-info btn-icon btn-lg">
-                                    <i class="mdi mdi-delete"></i>
-                                </button>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-                <h5 class="text-muted mb-4">Nieuw toevoegen</h5>
-                <div class="row">
-                    <div class="col-md-6">
-                        <div class="form-group">
-                            <label class="form-label">Soort</label>
-                            <select class="form-control form-control-sm">
-                                <option></option>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="form-group">
-                            <label class="form-label">Geboortedatum</label>
-                            <input type="date" class="form-control">
-                        </div>
-                    </div>
-                </div>
-                <button type="submit" class="btn btn-outline-info">
-                    Toevoegen
-                </button>
-            </div>
-        </div>
-
         <button type="submit" class="btn btn-gradient-info float-end mt-5">
             @if (Auth::check()) Sla op @else Registreren @endif
         </button>
     </form>
+
+    <!-- ROOMMATES -->
+    @if(isset($fosterFamily))
+    <div class="content-wrapper">
+        <h3 class="text-muted">Huisgenoten</h3>
+        <div class="card">
+            <div class="card-body">                        
+                <h5 class="text-muted">Overzicht</h5>
+                <div class="stretch-card grid-margin">
+                    <div class="card-body card-border-info">
+                        @foreach ( $roommates as $roommate)
+                            <ul>
+                                <li class="row">
+                                    <div class="col-md-6">Relatie: {{ $roommate->relation }}</div>
+                                    <div class="col-md-6">Geboortedatum: {{ $roommate->dateOfBirth }} g</div>
+                                    <a href='/roommate_delete/{{$roommate->id}}' class="col-md-1 btn btn-inverse- btn-icon btn-lg pt-2"><i class="mdi mdi-delete"></i></a>                 
+                                </li>
+                            </ul>
+                        @endforeach
+                    </div>
+                </div>
+                <form id='roommateForm' method="post" action="{{route('storeRoommate')}}"> 
+                    @csrf
+                    <input type="hidden" value={{$fosterFamily->id}} name="fosterFamily_id">                          
+                    <h5 class="text-muted mb-4">Nieuw toevoegen</h5>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label class="form-label">Relatie</label>
+                                <select class="form-control form-control-sm" name="relations">
+                                    <option value="0">Selecteer</option>
+                                    @foreach ($relations as $relation)
+                                        <option value="{{$relation}}">{{$relation}}</option>
+                                    @endforeach
+                                </select>                              
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label class="form-label">Geboortedatum</label>
+                                <input type="date" min="0" class="form-control" name="dateOfBirth">
+                            </div>
+                        </div>
+                    </div>
+                    <button form='roommateForm' type="submit" class="btn btn-outline-info">
+                    Toevoegen
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+    <!-- PETS -->
+    <div class="content-wrapper">
+        <h3 class="text-muted">Huisdieren</h3>
+        <div class="card">
+            <div class="card-body">
+                <h5 class="text-muted">Overzicht</h5>
+                <div class="stretch-card grid-margin">
+                    <div class="card-body card-border-info">
+                        @foreach ( $pets as $pet)
+                            <ul>
+                                <li class="row">
+                                    <div class="col-md-6">Soort: {{ $pet->date}} </div>
+                                    <div class="col-md-6">Geboortedatum: {{ $pet->reason}}</div>
+                                    <a href='/pet_delete/{{$pet->id}}' class="col-md-1 btn btn-inverse-info btn-icon btn-lg pt-2"><i class="mdi mdi-delete"></i></a>                            
+                                </li>
+                            </ul>
+                        @endforeach
+                    </div>
+                </div>
+                <form id='petForm' method="post" action="{{route('storePet')}}"> 
+                    @csrf
+                    <input type="hidden" value={{$fosterFamily->id}} name="fosterFamily_id">
+                    <h5 class="text-muted mb-4">Nieuw toevoegen</h5>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label class="form-label">Soort</label>
+                                <select class="form-control form-control-sm" name="species">
+                                    <option value="0">Selecteer</option>
+                                    @foreach ($species as $specie)
+                                        <option value="{{$specie}}">{{$specie}}</option>
+                                    @endforeach
+                                </select>                                    
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label class="form-label">Geboortedatum</label>
+                                <input type="date" class="form-control" name="dateOfBirth">
+                            </div>
+                        </div>
+                    </div>
+                    <button id="petForm" type="submit" class="btn btn-outline-info">
+                    Toevoegen
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+    @endif
 </div>
 @endsection

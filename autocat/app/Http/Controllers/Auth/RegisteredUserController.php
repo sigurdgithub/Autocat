@@ -116,6 +116,8 @@ class RegisteredUserController extends Controller
 
         Auth::login($user);
 
+        $species = (['Kat','Hond','Knaagdier','Vogel']);
+        $relations = (['Kat','Hond','Knaagdier','Vogel']);
         return redirect(RouteServiceProvider::fosterHome);
     }
 

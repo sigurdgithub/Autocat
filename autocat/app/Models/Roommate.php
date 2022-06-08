@@ -4,7 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Roommates extends Model
+class Roommate extends Model
 {
     public function fosterFamily() {
         return $this->belongsTo(FosterFamily::class, 'fosterFamily_id');
