@@ -11,7 +11,7 @@ use Illuminate\Database\Eloquent\Builder;
 
 class MedicalController extends Controller
 {
-    public static function showWeigingsByCatId($catId)
+    public static function showWeighingsByCatId($catId)
     {
         $matchCase = ['cat_id'=> $catId];
         return Weighing::where($matchCase)->get();
