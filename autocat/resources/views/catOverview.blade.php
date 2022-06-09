@@ -19,7 +19,7 @@
                     <div class="input-group-prepend">
                         <i class="input-group-text border-0 mdi mdi-magnify"></i>
                     </div>
-                    <input type="text" class="form-control" placeholder="Zoek op naam">
+                    <input id="searchTerm" type="text" class="form-control" placeholder="Zoek op naam">
                 </div>
             </div>
         </div>
@@ -142,7 +142,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="row">
+                {{-- <div class="row">
                     <div class="col-md-4 stretch-card grid-margin">
                         <div class="card card-img-holder">
                             <div class="card">
@@ -200,11 +200,53 @@
                             </div>
                         </div>
                     </div>
-                </div>
+                </div> --}}
             </div>
         </div>
     </div>
     <script type="text/javascript">
+        function createAndFillCards(data, container) {
+            filteredCats = data;
+            var cats = container;
+            cats.empty();
+            console.log(filteredCats);
+            filteredCats.forEach(cat => {
+                console.log(cat);
+                let string = `
+                            <div class="col-md-4 stretch-card grid-margin">
+                            <div class="card card-img-holder">
+                                <div class="card">
+                                    <div class="card-header bg-gradient-danger">
+                                        <img src="assets/images/dashboard/circle.svg" class="card-img-absolute"
+                                            alt="circle-image" />
+                                        <div class="row">
+                                            <h4 class="col-md-6 font-weight-normal mb-3"><b>` + cat.name + `</b></h4>
+                                            <h5 class="col-md-6 font-weight-normal mb-3">
+                                                <b>` + cat.stringDate + `</b>
+                                            </h5>
+                                        </div>
+                                    </div>
+                                    <div class="card-footer card-border-danger">
+                                        <div>` + cat.adoptionStatus + `</div>`;
+                if (cat.fosterFamily_id != null) {
+                    {{-- TODO: add route once detail of foster family is available --}}
+                    string += `<div><a href="" class="text-black"><u>` + cat.fosterFirstName + ` ` + cat
+                        .fosterLastName + `</u></a></div>`;
+                } else {
+                    string += `<div><a href="" class="text-black"><u>nvt</u></a></div>`;
+
+                }
+                string += `<div class="mt-3"><a href="/katDetail/` + cat.id + `"><u>Meer
+                                                    info</u></a></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>`;
+                cats.append(string);
+
+            });
+            console.log(data);
+        }
         $(document).ready(function() {
             myOptions = [];
             myOptionsProvider = [{
@@ -229,7 +271,7 @@
                 showValueAsTags: true,
                 options: myOptions
             });*/
-            $('#selectGender').on('change', function() {
+            $('[id^="select"]').on('change', function() {
 
                 // Get input value on change
                 var ageTerm = $('#selectAge').val();
@@ -254,35 +296,35 @@
                     },
                     dataType: "json",
                     success: function(data) {
-                        filteredCats = data;
-                        cats.empty();
-                        /*filteredCats.foreach(cat => {
-                            console.log(cat);
-                            //let date = ({{ \App\Http\Controllers\CatController::getCatAgeString($cat->dateOfBirth) }});
-                            //let string = '<div class="col-md-4 stretch-card grid-margin"><div class="card card-img-holder"><div class="card"><div class="card-header bg-gradient-danger"><img src="assets/images/dashboard/circle.svg" class="card-img-absolute" alt="circle-image" /><div class="row"><h4 class="col-md-6 font-weight-normal mb-3"><b>' + {{ $cat->name }} + '</b></h4><h5 class="col-md-6 font-weight-normal mb-3"><b>' + "date" + '</b></h5></div></div><div class="card-footer card-border-danger"><div>' + {{ $cat->adoptionStatus }} + '</div>';
-                            //cats.append(string);
-                            if (cat.fosterFamily_id != null) {
-                                cats.append('<div><a href="" class="text-black"><u>' +
-                                    {{ $cat->fosterFamily->firstName }} + ' ' +
-                                    {{ $cat->fosterFamily->lastName }} '</u></a></div>'
-                                    );
-                            } else {
-                                cats.append(
-                                    '<div><a href="" class="text-black"><u>nvt</u></a></div>'
-                                    );
-                            }
-                            /*cats.append('<div class="mt-3"><a href="' +
-                                {{ route('showCatById', $cat->id) }} +
-                                '"><u>Meer info</u></a><div></div></div></div></div>'
-                                );
-                        });*/
-
-
-
-
-                        console.log(data);
+                        createAndFillCards(data, cats);
                     }
                 });
+            });
+            $('#searchTerm').on('keyup', function() {
+                var searchTerm = $(this).val();
+                var cats = $("#cats");
+                if (searchTerm == '') {
+                    $.ajax({
+                    url: '/cats/ajax/',
+                    type: "POST",
+                    data: {
+                        "_token": "{{ csrf_token() }}"
+                    },
+                    dataType: "json",
+                    success: function(data) {
+                        createAndFillCards(data, cats);
+                    }
+                });
+                } else {
+                    $.ajax({
+                        url: '/cats/ajax/' + searchTerm,
+                        type: "GET",
+                        dataType: "json",
+                        success: function(data) {
+                            createAndFillCards(data, cats);
+                        }
+                    });
+                }
             });
         });
     </script>

@@ -116,7 +116,9 @@ class RegisteredUserController extends Controller
 
         Auth::login($user);
 
-        return redirect(RouteServiceProvider::fosterHome);/* ->route('showFosterById', ['fosterFamily_id' => $foster->id]); */
+        $species = (['Kat','Hond','Knaagdier','Vogel']);
+        $relations = (['Kat','Hond','Knaagdier','Vogel']);
+        return redirect(RouteServiceProvider::fosterHome);
     }
 
 

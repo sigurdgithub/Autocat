@@ -50,9 +50,6 @@ Route::get('/asielAccount', function () {
     return view('shelterAccount');
 });
 
-Route::get('/asielDashboard', function () {
-    return view('shelterDashboard');
-});
 
 Route::get('/welkom', function () {
     return view('welcome');
@@ -66,6 +63,7 @@ Route::get('/notifications/{fosterId}', [DashBoardController::class, 'showByFost
 Route::get('/asielDashboard', [DashBoardController::class, 'showShelterNotifications'])->name('shelterNotifications');
 Route::get('/asielDashboard/ajax/{fosterId}', [DashBoardController::class, 'getCatsByFosterId']);
 Route::get('/cat/ajax/{id}', [CatController::class, 'getCatById']);
+Route::get('/cats/ajax/{search}', [CatController::class, 'filterCatsByString']);
 Route::post('/cats/ajax', [CatController::class, 'filterCats']);
 Route::get('/catPref/ajax/{id}', [CatController::class, 'getPreferenceByCatId']);
 Route::get('/fosterfamily/ajax/{id}', [FosterFamilyController::class, 'getFosterFamilyById']);
@@ -90,12 +88,18 @@ Route::get('katDetail', function () {
 /* Route::get('/katDetail', [CatController::class, 'storeCatPreferences'])->name('storeCatPreferences');*/
 Route::post('/katDetail', [CatController::class, 'storeCat'])->name('storeCat');
 Route::get('/katDetail/{id}', [CatController::class, 'showCatById'])->name('showCatById');
+Route::post('/updateCat/{id}', [CatController::class, 'updateCat'])->name('updateCat');
 
 //Medical routes
 Route::get('/weighing_delete/{id}', [MedicalController::class, 'deleteWeighing'])->name('weighing_delete');
 Route::get('/vetVisit_delete/{id}', [MedicalController::class, 'deleteVetVisit'])->name('vetVisit_delete');
 Route::post('/addWeighing', [MedicalController::class, 'storeWeighing'])->name('storeWeighing');
 Route::post('/addVetVisit', [MedicalController::class, 'storeVetVisit'])->name('storeVetVisit');
-Route::post('/updateCat/{id}', [CatController::class, 'updateCat'])->name('updateCat');
+
+//Pet & roommate routes
+Route::get('/roommate_delete/{id}', [PetsAndRoommatesController::class, 'deleteRoommate'])->name('roommate_delete');
+Route::get('/pet_delete/{id}', [PetsAndRoommatesController::class, 'deletePet'])->name('pet_delete');
+Route::post('/addRoommate', [PetsAndRoommatesController::class, 'storeRoommate'])->name('storeRoommate');
+Route::post('/addPet', [PetsAndRoommatesController::class, 'storePet'])->name('storePet');
 
 require __DIR__ . '/auth.php';
