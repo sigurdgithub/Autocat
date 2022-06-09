@@ -16,279 +16,304 @@
 <!--ACCOUNTDETAILS-->
 <div class="content-wrapper pt-0">
     {{-- FosterFamily Form --}}
-    <form method="POST" action="{{ route('storeFoster') }}">
-        @csrf
-        <h3 class="text-muted mt-4">Mijn gegevens</h3>
-        <div class="card">
-            <div class="card-body">
-                <div class="row mt-3">
-                    <!-- Validation Errors -->
-                    <x-auth-validation-errors class="mb-4" :errors="$errors" />
-                    <div class="col-md-4">
-                        <div class="form-group">
-                            <label class="form-label">Naam</label>
-                            <input type="text" class="form-control" name="lastName" :value="{{old('lastName')}}">
-                        </div>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="form-group">
-                            <label class="form-label">Voornaam</label>
-                            <input type="text" class="form-control" name="firstName" :value="{{old('firstName')}}">
-                        </div>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="form-group">
-                            <label class="form-label">Geboortedatum</label>
-                            <input type="date" class="form-control" name="dateOfBirth" :value="{{old('dateOfBirth')}}">
-                        </div>
-                    </div>
-                </div>
-                <div class="row mt-3">
-                    <div class="col-md-4">
-                        <div class="form-group">
-                            <label class="form-label">Straat</label>
-                            <input type="text" class="form-control" name="street" :value="{{old('street')}}">
-                        </div>
-                    </div>
-                    <div class="col-md-2">
-                        <div class="form-group">
-                            <label class="form-label">Huisnummer</label>
-                            <input type="text" class="form-control" name="number" :value="{{old('number')}}">
-                        </div>
-                    </div>
-                    <div class="col-md-2">
-                        <div class="form-group">
-                            <label class="form-label">Postcode</label>
-                            <input type="text" class="form-control" name="zipCode" :value="{{old('zipcode')}}">
-                        </div>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="form-group">
-                            <label class="form-label">Gemeente</label>
-                            <input type="text" class="form-control" name="city" :value="{{old('city')}}">
-                        </div>
-                    </div>
-                </div>
-                <div class="row mt-3">
-                    <div class="col-md-4">
-                        <div class="form-group">
-                            <label class="form-label">Telefoonnummer</label>
-                            <input type="text" class="form-control" name="phone" :value="{{old('phone')}}">
-                        </div>
-                    </div>
+    @if(isset($fosterFamily))
+    <form method="POST" action="/updateFoster/{{$fosterFamily->id}}" enctype="multipart/form-data">
 
-                    {{-- Register Form --}}
-                    {{-- <form method="post" action="{{route('register')}}">
-                        @csrf --}}
+        @else
+        <form method="POST" action="{{ route('storeFoster') }}">
+            @endif
+            @csrf
+            <h3 class="text-muted mt-4">Mijn gegevens</h3>
+            <div class="card">
+                <div class="card-body">
+                    <div class="row mt-3">
+                        <!-- Validation Errors -->
+                        <x-auth-validation-errors class="mb-4" :errors="$errors" />
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label class="form-label" for="lastName">Naam</label>
+                                <input type="text" class="form-control" name="lastName"
+                                    value="{{old('lastName')}}{{$fosterFamily->lastName ?? ''}}">
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label class="form-label">Voornaam</label>
+                                <input type="text" class="form-control" name="firstName"
+                                    value="{{old('firstName')}}{{$fosterFamily->firstName ?? ''}}">
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label class="form-label">Geboortedatum</label>
+                                <input type="date" class="form-control" name="dateOfBirth"
+                                    value="{{old('dateOfBirth')}}{{$fosterFamily->dateOfBirth ?? ''}}">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row mt-3">
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label class="form-label">Straat</label>
+                                <input type="text" class="form-control" name="street"
+                                    value="{{old('street')}}{{$fosterFamily->street ?? ''}}">
+                            </div>
+                        </div>
+                        <div class="col-md-2">
+                            <div class="form-group">
+                                <label class="form-label">Huisnummer</label>
+                                <input type="text" class="form-control" name="number"
+                                    value="{{old('number')}}{{$fosterFamily->number ?? ''}}">
+                            </div>
+                        </div>
+                        <div class="col-md-2">
+                            <div class="form-group">
+                                <label class="form-label">Postcode</label>
+                                <input type="text" class="form-control" name="zipCode"
+                                    value="{{old('zipCode')}}{{$fosterFamily->zipCode ?? ''}}">
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label class="form-label">Gemeente</label>
+                                <input type="text" class="form-control" name="city"
+                                    value="{{old('city')}}{{$fosterFamily->city ?? ''}}">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row mt-3">
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label class="form-label">Telefoonnummer</label>
+                                <input type="text" class="form-control" name="phone"
+                                    value="{{old('phone')}}{{$fosterFamily->phone ?? ''}}">
+                            </div>
+                        </div>
+
                         <div class="col-md-4">
                             <div class="form-group">
                                 <label class="form-label">E-mail</label>
-                                <input type="email" class="form-control" name="email" :value="{{old('email')}}"
-                                    required>
+                                <input type="email" class="form-control" name="email"
+                                    value="{{old('email')}}{{$user->email ?? ''}}">
                             </div>
                         </div>
                         <div class="col-md-4">
                             <div class="form-group">
                                 <label class="form-label">Wachtwoord</label>
-                                <input type="password" class="form-control" name="password" required>
+                                <input type="password" class="form-control" name="password" {{--
+                                    value="{{$user->password ?? ''}}" --}}required>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <h3 class="text-muted mt-5">Ik sta open voor</h3>
+            <div class="card">
+                <div class="card-body">
+                    <div class="form-group row">
+                        <label class="col-md-4 col-form-label">Aantal beschikbare plaatsen</label>
+                        <div class="col-md-2">
+                            <input type="number" min="0" class="form-control" name="availableSpots"
+                                value="{{old('availableSpots')}}{{$fosterFamily->availableSpots ?? ''}}" #txtWeight>
+                        </div>
+                    </div>
+                    {{-- <form method="POST" action="{{route('register')}}">
+                        @csrf --}}
+                        <div class="row">
+                            <div class="col-md-4">
+                                <div class="form-check form-check-info">
+                                    <label class="form-check-label">
+                                        <input type="checkbox" class="form-check-input" name="adult" value="1"
+                                            @if(isset($fosterFamily)){{ ($fosterPreference->adult=="1")? "checked" : ""
+                                        }}
+                                        @endif
+                                        :value="{{old('adult')}}{{$fosterPreference->adult ?? ''}}">Volwassen</label>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-check form-check-info">
+                                    <label class="form-check-label">
+                                        <input type="checkbox" class="form-check-input" name="pregnant" value="1"
+                                            @if(isset($fosterFamily)){{ ($fosterPreference->pregnant=="1")? "checked" :
+                                        ""
+                                        }} @endif
+                                        :value="{{old('pregnant')}}{{$fosterPreference->pregnant ??
+                                        ''}}">Zwanger</label>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-check form-check-info">
+                                    <label class="form-check-label">
+                                        <input type="checkbox" class="form-check-input" name="kitten" value="1"
+                                            @if(isset($fosterFamily)){{ ($fosterPreference->kitten=="1")? "checked" : ""
+                                        }}
+                                        @endif
+                                        :value="{{old('kitten')}}{{$fosterPreference->kitten ?? ''}}">Kitten</label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-4">
+                                <div class="form-check form-check-info">
+                                    <label class="form-check-label">
+                                        <input type="checkbox" class="form-check-input" name="bottleFeeding" value="1"
+                                            @if(isset($fosterFamily)){{ ($fosterPreference->bottleFeeding=="1")?
+                                        "checked" :
+                                        "" }}
+                                        @endif
+                                        :value="{{old('bottleFeeding')}}{{$fosterPreference->bottleFeeding ??
+                                        ''}}">Flesvoeding</label>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-check form-check-info">
+                                    <label class="form-check-label">
+                                        <input type="checkbox" class="form-check-input" name="scared" value="1"
+                                            @if(isset($fosterFamily)){{ ($fosterPreference->scared=="1")? "checked" : ""
+                                        }}
+                                        @endif
+                                        :value="{{old('scared')}}{{$fosterPreference->scared ?? ''}}">Bang</label>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-check form-check-info">
+                                    <label class="form-check-label">
+                                        <input type="checkbox" class="form-check-input" name="feral" value="1"
+                                            @if(isset($fosterFamily)){{ ($fosterPreference->feral=="1")? "checked" : ""
+                                        }}
+                                        @endif
+                                        :value="{{old('feral')}}{{$fosterPreference->feral ?? ''}}">Wild</label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-4">
+                                <div class="form-check form-check-info">
+                                    <label class="form-check-label">
+                                        <input type="checkbox" class="form-check-input" name="intensiveCare" value="1"
+                                            @if(isset($fosterFamily)){{ ($fosterPreference->intensiveCare=="1")?
+                                        "checked" :
+                                        "" }}
+                                        @endif
+                                        :value="{{old('intensiveCare')}}{{$fosterPreference->intensiveCare ?? ''}}">Ziek
+                                        met intensieve
+                                        verzorging</label>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-check form-check-info">
+                                    <label class="form-check-label">
+                                        <input type="checkbox" class="form-check-input" name="noIntensiveCare" value="1"
+                                            @if(isset($fosterFamily)){{ ($fosterPreference->noIntensiveCare=="1")?
+                                        "checked"
+                                        : "" }}
+                                        @endif
+                                        :value="{{old('noIntensiveCare')}}{{$fosterPreference->noIntensiveCare ??
+                                        ''}}">Ziek zonder
+                                        intensieve
+                                        verzorging</label>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-check form-check-info">
+                                    <label class="form-check-label">
+                                        <input type="checkbox" class="form-check-input" name="isolation" value="1"
+                                            @if(isset($fosterFamily)){{ ($fosterPreference->isolation=="1")? "checked" :
+                                        ""
+                                        }} @endif
+                                        :value="{{old('isolation')}}{{$fosterPreference->isolation ??
+                                        ''}}">Isolatie</label>
+                                </div>
                             </div>
                         </div>
                 </div>
             </div>
-        </div>
-        <h3 class="text-muted mt-5">Ik sta open voor</h3>
-        <div class="card">
-            <div class="card-body">
-                <div class="form-group row">
-                    <label class="col-md-4 col-form-label">Aantal beschikbare plaatsen</label>
-                    <div class="col-md-2">
-                        <input type="number" min="0" class="form-control" name="availableSpots"
-                            :value="{{old('availableSpots')}}" #txtWeight>
+            <h3 class="text-muted mt-5">Huisgenoten</h3>
+            <div class="card">
+
+                <div class="card-body">
+
+                    <h5 class="text-muted">Overzicht</h5>
+                    <div class="stretch-card grid-margin">
+                        <div class="card-body card-border-info">
+                            <ul>
+                                <li class="row">
+                                    <div class="col-md-5">Relatie: </div>
+                                    <div class="col-md-5">Leeftijd: </div>
+                                    <button class="col-md-1 btn btn-inverse-info btn-icon btn-lg">
+                                        <i class="mdi mdi-delete"></i>
+                                    </button>
+                                </li>
+                            </ul>
+                        </div>
                     </div>
-                </div>
-                {{-- <form method="POST" action="{{route('register')}}">
-                    @csrf --}}
+                    <h5 class="text-muted mb-4">Nieuw toevoegen</h5>
                     <div class="row">
-                        <div class="col-md-4">
-                            <div class="form-check form-check-info">
-                                <label class="form-check-label">
-                                    <input type="checkbox" class="form-check-input" name="adult" value="1"
-                                        @if(isset($fosterFamily)){{ ($fosterPreference->adult=="1")? "checked" : "" }}
-                                    @endif
-                                    :value="{{old('adult')}}">Volwassen</label>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label class="form-label">Relatie</label>
+                                <select class="form-control form-control-sm">
+                                    <option></option>
+                                </select>
                             </div>
                         </div>
-                        <div class="col-md-4">
-                            <div class="form-check form-check-info">
-                                <label class="form-check-label">
-                                    <input type="checkbox" class="form-check-input" name="pregnant" value="1"
-                                        @if(isset($fosterFamily)){{ ($fosterPreference->pregnant=="1")? "checked" : ""
-                                    }} @endif
-                                    :value="{{old('pregnant')}}">Zwanger</label>
-                            </div>
-                        </div>
-                        <div class="col-md-4">
-                            <div class="form-check form-check-info">
-                                <label class="form-check-label">
-                                    <input type="checkbox" class="form-check-input" name="kitten" value="1"
-                                        @if(isset($fosterFamily)){{ ($fosterPreference->kitten=="1")? "checked" : "" }}
-                                    @endif
-                                    :value="{{old('kitten')}}">Kitten</label>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label class="form-label">Geboortedatum</label>
+                                <input type="date" class="form-control">
                             </div>
                         </div>
                     </div>
+                    <button type="submit" class="btn btn-outline-info">
+                        Toevoegen
+                    </button>
+                </div>
+            </div>
+
+            <h3 class="text-muted mt-5">Huisdieren</h3>
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="text-muted">Overzicht</h5>
+
+                    <div class="stretch-card grid-margin">
+                        <div class="card-body card-border-info">
+                            <ul>
+                                <li class="row">
+                                    <div class="col-md-5">Soort: </div>
+                                    <div class="col-md-5">Leeftijd: </div>
+                                    <button class="col-md-1 btn btn-inverse-info btn-icon btn-lg">
+                                        <i class="mdi mdi-delete"></i>
+                                    </button>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <h5 class="text-muted mb-4">Nieuw toevoegen</h5>
                     <div class="row">
-                        <div class="col-md-4">
-                            <div class="form-check form-check-info">
-                                <label class="form-check-label">
-                                    <input type="checkbox" class="form-check-input" name="bottleFeeding" value="1"
-                                        @if(isset($fosterFamily)){{ ($fosterPreference->bottleFeeding=="1")? "checked" :
-                                    "" }}
-                                    @endif
-                                    :value="{{old('bottleFeeding')}}">Flesvoeding</label>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label class="form-label">Soort</label>
+                                <select class="form-control form-control-sm">
+                                    <option></option>
+                                </select>
                             </div>
                         </div>
-                        <div class="col-md-4">
-                            <div class="form-check form-check-info">
-                                <label class="form-check-label">
-                                    <input type="checkbox" class="form-check-input" name="scared" value="1"
-                                        @if(isset($fosterFamily)){{ ($fosterPreference->scared=="1")? "checked" : "" }}
-                                    @endif
-                                    :value="{{old('scared')}}">Bang</label>
-                            </div>
-                        </div>
-                        <div class="col-md-4">
-                            <div class="form-check form-check-info">
-                                <label class="form-check-label">
-                                    <input type="checkbox" class="form-check-input" name="feral" value="1"
-                                        @if(isset($fosterFamily)){{ ($fosterPreference->feral=="1")? "checked" : "" }}
-                                    @endif
-                                    :value="{{old('feral')}}">Wild</label>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label class="form-label">Geboortedatum</label>
+                                <input type="date" class="form-control">
                             </div>
                         </div>
                     </div>
-                    <div class="row">
-                        <div class="col-md-4">
-                            <div class="form-check form-check-info">
-                                <label class="form-check-label">
-                                    <input type="checkbox" class="form-check-input" name="intensiveCare" value="1"
-                                        @if(isset($fosterFamily)){{ ($fosterPreference->intensiveCare=="1")? "checked" :
-                                    "" }}
-                                    @endif
-                                    :value="{{old('intensiveCare')}}">Ziek met intensieve
-                                    verzorging</label>
-                            </div>
-                        </div>
-                        <div class="col-md-4">
-                            <div class="form-check form-check-info">
-                                <label class="form-check-label">
-                                    <input type="checkbox" class="form-check-input" name="noIntensiveCare" value="1"
-                                        @if(isset($fosterFamily)){{ ($fosterPreference->noIntensiveCare=="1")? "checked"
-                                    : "" }}
-                                    @endif
-                                    :value="{{old('noIntensiveCare')}}">Ziek zonder
-                                    intensieve
-                                    verzorging</label>
-                            </div>
-                        </div>
-                        <div class="col-md-4">
-                            <div class="form-check form-check-info">
-                                <label class="form-check-label">
-                                    <input type="checkbox" class="form-check-input" name="isolation" value="1"
-                                        @if(isset($fosterFamily)){{ ($fosterPreference->isolation=="1")? "checked" : ""
-                                    }} @endif
-                                    :value="{{old('isolation')}}">Isolatie</label>
-                            </div>
-                        </div>
-                    </div>
+                    <button type="submit" class="btn btn-outline-info">
+                        Toevoegen
+                    </button>
+                </div>
             </div>
-        </div>
-        <h3 class="text-muted mt-5">Huisgenoten</h3>
-        <div class="card">
 
-            <div class="card-body">
-
-                <h5 class="text-muted">Overzicht</h5>
-                <div class="stretch-card grid-margin">
-                    <div class="card-body card-border-info">
-                        <ul>
-                            <li class="row">
-                                <div class="col-md-5">Relatie: </div>
-                                <div class="col-md-5">Leeftijd: </div>
-                                <button class="col-md-1 btn btn-inverse-info btn-icon btn-lg">
-                                    <i class="mdi mdi-delete"></i>
-                                </button>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-                <h5 class="text-muted mb-4">Nieuw toevoegen</h5>
-                <div class="row">
-                    <div class="col-md-6">
-                        <div class="form-group">
-                            <label class="form-label">Relatie</label>
-                            <select class="form-control form-control-sm">
-                                <option></option>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="form-group">
-                            <label class="form-label">Geboortedatum</label>
-                            <input type="date" class="form-control">
-                        </div>
-                    </div>
-                </div>
-                <button type="submit" class="btn btn-outline-info">
-                    Toevoegen
-                </button>
-            </div>
-        </div>
-
-        <h3 class="text-muted mt-5">Huisdieren</h3>
-        <div class="card">
-            <div class="card-body">
-                <h5 class="text-muted">Overzicht</h5>
-
-                <div class="stretch-card grid-margin">
-                    <div class="card-body card-border-info">
-                        <ul>
-                            <li class="row">
-                                <div class="col-md-5">Soort: </div>
-                                <div class="col-md-5">Leeftijd: </div>
-                                <button class="col-md-1 btn btn-inverse-info btn-icon btn-lg">
-                                    <i class="mdi mdi-delete"></i>
-                                </button>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-                <h5 class="text-muted mb-4">Nieuw toevoegen</h5>
-                <div class="row">
-                    <div class="col-md-6">
-                        <div class="form-group">
-                            <label class="form-label">Soort</label>
-                            <select class="form-control form-control-sm">
-                                <option></option>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="form-group">
-                            <label class="form-label">Geboortedatum</label>
-                            <input type="date" class="form-control">
-                        </div>
-                    </div>
-                </div>
-                <button type="submit" class="btn btn-outline-info">
-                    Toevoegen
-                </button>
-            </div>
-        </div>
-
-        <button type="submit" class="btn btn-gradient-info float-end mt-5">
-            @if (Auth::check()) Sla op @else Registreren @endif
-        </button>
-    </form>
+            <button type="submit" class="btn btn-gradient-info float-end mt-5">
+                @if (Auth::check()) Sla op @else Registreren @endif
+            </button>
+        </form>
 </div>
 @endsection

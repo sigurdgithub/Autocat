@@ -56,16 +56,16 @@ class RegisteredUserController extends Controller
             'availableSpots' => ['required', 'integer'],
         ]);
 
-        $foster = FosterFamily::create([
-            'lastName' => $request->lastName,
-            'firstName' => $request->firstName,
-            'dateOfBirth' => $request->dateOfBirth,
-            'street' => $request->street,
-            'number' => $request->number,
-            'city' => $request->city,
-            'zipCode' => $request->zipCode,
-            'phone' => $request->phone,
-            'availableSpots' => $request->availableSpots,
+        $foster = FosterFamily::firstOrCreate([
+            'lastName' => $request->input('lastName'),
+            'firstName' => $request->input('firstName'),
+            'dateOfBirth' => $request->input('dateOfBirth'),
+            'street' => $request->input('street'),
+            'number' => $request->input('number'),
+            'city' => $request->input('city'),
+            'zipCode' => $request->input('zipCode'),
+            'phone' => $request->input('phone'),
+            'availableSpots' => $request->input('availableSpots'),
         ]);
 
         // USER TABLE //
@@ -77,8 +77,8 @@ class RegisteredUserController extends Controller
             'shelter_id' => 'null'
         ]);
 
-        $user = User::create([
-            'email' => $request->email,
+        $user = User::firstOrCreate([
+            'email' => $request->input('email'),
             'password' => Hash::make($request->password),
             'fosterFamily_id' => $foster->id,
             'shelter_id' => null
@@ -99,25 +99,43 @@ class RegisteredUserController extends Controller
             'isolation' => ['integer']
         ]);
 
-        $fosterPreference = FosterPreference::create([
+        $fosterPreference = FosterPreference::firstOrCreate([
             'fosterFamily_id' => $foster->id,
-            'adult' => $request->adult,
-            'pregnant' => $request->pregnant,
-            'kitten' => $request->kitten,
-            'bottleFeeding' => $request->bottleFeeding,
-            'scared' => $request->scared,
-            'feral' => $request->feral,
-            'intensiveCare' => $request->intensiveCare,
-            'noIntensiveCare' => $request->noIntensiveCare,
-            'isolation' => $request->isolation,
+            'adult' => $request->input('adult'),
+            'pregnant' => $request->input('pregnant'),
+            'kitten' => $request->input('kitten'),
+            'bottleFeeding' => $request->input('bottleFeeding'),
+            'scared' => $request->input('scared'),
+            'feral' => $request->input('feral'),
+            'intensiveCare' => $request->input('intensiveCare'),
+            'noIntensiveCare' => $request->input('noIntensiveCare'),
+            'isolation' => $request->input('isolation'),
         ]);
 
         event(new Registered($user));
 
         Auth::login($user);
 
-        return redirect(RouteServiceProvider::fosterHome);
+        return redirect(RouteServiceProvider::fosterHome);/* ->route('showFosterById', ['fosterFamily_id' => $foster->id]); */
     }
+
+
+    /*  public function showFosterById($id)
+    {
+
+        $fosterFamily = FosterFamily::where('id', $id)->firstOrFail();
+        $fosterPreference = FosterPreference::where('fosterFamily_id', $id)->firstOrFail();
+        $user = User::where('fosterFamily_id', $id);
+
+        return view('pleeggezinAccount', compact('fosterFamily', 'fosterPreference', 'user'));
+
+        /* // MASSIMO
+        $user = User::find(auth()->user()->id);
+        //dd($user->fosterFamily_id);
+        $fosterFamilies = FosterFamily::where('id', '=', $user->fosterFamily_id)->firstOrFail();
+        dd($fosterFamilies);
+        return view('auth.fosterAccount', compact('fosterFamiliy', 'fosterPreference', 'user')); 
+    } */
 
     public function storeShelter(Request $request)
     {
