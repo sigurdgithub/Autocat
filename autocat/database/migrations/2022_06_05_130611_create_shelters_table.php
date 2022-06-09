@@ -26,6 +26,7 @@ return new class extends Migration
             $table->string('shelterCity');
             $table->string('shelterZipCode');
             $table->string('phoneNumber');
+            $table->string('website');
             $table->string('picture')->nullable();
             $table->timestamps();
         });

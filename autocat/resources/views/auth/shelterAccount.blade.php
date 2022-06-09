@@ -118,6 +118,12 @@
                     <div class="row mt-3">
                         <div class="col-md-4">
                             <div class="form-group">
+                                <label class="form-label">Website</label>
+                                <input type="text" class="form-control" name="website" required>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
                                 <label class="form-label">Laad hier uw foto op</label>
                                 <input type="file" class="form-control form-control-sm" name="picture">
                             </div>

@@ -47,7 +47,7 @@ Route::get('/pleeggezinnenOverzicht', function () {
 });
 
 Route::get('/asielAccount', function () {
-    return view('shelterAccount');
+    return view('auth.shelterAccount');
 });
 
 

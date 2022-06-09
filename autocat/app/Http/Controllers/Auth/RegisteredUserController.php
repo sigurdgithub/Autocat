@@ -116,8 +116,8 @@ class RegisteredUserController extends Controller
 
         Auth::login($user);
 
-        $species = (['Kat','Hond','Knaagdier','Vogel']);
-        $relations = (['Kat','Hond','Knaagdier','Vogel']);
+        $species = (['Kat', 'Hond', 'Knaagdier', 'Vogel']);
+        $relations = (['Kat', 'Hond', 'Knaagdier', 'Vogel']);
         return redirect(RouteServiceProvider::fosterHome);
     }
 
@@ -155,6 +155,7 @@ class RegisteredUserController extends Controller
             'shelterCity' => ['required', 'string'],
             'shelterZipCode' => ['required', 'string'],
             'phoneNumber' => ['required', 'string'],
+            'website' => ['required', 'string'],
             'picture' => ['nullable', 'string'],
         ]);
 
@@ -170,6 +171,7 @@ class RegisteredUserController extends Controller
             'shelterCity' => $request->shelterCity,
             'shelterZipCode' => $request->shelterZipCode,
             'phoneNumber' => $request->phoneNumber,
+            'website' => $request->website,
             'picture' => $request->picture,
         ]);
 
