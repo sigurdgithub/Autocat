@@ -101,8 +101,8 @@
                         <div class="col-md-4">
                             <div class="form-group">
                                 <label class="form-label">Wachtwoord</label>
-                                <input type="password" class="form-control" name="password" {{--
-                                    value="{{$user->password ?? ''}}" --}}required>
+                                <input type="password" class="form-control" name="password"
+                                    value="{{$user->password ?? ''}}">
                             </div>
                         </div>
                     </div>
