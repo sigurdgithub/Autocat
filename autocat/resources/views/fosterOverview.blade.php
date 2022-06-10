@@ -18,7 +18,7 @@
                         <div class="input-group-prepend">
                             <i class="input-group-text border-0 mdi mdi-magnify"></i>
                         </div>
-                        <input type="text" class="form-control" placeholder="Zoek op naam">
+                        <input id="searchTerm" type="text" class="form-control" placeholder="Zoek op naam">
                     </div>
                 </div>  
             </div>             
@@ -26,41 +26,41 @@
                 <div class="card-body">
                     <div class="row mb-5">
                         <div class="col-md-4">
-                            <select class="fosterFilter" multiple placeholder="Selecteer een aantal plaatsen...">
-                                <option>1 beschikbare plaats</option>
-                                <option>2 beschikbare plaatsen</option>
-                                <option>3 beschikbare plaatsen</option>
-                                <option>4 beschikbare plaatsen</option>
-                                <option>5 beschikbare plaatsen</option>
-                                <option>6 beschikbare plaatsen</option>
-                                <option>7 beschikbare plaatsen</option>
-                                <option>8 beschikbare plaatsen</option>
-                                <option>9 beschikbare plaatsen</option>
+                            <select class="fosterFilter" placeholder="Selecteer een aantal plaatsen...">
+                                <option value='1'>1 beschikbare plaats</option>
+                                <option value='2'>2 beschikbare plaatsen</option>
+                                <option value='3'>3 beschikbare plaatsen</option>
+                                <option value='4'>4 beschikbare plaatsen</option>
+                                <option value='5'>5 beschikbare plaatsen</option>
+                                <option value='6'>6 beschikbare plaatsen</option>
+                                <option value='7'>7 beschikbare plaatsen</option>
+                                <option value='8'>8 beschikbare plaatsen</option>
+                                <option value='9'>9 beschikbare plaatsen</option>
                             </select>
                         </div>
                         <div class="col-md-4">
                             <select class="fosterFilter" multiple placeholder="Selecteer katvoorkeur(en)...">
-                                <option>Volwassen</option>
-                                <option>Zwanger</option>
-                                <option>Kitten</option>
-                                <option>Flesvoeding</option>
-                                <option>Bang</option>
-                                <option>Wild</option>
-                                <option>Ziek met intensieve verzorging</option>
-                                <option>Ziek zonder intensieve verzorging</option>
-                                <option>Isolatie</option>
+                                <option value='adult'>Volwassen</option>
+                                <option value='pregnant'>Zwanger</option>
+                                <option value='kitten'>Kitten</option>
+                                <option value='bottleFeeding'>Flesvoeding</option>
+                                <option value='scared'>Bang</option>
+                                <option value='feral'>Wild</option>
+                                <option value='intensiveCare'>Ziek met intensieve verzorging</option>
+                                <option value='noIntensiveCare'>Ziek zonder intensieve verzorging</option>
+                                <option value='isolation'>Isolatie</option>
                             </select>
                         </div>
                         <div class="col-md-4">
                             <select class="fosterFilter" multiple placeholder="Selecteer thuissituatie...">
-                                <option>Geen kinderen</option>  
-                                <option>Geen huisdieren</option>                                                     
-                                <option>Geen honden</option>
-                                <option>Geen katten</option>
+                                <option value='no kids'>Geen kinderen</option>  
+                                <option value='no pets'>Geen huisdieren<option>                                                     
+                                <option value='no dogs'>Geen honden</option>
+                                <option value='no cats'>Geen katten</option>
                             </select>
                         </div>
                     </div>
-                    <div class="row">
+                    <div id="fosterFamilies" class="row">
                     @foreach ($fosterFamilies as $fosterFamily) 
                         <div class="col-md-4 stretch-card grid-margin">
                             <div class="card card-img-holder">
@@ -78,97 +78,38 @@
                             </div>
                         </div>
                     @endforeach
-                        <div class="col-md-4 stretch-card grid-margin">
-                            <div class="card card-img-holder">
-                                <div class="card">
-                                    <div class="card-header bg-gradient-info">
-                                        <img src="assets/images/dashboard/circle.svg" class="card-img-absolute" alt="circle-image" />
-                                        <h4 class="font-weight-normal mb-3"><b>Liesbeth Poelmans</b></h4>
-                                    </div>
-                                    <div class="card-footer card-border-info">
-                                        <div class="mb-3">4 beschikbare plaatsen</div>
-                                        <div><a href=""><u>Meer info</u></a></div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-4 stretch-card grid-margin">
-                            <div class="card card-img-holder">
-                                <div class="card">
-                                    <div class="card-header bg-gradient-info">
-                                        <img src="assets/images/dashboard/circle.svg" class="card-img-absolute" alt="circle-image" />
-                                        <h4 class="font-weight-normal mb-3"><b>Heleen Vijgen</b></h4>
-                                    </div>
-                                    <div class="card-footer card-border-info">
-                                        <div class="mb-3">2 beschikbare plaatsen</div>
-                                        <div><a href=""><u>Meer info</u></a></div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-4 stretch-card grid-margin">
-                            <div class="card card-img-holder">
-                                <div class="card">
-                                    <div class="card-header bg-gradient-info">
-                                        <img src="assets/images/dashboard/circle.svg" class="card-img-absolute" alt="circle-image" />
-                                        <h4 class="font-weight-normal mb-3"><b>Sophie Coemans</b></h4>
-                                    </div>
-                                    <div class="card-footer card-border-info">
-                                        <div class="mb-3">Geen beschikbare plaatsen</div>
-                                        <div><a href=""><u>Meer info</u></a></div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-4 stretch-card grid-margin">
-                            <div class="card card-img-holder">
-                                <div class="card">
-                                    <div class="card-header bg-gradient-info">
-                                        <img src="assets/images/dashboard/circle.svg" class="card-img-absolute" alt="circle-image" />
-                                        <h4 class="font-weight-normal mb-3"><b>Leentje Bout</b></h4>
-                                    </div>
-                                    <div class="card-footer card-border-info">
-                                        <div class="mb-3">1 beschikbare plaats</div>
-                                        <div><a href=""><u>Meer info</u></a></div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-4 stretch-card grid-margin">
-                            <div class="card card-img-holder">
-                                <div class="card">
-                                    <div class="card-header bg-gradient-info">
-                                        <img src="assets/images/dashboard/circle.svg" class="card-img-absolute" alt="circle-image" />
-                                        <h4 class="font-weight-normal mb-3"><b>Doentja Seykens</b></h4>
-                                    </div>
-                                    <div class="card-footer card-border-info">
-                                        <div class="mb-3">9 beschikbare plaatsen</div>
-                                        <div><a href=""><u>Meer info</u></a></div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-4 stretch-card grid-margin">
-                            <div class="card card-img-holder">
-                                <div class="card">
-                                    <div class="card-header bg-gradient-info">
-                                        <img src="assets/images/dashboard/circle.svg" class="card-img-absolute" alt="circle-image" />
-                                        <h4 class="font-weight-normal mb-3"><b>Sara Frère</b></h4>
-                                    </div>
-                                    <div class="card-footer card-border-info">
-                                        <div class="mb-3">6 beschikbare plaatsen</div>
-                                        <div><a href=""><u>Meer info</u></a></div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
                     </div>
                 </div>
             </div>
         </div>
         <script type="text/javascript">
+        function createAndFillCards(data, container) {
+            filteredCats = data;
+            var cats = container;
+            cats.empty();
+            console.log(filteredCats);
+            filteredCats.forEach(cat => {
+                console.log(cat);
+                let string = `<div class="col-md-4 stretch-card grid-margin">
+                            <div class="card card-img-holder">
+                                <div class="card">
+                                    <div class="card-header bg-gradient-info">
+                                        <img src="assets/images/dashboard/circle.svg" class="card-img-absolute" alt="circle-image" />
+                                        <h4 class="font-weight-normal mb-3"><b>` + cat.firstName + ` ` + cat.lastName + `</b></h4>
+                                    </div>
+                                    <div class="card-footer card-border-info">
+                                        <div class="mb-3">` + cat.availableSpots + ` beschikbare plaatsen</div>
+                                            {{-- TODO: add route once detail of foster family is available --}}
+                                            <div><a href="{{--route()--}}" class="text-black"><u>Meer info</u></a></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>`;
+                cats.append(string);
+
+            });
+            console.log(data);
+        }
         $(document).ready(function() {
             myOptions = [];
             VirtualSelect.init({
@@ -176,6 +117,32 @@
                         allowNewOption: false,
                         showValueAsTags: true,
                         options: myOptions
+            });
+            $('#searchTerm').on('keyup', function() {
+                var searchTerm = $(this).val();
+                var fosterFamilies = $("#fosterFamilies");
+                if (searchTerm == '') {
+                    $.ajax({
+                    url: '/fosterfamilies/ajax/',
+                    type: "POST",
+                    data: {
+                        "_token": "{{ csrf_token() }}"
+                    },
+                    dataType: "json",
+                    success: function(data) {
+                        createAndFillCards(data, fosterFamilies);
+                    }
+                });
+                } else {
+                    $.ajax({
+                        url: '/fosterfamilies/ajax/' + searchTerm,
+                        type: "GET",
+                        dataType: "json",
+                        success: function(data) {
+                            createAndFillCards(data, fosterFamilies);
+                        }
+                    });
+                }
             });
         });
         </script>
