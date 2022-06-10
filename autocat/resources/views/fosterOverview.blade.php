@@ -26,7 +26,7 @@
                 <div class="card-body">
                     <div class="row mb-5">
                         <div class="col-md-4">
-                            <select class="fosterFilter" placeholder="Selecteer een aantal plaatsen...">
+                            <select id='availableSpots' class="fosterFilter" placeholder="Selecteer een aantal plaatsen...">
                                 <option value='1'>1 beschikbare plaats</option>
                                 <option value='2'>2 beschikbare plaatsen</option>
                                 <option value='3'>3 beschikbare plaatsen</option>
@@ -39,7 +39,7 @@
                             </select>
                         </div>
                         <div class="col-md-4">
-                            <select class="fosterFilter" multiple placeholder="Selecteer katvoorkeur(en)...">
+                            <select id='catPreferences' class="fosterFilter" multiple placeholder="Selecteer katvoorkeur(en)...">
                                 <option value='adult'>Volwassen</option>
                                 <option value='pregnant'>Zwanger</option>
                                 <option value='kitten'>Kitten</option>
@@ -52,9 +52,9 @@
                             </select>
                         </div>
                         <div class="col-md-4">
-                            <select class="fosterFilter" multiple placeholder="Selecteer thuissituatie...">
+                            <select id='livingStatus' class="fosterFilter" multiple placeholder="Selecteer thuissituatie...">
                                 <option value='no kids'>Geen kinderen</option>  
-                                <option value='no pets'>Geen huisdieren<option>                                                     
+                                <option value='no pets'>Geen huisdieren</option>                                                     
                                 <option value='no dogs'>Geen honden</option>
                                 <option value='no cats'>Geen katten</option>
                             </select>
@@ -98,7 +98,7 @@
                                         <h4 class="font-weight-normal mb-3"><b>` + cat.firstName + ` ` + cat.lastName + `</b></h4>
                                     </div>
                                     <div class="card-footer card-border-info">
-                                        <div class="mb-3">` + cat.availableSpots + ` beschikbare plaatsen</div>
+                                        <div class="mb-3">` + cat.availableSpots + (cat.availableSpots>1?  ` beschikbare plaatsen`:  ` beschikbare plaats`) + `</div>
                                             {{-- TODO: add route once detail of foster family is available --}}
                                             <div><a href="{{--route()--}}" class="text-black"><u>Meer info</u></a></div>
                                     </div>
@@ -143,6 +143,26 @@
                         }
                     });
                 }
+            });
+            $('.fosterFilter').on('change', function() {
+                var availableSpots = $('#availableSpots').val();
+                var catPreferences = $('#catPreferences').val();
+                var livingStatus = $('#livingStatus').val();
+                var fosterFamilies = $("#fosterFamilies");
+                $.ajax({
+                    url: '/fosterfamilies/ajax/',
+                    type: "POST",
+                    data: {
+                        "_token": "{{ csrf_token() }}",
+                        "catPreferences": catPreferences,
+                        "livingStatus": livingStatus,
+                        "availableSpots": availableSpots
+                    },
+                    dataType: "json",
+                    success: function(data) {
+                        createAndFillCards(data, fosterFamilies);
+                    }
+                });
             });
         });
         </script>
