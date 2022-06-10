@@ -13,6 +13,8 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('guest')->group(function () {
     Route::post('register', [RegisteredUserController::class, 'storeFoster'])->name('storeFoster');
 
+    Route::post('/pleeggezinAccount/{id}', [RegisteredUserController::class, 'updateFoster'], [])->name('updateFoster');
+
     Route::post('registerShelter', [RegisteredUserController::class, 'storeShelter'])
         ->name('storeShelter');
 
