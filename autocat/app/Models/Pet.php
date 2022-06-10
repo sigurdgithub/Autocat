@@ -4,7 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Pets extends Model
+class Pet extends Model
 {       
     public function fosterFamily() {
         return $this->belongsTo(FosterFamily::class, 'fosterFamily_id');

@@ -376,7 +376,7 @@ class CatController extends Controller
         $gender = (['Kattin', 'Kater']);
         $socialization = (['Tam', 'Bang', 'Wild']);
         $reason = (['Vaccinatie', 'Chip', 'Vaccinatie & chip', 'Sterilisatie', '']);
-        $weighings = MedicalController::showWeigingsByCatId($cat->id);
+        $weighings = MedicalController::showWeighingsByCatId($cat->id);
         $vetVisits = MedicalController::showVetVisitsByCatId($cat->id);
         $fosterFamilies = FosterFamilyController::getFosterFamilies();
         
@@ -395,7 +395,7 @@ class CatController extends Controller
         $gender = (['Kattin', 'Kater']);
         $socialization = (['Tam', 'Bang', 'Wild']);
         $reason = (['Vaccinatie', 'Chip', 'Vaccinatie & chip', 'Sterilisatie', '']);
-        $weighings = MedicalController::showWeigingsByCatId($id);
+        $weighings = MedicalController::showWeighingsByCatId($id);
         $vetVisits = MedicalController::showVetVisitsByCatId($id);
         $fosterFamilies = FosterFamilyController::getFosterFamilies();
 
@@ -455,7 +455,7 @@ class CatController extends Controller
         $gender = (['Kattin','Kater']);
         $socialization = (['Tam','Bang','Wild']);
         $reason = (['Vaccinatie','Chip','Vaccinatie & chip','Sterilisatie','']);
-        $weighings = MedicalController::showWeigingsByCatId($id);
+        $weighings = MedicalController::showWeighingsByCatId($id);
         $vetVisits = MedicalController::showVetVisitsByCatId($id);
         $fosterFamilies = FosterFamilyController::getFosterFamilies();
 
