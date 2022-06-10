@@ -226,91 +226,9 @@
                                 </div>
                             </div>
                         </div>
+                    </div>
                 </div>
             </div>
-            <h3 class="text-muted mt-5">Huisgenoten</h3>
-            <div class="card">
-
-                <div class="card-body">
-
-                    <h5 class="text-muted">Overzicht</h5>
-                    <div class="stretch-card grid-margin">
-                        <div class="card-body card-border-info">
-                            <ul>
-                                <li class="row">
-                                    <div class="col-md-5">Relatie: </div>
-                                    <div class="col-md-5">Leeftijd: </div>
-                                    <button class="col-md-1 btn btn-inverse-info btn-icon btn-lg">
-                                        <i class="mdi mdi-delete"></i>
-                                    </button>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                    <h5 class="text-muted mb-4">Nieuw toevoegen</h5>
-                    <div class="row">
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label class="form-label">Relatie</label>
-                                <select class="form-control form-control-sm">
-                                    <option></option>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label class="form-label">Geboortedatum</label>
-                                <input type="date" class="form-control">
-                            </div>
-                        </div>
-                    </div>
-                    <button type="submit" class="btn btn-outline-info">
-                        Toevoegen
-                    </button>
-                </div>
-            </div>
-
-            <h3 class="text-muted mt-5">Huisdieren</h3>
-            <div class="card">
-                <div class="card-body">
-                    <h5 class="text-muted">Overzicht</h5>
-
-                    <div class="stretch-card grid-margin">
-                        <div class="card-body card-border-info">
-                            <ul>
-                                <li class="row">
-                                    <div class="col-md-5">Soort: </div>
-                                    <div class="col-md-5">Leeftijd: </div>
-                                    <button class="col-md-1 btn btn-inverse-info btn-icon btn-lg">
-                                        <i class="mdi mdi-delete"></i>
-                                    </button>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                    <h5 class="text-muted mb-4">Nieuw toevoegen</h5>
-                    <div class="row">
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label class="form-label">Soort</label>
-                                <select class="form-control form-control-sm">
-                                    <option></option>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label class="form-label">Geboortedatum</label>
-                                <input type="date" class="form-control">
-                            </div>
-                        </div>
-                    </div>
-                    <button type="submit" class="btn btn-outline-info">
-                        Toevoegen
-                    </button>
-                </div>
-            </div>
-</div>
 <button type="submit" class="btn btn-gradient-info float-end mt-5">
     @if (Auth::check()) Sla op @else Registreren @endif
 </button>
@@ -332,7 +250,7 @@
                             <div class="col-md-6">Geboortedatum: {{ $roommate->dateOfBirth }} g</div>
                             <a href='/roommate_delete/{{$roommate->id}}'
                                 class="col-md-1 btn btn-inverse- btn-icon btn-lg pt-2"><i
-                                    class="mdi mdi-delete"></i></a>
+                                class="mdi mdi-delete"></i></a>
                         </li>
                     </ul>
                     @endforeach
@@ -421,4 +339,8 @@
 </div>
 @endif
 </div>
+</div>
+</div>
+</div>
+
 @endsection

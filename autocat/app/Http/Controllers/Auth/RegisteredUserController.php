@@ -13,6 +13,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rules;
+use App\Http\Controllers\PetsAndRoommatesController;
 
 class RegisteredUserController extends Controller
 {
@@ -116,8 +117,13 @@ class RegisteredUserController extends Controller
 
         Auth::login($user);
 
-        $species = (['Kat', 'Hond', 'Knaagdier', 'Vogel']);
-        $relations = (['Kat', 'Hond', 'Knaagdier', 'Vogel']);
+        $roommates = PetsAndRoommatesController::showRoommatesByFosterId($foster->id);
+        //dd($roommates);
+        $pets = PetsAndRoommatesController::showPetsByFosterId($foster->id);
+        //dd($pets);
+        $species = (['Kat','Hond','Knaagdier','Vogel']);
+        $relations = (['Partner','Kind','Ouder']);
+
         return redirect(RouteServiceProvider::fosterHome);
     }
 
