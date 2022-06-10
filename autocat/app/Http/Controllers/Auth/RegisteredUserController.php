@@ -80,7 +80,7 @@ class RegisteredUserController extends Controller
 
         $user = User::firstOrCreate([
             'email' => $request->input('email'),
-            'password' => Hash::make($request->password),
+            'password' => Hash::make($request->input('password')),
             'fosterFamily_id' => $foster->id,
             'shelter_id' => null
         ]);
@@ -146,19 +146,9 @@ class RegisteredUserController extends Controller
 
         $user = User::find(auth()->user()->id);
         $user->email = $request->input('email');
-        $user->password = $request->input('password');
+        $user->password = Hash::make($request->input('password'));
         $user->save();
 
-        //$fosterPreference = FosterPreference::where('fosterFamily_id', '=', $id)->get();
-        /* $fosterPreference->adult = $request->input('adult');
-        $fosterPreference->pregnant = $request->input('pregnant');
-        $fosterPreference->kitten = $request->input('kitten');
-        $fosterPreference->bottleFeeding = $request->input('bottleFeeding');
-        $fosterPreference->feral = $request->input('feral');
-        $fosterPreference->intensiveCare = $request->input('intensiveCare');
-        $fosterPreference->noIntensiveCare = $request->input('noIntensiveCare');
-        $fosterPreference->isolation = $request->input('isolation'); 
-        $fosterPreference->save();*/
         FosterPreference::where('fosterFamily_id', $id)->update([
             'adult' => $request->input('adult'),
             'pregnant' => $request->input('pregnant'),
@@ -171,24 +161,6 @@ class RegisteredUserController extends Controller
         ]);
         return redirect()->route('fosterAccount', $id);
     }
-
-
-    /*  public function showFosterById($id)
-    {
-
-        $fosterFamily = FosterFamily::where('id', $id)->firstOrFail();
-        $fosterPreference = FosterPreference::where('fosterFamily_id', $id)->firstOrFail();
-        $user = User::where('fosterFamily_id', $id);
-
-        return view('pleeggezinAccount', compact('fosterFamily', 'fosterPreference', 'user'));
-
-        /* // MASSIMO
-        $user = User::find(auth()->user()->id);
-        //dd($user->fosterFamily_id);
-        $fosterFamilies = FosterFamily::where('id', '=', $user->fosterFamily_id)->firstOrFail();
-        dd($fosterFamilies);
-        return view('auth.fosterAccount', compact('fosterFamiliy', 'fosterPreference', 'user')); 
-    } */
 
     public function storeShelter(Request $request)
     {

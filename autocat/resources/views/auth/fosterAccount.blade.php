@@ -92,12 +92,12 @@
                             <input type="email" class="form-control" name="email"
                                 value="{{old('email')}}{{$user->email ?? ''}}">
                         </div>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="form-group">
-                            <label class="form-label">Wachtwoord</label>
-                            <input type="password" class="form-control" name="password" {{--
-                                value="{{$user->password ?? ''}}" --}}required>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label class="form-label">Wachtwoord</label>
+                                <input type="password" class="form-control" name="password"
+                                    value="{{$user->password ?? ''}}">
+                            </div>
                         </div>
                     </div>
                 </div>
