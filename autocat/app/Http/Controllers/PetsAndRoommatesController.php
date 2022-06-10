@@ -24,17 +24,17 @@ class PetsAndRoommatesController extends Controller
     }
 
     public function deletePet($id) {
-        $weighing = Pet::find($id);
+        $pet = Pet::find($id);
         $fosterFamily_id = $pet->fosterFamily_id;
         $pet->delete();
-        return redirect()->route('showFosterFamilyById', ['id' => $fosterFamily_id]);
+        return redirect()->route('fosterAccount', $fosterFamily_id);
     }
 
     public function deleteRoommate($id) {
         $roommate = Roommate::find($id);
         $fosterFamily_id = $roommate->fosterFamily_id;
         $roommate->delete();
-        return redirect()->route('showFosterFamilyById', ['id' => $fosterFamily_id]);
+        return redirect()->route('fosterAccount', $fosterFamily_id);
     }
 
     public function storePet(Request $request)
@@ -50,22 +50,22 @@ class PetsAndRoommatesController extends Controller
             'dateOfBirth' => $request->input('dateOfBirth'),
             ]);
         
-        return redirect()->route('showFosterFamilyById', ['id' => $request->input('fosterFamily_id')]);
+        return redirect()->route('fosterAccount', $request->input('fosterFamily_id'));
     }
 
     public function storeRoommate(Request $request)
     {   
         $validation = $request->validate([
             'relation'=> 'required',
-            'dateOfBirth'=>'dateOfBirth',
+            'dateOfBirth'=>'required',
         ]);
 
-        $weighing = VetVisit::firstOrCreate(
+        $roommate = Roommate::firstOrCreate(
             ['fosterFamily_id' => $request->input('fosterFamily_id'),
             'relation' => $request->input('relation'),
             'dateOfBirth' => $request->input('dateOfBirth'),
             ]);
         
-        return redirect()->route('showFosterFamilyById', ['id' => $request->input('fosterFamily_id')]);
+        return redirect()->route('fosterAccount', $request->input('fosterFamily_id'));
     }
 }

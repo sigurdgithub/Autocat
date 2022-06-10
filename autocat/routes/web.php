@@ -42,9 +42,9 @@ Route::get('/pleeggezinAccount/{id}', function ($id) {
     $pets = PetsAndRoommatesController::showPetsByFosterId($fosterFamily->id);
     //dd($pets);
     $species = (['Kat','Hond','Knaagdier','Vogel']);
-    $relations = (['Partner','Kind','Ouder']);
+    $relation = (['Partner','Kind','Ouder']);
 
-    return view('auth.fosterAccount', compact('fosterFamily', 'user', 'fosterPreference'));
+    return view('auth.fosterAccount', compact('fosterFamily', 'user', 'fosterPreference', 'roommates', 'pets', 'species', 'relation'));
 })->name('fosterAccount');
 
 Route::get('/pleeggezinDashboard', function () {

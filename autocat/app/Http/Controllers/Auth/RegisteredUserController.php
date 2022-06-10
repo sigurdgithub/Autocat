@@ -122,9 +122,9 @@ class RegisteredUserController extends Controller
         $pets = PetsAndRoommatesController::showPetsByFosterId($foster->id);
         //dd($pets);
         $species = (['Kat','Hond','Knaagdier','Vogel']);
-        $relations = (['Partner','Kind','Ouder']);
+        $relation = (['Partner','Kind','Ouder']);
 
-        return redirect(RouteServiceProvider::fosterHome);
+        return redirect()->route('fosterAccount', $foster->id);
     }
 
     public function updateFoster(Request $request, $user)
