@@ -127,6 +127,39 @@ class RegisteredUserController extends Controller
         return redirect(RouteServiceProvider::fosterHome);
     }
 
+    public function updateFoster(Request $request, $user)
+    {
+        $fosterFamily = FosterFamily::find('id', '=', $user->fosterFamily_id);
+        $fosterFamily->lastName = $request->input('lastName');
+        $fosterFamily->firstName = $request->input('firstName');
+        $fosterFamily->dateOfBirth = $request->input('dateOfBirth');
+        $fosterFamily->street = $request->input('street');
+        $fosterFamily->number = $request->input('number');
+        $fosterFamily->city = $request->input('city');
+        $fosterFamily->zipCode = $request->input('zipCode');
+        $fosterFamily->phone = $request->input('phone');
+        $fosterFamily->availableSpots = $request->input('availableSpots');
+        $fosterFamily->save();
+
+        $user = User::find(auth()->user()->id);
+        $user->email = $request->input('email');
+        $user->password = $request->input('password');
+        $user->save();
+
+        $fosterPreference = FosterPreference::find('fosterFamily_id', '=', $user->fosterFamily_id);
+        $fosterPreference->adult = $request->input('adult');
+        $fosterPreference->pregnant = $request->input('pregnant');
+        $fosterPreference->kitten = $request->input('kitten');
+        $fosterPreference->bottleFeeding = $request->input('bottleFeeding');
+        $fosterPreference->feral = $request->input('feral');
+        $fosterPreference->intensiveCare = $request->input('intensiveCare');
+        $fosterPreference->noIntensiveCare = $request->input('noIntensiveCare');
+        $fosterPreference->isolation = $request->input('isolation');
+        $fosterPreference->save();
+
+        return redirect()->route('pleeggezinAccount/{id}', ['id' => $fosterFamily->id]);
+    }
+
 
     /*  public function showFosterById($id)
     {

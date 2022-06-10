@@ -16,12 +16,12 @@
 <!--ACCOUNTDETAILS-->
 <div class="content-wrapper pt-0">
     {{-- FosterFamily Form --}}
-    @if(isset($fosterFamily))
-    <form method="POST" action="/updateFoster/{{$fosterFamily->id}}" enctype="multipart/form-data">
+    @auth
+    <form method="POST" action="/pleeggezinAccount/{{$fosterFamily->id}}"> @csrf <input type="hidden" value="{{$fosterFamily->
+        id}}" name="fosterFamily_id">
 
-        @else
+        @endauth
         <form method="POST" action="{{ route('storeFoster') }}">
-            @endif
             @csrf
             <h3 class="text-muted mt-4">Mijn gegevens</h3>
             <div class="card">
@@ -233,9 +233,13 @@
     @if (Auth::check()) Sla op @else Registreren @endif
 </button>
 </form>
+@auth
+</form>
+@endauth
+
 
 <!-- ROOMMATES -->
-@if(isset($fosterFamily))
+{{-- @if(isset($fosterFamily))
 <div class="content-wrapper">
     <h3 class="text-muted">Huisgenoten</h3>
     <div class="card">
