@@ -98,7 +98,7 @@
                                         <h4 class="font-weight-normal mb-3"><b>` + cat.firstName + ` ` + cat.lastName + `</b></h4>
                                     </div>
                                     <div class="card-footer card-border-info">
-                                        <div class="mb-3">` + cat.availableSpots + `beschikbare plaatsen</div>
+                                        <div class="mb-3">` + cat.availableSpots + ` beschikbare plaatsen</div>
                                             {{-- TODO: add route once detail of foster family is available --}}
                                             <div><a href="{{--route()--}}" class="text-black"><u>Meer info</u></a></div>
                                     </div>
