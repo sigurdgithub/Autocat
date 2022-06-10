@@ -24,12 +24,12 @@ class RegisteredUserController extends Controller
      */
     public function createFoster()
     {
-        return view(('auth.fosterAccount'));
+        return view('auth.fosterAccount');
     }
 
     public function createShelter()
     {
-        return view(('auth.shelterAccount'));
+        return view('auth.shelterAccount');
     }
 
 
@@ -124,12 +124,15 @@ class RegisteredUserController extends Controller
         $species = (['Kat','Hond','Knaagdier','Vogel']);
         $relation = (['Partner','Kind','Ouder']);
 
-        return redirect()->route('fosterAccount', $foster->id);
+        $id = auth()->user()->fosterFamily_id;
+        return redirect()->route('fosterAccount', $id);
     }
 
-    public function updateFoster(Request $request, $user)
+    public function updateFoster(Request $request)
     {
-        $fosterFamily = FosterFamily::find('id', '=', $user->fosterFamily_id);
+        /* $fosterFamily = FosterFamily::find('id', '=', $user->fosterFamily_id); */
+        $id = $request->input('fosterFamily_id');
+        $fosterFamily = FosterFamily::find($id);
         $fosterFamily->lastName = $request->input('lastName');
         $fosterFamily->firstName = $request->input('firstName');
         $fosterFamily->dateOfBirth = $request->input('dateOfBirth');
@@ -146,18 +149,27 @@ class RegisteredUserController extends Controller
         $user->password = $request->input('password');
         $user->save();
 
-        $fosterPreference = FosterPreference::find('fosterFamily_id', '=', $user->fosterFamily_id);
-        $fosterPreference->adult = $request->input('adult');
+        //$fosterPreference = FosterPreference::where('fosterFamily_id', '=', $id)->get();
+        /* $fosterPreference->adult = $request->input('adult');
         $fosterPreference->pregnant = $request->input('pregnant');
         $fosterPreference->kitten = $request->input('kitten');
         $fosterPreference->bottleFeeding = $request->input('bottleFeeding');
         $fosterPreference->feral = $request->input('feral');
         $fosterPreference->intensiveCare = $request->input('intensiveCare');
         $fosterPreference->noIntensiveCare = $request->input('noIntensiveCare');
-        $fosterPreference->isolation = $request->input('isolation');
-        $fosterPreference->save();
-
-        return redirect()->route('pleeggezinAccount/{id}', ['id' => $fosterFamily->id]);
+        $fosterPreference->isolation = $request->input('isolation'); 
+        $fosterPreference->save();*/
+        FosterPreference::where('fosterFamily_id', $id)->update([
+            'adult' => $request->input('adult'),
+            'pregnant' => $request->input('pregnant'),
+            'kitten' => $request->input('kitten'),
+            'bottleFeeding' => $request->input('bottleFeeding'),
+            'feral' => $request->input('feral'),
+            'intensiveCare' => $request->input('intensiveCare'),
+            'noIntensiveCare' => $request->input('noIntensiveCare'),
+            'isolation' => $request->input('isolation'),
+        ]);
+        return redirect()->route('fosterAccount', $id);
     }
 
 
