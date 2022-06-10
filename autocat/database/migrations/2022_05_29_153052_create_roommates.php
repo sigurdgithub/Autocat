@@ -16,8 +16,8 @@ return new class extends Migration
         Schema::create('roommates', function (Blueprint $table) {
             $table->id();
             $table->integer('fosterFamily_id');
-            $table->date('relation');
-            $table->integer('dateOfBirth');
+            $table->string('relation');
+            $table->date('dateOfBirth');
             $table->timestamps();
         });
     }
