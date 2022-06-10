@@ -28,15 +28,15 @@ use App\Models\FosterPreference;
 
 Route::get('/kattenOverzicht', [CatOverviewController::class, 'getCats']);
 
-Route::get('/pleeggezinAccount', function () {
+Route::get('/pleeggezinAccount/{id}', function ($id) {
     $user = App\Models\User::find(auth()->user()->id);
     //dd($user->fosterFamily_id);
-    $fosterFamily = App\Models\FosterFamily::where('id', '=', $user->fosterFamily_id)->firstOrFail();
+    $fosterFamily = App\Models\FosterFamily::where('id', '=', $id)->firstOrFail();
     //dd($fosterFamily)
-    $fosterPreference = App\Models\FosterPreference::where('fosterFamily_id', '=', $user->fosterFamily_id)->firstOrFail();
+    $fosterPreference = App\Models\FosterPreference::where('fosterFamily_id', '=', $fosterFamily->id)->firstOrFail();
     //dd($fosterPreference);
     return view('auth.fosterAccount', compact('fosterFamily', 'user', 'fosterPreference'));
-});
+})->name('fosterAccount');
 
 Route::get('/pleeggezinDashboard', function () {
     return view('fosterDashboard');

@@ -31,8 +31,9 @@ class AuthenticatedSessionController extends Controller
         $request->authenticate();
 
         $request->session()->regenerate();
-
-        return redirect()->intended(RouteServiceProvider::fosterHome);
+        $id = auth()->user()->fosterFamily_id;
+        return redirect()->route('fosterAccount', $id);
+        // If fosterFamilt_id is null redirect to shelter dashboard
     }
 
     /**
