@@ -17,8 +17,9 @@
 <div class="content-wrapper pt-0">
     {{-- FosterFamily Form --}}
     @auth
-    <form method="POST" action="/pleeggezinAccount/{{$fosterFamily->id}}"> @csrf <input type="hidden" value="{{$fosterFamily->
-        id}}" name="fosterFamily_id">
+    <form method="POST" action="{{route ('updateFoster')}}">
+        @csrf
+        <input type="hidden" value="{{$fosterFamily->id}}" name="fosterFamily_id">
 
         @endauth
         <form method="POST" action="{{ route('storeFoster') }}">
