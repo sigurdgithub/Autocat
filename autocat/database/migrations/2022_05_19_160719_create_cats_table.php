@@ -36,7 +36,7 @@ return new class extends Migration
             $table->string('gardenAccess')->nullable();
             $table->integer('buddyId')->default(0);
             $table->string('image')->nullable();
-            $table->integer('fosterFamily_id')->default(0);
+            $table->integer('fosterFamily_id')->nullable();
             $table->timestamps();
         });
     }

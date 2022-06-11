@@ -16,8 +16,8 @@ return new class extends Migration
         Schema::create('pets', function (Blueprint $table) {
             $table->id();
             $table->integer('fosterFamily_id');
-            $table->date('species');
-            $table->string('dateOfBirth');
+            $table->string('species');
+            $table->date('dateOfBirth');
             $table->timestamps();
         });
     }

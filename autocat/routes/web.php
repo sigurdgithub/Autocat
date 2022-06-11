@@ -8,6 +8,7 @@ use App\Http\Controllers\CatOverviewController;
 use App\Http\Controllers\DashBoardController;
 use App\Http\Controllers\FosterFamilyController;
 use App\Http\Controllers\MedicalController;
+use App\Http\Controllers\PetsAndRoommatesController;
 use App\Models\FosterPreference;
 
 /*
@@ -36,7 +37,15 @@ Route::get('/pleeggezinAccount/{id}', function ($id) {
     //dd($fosterFamily)
     $fosterPreference = App\Models\FosterPreference::where('fosterFamily_id', '=', $fosterFamily->id)->firstOrFail();
     //dd($fosterPreference);
-    return view('auth.fosterAccount', compact('fosterFamily', 'user', 'fosterPreference'));
+
+    $roommates = PetsAndRoommatesController::showRoommatesByFosterId($fosterFamily->id);
+        //dd($roommates);
+    $pets = PetsAndRoommatesController::showPetsByFosterId($fosterFamily->id);
+    //dd($pets);
+    $species = (['Kat','Hond','Knaagdier','Vogel']);
+    $relation = (['Partner','Kind','Ouder']);
+
+    return view('auth.fosterAccount', compact('fosterFamily', 'user', 'fosterPreference', 'roommates', 'pets', 'species', 'relation'));
 })->name('fosterAccount');
 
 Route::get('/pleeggezinDashboard', function () {
