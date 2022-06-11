@@ -17,12 +17,10 @@
 <div class="content-wrapper pt-0">
     {{-- FosterFamily Form --}}
     @auth
-    <form method="POST" action="{{route ('updateFoster')}}">
-        @csrf
-        <input type="hidden" value="{{$fosterFamily->id}}" name="fosterFamily_id">
-
+    <form id="updateForm" method="POST" action="/pleeggezinAccount/{{$fosterFamily->id}}"> @csrf <input type="hidden"
+            value="{{$fosterFamily->id}}" name="fosterFamily_id">
         @endauth
-        <form method="POST" action="{{ route('storeFoster') }}">
+        <form id="registerForm" method="POST" action="{{ route('storeFoster') }}">
             @csrf
             <h3 class="text-muted mt-4">Mijn gegevens</h3>
             <div class="card">
@@ -334,11 +332,12 @@
             </div>
             @endif
         </div>
-    <button type="submit" class="btn btn-gradient-info float-end mt-5">
-        @if (Auth::check()) Sla op @else Registreren @endif
-    </button>
-</form>
-@auth
-</form>
-@endauth
+        <button type="submit" class="btn btn-gradient-info float-end mt-5" @if(Auth::check()) form="updateForm" @else
+            form="registerForm" @endif>
+            @if (Auth::check()) Sla op @else Registreren @endif
+        </button>
+    </form>
+    @auth
+    </form>
+    @endauth
 @endsection
