@@ -174,20 +174,20 @@ class RegisteredUserController extends Controller
             'picture' => ['nullable', 'string'],
         ]);
 
-        $shelter = Shelter::create([
-            'shelterName' => $request->shelterName,
-            'shelterPhone' => $request->shelterPhone,
-            'hkNumber' => $request->hkNumber,
-            'shelterFirstName' => $request->shelterFirstName,
-            'shelterLastName' => $request->shelterLastName,
-            'shelterDateOfBirth' => $request->shelterDateOfBirth,
-            'shelterStreet' => $request->shelterStreet,
-            'shelterNumber' => $request->shelterNumber,
-            'shelterCity' => $request->shelterCity,
-            'shelterZipCode' => $request->shelterZipCode,
-            'phoneNumber' => $request->phoneNumber,
-            'website' => $request->website,
-            'picture' => $request->picture,
+        $shelter = Shelter::firstOrCreate([
+            'shelterName' => $request->input('shelterName'),
+            'shelterPhone' => $request->input('shelterPhone'),
+            'hkNumber' => $request->input('hkNumber'),
+            'shelterFirstName' => $request->input('shelterFirstName'),
+            'shelterLastName' => $request->input('shelterLastName'),
+            'shelterDateOfBirth' => $request->input('shelterDateOfBirth'),
+            'shelterStreet' => $request->input('shelterStreet'),
+            'shelterNumber' => $request->input('shelterNumber'),
+            'shelterCity' => $request->input('shelterCity'),
+            'shelterZipCode' => $request->input('shelterZipCode'),
+            'phoneNumber' => $request->input('phoneNumber'),
+            'website' => $request->input('website'),
+            'picture' => $request->input('picture'),
         ]);
 
         // USER TABLE //
@@ -198,9 +198,9 @@ class RegisteredUserController extends Controller
             'shelter_id' => ['integer']
         ]);
 
-        $user = User::create([
-            'email' => $request->email,
-            'password' => Hash::make($request->password),
+        $user = User::firstOrCreate([
+            'email' => $request->input('email'),
+            'password' => Hash::make($request->input('password')),
             'fosterFamily_id' => null,
             'shelter_id' => $shelter->id
         ]);
@@ -209,6 +209,7 @@ class RegisteredUserController extends Controller
 
         Auth::login($user);
 
-        return redirect(RouteServiceProvider::shelterHome);
+        $id = auth()->user($user)->shelter_id;
+        return redirect()->route('shelterAccount', $id);
     }
 }

@@ -25,114 +25,121 @@
                     <div class="col-md-4">
                         <div class="form-group">
                             <label class="form-label">Naam asiel</label>
-                            <input type="text" class="form-control" name="shelterName" value="{{ old('shelterName') }}">
+                            <input type="text" class="form-control" name="shelterName"
+                                value="{{ old('shelterName') }}{{$shelter->shelterName ?? ''}}">
                         </div>
                     </div>
                     <div class="col-md-4">
                         <div class="form-group">
                             <label class="form-label">Telefoonnummer asiel</label>
                             <input type="text" class="form-control" name="shelterPhone"
-                                :value="{{old('shelterPhone')}}">
+                                value="{{old('shelterPhone')}}{{$shelter->shelterPhone ?? ''}}">
                         </div>
                     </div>
                     <div class="col-md-4">
                         <div class="form-group">
                             <label class="form-label">HK-nummer</label>
-                            <input type="text" class="form-control" name="hkNumber" value="{{ old('hkNumber') }}">
+                            <input type="text" class="form-control" name="hkNumber"
+                                value="{{ old('hkNumber') }}{{$shelter->hkNumber ?? ''}}"">
                         </div>
                     </div>
                 </div>
-                <div class="row mt-3">
-                    <div class="col-md-4">
-                        <div class="form-group">
-                            <label class="form-label">Naam</label>
-                            <input type="text" class="form-control" name="shelterLastName"
-                                :value="{{old('shelterLastName')}}">
+                <div class=" row mt-3">
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label class="form-label">Naam</label>
+                                    <input type="text" class="form-control" name="shelterLastName"
+                                        value="{{old('shelterLastName')}}{{$shelter->shelterLastName ?? ''}}"">
                         </div>
                     </div>
-                    <div class="col-md-4">
-                        <div class="form-group">
-                            <label class="form-label">Voornaam</label>
-                            <input type="text" class="form-control" name="shelterFirstName"
-                                :value="{{old('shelterFirstName')}}">
-                        </div>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="form-group">
-                            <label class="form-label">Geboortedatum</label>
-                            <input type="date" class="form-control" name="shelterDateOfBirth"
-                                :value="{{old('shelterDateOfBirth')}}">
-                        </div>
-                    </div>
-                </div>
-                <div class="row mt-3">
-                    <div class="col-md-4">
-                        <div class="form-group">
-                            <label class="form-label">Straat</label>
-                            <input type="text" class="form-control" name="shelterStreet"
-                                :value="{{old('shelterStreet')}}">
-                        </div>
-                    </div>
-                    <div class="col-md-2">
-                        <div class="form-group">
-                            <label class="form-label">Huisnummer</label>
-                            <input type="text" class="form-control" name="shelterNumber"
-                                :value="{{old('shelterNumber')}}">
-                        </div>
-                    </div>
-                    <div class="col-md-2">
-                        <div class="form-group">
-                            <label class="form-label">Postcode</label>
-                            <input type="text" class="form-control" name="shelterZipCode"
-                                :value="{{old('shelterZipcode')}}">
-                        </div>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="form-group">
-                            <label class="form-label">Gemeente</label>
-                            <input type="text" class="form-control" name="shelterCity" :value="{{old('shelterCity')}}">
-                        </div>
-                    </div>
-                    <div class="row mt-3">
-                        <div class="col-md-4">
-                            <div class="form-group">
-                                <label class="form-label">Telefoonnummer</label>
-                                <input type="text" class="form-control" name="phoneNumber"
-                                    :value="{{old('phoneNumber')}}">
+                    <div class=" col-md-4">
+                                    <div class="form-group">
+                                        <label class="form-label">Voornaam</label>
+                                        <input type="text" class="form-control" name="shelterFirstName"
+                                            value="{{old('shelterFirstName')}}{{$shelter->shelterFirstName ?? ''}}">
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label class="form-label">Geboortedatum</label>
+                                        <input type="date" class="form-control" name="shelterDateOfBirth"
+                                            value="{{old('shelterDateOfBirth')}}{{$shelter->shelterDateOfBirth ?? ''}}">
+                                    </div>
+                                </div>
                             </div>
-                        </div>
-                        <div class="col-md-4">
-                            <div class="form-group">
-                                <label class="form-label">E-mail</label>
-                                <input type="email" class="form-control" name="email" :value="{{old('email')}}"
-                                    required>
-                            </div>
-                        </div>
-                        <div class="col-md-4">
-                            <div class="form-group">
-                                <label class="form-label">Wachtwoord</label>
-                                <input type="password" class="form-control" name="password" required>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row mt-3">
-                        <div class="col-md-4">
-                            <div class="form-group">
-                                <label class="form-label">Website</label>
-                                <input type="text" class="form-control" name="website" required>
-                            </div>
-                        </div>
-                        <div class="col-md-4">
-                            <div class="form-group">
-                                <label class="form-label">Laad hier uw foto op</label>
-                                <input type="file" class="form-control form-control-sm" name="picture">
-                            </div>
+                            <div class="row mt-3">
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label class="form-label">Straat</label>
+                                        <input type="text" class="form-control" name="shelterStreet"
+                                            value="{{old('shelterStreet')}}{{$shelter->shelterStreet ?? ''}}">
+                                    </div>
+                                </div>
+                                <div class="col-md-2">
+                                    <div class="form-group">
+                                        <label class="form-label">Huisnummer</label>
+                                        <input type="text" class="form-control" name="shelterNumber"
+                                            value="{{old('shelterNumber')}}{{$shelter->shelterNumber ?? ''}}">
+                                    </div>
+                                </div>
+                                <div class="col-md-2">
+                                    <div class="form-group">
+                                        <label class="form-label">Postcode</label>
+                                        <input type="text" class="form-control" name="shelterZipCode"
+                                            value="{{old('shelterZipCode')}}{{$shelter->shelterZipCode ?? ''}}"">
                         </div>
                     </div>
-                </div>
-                <button type="submit" class="btn btn-gradient-success float-end mt-5">
-                    Sla op
-                </button>
+                    <div class=" col-md-4">
+                                        <div class="form-group">
+                                            <label class="form-label">Gemeente</label>
+                                            <input type="text" class="form-control" name="shelterCity"
+                                                value="{{old('shelterCity')}}{{$shelter->shelterCity ?? ''}}">
+                                        </div>
+                                    </div>
+                                    <div class="row mt-3">
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label class="form-label">Telefoonnummer</label>
+                                                <input type="text" class="form-control" name="phoneNumber"
+                                                    value="{{old('phoneNumber')}}{{$shelter->phoneNumber ?? ''}}">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label class="form-label">E-mail</label>
+                                                <input type="email" class="form-control" name="email"
+                                                    value="{{old('email')}}{{$user->email ?? ''}}">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label class="form-label">Wachtwoord</label>
+                                                <input type="password" class="form-control" name="password"
+                                                    value="{{$user->password ?? ''}}">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row mt-3">
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label class="form-label">Website</label>
+                                                <input type="text" class="form-control" name="website"
+                                                    value="{{old('website')}}{{$shelter->website ?? ''}}">
+
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label class="form-label">Laad hier uw foto op</label>
+                                                <input type="file" class="form-control form-control-sm" name="picture"
+                                                    value="{{old('picture')}}{{$shelter->picture ?? ''}}">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <button type="submit" class="btn btn-gradient-success float-end mt-5">
+                                    Registreer @auth Sla op @endauth
+                                </button>
     </form>
 </div>
 

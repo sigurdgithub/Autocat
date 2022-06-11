@@ -1,5 +1,6 @@
 <?php
 
+
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\NotificationController;
 use App\Http\Controllers\CatController;
@@ -50,6 +51,11 @@ Route::get('/asielAccount', function () {
     return view('auth.shelterAccount');
 });
 
+Route::get('/asielAccount/{id}', function ($id) {
+    $user = App\Models\User::find(auth()->user()->id);
+    $shelter = App\Models\Shelter::where('id', '=', $id)->firstOrFail();
+    return view('auth.shelterAccount', compact('user', 'shelter'));
+})->name('shelterAccount');
 
 Route::get('/welkom', function () {
     return view('welcome');
