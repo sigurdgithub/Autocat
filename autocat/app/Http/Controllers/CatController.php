@@ -429,8 +429,8 @@ class CatController extends Controller
         $cat->fosterFamily_id = $request->input('fosterFamily_id');
         $cat->save();
 
-        $catPreference = CatPreference::find($cat->id);
-        // $catPreference = CatPreference::where('cat_id','=',$cat->id)->firstOrFail();
+/*         $catPreference = CatPreference::find($cat->id);*/        
+        $catPreference = CatPreference::where('cat_id','=',$cat->id)->firstOrFail();
         //dd($cat->id);
         //dd($catPreference);
         $catPreference->bottleFeeding = $request->input('bottleFeeding');

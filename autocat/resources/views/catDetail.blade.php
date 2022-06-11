@@ -343,7 +343,7 @@
                             </div>
                             <div class="form-check form-check-danger">
                                 <label class="form-check-label">
-                                <input type="checkbox" class="form-check-input" name="playfulCat" value="1" @if(isset($cat)){{ ($catPreference->playfulcat=="1")? "checked" : "" }} @endif>Speelse kat</label>
+                                <input type="checkbox" class="form-check-input" name="playfulCat" value="1" @if(isset($cat)){{ ($catPreference->playfulCat=="1")? "checked" : "" }} @endif>Speelse kat</label>
                             </div>
                             <div class="form-check form-check-danger">
                                 <label class="form-check-label">
@@ -355,7 +355,7 @@
                             </div>
                             <div class="form-check form-check-danger">
                                 <label class="form-check-label">
-                                <input type="checkbox" class="form-check-input" name="bedroomAccess" value="1" @if(isset($cat)){{ ($catPreference->bedroomCat=="1")? "checked" : "" }} @endif>Wil in de slaapkamer</label>
+                                <input type="checkbox" class="form-check-input" name="bedroomAccess" value="1" @if(isset($cat)){{ ($catPreference->bedroomAccess=="1")? "checked" : "" }} @endif>Wil in de slaapkamer</label>
                             </div>
                         </div>
                     </div>
