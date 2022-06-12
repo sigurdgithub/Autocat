@@ -121,8 +121,8 @@ class RegisteredUserController extends Controller
         //dd($roommates);
         $pets = PetsAndRoommatesController::showPetsByFosterId($foster->id);
         //dd($pets);
-        $species = (['Kat','Hond','Knaagdier','Vogel']);
-        $relation = (['Partner','Kind','Ouder']);
+        $species = (['Kat', 'Hond', 'Knaagdier', 'Vogel']);
+        $relation = (['Partner', 'Kind', 'Ouder']);
 
         $id = auth()->user()->fosterFamily_id;
         return redirect()->route('fosterAccount', $id);
@@ -218,6 +218,33 @@ class RegisteredUserController extends Controller
         Auth::login($user);
 
         $id = auth()->user($user)->shelter_id;
+        return redirect()->route('shelterAccount', $id);
+    }
+
+    public function updateShelter(Request $request)
+    {
+        $id = $request->input('shelter_id');
+        $shelter = Shelter::find($id);
+        $shelter->shelterName = $request->input('shelterName');
+        $shelter->shelterPhone = $request->input('shelterPhone');
+        $shelter->hkNumber = $request->input('hkNumber');
+        $shelter->shelterFirstName = $request->input('shelterFirstName');
+        $shelter->shelterLastName = $request->input('shelterLastName');
+        $shelter->shelterDateOfBirth = $request->input('shelterDateOfBirth');
+        $shelter->shelterStreet = $request->input('shelterStreet');
+        $shelter->shelterNumber = $request->input('shelterNumber');
+        $shelter->shelterCity = $request->input('shelterCity');
+        $shelter->shelterZipCode = $request->input('shelterZipCode');
+        $shelter->phoneNumber = $request->input('phoneNumber');
+        $shelter->website = $request->input('website');
+        $shelter->picture = $request->input('picture');
+        $shelter->save();
+
+        $user = User::find(auth()->user()->id);
+        $user->email = $request->input('email');
+        $user->password = Hash::make($request->input('password'));
+        $user->save();
+
         return redirect()->route('shelterAccount', $id);
     }
 }

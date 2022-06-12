@@ -46,7 +46,9 @@ Route::middleware('auth')->group(function () {
     Route::get('verify-email', [EmailVerificationPromptController::class, '__invoke'])
         ->name('verification.notice');
 
-    Route::post('/pleeggezinAccount', [RegisteredUserController::class, 'updateFoster'], [])->name('updateFoster');
+    Route::post('/pleeggezinAccount/{id}', [RegisteredUserController::class, 'updateFoster'], [])->name('updateFoster');
+
+    Route::post('/asielAccount/{id}', [RegisteredUserController::class, 'updateShelter'])->name('updateShelter');
 
     Route::get('verify-email/{id}/{hash}', [VerifyEmailController::class, '__invoke'])
         ->middleware(['signed', 'throttle:6,1'])
