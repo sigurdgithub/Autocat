@@ -159,6 +159,14 @@ class RegisteredUserController extends Controller
             'noIntensiveCare' => $request->input('noIntensiveCare'),
             'isolation' => $request->input('isolation'),
         ]);
+
+        $roommates = PetsAndRoommatesController::showRoommatesByFosterId($fosterFamily->id);
+        //dd($roommates);
+        $pets = PetsAndRoommatesController::showPetsByFosterId($fosterFamily->id);
+        //dd($pets);
+        $species = (['Kat', 'Hond', 'Knaagdier', 'Vogel']);
+        $relation = (['Partner', 'Kind', 'Ouder']);
+
         return redirect()->route('fosterAccount', $id);
     }
 

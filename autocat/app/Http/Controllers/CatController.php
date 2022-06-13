@@ -322,6 +322,7 @@ class CatController extends Controller
         ]);
 
         $timestamp = now()->timestamp;
+        $foster = (($request->input('fosterFamily_id')==0)?NULL:$request->input('fosterFamily_id'));
 
         // Store
         $cat = Cat::firstOrCreate(
@@ -347,7 +348,7 @@ class CatController extends Controller
             'gardenAccess' => $request->input('gardenAccess'),
             'buddyId' => $request->input('buddyId'),
             'image' => $request->input('image'),
-            'fosterFamily_id' => $request->input('fosterFamily_id')
+            'fosterFamily_id' => $foster
             ]);
 
         $catPreference = CatPreference::firstOrCreate(
