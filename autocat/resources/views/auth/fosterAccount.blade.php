@@ -227,6 +227,10 @@
                         </div>
                 </div>
             </div>
+        </form>
+        @auth
+        </form>
+        @endauth
             <!-- ROOMMATES -->
             @if(isset($fosterFamily))
             <div class="mt-5">
@@ -268,7 +272,7 @@
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label class="form-label">Geboortedatum</label>
-                                        <input type="date" min="0" class="form-control" name="dateOfBirth">
+                                        <input type="date" min="0" class="form-control" name="dateOfBirthRoommate">
                                     </div>
                                 </div>
                             </div>
@@ -319,11 +323,11 @@
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label class="form-label">Geboortedatum</label>
-                                        <input type="date" class="form-control" name="dateOfBirth">
+                                        <input type="date" class="form-control" name="dateOfBirthPet">
                                     </div>
                                 </div>
                             </div>
-                            <button id="petForm" type="submit" class="btn btn-outline-info">
+                            <button form="petForm" type="submit" class="btn btn-outline-info">
                                 Toevoegen
                             </button>
                         </form>
@@ -336,8 +340,4 @@
             form="registerForm" @endif>
             @if (Auth::check()) Sla op @else Registreren @endif
         </button>
-    </form>
-    @auth
-    </form>
-    @endauth
 @endsection

@@ -41,13 +41,13 @@ class PetsAndRoommatesController extends Controller
     {   
         $validation = $request->validate([
             'species'=> 'required',
-            'dateOfBirth'=>'required',
+            'dateOfBirthPet'=>'required',
         ]);
 
         $pet = Pet::firstOrCreate(
             ['fosterFamily_id' => $request->input('fosterFamily_id'),
             'species' => $request->input('species'),
-            'dateOfBirth' => $request->input('dateOfBirth'),
+            'dateOfBirth' => $request->input('dateOfBirthPet'),
             ]);
         
         return redirect()->route('fosterAccount', $request->input('fosterFamily_id'));
@@ -55,15 +55,16 @@ class PetsAndRoommatesController extends Controller
 
     public function storeRoommate(Request $request)
     {   
-        $validation = $request->validate([
+/*         dd($request);
+ */        $validation = $request->validate([
             'relation'=> 'required',
-            'dateOfBirth'=>'required',
+            'dateOfBirthRoommate'=>'required',
         ]);
 
         $roommate = Roommate::firstOrCreate(
             ['fosterFamily_id' => $request->input('fosterFamily_id'),
             'relation' => $request->input('relation'),
-            'dateOfBirth' => $request->input('dateOfBirth'),
+            'dateOfBirth' => $request->input('dateOfBirthRoommate'),
             ]);
         
         return redirect()->route('fosterAccount', $request->input('fosterFamily_id'));
