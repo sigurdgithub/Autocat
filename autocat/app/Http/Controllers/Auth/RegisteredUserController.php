@@ -128,9 +128,10 @@ class RegisteredUserController extends Controller
         return redirect()->route('fosterAccount', $id);
     }
 
-    public function updateFoster(Request $request)
+    public function updateFoster(Request $request, $user)
     {
-        /* $fosterFamily = FosterFamily::find('id', '=', $user->fosterFamily_id); */
+        //$fosterFamily = FosterFamily::find('id', '=', $user->fosterFamily_id);
+
         $id = $request->input('fosterFamily_id');
         $fosterFamily = FosterFamily::find($id);
         $fosterFamily->lastName = $request->input('lastName');

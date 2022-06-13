@@ -39,22 +39,26 @@ Route::get('/pleeggezinAccount/{id}', function ($id) {
     //dd($fosterPreference);
 
     $roommates = PetsAndRoommatesController::showRoommatesByFosterId($fosterFamily->id);
-        //dd($roommates);
+    //dd($roommates);
     $pets = PetsAndRoommatesController::showPetsByFosterId($fosterFamily->id);
     //dd($pets);
-    $species = (['Kat','Hond','Knaagdier','Vogel']);
-    $relation = (['Partner','Kind','Ouder']);
+    $species = (['Kat', 'Hond', 'Knaagdier', 'Vogel']);
+    $relation = (['Partner', 'Kind', 'Ouder']);
 
     return view('auth.fosterAccount', compact('fosterFamily', 'user', 'fosterPreference', 'roommates', 'pets', 'species', 'relation'));
 })->name('fosterAccount');
 
-Route::get('/pleeggezinDashboard', function () {
+/* Route::get('/pleeggezinDashboard', function () {
     return view('fosterDashboard');
-});
+}); */
 // TODO Change this to be used with a a controller if necessary
 Route::get('/pleeggezinnenOverzicht', function () {
     return view('fosterOverview', ['fosterFamilies' => FosterFamilyController::getFosterFamilies()]);
 });
+
+/* Route::get('/asielDashboard', function () {
+    return view('shelterDashboard');
+})->name('shelterDashboard'); */
 
 Route::get('/asielAccount', function () {
     return view('auth.shelterAccount');
@@ -74,8 +78,8 @@ Route::get('/privacyverklaring', function () {
     return view('privacy');
 });
 
-Route::get('/notifications/{fosterId}', [DashBoardController::class, 'showByFosterId'])->name('notifications');
-Route::get('/asielDashboard', [DashBoardController::class, 'showShelterNotifications'])->name('shelterNotifications');
+/* Route::get('/notifications/{fosterId}', [DashBoardController::class, 'showByFosterId'])->name('notifications'); */
+/* Route::get('/asielDashboard', [DashBoardController::class, 'showShelterNotifications'])->name('shelterNotifications'); */
 Route::get('/asielDashboard/ajax/{fosterId}', [DashBoardController::class, 'getCatsByFosterId']);
 Route::get('/cat/ajax/{id}', [CatController::class, 'getCatById']);
 Route::get('/cats/ajax/{search}', [CatController::class, 'filterCatsByString']);

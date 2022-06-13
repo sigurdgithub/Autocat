@@ -8,7 +8,11 @@ use App\Http\Controllers\Auth\NewPasswordController;
 use App\Http\Controllers\Auth\PasswordResetLinkController;
 use App\Http\Controllers\Auth\RegisteredUserController;
 use App\Http\Controllers\Auth\VerifyEmailController;
+use App\Http\Controllers\DashBoardController;
+use App\Http\Controllers\FosterFamilyController;
+use App\Models\FosterFamily;
 use Illuminate\Support\Facades\Route;
+
 
 Route::middleware('guest')->group(function () {
     Route::post('register', [RegisteredUserController::class, 'storeFoster'])->name('storeFoster');
@@ -65,4 +69,18 @@ Route::middleware('auth')->group(function () {
 
     Route::post('logout', [AuthenticatedSessionController::class, 'destroy'])
         ->name('logout');
+
+    // Shelter pages ///////////////////////////////////////////////////////
+    Route::get('/asielDashboard', function () {
+        return view('shelterDashboard');
+    })->name('shelterDashboard');
+
+    Route::get('/asielDashboard', [DashBoardController::class, 'showShelterNotifications'])->name('shelterNotifications');
+
+    // Foster pages ///////////////////////////////////////////////////////
+    Route::get('/pleeggezinDashboard', function () {
+        return view('fosterDashboard');
+    })->name('fosterDashboard');
+
+    Route::get('/notifications/{fosterId}', [DashBoardController::class, 'showByFosterId'])->name('notifications');
 });
