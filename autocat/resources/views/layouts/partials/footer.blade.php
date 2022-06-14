@@ -59,7 +59,7 @@
     </div>
   </div>
   <div class="text-center text-muted mt-2">
-    <span><a href="privacyverklaring">Privacyverklaring</a></span>
+    <span><a href="/privacyverklaring">Privacyverklaring</a></span>
     <span> - Copyright © AutoCat 2022</span>
   </div>
 </footer>
