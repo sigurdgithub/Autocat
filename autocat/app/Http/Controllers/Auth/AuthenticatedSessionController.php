@@ -33,7 +33,8 @@ class AuthenticatedSessionController extends Controller
         $request->session()->regenerate();
         // Route to correct dashboard if shelter or foster
         if ($id = auth()->user()->fosterFamily_id) {
-            return redirect()->route('notifications', $id);
+            /* $fosterFamily = auth()->user()->fosterFamily; */
+            return redirect()->route('notifications', $id,); //['fosterId' => $request->fosterFamily]);
         } elseif ($id = auth()->user()->shelter_id) {
             return redirect()->route('shelterNotifications', $id);
         };

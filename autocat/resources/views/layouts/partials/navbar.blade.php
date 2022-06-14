@@ -68,11 +68,17 @@
           </div>
         </a>
         <div class="dropdown-menu navbar-dropdown" aria-labelledby="profileDropdown">
-          <a class="{{Request::path() === 'pleeggezinAccount'? 'dropdown-item active active':'dropdown-item'}}"
-            href="pleeggezinAccount">
+          @if (auth()->user()->fosterFamily_id != null)
+          <a class="{{Request::path() === 'fosterAccount'? 'dropdown-item active active':'dropdown-item'}}"
+            href="/pleeggezinAccount/{{auth()->user()->fosterFamily_id}}">
             <i class="mdi mdi-account me-2"></i> Account overzicht </a>
+          @elseif (auth()->user()->shelter_id != null)
+          <a class="{{Request::path() === 'asielAccount'? 'dropdown-item active active':'dropdown-item'}}"
+            href="asielAccount">
+            <i class="mdi mdi-account me-2"></i> Account overzicht </a>
+          @endif
           <div class="dropdown-divider"></div>
-          <a class="{{Request::path() === ''? 'dropdown-item active active':'dropdown-item'}}" href="/">
+          <a class="{{Request::path() === ''? 'dropdown-item active active':'dropdown-item'}}" href=>
             <i class="mdi mdi-power me-2"></i> Log uit </a>
         </div>
       </li>

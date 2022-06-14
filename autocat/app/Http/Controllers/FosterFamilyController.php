@@ -24,11 +24,13 @@ class FosterFamilyController extends Controller
 
         return $fosterFamily;
     }
-    public function getFosterFamilyById($id) {
+    public function getFosterFamilyById($id)
+    {
         return FosterFamily::findOrFail($id);
     }
 
-    private static function checkKids($query) {
+    private static function checkKids($query)
+    {
         $query = $query;
         return $query;
     }
@@ -80,28 +82,29 @@ class FosterFamilyController extends Controller
         }
     }
 
-    public function filterFosterFamiliesByString($string) {
+    public function filterFosterFamiliesByString($string)
+    {
         $fosterFamilies = DB::table('fosterFamilies')->select('fosterFamilies.*');
-        $fosterFamilies = $fosterFamilies->where('fosterFamilies.firstName', 'LIKE', '%'.$string.'%')
-        ->orWhere('fosterFamilies.lastName', 'LIKE', '%'.$string.'%');
+        $fosterFamilies = $fosterFamilies->where('fosterFamilies.firstName', 'LIKE', '%' . $string . '%')
+            ->orWhere('fosterFamilies.lastName', 'LIKE', '%' . $string . '%');
         $result = $fosterFamilies->get();
         return json_encode($result);
     }
 
-    public function filterFosterFamilies(Request $request) {
+    public function filterFosterFamilies(Request $request)
+    {
         $data = $request->all();
-        
+
         $fosterFamilies = DB::table('fosterFamilies')->leftJoin('foster_preferences', 'fosterFamilies.id', '=', 'foster_preferences.fosterFamily_id')->join('roommates', 'fosterFamilies.id', '=', 'roommates.fosterFamily_id');
         //$fosterFamilies = $fosterFamilies->where('foster_preferences.adult', '=', 1);
         if (isset($data['availableSpots'])) {
             $fosterFamilies = $fosterFamilies->where('availableSpots', '=', $data['availableSpots']);
         }
         if (isset($data['livingStatus'])) {
-            $fosterFamilies =FosterFamilyController::filterHomeSituation($data['livingStatus'], $fosterFamilies);
+            $fosterFamilies = FosterFamilyController::filterHomeSituation($data['livingStatus'], $fosterFamilies);
         }
         $result = $fosterFamilies->get();
         dd($result);
         return json_encode($result);
     }
-
 }

@@ -9,11 +9,13 @@ use App\Http\Controllers\Auth\PasswordResetLinkController;
 use App\Http\Controllers\Auth\RegisteredUserController;
 use App\Http\Controllers\Auth\VerifyEmailController;
 use App\Http\Controllers\DashBoardController;
+use App\Http\Controllers\CatOverviewController;
 use App\Http\Controllers\FosterFamilyController;
 use App\Models\FosterFamily;
+use App\Http\Middleware\ShelterMiddleware;
 use Illuminate\Support\Facades\Route;
 
-
+//////////// GUEST USERS //////////////////
 Route::middleware('guest')->group(function () {
     Route::post('register', [RegisteredUserController::class, 'storeFoster'])->name('storeFoster');
 
@@ -46,13 +48,10 @@ Route::middleware('guest')->group(function () {
         ->name('password.update');
 });
 
+//////////// LOGGED IN USERS //////////////////
 Route::middleware('auth')->group(function () {
     Route::get('verify-email', [EmailVerificationPromptController::class, '__invoke'])
         ->name('verification.notice');
-
-    Route::post('/pleeggezinAccount/{id}', [RegisteredUserController::class, 'updateFoster'], [])->name('updateFoster');
-
-    Route::post('/asielAccount/{id}', [RegisteredUserController::class, 'updateShelter'])->name('updateShelter');
 
     Route::get('verify-email/{id}/{hash}', [VerifyEmailController::class, '__invoke'])
         ->middleware(['signed', 'throttle:6,1'])
@@ -67,20 +66,5 @@ Route::middleware('auth')->group(function () {
 
     Route::post('confirm-password', [ConfirmablePasswordController::class, 'store']);
 
-    Route::post('logout', [AuthenticatedSessionController::class, 'destroy'])
-        ->name('logout');
-
-    // Shelter pages ///////////////////////////////////////////////////////
-    Route::get('/asielDashboard', function () {
-        return view('shelterDashboard');
-    })->name('shelterDashboard');
-
-    Route::get('/asielDashboard', [DashBoardController::class, 'showShelterNotifications'])->name('shelterNotifications');
-
-    // Foster pages ///////////////////////////////////////////////////////
-    Route::get('/pleeggezinDashboard', function () {
-        return view('fosterDashboard');
-    })->name('fosterDashboard');
-
-    Route::get('/notifications/{fosterId}', [DashBoardController::class, 'showByFosterId'])->name('notifications');
+    Route::post('logout', [AuthenticatedSessionController::class, 'destroy'])->name('logout');
 });
