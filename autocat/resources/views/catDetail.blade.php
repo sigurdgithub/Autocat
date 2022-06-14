@@ -392,7 +392,7 @@
                                     <ul>
                                         <li class="row">
                                             <div class="col-md-3">Datum: {{ $weighing->date }}</div>
-                                            <div class="col-md-3">Gewicht: {{ $weighing->weighing }} g</div>
+                                            <div class="col-md-3">Gewicht: {{ $weighing->weight }} g</div>
                                             <div class="col-md-5">Opmerking: {{ $weighing->comments}} </div>  
                                             <a href='/weighing_delete/{{$weighing->id}}' class="col-md-1 btn btn-inverse-danger btn-icon btn-lg pt-2"><i class="mdi mdi-delete"></i></a>                 
                                         </li>

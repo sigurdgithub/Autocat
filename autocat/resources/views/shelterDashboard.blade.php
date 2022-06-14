@@ -101,61 +101,6 @@
                                 </td>                      
                             </tr>
                             @endforeach
-                            <tr>
-                                <td>Liesbeth P</td>
-                                <td>Malou</td>
-                                <td>Profiel up to date?</td>
-                                <td>lorem ipsum dolor sit amet</td>
-                                <td> 
-                                    <button class="btn btn-inverse-success btn-icon">
-                                        <i class="mdi mdi-delete"></i>
-                                    </button>
-                                </td>                      
-                            </tr>
-                            <tr>
-                                <td>Sophie C</td>
-                                <td>Caramel</td>
-                                <td>Weging</td>
-                                <td>lorem ipsum dolor sit amet</td>
-                                <td>                          
-                                    <button type="button" class="btn btn-inverse-success btn-icon">
-                                        <i class="mdi mdi-delete"></i>
-                                    </button>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>Leentje B</td>
-                                <td>Tux</td>
-                                <td>Opvang geweigerd</td>
-                                <td>lorem ipsum dolor sit amet</td>
-                                <td>                          
-                                    <button type="button" class="btn btn-inverse-success btn-icon">
-                                        <i class="mdi mdi-delete"></i>
-                                    </button>
-                                </td>                    
-                            </tr>
-                            <tr>
-                                <td>Doenja S</td>
-                                <td>Pumpkin</td>
-                                <td>Afspraak adoptant</td>
-                                <td>lorem ipsum dolor sit amet</td>
-                                <td>                          
-                                    <button type="button" class="btn btn-inverse-success btn-icon">
-                                        <i class="mdi mdi-delete"></i>
-                                    </button>
-                                </td>                    
-                            </tr>
-                            <tr>
-                                <td>Jan V</td>
-                                <td>Olijfje</td>
-                                <td>Opvang geaccepteerd</td>
-                                <td>lorem ipsum dolor sit amet</td>
-                                <td>                          
-                                    <button type="button" class="btn btn-inverse-success btn-icon">
-                                        <i class="mdi mdi-delete"></i>
-                                    </button>
-                                </td>                    
-                            </tr>
                         </tbody>
                     </table>
                 </div>

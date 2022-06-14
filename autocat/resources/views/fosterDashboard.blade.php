@@ -92,46 +92,6 @@
                                 </td>                      
                             </tr>
                             @endforeach
-                            <tr>
-                                <td>Caramel</td>
-                                <td>Vraag voor opvang</td>
-                                <td>lorem ipsum dolor sit amet</td>
-                                <td>                          
-                                    <button type="button" class="btn btn-inverse-info btn-icon">
-                                        <i class="mdi mdi-delete"></i>
-                                    </button>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>Tux</td>
-                                <td>Afspraak adoptant</td>
-                                <td>lorem ipsum dolor sit amet</td>
-                                <td>                          
-                                    <button type="button" class="btn btn-inverse-info btn-icon">
-                                        <i class="mdi mdi-delete"></i>
-                                    </button>
-                                </td>                    
-                            </tr>
-                            <tr>
-                                <td>Pumpkin</td>
-                                <td>Adoptant goedgekeurd</td>
-                                <td>lorem ipsum dolor sit amet</td>
-                                <td>                          
-                                    <button type="button" class="btn btn-inverse-info btn-icon">
-                                        <i class="mdi mdi-delete"></i>
-                                    </button>
-                                </td>                    
-                            </tr>
-                            <tr>
-                                <td>Olijfje</td>
-                                <td>Vraag voor opvang</td>
-                                <td>lorem ipsum dolor sit amet</td>
-                                <td>                          
-                                    <button type="button" class="btn btn-inverse-info btn-icon">
-                                        <i class="mdi mdi-delete"></i>
-                                    </button>
-                                </td>                    
-                            </tr>
                         </tbody>
                     </table>
                 </div>
