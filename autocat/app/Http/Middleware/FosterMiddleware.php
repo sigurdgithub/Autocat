@@ -17,7 +17,7 @@ class FosterMiddleware
     public function handle(Request $request, Closure $next)
     {
         if (!auth()->check() || auth()->user()->fosterFamily_id == null) {
-            abort(code: 403);
+            abort(code: 403, message: 'U bent niet bevoegd voor deze actie.');
         }
         return $next($request);
     }

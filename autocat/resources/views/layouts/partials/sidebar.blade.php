@@ -1,6 +1,7 @@
 <!-- partial:partials/_sidebar.html -->
 <nav class="sidebar sidebar-offcanvas" id="sidebar">
   {{-- FOSTER SIDEBAR --}}
+  @auth
   @if (auth()->user()->fosterFamily_id != null)
   <ul class="nav ">
     <li class="nav-item info">
@@ -64,5 +65,6 @@
       </a>
   </ul>
   @endif
+  @endauth
 </nav>
 <!-- partial -->
