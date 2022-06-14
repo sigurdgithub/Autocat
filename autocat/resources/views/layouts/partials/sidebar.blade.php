@@ -3,7 +3,7 @@
   {{-- FOSTER SIDEBAR --}}
   @if (auth()->user()->fosterFamily_id != null)
   <ul class="nav ">
-    <li class="nav-item success">
+    <li class="nav-item info">
       <a class="{{Request::path() === 'pleeggezinDashboard'? 'nav-link active active':'nav-link'}}"
         href="/notifications/{{auth()->user()->fosterFamily_id}}">
         <span class="menu-title">Dashboard</span>

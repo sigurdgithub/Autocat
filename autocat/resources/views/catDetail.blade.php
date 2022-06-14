@@ -194,7 +194,7 @@
                             </div>
                         <div class="col-md-5">
                             <div class="form-group">
-                                <label for="">Andere</label>
+                                <label for="">Beschrijving speciale noden</label>
                                 <textarea class="form-control" name="extraInfo" value="{{ old('extraInfo') }}">{{ old('extraInfo') }}{{$cat->extraInfo ?? ''}}</textarea>
                             </div>
                             <div class="form-group">
