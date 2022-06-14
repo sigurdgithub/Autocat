@@ -1,2 +1,2 @@
 # Autocat
-Backend school project made in Laravel
+Backend school project made with Laravel & AJAX
