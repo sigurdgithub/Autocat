@@ -12,51 +12,11 @@
     </button>
 
     <ul class="navbar-nav navbar-nav-right">
-      {{-- <li class="nav-item dropdown">
-        <a class="nav-link count-indicator dropdown-toggle" id="messageDropdown" href="#" data-bs-toggle="dropdown"
-          aria-expanded="false">
-          <i class="mdi mdi-email-outline"></i>
-          <span class="count-symbol bg-warning"></span>
-        </a>
-        <div class="dropdown-menu dropdown-menu-right navbar-dropdown preview-list" aria-labelledby="messageDropdown">
-          <h6 class="p-3 mb-0">Berichten</h6>
-          <div class="dropdown-divider"></div>
-          <a class="dropdown-item preview-item">
-            <div class="preview-thumbnail">
-              <img src="../assets/images/faces/face4.jpg" alt="image" class="profile-pic">
-            </div>
-            <div class="preview-item-content d-flex align-items-start flex-column justify-content-center">
-              <h6 class="preview-subject ellipsis mb-1 font-weight-normal">Nieuw bericht van <b>Massimo</b></h6>
-            </div>
-          </a>
-          <div class="dropdown-divider"></div>
-          <a class="dropdown-item preview-item">
-            <div class="preview-thumbnail">
-              <img src="../assets/images/faces/face2.jpg" alt="image" class="profile-pic">
-            </div>
-            <div class="preview-item-content d-flex align-items-start flex-column justify-content-center">
-              <h6 class="preview-subject ellipsis mb-1 font-weight-normal">Nieuw bericht van <b>Wesley</b></h6>
-            </div>
-          </a>
-          <div class="dropdown-divider"></div>
-          <a class="dropdown-item preview-item">
-            <div class="preview-thumbnail">
-              <img src="../assets/images/faces/face3.jpg" alt="image" class="profile-pic">
-            </div>
-            <div class="preview-item-content d-flex align-items-start flex-column justify-content-center">
-              <h6 class="preview-subject ellipsis mb-1 font-weight-normal">Nieuw bericht van <b>Jari</b></h6>
-            </div>
-          </a>
-          <div class="dropdown-divider"></div>
-          <h6 class="p-3 mb-0 text-center">4 nieuwe berichten</h6>
-        </div>
-      </li> --}}
-
       <li class="nav-item nav-profile dropdown">
         <a class="nav-link dropdown-toggle" id="profileDropdown" href="#" data-bs-toggle="dropdown"
           aria-expanded="false">
           <div class="nav-profile-img">
-            <img src="../assets/images/faces/face1.jpg" alt="image">
+            <img src="../assets/images/faces-clipart/pic-1.png" alt="image">
             <span class="availability-status online"></span>
           </div>
           <div class="nav-profile-text">
@@ -81,11 +41,13 @@
             href="asielAccount/{{auth()->user()->shelter_id}}">
             <i class="mdi mdi-account me-2"></i> Account overzicht </a>
           @endif
-          <div class="dropdown-divider"></div>
+          <div class="dropdown-divider nav-item nav-logout d-none d-lg-block"></div>
           <form method="POST" action="{{ route('logout') }}">
-            <a class="{{Request::path() === ''? 'dropdown-item active active':'dropdown-item'}}" :href="route('logout')"
-              onclick="event.preventDefault();this.closest('form').submit();"> Log uit </a>
-        </div>
+            @csrf
+
+            <a class="nav-link active active nav-link" :href=""
+              onclick="event.preventDefault();this.closest('form').submit();" id='logout'> Log uit </a>
+          </form>
       </li>
       <li class="nav-item nav-logout d-none d-lg-block">
         <form method="POST" action="{{ route('logout') }}">

@@ -8,17 +8,12 @@ use App\Http\Controllers\Auth\NewPasswordController;
 use App\Http\Controllers\Auth\PasswordResetLinkController;
 use App\Http\Controllers\Auth\RegisteredUserController;
 use App\Http\Controllers\Auth\VerifyEmailController;
-use App\Http\Controllers\DashBoardController;
-use App\Http\Controllers\CatOverviewController;
-use App\Http\Controllers\FosterFamilyController;
-use App\Models\FosterFamily;
-use App\Http\Middleware\ShelterMiddleware;
 use Illuminate\Support\Facades\Route;
 
 //////////// GUEST USERS //////////////////
+
 Route::middleware('guest')->group(function () {
     Route::post('register', [RegisteredUserController::class, 'storeFoster'])->name('storeFoster');
-
 
     Route::post('registerShelter', [RegisteredUserController::class, 'storeShelter'])
         ->name('storeShelter');
@@ -49,6 +44,7 @@ Route::middleware('guest')->group(function () {
 });
 
 //////////// LOGGED IN USERS //////////////////
+
 Route::middleware('auth')->group(function () {
     Route::get('verify-email', [EmailVerificationPromptController::class, '__invoke'])
         ->name('verification.notice');

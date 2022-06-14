@@ -37,6 +37,7 @@ Route::get('/privacyverklaring', function () {
 
 // ------- LOGGED IN USERS -------
 Route::middleware('auth')->group(function () {
+
     /* --- GET --- */
 
     Route::get('/pleeggezinDashboard', function () {
