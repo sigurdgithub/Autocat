@@ -229,115 +229,118 @@
             </div>
         </form>
         @auth
-        </form>
-        @endauth
-            <!-- ROOMMATES -->
-            @if(isset($fosterFamily))
-            <div class="mt-5">
-                <h3 class="text-muted">Huisgenoten</h3>
-                <div class="card">
-                    <div class="card-body">
-                        <h5 class="text-muted">Overzicht</h5>
-                        <div class="stretch-card grid-margin">
-                            <div class="card-body card-border-info">
-                                @foreach ( $roommates as $roommate)
-                                <ul>
-                                    <li class="row">
-                                        <div class="col-md-5">Relatie: {{ $roommate->relation }}</div>
-                                        <div class="col-md-5">Geboortedatum: {{ $roommate->dateOfBirth }}</div>
-                                        <a href='/roommate_delete/{{$roommate->id}}'
-                                            class="col-md-1 btn btn-inverse-info btn-icon btn-lg pt-2"><i
-                                                class="mdi mdi-delete"></i></a>
-                                    </li>
-                                </ul>
-                                @endforeach
-                            </div>
-                        </div>
-                        <form id='roommateForm' method="post" action="{{route('storeRoommate')}}">
-                            @csrf
-                            <input type="hidden" value={{$fosterFamily->id}} name="fosterFamily_id">
-                            <h5 class="text-muted mb-4">Nieuw toevoegen</h5>
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label class="form-label">Relatie</label>
-                                        <select class="form-control form-control-sm" name="relation">
-                                            <option value="0">Selecteer</option>
-                                            @foreach ($relation as $relatio)
-                                            <option value="{{$relatio}}">{{$relatio}}</option>
-                                            @endforeach
-                                        </select>
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label class="form-label">Geboortedatum</label>
-                                        <input type="date" min="0" class="form-control" name="dateOfBirthRoommate">
-                                    </div>
-                                </div>
-                            </div>
-                            <button form='roommateForm' type="submit" class="btn btn-outline-info">
-                                Toevoegen
-                            </button>
-                        </form>
+    </form>
+    @endauth
+    <!-- ROOMMATES -->
+    @if(isset($fosterFamily))
+    <div class="mt-5">
+        <h3 class="text-muted">Huisgenoten</h3>
+        <div class="card">
+            <div class="card-body">
+                <h5 class="text-muted">Overzicht</h5>
+                <div class="stretch-card grid-margin">
+                    <div class="card-body card-border-info">
+                        @foreach ( $roommates as $roommate)
+                        <ul>
+                            <li class="row">
+                                <div class="col-md-5">Relatie: {{ $roommate->relation }}</div>
+                                <div class="col-md-5">Geboortedatum: {{ $roommate->dateOfBirth }}</div>
+                                <a href='/roommate_delete/{{$roommate->id}}'
+                                    class="col-md-1 btn btn-inverse-info btn-icon btn-lg pt-2"><i
+                                        class="mdi mdi-delete"></i></a>
+                            </li>
+                        </ul>
+                        @endforeach
                     </div>
                 </div>
-            </div>
-            <!-- PETS -->
-            <div class="mt-5">
-                <h3 class="text-muted">Huisdieren</h3>
-                <div class="card">
-                    <div class="card-body">
-                        <h5 class="text-muted">Overzicht</h5>
-                        <div class="stretch-card grid-margin">
-                            <div class="card-body card-border-info">
-                                @foreach ( $pets as $pet)
-                                <ul>
-                                    <li class="row">
-                                        <div class="col-md-5">Soort: {{ $pet->species}} </div>
-                                        <div class="col-md-5">Geboortedatum: {{ $pet->dateOfBirth }} </div>
-                                        <a href='/pet_delete/{{$pet->id}}'
-                                            class="col-md-1 btn btn-inverse-info btn-icon btn-lg pt-2"><i
-                                                class="mdi mdi-delete"></i></a>
-                                    </li>
-                                </ul>
-                                @endforeach
+                <form id='roommateForm' method="post" action="{{route('storeRoommate')}}">
+                    @csrf
+                    <input type="hidden" value={{$fosterFamily->id}} name="fosterFamily_id">
+                    <h5 class="text-muted mb-4">Nieuw toevoegen</h5>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label class="form-label">Relatie</label>
+                                <select class="form-control form-control-sm" name="relation">
+                                    <option value="0">Selecteer</option>
+                                    @foreach ($relation as $relatio)
+                                    <option value="{{$relatio}}">{{$relatio}}</option>
+                                    @endforeach
+                                </select>
                             </div>
                         </div>
-                        <form id='petForm' method="post" action="{{route('storePet')}}">
-                            @csrf
-                            <input type="hidden" value={{$fosterFamily->id}} name="fosterFamily_id">
-                            <h5 class="text-muted mb-4">Nieuw toevoegen</h5>
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label class="form-label">Soort</label>
-                                        <select class="form-control form-control-sm" name="species">
-                                            <option value="0">Selecteer</option>
-                                            @foreach ($species as $specie)
-                                            <option value="{{$specie}}">{{$specie}}</option>
-                                            @endforeach
-                                        </select>
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label class="form-label">Geboortedatum</label>
-                                        <input type="date" class="form-control" name="dateOfBirthPet">
-                                    </div>
-                                </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label class="form-label">Geboortedatum</label>
+                                <input type="date" min="0" class="form-control" name="dateOfBirthRoommate">
                             </div>
-                            <button form="petForm" type="submit" class="btn btn-outline-info">
-                                Toevoegen
-                            </button>
-                        </form>
+                        </div>
                     </div>
-                </div>
+                    <button form='roommateForm' type="submit" class="btn btn-outline-info">
+                        Toevoegen
+                    </button>
+                </form>
             </div>
-            @endif
         </div>
-        <button type="submit" class="btn btn-gradient-info float-end mt-5" @if(Auth::check()) form="updateForm" @else
-            form="registerForm" @endif>
-            @if (Auth::check()) Sla op @else Registreren @endif
-        </button>
+    </div>
+    <!-- PETS -->
+    <div class="mt-5">
+        <h3 class="text-muted">Huisdieren</h3>
+        <div class="card">
+            <div class="card-body">
+                <h5 class="text-muted">Overzicht</h5>
+                <div class="stretch-card grid-margin">
+                    <div class="card-body card-border-info">
+                        @foreach ( $pets as $pet)
+                        <ul>
+                            <li class="row">
+                                <div class="col-md-5">Soort: {{ $pet->species}} </div>
+                                <div class="col-md-5">Geboortedatum: {{ $pet->dateOfBirth }} </div>
+                                <a href='/pet_delete/{{$pet->id}}'
+                                    class="col-md-1 btn btn-inverse-info btn-icon btn-lg pt-2"><i
+                                        class="mdi mdi-delete"></i></a>
+                            </li>
+                        </ul>
+                        @endforeach
+                    </div>
+                </div>
+                <form id='petForm' method="post" action="{{route('storePet')}}">
+                    @csrf
+                    <input type="hidden" value={{$fosterFamily->id}} name="fosterFamily_id">
+                    <h5 class="text-muted mb-4">Nieuw toevoegen</h5>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label class="form-label">Soort</label>
+                                <select class="form-control form-control-sm" name="species">
+                                    <option value="0">Selecteer</option>
+                                    @foreach ($species as $specie)
+                                    <option value="{{$specie}}">{{$specie}}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label class="form-label">Geboortedatum</label>
+                                <input type="date" class="form-control" name="dateOfBirthPet">
+                            </div>
+                        </div>
+                    </div>
+                    <button form="petForm" type="submit" class="btn btn-outline-info">
+                        Toevoegen
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+    @endif
+</div>
+@if (auth()->user()->fosterFamily_id == null)
+@else
+<button type="submit" class="btn btn-gradient-info float-end mt-5" @if(Auth::check()) form="updateForm" @else
+    form="registerForm" @endif>
+    @if (Auth::check()) Sla op @else Registreren @endif
+</button>
+@endif
 @endsection
