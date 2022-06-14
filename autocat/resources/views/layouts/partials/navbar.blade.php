@@ -5,10 +5,12 @@
     <a class="navbar-brand brand-logo-mini" href="welkom"><img
         src="../assets/images/autoCatLogo/autoCatLogo_small_grey.png" alt="logo" /></a>
   </div>
+  @auth
   <div class="navbar-menu-wrapper d-flex align-items-stretch border-bottom">
     <button class="navbar-toggler navbar-toggler align-self-center" type="button" data-toggle="minimize">
       <span class="mdi mdi-menu"></span>
     </button>
+
     <ul class="navbar-nav navbar-nav-right">
       {{-- <li class="nav-item dropdown">
         <a class="nav-link count-indicator dropdown-toggle" id="messageDropdown" href="#" data-bs-toggle="dropdown"
@@ -49,6 +51,7 @@
           <h6 class="p-3 mb-0 text-center">4 nieuwe berichten</h6>
         </div>
       </li> --}}
+
       <li class="nav-item nav-profile dropdown">
         <a class="nav-link dropdown-toggle" id="profileDropdown" href="#" data-bs-toggle="dropdown"
           aria-expanded="false">
@@ -58,12 +61,13 @@
           </div>
           <div class="nav-profile-text">
             <p class="mb-1 text-black">
-              {{-- @if(Auth::user()->shelter_id != null)
-              {{$shelter->shelterFirstName}} {{$shelter->shelterLastName}}
-              @elseif(Auth::user()->fosterFamily_id !)
-              {{$foster->firstName}} {{$foster->lastName}}
 
-              @endif--}}
+              {{-- @if(auth()->user()->shelter_id != null)
+              {{$shelter->shelterFirstName}} {{$shelter->shelterLastName}}
+              @elseif(auth()->user()->fosterFamily_id != null)
+              {{$foster->firstName}} {{$foster->lastName}}
+              --}}
+
             </p>
           </div>
         </a>
@@ -78,8 +82,9 @@
             <i class="mdi mdi-account me-2"></i> Account overzicht </a>
           @endif
           <div class="dropdown-divider"></div>
-          <a class="{{Request::path() === ''? 'dropdown-item active active':'dropdown-item'}}" href=>
-            <i class="mdi mdi-power me-2"></i> Log uit </a>
+          <form method="POST" action="{{ route('logout') }}">
+            <a class="{{Request::path() === ''? 'dropdown-item active active':'dropdown-item'}}" :href="route('logout')"
+              onclick="event.preventDefault();this.closest('form').submit();"> Log uit </a>
         </div>
       </li>
       <li class="nav-item nav-logout d-none d-lg-block">
@@ -95,8 +100,10 @@
 
       </li>
     </ul>
+
     <button class="navbar-toggler navbar-toggler-right d-lg-none align-self-center" type="/" data-toggle="offcanvas">
       <span class="mdi mdi-menu"></span>
     </button>
   </div>
+  @endauth
 </nav>

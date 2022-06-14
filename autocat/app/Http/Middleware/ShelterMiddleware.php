@@ -17,7 +17,7 @@ class ShelterMiddleware
     public function handle(Request $request, Closure $next)
     {
         if (!auth()->check() || auth()->user()->shelter_id == null) {
-            abort(code: 403);
+            abort(code: 403,  message: 'U heeft geen toegang tot deze pagina');
         }
         return $next($request);
     }

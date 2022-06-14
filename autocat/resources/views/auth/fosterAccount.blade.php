@@ -336,11 +336,11 @@
     </div>
     @endif
 </div>
-@if (auth()->user()->fosterFamily_id == null)
-@else
+{{-- @if (auth()->user()->shelter_id != null) --}}
+{{-- @else --}}
 <button type="submit" class="btn btn-gradient-info float-end mt-5" @if(Auth::check()) form="updateForm" @else
     form="registerForm" @endif>
     @if (Auth::check()) Sla op @else Registreren @endif
 </button>
-@endif
+{{-- @endif --}}
 @endsection
