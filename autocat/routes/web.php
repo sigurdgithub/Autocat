@@ -45,6 +45,7 @@ Route::middleware('auth')->group(function () {
 
     Route::get('/notifications/{fosterId}', [DashBoardController::class, 'showByFosterId'])->name('notifications');
 
+
     Route::get('/pleeggezinAccount/{id}', function ($id) {
         $user = App\Models\User::find(auth()->user()->id);
         //dd($user->fosterFamily_id);
@@ -93,6 +94,9 @@ Route::middleware('auth')->group(function () {
 
     Route::post('/addRoommate', [PetsAndRoommatesController::class, 'storeRoommate'])->name('storeRoommate');
     Route::post('/addPet', [PetsAndRoommatesController::class, 'storePet'])->name('storePet');
+
+    Route::delete('/notifications_delete/{id}', [DashBoardController::class, 'delete'])->name('delete');
+    Route::post('/addNotification', [DashBoardController::class, 'store'])->name('addNotification');
 
     // ------- FOSTER USERS ------- */
     Route::group(
@@ -150,8 +154,7 @@ Route::middleware('auth')->group(function () {
 
             Route::post('/cats/ajax', [CatController::class, 'filterCats']);
             Route::post('/fosterfamilies/ajax', [FosterFamilyController::class, 'filterFosterFamilies']);
-            Route::delete('/notifications_delete/{id}', [DashBoardController::class, 'delete'])->name('delete');
-            Route::post('/addNotification', [DashBoardController::class, 'store'])->name('addNotification');
+
             Route::post('/addNotificationShelter', [DashBoardController::class, 'storeShelter'])->name('addNotificationShelter');
         }
     );
