@@ -72,7 +72,7 @@ Route::middleware('auth')->group(function () {
         $furLength = (['Kort', 'Lang']);
         $gender = (['Kattin', 'Kater']);
         $socialization = (['Tam', 'Bang', 'Wild']);
-        $reason = (['Vaccinatie', 'Chip', 'Vaccinatie & chip', 'Sterilisatie', '']);
+        $reason = (['Vaccinatie', 'Chip', 'Vaccinatie & chip', 'Sterilisatie', 'Algemene checkup', 'Andere']);
         $fosterFamilies = FosterFamilyController::getFosterFamilies();
 
         return view('catDetail', compact('cats', 'adoptionStatus', 'breed', 'furLength', 'gender', 'socialization', 'fosterFamilies'));
