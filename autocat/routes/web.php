@@ -13,6 +13,7 @@ use App\Http\Controllers\Auth\RegisteredUserController;
 use App\Models\FosterFamily;
 use App\Http\Middleware\ShelterMiddleware;
 use App\Models\FosterPreference;
+use Illuminate\Support\Facades\Crypt;
 
 /*
 |--------------------------------------------------------------------------
@@ -48,10 +49,11 @@ Route::middleware('auth')->group(function () {
 
 
     Route::get('/pleeggezinAccount/{id}', function ($id) {
+        $fosterFamilyDecryptID = Crypt::decryptString($id);
+        // dd($fosterFamilyDecryptID);
         $user = App\Models\User::find(auth()->user()->id);
         //dd($user->fosterFamily_id);
-        $fosterFamily = App\Models\FosterFamily::where('id', '=', $id)->firstOrFail();
-        //dd($fosterFamily)
+        $fosterFamily = App\Models\FosterFamily::where('id', '=', $fosterFamilyDecryptID)->firstOrFail();
         $fosterPreference = App\Models\FosterPreference::where('fosterFamily_id', '=', $fosterFamily->id)->firstOrFail();
         //dd($fosterPreference);
 
@@ -132,8 +134,9 @@ Route::middleware('auth')->group(function () {
             });
 
             Route::get('/asielAccount/{id}', function ($id) {
+                $shelterDecryptID = Crypt::decryptString($id);
                 $user = App\Models\User::find(auth()->user()->id);
-                $shelter = App\Models\Shelter::where('id', '=', $id)->firstOrFail();
+                $shelter = App\Models\Shelter::where('id', '=', $shelterDecryptID)->firstOrFail();
                 return view('auth.shelterAccount', compact('user', 'shelter'));
             })->name('shelterAccount');
 
@@ -159,22 +162,5 @@ Route::middleware('auth')->group(function () {
             Route::post('/addNotificationShelter', [DashBoardController::class, 'storeShelter'])->name('addNotificationShelter');
         }
     );
-
-    /*Route::get('/kattenOverzicht', function () {
-    return view('catOverview');
-});*/
-
-    /* Route::get('/kattenOverzicht', [CatOverviewController::class, 'getCats']); */
-
-
-
-    /* Route::get('/pleeggezinDashboard', function () {
-    return view('fosterDashboard');
-}); */
-
-
-    /* Route::get('/asielDashboard', function () {
-    return view('shelterDashboard');
-})->name('shelterDashboard'); */
 });
 require __DIR__ . '/auth.php';
