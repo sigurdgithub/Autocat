@@ -3,10 +3,14 @@
   {{-- FOSTER SIDEBAR --}}
   @auth
   @if (auth()->user()->fosterFamily_id != null)
+  @php
+  $foster_id_crypt = Crypt::encryptString(auth()->user()->fosterFamily_id);
+  $shelter_id_crypt = Crypt::encryptString(auth()->user()->shelter_id);
+  @endphp
   <ul class="nav ">
     <li class="nav-item info">
       <a class="{{Request::path() === 'pleeggezinDashboard'? 'nav-link active active':'nav-link'}}"
-        href="/notifications/{{auth()->user()->fosterFamily_id}}">
+        href="/notifications/{{$foster_id_crypt}}">
         <span class="menu-title">Dashboard</span>
         <i class="mdi mdi-view-dashboard menu-icon"></i>
       </a>

@@ -31,14 +31,19 @@
             </p>
           </div>
         </a>
+        @php
+        $foster_id_crypt = Crypt::encryptString(auth()->user()->fosterFamily_id);
+        $shelter_id_crypt = Crypt::encryptString(auth()->user()->shelter_id);
+        @endphp
+
         <div class="dropdown-menu navbar-dropdown" aria-labelledby="profileDropdown">
           @if (auth()->user()->fosterFamily_id != null)
           <a class="{{Request::path() === 'fosterAccount'? 'dropdown-item active active':'dropdown-item'}}"
-            href="/pleeggezinAccount/{{auth()->user()->fosterFamily_id}}">
+            href="/pleeggezinAccount/{{$foster_id_crypt}}">
             <i class="mdi mdi-account me-2"></i> Account overzicht </a>
           @elseif (auth()->user()->shelter_id != null)
           <a class="{{Request::path() === 'asielAccount'? 'dropdown-item active active':'dropdown-item'}}"
-            href="asielAccount/{{auth()->user()->shelter_id}}">
+            href="asielAccount/{{$shelter_id_crypt}}">
             <i class="mdi mdi-account me-2"></i> Account overzicht </a>
           @endif
           <div class="dropdown-divider nav-item nav-logout d-none d-lg-block"></div>
