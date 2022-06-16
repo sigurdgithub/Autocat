@@ -7,6 +7,7 @@ use App\Http\Requests\Auth\LoginRequest;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Crypt;
 
 class AuthenticatedSessionController extends Controller
 {
@@ -32,11 +33,12 @@ class AuthenticatedSessionController extends Controller
         //dd($request);
         $request->session()->regenerate();
         // Route to correct dashboard if shelter or foster
-        if ($id = auth()->user()->fosterFamily_id) {
-            /* $fosterFamily = auth()->user()->fosterFamily; */
-            return redirect()->route('notifications', $id,); //['fosterId' => $request->fosterFamily]);
-        } elseif ($id = auth()->user()->shelter_id) {
-            return redirect()->route('shelterNotifications', $id);
+        if ($foster_id_crypt = auth()->user()->fosterFamily_id) {
+            $foster_id_crypt = Crypt::encryptString(auth()->user()->fosterFamily_id);
+            return redirect()->route('notifications', $foster_id_crypt); //['fosterId' => $request->fosterFamily]);
+        } elseif ($shelter_id_crypt = auth()->user()->shelter_id) {
+            $shelter_id_crypt = Crypt::encryptString(auth()->user()->shelter_id);
+            return redirect()->route('shelterNotifications', $shelter_id_crypt);
         };
     }
 
