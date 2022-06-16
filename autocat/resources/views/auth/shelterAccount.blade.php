@@ -120,10 +120,10 @@
                             <div class="form-group">
                                 <label class="form-label">Wachtwoord</label>
                                 <input type="password" class="form-control" name="password"
-                                    value="{{$user->password ?? ''}}">
+                                    value="{{$user->password ?? ''}}" @auth readonly @endauth>
                             </div>
                         </div>
-                    </div>    
+                    </div>
                     <div class="row mt-3">
                         <div class="col-md-4">
                             <div class="form-group">

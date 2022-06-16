@@ -14,6 +14,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rules;
 use App\Http\Controllers\PetsAndRoommatesController;
+use Illuminate\Support\Facades\Crypt;
 
 class RegisteredUserController extends Controller
 {
@@ -124,8 +125,9 @@ class RegisteredUserController extends Controller
         $species = (['Kat', 'Hond', 'Knaagdier', 'Vogel']);
         $relation = (['Partner', 'Kind', 'Ouder']);
 
-        $id = auth()->user()->fosterFamily_id;
-        return redirect()->route('fosterAccount', $id);
+        $foster_id_crypt = Crypt::encryptString(auth()->user()->fosterFamily_id);
+
+        return redirect()->route('notifications', $foster_id_crypt);
     }
 
     public function updateFoster(Request $request, $user)
@@ -147,7 +149,7 @@ class RegisteredUserController extends Controller
 
         $user = User::find(auth()->user()->id);
         $user->email = $request->input('email');
-        $user->password = Hash::make($request->input('password'));
+        /* $user->password = ($request->input('password')); */
         $user->save();
 
         FosterPreference::where('fosterFamily_id', $id)->update([
@@ -167,8 +169,9 @@ class RegisteredUserController extends Controller
         //dd($pets);
         $species = (['Kat', 'Hond', 'Knaagdier', 'Vogel']);
         $relation = (['Partner', 'Kind', 'Ouder']);
+        $foster_id_crypt = Crypt::encryptString(auth()->user()->fosterFamily_id);
 
-        return redirect()->route('fosterAccount', $id);
+        return redirect()->route('fosterAccount', $foster_id_crypt);
     }
 
     public function storeShelter(Request $request)
@@ -226,8 +229,8 @@ class RegisteredUserController extends Controller
 
         Auth::login($user);
 
-        $id = auth()->user($user)->shelter_id;
-        return redirect()->route('shelterAccount', $id);
+        $shelter_id_crypt = Crypt::encryptString(auth()->user()->shelter_id);
+        return redirect()->route('shelterNotifications', $shelter_id_crypt);
     }
 
     public function updateShelter(Request $request)
@@ -251,9 +254,10 @@ class RegisteredUserController extends Controller
 
         $user = User::find(auth()->user()->id);
         $user->email = $request->input('email');
-        $user->password = Hash::make($request->input('password'));
+        $user->password = ($request->input('password'));
         $user->save();
+        $shelter_id_crypt = Crypt::encryptString(auth()->user()->shelter_id);
 
-        return redirect()->route('shelterAccount', $id);
+        return redirect()->route('shelterAccount', $shelter_id_crypt);
     }
 }
