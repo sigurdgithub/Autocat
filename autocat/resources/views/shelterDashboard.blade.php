@@ -386,17 +386,22 @@
                         current_cat = data;
                         console.log(current_cat);
                         $('#dateOfBirthCat').empty();
-                        $('#dateOfBirthCat').append(current_cat.dateOfBirth.toString());
+                        if (current_cat.dateOfBirth == null) { $('#dateOfBirthCat').append("Onbekend"); }
+                        else { $('#dateOfBirthCat').append(current_cat.dateOfBirth.toString()); }
                         $('#genderCat').empty();
-                        $('#genderCat').append(current_cat.gender);
+                        if (current_cat.gender == null) { $('#genderCat').append("Onbekend"); }
+                        else { $('#genderCat').append(current_cat.gender); }
                         $('#breedCat').empty();
-                        $('#breedCat').append(current_cat.breed);
+                        if (current_cat.breed == null) { $('#breedCat').append("Onbekend"); }
+                        else { $('#breedCat').append(current_cat.breed); }
                         $('#chipNumberCat').empty();
                         $('#chipNumberCat').append(current_cat.chipNumber)
                         $('#socializationCat').empty();
-                        $('#socializationCat').append(current_cat.socialization);
+                        if (current_cat.socialization == null) { $('#socializationCat').append("Onbekend"); }
+                        else { $('#socializationCat').append(current_cat.socialization); }
                         $('#startWeightCat').empty();
-                        $('#startWeightCat').append(current_cat.startWeight + " Gram");
+                        if (current_cat.startWeight == null) { $('#startWeightCat').append("Onbekend"); }
+                        else { $('#startWeightCat').append(current_cat.startWeight + " Gram"); }
                         $('#sterilizedCat').empty();
                         $('#sterilizedCat').append((Number(current_cat.sterilized) ? "Ja": "Nee"));
                         // TODO: add more if extra properties are selected
