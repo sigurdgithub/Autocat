@@ -28,7 +28,7 @@ class FosterPet extends Model
      */
     protected $hidden = [];
 
-    protected $table = 'fosterPets';
+    protected $table = 'pets';
 
 
 }

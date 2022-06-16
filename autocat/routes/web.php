@@ -151,6 +151,7 @@ Route::middleware('auth')->group(function () {
             Route::get('/fosterfamilies/ajax/{search}', [FosterFamilyController::class, 'filterFosterFamiliesByString']);
             Route::get('/catPref/ajax/{id}', [CatController::class, 'getPreferenceByCatId']);
             Route::get('/fosterfamily/ajax/{id}', [FosterFamilyController::class, 'getFosterFamilyById']);
+            Route::get('/fosterPref/ajax/{id}', [FosterFamilyController::class, 'getPreferenceByFosterId']);
 
             /* --- POST --- */
 

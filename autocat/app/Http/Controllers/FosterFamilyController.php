@@ -30,10 +30,12 @@ class FosterFamilyController extends Controller
         return FosterFamily::findOrFail($id);
     }
 
-    private static function checkKids($query)
-    {
-        $query = $query;
-        return $query;
+    public function getPreferenceByFosterId($id) {
+        $result = [];
+        $result['preferences'] = json_decode(json_encode(FosterFamily::findOrFail($id)->preferences));
+        $result['pets'] = json_decode(json_encode(FosterFamily::findOrFail($id)->pets));
+        $result['roommates'] = json_decode(json_encode(FosterFamily::findOrFail($id)->roommates));        
+        return json_encode($result);
     }
 
     private static function filterByCatPref($value, $query)

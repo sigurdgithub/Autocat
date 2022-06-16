@@ -13,17 +13,17 @@ class FosterFamily extends Authenticatable
 
     public function pets()
     {
-        return $this->hasMany(FosterPet::class, 'fosterFamily');
+        return $this->hasMany(FosterPet::class, 'fosterFamily_id');
     }
 
     public function roommates()
     {
-        return $this->hasMany(FosterRoommate::class, 'fosterFamily');
+        return $this->hasMany(FosterRoommate::class, 'fosterFamily_id');
     }
 
     public function notifications()
     {
-        return $this->hasMany(Notification::class, 'fosterFamily');
+        return $this->hasMany(Notification::class, 'fosterFamily_id');
     }
 
     public function fosterFamily_id()
@@ -33,7 +33,7 @@ class FosterFamily extends Authenticatable
 
     public function preferences()
     {
-        return $this->hasOne(FosterPreference::class);
+        return $this->hasOne(FosterPreference::class, "fosterFamily_id");
     }
 
     /**
