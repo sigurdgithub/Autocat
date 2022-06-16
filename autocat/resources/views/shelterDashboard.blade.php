@@ -330,6 +330,15 @@
                         if (data.noIntensiveCare) {
                             $('#catAttention').append('<li>Is ziek maar heeft geen intensieve verzorging nodig</li>');
                         }
+                        if (data.bottleFeeding) {
+                            $('#catAttention').append('<li>Heeft flesvoeding nodig</li>');
+                        }
+                        if (data.pregnancy) {
+                            $('#catAttention').append('<li>Is zwanger</li>');
+                        }
+                        if (data.isolation) {
+                            $('#catAttention').append('<li>Moet in isolatie kunnen zitten</li>');
+                        }
                         //$('#catPreferences').append(JSON.stringify(data));
                         console.log(data);
                         //$('#sterilizedCat').empty();
@@ -389,7 +398,7 @@
                         $('#startWeightCat').empty();
                         $('#startWeightCat').append(current_cat.startWeight + " Gram");
                         $('#sterilizedCat').empty();
-                        $('#sterilizedCat').append(current_cat.sterilized);
+                        $('#sterilizedCat').append((Number(current_cat.sterilized) ? "Ja": "Nee"));
                         // TODO: add more if extra properties are selected
                         $('#catLink').append(current_cat.name);
                         $('#catLink').attr('href', '/katDetail/'+current_cat.id);
