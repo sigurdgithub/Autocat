@@ -100,7 +100,7 @@
                             <div class="form-group">
                                 <label class="form-label">Wachtwoord</label>
                                 <input type="password" class="form-control" name="password"
-                                    value="{{$user->password ?? ''}}">
+                                    value="{{$user->password ?? ''}}" @auth readonly @endauth>
                             </div>
                         </div>
                     </div>
