@@ -27,7 +27,7 @@
             <div class="card-body">
                 <div class="row mb-3">
                     <div class="col-md-4">
-                        <select id='selectFoster' class="filter location-search" autocomplete="off"
+                        <select id='selectFoster' class="catFilter" class="filter location-search" autocomplete="off"
                             placeholder="Selecteer pleeggezin..." multiple data-silent-initial-value-set="true">
                             @foreach ($fosterFamilies as $fosterFamily)
                                 <option value='{{ $fosterFamily->id }}'>{{ $fosterFamily->firstName }}
@@ -36,13 +36,13 @@
                         </select>
                     </div>
                     <div class="col-md-4">
-                        <select id='selectGender' multiple placeholder="Selecteer Geslacht...">
-                            <option value='female'>Kattin</option>
-                            <option value='male'>Kater</option>
+                        <select id='selectGender' class="catFilter" multiple placeholder="Selecteer Geslacht...">
+                            <option value='Kattin'>Kattin</option>
+                            <option value='Kater'>Kater</option>
                         </select>
                     </div>
                     <div class="col-md-4">
-                        <select id='selectAge' multiple placeholder="Selecteer Leeftijd...">
+                        <select id='selectAge' class="catFilter" multiple placeholder="Selecteer Leeftijd...">
                             <option value='kitten'>Kitten</option>
                             <option value='adolescent'>Puber</option>
                             <option value='adult'>Volwassen</option>
@@ -52,7 +52,7 @@
                 </div>
                 <div class="row mb-5">
                     <div class="col-md-4">
-                        <select id='selectStatus' multiple placeholder="Selecteer Adoptiestatus...">
+                        <select id='selectStatus' class="catFilter" multiple placeholder="Selecteer Adoptiestatus...">
                             <option value='Aangemeld'>Aangemeld</option>
                             <option value='Bij Pleeggezin'>Bij Pleeggezin</option>
                             <option value='In Asiel'>In Asiel</option>
@@ -63,7 +63,7 @@
                         </select>
                     </div>
                     <div class="col-md-4">
-                        <select id='selectPlacement' multiple placeholder="Selecteer Adoptie mogelijkheden...">
+                        <select id='selectPlacement' class="catFilter" multiple placeholder="Selecteer Adoptie mogelijkheden...">
                             <option value='Solo should'>Solo Moet</option>
                             <option value='Solo could'>Solo Mag</option>
                             <option value='Solo no'>Solo Nee</option>
@@ -79,7 +79,7 @@
                         </select>
                     </div>
                     <div class="col-md-4">
-                        <select id='selectCharacter' multiple placeholder="Selecteer Karakter...">
+                        <select id='selectCharacter' class="catFilter" multiple placeholder="Selecteer Karakter...">
                             <option value='lapCat'>Schootkat</option>
                             <option value='playfulCat'>Speelse kat</option>
                             <option value='outdoorCat'>Buitenkat</option>
@@ -271,7 +271,7 @@
                 showValueAsTags: true,
                 options: myOptions
             });*/
-            $('[id^="select"]').on('change', function() {
+            $('.catFilter').on('change', function() {
 
                 // Get input value on change
                 var ageTerm = $('#selectAge').val();

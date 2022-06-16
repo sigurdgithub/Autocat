@@ -188,47 +188,51 @@ class CatController extends Controller
                     case 'kitten':
                         if ($first) {
                             $first = false;
-                            $query = $query->whereDate('dateOfBirth', '<=', Carbon::now()->subYear()->toDateString());
+                            $query = $query->whereDate('cats.dateOfBirth', '>=', Carbon::now()->subYear()->toDateString());
                         } else {
-                            $query = $query->orWhereDate('dateOfBirth', '<=', Carbon::now()->subYear()->toDateString());
+                            $query = $query->orWhereDate('cats.dateOfBirth', '>=', Carbon::now()->subYear()->toDateString());
                         }
+                        break;
                     case 'adolescent':
                         if ($first) {
                             $first = false;
-                            $query = $query->whereBetween('dateOfBirth', [Carbon::now()->subYear()->toDateString(), Carbon::now()->subYears(2)->toDateString()]);
+                            $query = $query->whereBetween('cats.dateOfBirth', [Carbon::now()->subYears(2)->toDateString(), Carbon::now()->subYear()->toDateString()]);
                         } else {
-                            $query = $query->orWhereBetween('dateOfBirth', [Carbon::now()->subYear()->toDateString(), Carbon::now()->subYears(2)->toDateString()]);
+                            $query = $query->orWhereBetween('cats.dateOfBirth', [Carbon::now()->subYears(2)->toDateString(), Carbon::now()->subYear()->toDateString()]);
                         }
+                        break;
                     case 'adult':
                         if ($first) {
                             $first = false;
-                            $query = $query->whereBetween('dateOfBirth', [Carbon::now()->subYear(2)->toDateString(), Carbon::now()->subYears(8)->toDateString()]);
+                            $query = $query->whereBetween('cats.dateOfBirth', [Carbon::now()->subYears(8)->toDateString(), Carbon::now()->subYear(2)->toDateString()]);
                         } else {
-                            $query = $query->orWhereBetween('dateOfBirth', [Carbon::now()->subYear(2)->toDateString(), Carbon::now()->subYears(8)->toDateString()]);
+                            $query = $query->orWhereBetween('cats.dateOfBirth', [Carbon::now()->subYears(8)->toDateString(), Carbon::now()->subYear(2)->toDateString()]);
                         }
+                        break;
                     case 'senior':
                         if ($first) {
                             $first = false;
-                            $query = $query->whereDate('dateOfBirth', '>', Carbon::now()->subYears(8)->toDateString());
+                            $query = $query->whereDate('cats.dateOfBirth', '<', Carbon::now()->subYears(8)->toDateString());
                         } else {
-                            $query = $query->orWhereDate('dateOfBirth', '>', Carbon::now()->subYears(8)->toDateString());
+                            $query = $query->orWhereDate('cats.dateOfBirth', '<', Carbon::now()->subYears(8)->toDateString());
                         }
+                        break;
                 }
             }
             return $query;
         } else {
             switch ($value) {
                 case 'kitten':
-                    $query = $query->whereDate('dateOfBirth', '<=', Carbon::now()->subYear()->toDateString());
+                    $query = $query->whereDate('cats.dateOfBirth', '<=', Carbon::now()->subYear()->toDateString());
                     return $query;
                 case 'adolescent':
-                    $query = $query->whereBetween('dateOfBirth', [Carbon::now()->subYear()->toDateString(), Carbon::now()->subYears(2)->toDateString()]);
+                    $query = $query->whereBetween('cats.dateOfBirth', [Carbon::now()->subYears(2)->toDateString(), Carbon::now()->subYear()->toDateString()]);
                     return $query;
                 case 'adult':
-                    $query = $query->whereBetween('dateOfBirth', [Carbon::now()->subYear(2)->toDateString(), Carbon::now()->subYears(8)->toDateString()]);
+                    $query = $query->whereBetween('cats.dateOfBirth', [Carbon::now()->subYears(8)->toDateString(), Carbon::now()->subYear(2)->toDateString(),]);
                     return $query;
                 case 'senior':
-                    $query = $query->whereDate('dateOfBirth', '>', Carbon::now()->subYears(8)->toDateString());
+                    $query = $query->whereDate('cats.dateOfBirth', '>', Carbon::now()->subYears(8)->toDateString());
                     return $query;
             }
         }
