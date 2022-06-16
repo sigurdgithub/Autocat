@@ -7,6 +7,7 @@ use App\Models\FosterFamily;
 use App\Models\Cat;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Facades\DB;
+use Carbon\Carbon;
 
 
 
@@ -116,38 +117,57 @@ class FosterFamilyController extends Controller
             }
         }
     }
+
+    private static function filterChildren() {
+        $now = Carbon::now()->subYears(12)->toDateString();
+        $query =  DB::table('fosterFamilies')->crossJoin('roommates', 'fosterFamilies.id', '=', 'roommates.fosterFamily_id')->select('fosterFamilies.*');
+        $result = $query->where('roommates.dateOfBirth', '>', $now)->get();
+        return $result;
+    }
+
     // TODO: Depends on roommates and pets
+    // Returns a collection of all foster families that DON'T comply with the criteria
     private static function filterHomeSituation($value, $query) {
+        //$query =  DB::table('fosterFamilies')->leftJoin('pets', 'fosterFamilies.id', '=', 'pets.fosterFamily_id')->select('fosterFamilies.*');
         if (is_array($value)) {
             $first = true;
             foreach ($value as $val) {
                 if (str_ends_with($val, 'kids')) {
+                    $now = Carbon::now()->subYears(12)->toDateString();
+                    $subQuery = DB::table('fosterFamilies')->join('roommates', 'fosterFamilies.id', '=', 'roommates.fosterFamily_id')->select('fosterFamilies.id');
+                    $subQuery = $subQuery->where('roommates.dateOfBirth', '>', $now); 
                     if ($first) {
                         $first = false;
-                        $query = $query->where('Solo', explode(' ', $val)[0]);
+                        $query = $query->whereNotIn('fosterFamilies.id', $subQuery);
                     } else {
-                        $query = $query->orWhere('Solo', explode(' ', $val)[0]);
+                        $query = $query->orWhereNotIn('fosterFamilies.id', $subQuery);
                     }
                 } else if (str_ends_with($val, 'pets')) {
+                    $subQuery = DB::table('fosterFamilies')->join('pets', 'fosterFamilies.id', '=', 'pets.fosterFamily_id')->select('fosterFamilies.id');
                     if ($first) {
                         $first = false;
-                        $query = $query->where('withPet', explode(' ', $val)[0]);
+                        $query = $query->whereNotIn('fosterFamilies.id', $subQuery);
                     } else {
-                        $query = $query->orWhere('withPet', explode(' ', $val)[0]);
+                        $query = $query->orWhereNotIn('fosterFamilies.id', $subQuery);
                     }
                 } else if (str_ends_with($val, 'dogs')) {
+                    $subQuery = DB::table('fosterFamilies')->join('pets', 'fosterFamilies.id', '=', 'pets.fosterFamily_id')->select('fosterFamilies.id');
+                    $subQuery =  $subQuery->where('pets.species', '=', 'Hond');
                     if ($first) {
                         $first = false;
-                        $query = $query->where('gardenAccess', explode(' ', $val)[0]);
+                        $query = $query->whereNotIn('fosterFamilies.id', $subQuery);
                     } else {
-                        $query = $query->orWhere('gardenAccess', explode(' ', $val)[0]);
+                        $query = $query->orWhereNotIn('fosterFamilies.id', $subQuery);
                     }
                 } else if (str_ends_with($val, 'cats')) {
+                    $subQuery = DB::table('fosterFamilies')->join('pets', 'fosterFamilies.id', '=', 'pets.fosterFamily_id')->select('fosterFamilies.id');
+                    $subQuery = $subQuery->where('pets.species', '=', 'Kat');
                     if ($first) {
                         $first = false;
-                        $query = $query->where('gardenAccess', explode(' ', $val)[0]);
+                        $query = $query->whereNotIn('fosterFamilies.id', $subQuery);
+
                     } else {
-                        $query = $query->orWhere('gardenAccess', explode(' ', $val)[0]);
+                        $query = $query->orWhereNotIn('fosterFamilies.id', $subQuery);
                     }
                 }
             }
@@ -176,7 +196,7 @@ class FosterFamilyController extends Controller
     {
         $data = $request->all();
 
-        $fosterFamilies = DB::table('fosterFamilies')->leftJoin('foster_preferences', 'fosterFamilies.id', '=', 'foster_preferences.fosterFamily_id')->join('roommates', 'fosterFamilies.id', '=', 'roommates.fosterFamily_id');
+        $fosterFamilies = DB::table('fosterFamilies')->leftJoin('foster_preferences', 'fosterFamilies.id', '=', 'foster_preferences.fosterFamily_id');
         //$fosterFamilies = $fosterFamilies->where('foster_preferences.adult', '=', 1);
         if (isset($data['availableSpots'])) {
             $fosterFamilies = $fosterFamilies->where('availableSpots', '=', $data['availableSpots']);
@@ -184,8 +204,11 @@ class FosterFamilyController extends Controller
         if (isset($data['livingStatus'])) {
             $fosterFamilies = FosterFamilyController::filterHomeSituation($data['livingStatus'], $fosterFamilies);
         }
+        if (isset($data['catPreferences'])) {
+            $fosterFamilies = FosterFamilyController::filterByCatPref($data['catPreferences'], $fosterFamilies);
+        }
         $result = $fosterFamilies->get();
-        dd($result);
+        //dd($result);
         return json_encode($result);
     }
 }

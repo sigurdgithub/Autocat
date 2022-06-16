@@ -26,7 +26,7 @@
         <div class="card-body">
             <div class="row mb-5">
                 <div class="col-md-4">
-                    <select id='availableSpots' class="fosterFilter" placeholder="Selecteer een aantal plaatsen...">
+                    <select id='availableSpots' class="fosterFilter" multiple placeholder="Selecteer een aantal plaatsen...">
                         <option value='1'>1 beschikbare plaats</option>
                         <option value='2'>2 beschikbare plaatsen</option>
                         <option value='3'>3 beschikbare plaatsen</option>
