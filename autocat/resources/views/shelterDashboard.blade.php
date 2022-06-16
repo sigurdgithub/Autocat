@@ -405,6 +405,8 @@
                         $('#sterilizedCat').empty();
                         $('#sterilizedCat').append((Number(current_cat.sterilized) ? "Ja": "Nee"));
                         // TODO: add more if extra properties are selected
+                        $('#catLink').empty();
+                        $('#catLink').append("Volledige fiche van ");
                         $('#catLink').append(current_cat.name);
                         $('#catLink').attr('href', '/katDetail/'+current_cat.id);
                         getPreferencesCat(current_cat.id);
