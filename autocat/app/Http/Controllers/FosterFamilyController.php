@@ -219,7 +219,7 @@ class FosterFamilyController extends Controller
             $fosterFamilies = FosterFamilyController::filterByCatPref($data['catPreferences'], $fosterFamilies);
         }
         $result = $fosterFamilies->get();
-        $result = json_decode(json_encode($result));
+        $result = json_decode(json_encode($result), true);
         foreach ($result as $row) {
             $row['hashed'] = Crypt::encryptString($row['id']);
         }
