@@ -338,7 +338,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="mt-5"><a> Volledige fiche van </a></div>
+                        <div class="mt-5"><a id="fosterLink"> Volledige fiche van </a></div>
                     </ng-container>
                 </div>
             </div>
@@ -405,12 +405,19 @@
                 success: function(data) {
                     $('#catPreferences').empty();
                     $('#catAttention').empty();
-                    let string = (data.kids ? ' wel ' : ' niet ');
-                    $('#catPreferences').append('<li>kan ' + string + 'geplaatst worden met kinderen</li>');
-                    string = (data.dogs ? ' wel ' : ' niet ');
-                    $('#catPreferences').append('<li>kan ' + string + 'geplaatst worden met honden</li>');
-                    string = (data.cats ? ' wel ' : ' niet ');
-                    $('#catPreferences').append('<li>kan ' + string + 'geplaatst worden met katten</li>');
+                    let string;
+                    if (!data.kids) {
+                        string = (data.kids ? ' wel ' : ' niet ');
+                        $('#catPreferences').append('<li>kan ' + string + 'geplaatst worden met kinderen</li>');
+                    }
+                    if (!data.dogs) {
+                        string = (data.dogs ? ' wel ' : ' niet ');
+                        $('#catPreferences').append('<li>kan ' + string + 'geplaatst worden met honden</li>');
+                    }
+                    if (!data.cats) {
+                        string = (data.cats ? ' wel ' : ' niet ');
+                        $('#catPreferences').append('<li>kan ' + string + 'geplaatst worden met katten</li>');
+                    }
                     if (data.intensiveCare) {
                         $('#catAttention').append('<li>Heeft intensieve verzorging nodig</li>');
                     }
@@ -547,6 +554,10 @@
                             $('#emailFoster').append(current_foster.email);
                             $('#availableSpotsFoster').empty();
                             $('#availableSpotsFoster').append(current_foster.availableSpots);
+                            $('#fosterLink').empty();
+                            $('#fosterLink').append("Volledige fiche van ");
+                            $('#fosterLink').append(current_foster.firstName + ' ' + current_foster.lastName);
+                            $('#fosterLink').attr('href', '/pleeggezinAccount/' + current_foster.id);
                             getPreferencesFoster(fosterFamilyId);
                             //$('#sterilizedCat').empty();
                             //$('#sterilizedCat').append(current_foster.sterilized);
