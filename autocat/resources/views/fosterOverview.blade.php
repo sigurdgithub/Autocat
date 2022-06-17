@@ -107,7 +107,7 @@
                                     <div class="card-footer card-border-info">
                                         <div class="mb-3">` + cat.availableSpots + (cat.availableSpots>1?  ` beschikbare plaatsen`:  ` beschikbare plaats`) + `</div>
                                             {{-- TODO: add route once detail of foster family is available --}}
-                                            <div><a href="{{--route()--}}" class="text-black"><u>Meer info</u></a></div>
+                                            <div><a href="${cat.hashed}" class="text-black"><u>Meer info</u></a></div>
                                     </div>
                                 </div>
                             </div>

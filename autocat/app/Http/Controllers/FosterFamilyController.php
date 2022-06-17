@@ -9,6 +9,7 @@ use App\Models\User;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Facades\DB;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Crypt;
 
 
 
@@ -23,12 +24,14 @@ class FosterFamilyController extends Controller
     {
         $fosterFamilyId = Cat::find($catId)->fosterFamily_id;
         $fosterFamily = FosterFamily::find($fosterFamilyId);
-
         return $fosterFamily;
     }
     public function getFosterFamilyById($id)
     {
-        return FosterFamily::findOrFail($id);
+        $result = FosterFamily::findOrFail($id);
+        $result = json_decode(json_encode($result), true);
+        $result['hashed'] = Crypt::encryptString($result['id']);
+        return json_encode($result);
     }
 
     public function getPreferenceByFosterId($id) {
@@ -193,6 +196,10 @@ class FosterFamilyController extends Controller
         $fosterFamilies = $fosterFamilies->where('fosterFamilies.firstName', 'LIKE', '%' . $string . '%')
             ->orWhere('fosterFamilies.lastName', 'LIKE', '%' . $string . '%');
         $result = $fosterFamilies->get();
+        $result = json_decode(json_encode($result));
+        foreach ($result as $row) {
+            $row['hashed'] = Crypt::encryptString($row['id']);
+        }
         return json_encode($result);
     }
 
@@ -212,6 +219,10 @@ class FosterFamilyController extends Controller
             $fosterFamilies = FosterFamilyController::filterByCatPref($data['catPreferences'], $fosterFamilies);
         }
         $result = $fosterFamilies->get();
+        $result = json_decode(json_encode($result));
+        foreach ($result as $row) {
+            $row['hashed'] = Crypt::encryptString($row['id']);
+        }
         //dd($result);
         return json_encode($result);
     }

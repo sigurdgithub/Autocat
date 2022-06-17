@@ -557,7 +557,7 @@
                             $('#fosterLink').empty();
                             $('#fosterLink').append("Volledige fiche van ");
                             $('#fosterLink').append(current_foster.firstName + ' ' + current_foster.lastName);
-                            $('#fosterLink').attr('href', '/pleeggezinAccount/' + current_foster.id);
+                            $('#fosterLink').attr('href', '/pleeggezinAccount/' + current_foster.hashed);
                             getPreferencesFoster(fosterFamilyId);
                             //$('#sterilizedCat').empty();
                             //$('#sterilizedCat').append(current_foster.sterilized);
