@@ -230,7 +230,7 @@
                                         <div>` + cat.adoptionStatus + `</div>`;
                 if (cat.fosterFamily_id != null) {
                     {{-- TODO: add route once detail of foster family is available --}}
-                    string += `<div><a href="" class="text-black"><u>` + cat.fosterFirstName + ` ` + cat
+                    string += `<div><a href="/pleeggezinAccount/${cat.fosterHashed}" class="text-black"><u>` + cat.fosterFirstName + ` ` + cat
                         .fosterLastName + `</u></a></div>`;
                 } else {
                     string += `<div><a href="" class="text-black"><u>nvt</u></a></div>`;

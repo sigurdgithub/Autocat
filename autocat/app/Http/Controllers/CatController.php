@@ -8,7 +8,7 @@ use App\Models\CatPreference;
 use Illuminate\Database\Eloquent\Builder;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
-
+use Illuminate\Support\Facades\Crypt;
 
 class CatController extends Controller
 {
@@ -300,6 +300,9 @@ class CatController extends Controller
         foreach ($array as $row) {
             //dd($row);
             $row += ['stringDate' => CatController::getCatAgeString($row['dateOfBirth'])];
+            if (isset($row['fosterFamily_id'])) {
+                $row += ['fosterHashed' => Crypt::encryptString($row['fosterFamily_id'])];
+            }
             array_push($result, $row);
         }
         return json_encode($result);
