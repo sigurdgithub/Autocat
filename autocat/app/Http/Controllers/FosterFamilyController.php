@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\FosterFamily;
 use App\Models\Cat;
+use App\Models\User;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Facades\DB;
 use Carbon\Carbon;
@@ -35,6 +36,7 @@ class FosterFamilyController extends Controller
         $result['preferences'] = json_decode(json_encode(FosterFamily::findOrFail($id)->preferences));
         $result['pets'] = json_decode(json_encode(FosterFamily::findOrFail($id)->pets));
         $result['roommates'] = json_decode(json_encode(FosterFamily::findOrFail($id)->roommates));        
+        $result['email'] = User::where('fosterFamily_id', $id)->select('email')->first();        
         return json_encode($result);
     }
 

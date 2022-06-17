@@ -96,9 +96,12 @@
                     <tbody>
                         @foreach ($notifications as $notification)
                             <tr>
-                                <td>{{ $notification->fosterFamily->firstName }} {{ $notification->fosterFamily->lastName }}
-                                </td>
-                                <td>{{ $notification->cat->name }}</td>
+                                <td>{{ $notification->fosterFamily->firstName }} {{ $notification->fosterFamily->lastName }}</td>
+                                @if (isset($notification->cat))
+                                    <td>{{$notification->cat->name}}</td>
+                                @else
+                                    <td><span style="font-weight:bold;">Geen kat</span></td>
+                                @endif
                                 <td>{{ $notification->type }}</td>
                                 <td>{{ $notification->message }}</td>
                                 <td>
@@ -381,6 +384,8 @@
                     if (preferences.NoIntensiveCare) { $('#fosterPreferences').append(`<li>Staat open voor zieke katten zonder intensieve verzorging</li>`); }
                     if (preferences.isolation) { $('#fosterPreferences').append(`<li>Staat open voor katten in isolatie</li>`); }
 
+                    $('#emailFoster').empty()
+                    $('#emailFoster').append(data.email.email);
                     //$('#sterilizedCat').empty();
                     //$('#sterilizedCat').append(current_foster.sterilized);
                     //$('#sterilizedCat').empty();

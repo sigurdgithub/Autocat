@@ -85,7 +85,11 @@
                 <tbody>
                     @foreach ($notifications as $notification)
                     <tr>
+                        @if (isset($notification->cat))
                         <td>{{$notification->cat->name}}</td>
+                        @else
+                        <td><span style="font-weight:bold;">Geen kat</span></td>
+                        @endif
                         <td>{{$notification->type}}</td>
                         <td>{{$notification->message}}</td>
                         <td>

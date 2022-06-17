@@ -7,16 +7,17 @@ use App\Models\Notification;
 use App\Models\Cat;
 use App\Models\FosterFamily;
 use Illuminate\Database\Eloquent\Builder;
-
+use Illuminate\Support\Facades\Auth;
 
 class DashBoardController extends Controller
 {
     public function showByFosterId($fosterId)
     {
-        $notifications = NotificationController::getNotificationsByFosterId($fosterId);
-        $cats = CatController::getCatsByFosterId($fosterId);
+        $foster = Auth::user()->fosterFamily_id;
+        $notifications = NotificationController::getNotificationsByFosterId($foster);
+        $cats = CatController::getCatsByFosterId($foster);
         //dd($notifications);
-        return view('fosterDashboard', ['notifications' => $notifications, 'cats' => $cats, 'fosterFamily' => $fosterId]);
+        return view('fosterDashboard', ['notifications' => $notifications, 'cats' => $cats, 'fosterFamily' => $foster]);
     }
 
     /**
@@ -28,16 +29,18 @@ class DashBoardController extends Controller
     public function store(Request $request)
     {
         // Validate the request...
+        //$validated = $request->validate(['cat' => 'required|integer', 'type' => 'required', 'message' => 'required']);
 
         $notification = new Notification;
 
-        $notification->cat_id = $request->cat;
+        if (is_numeric($request->cat)) { $notification->cat_id = $request->cat; }
+        else { $notification->cat_id = null; }
         $notification->type = $request->type;
         $notification->message = $request->message;
 
         $notification->sentByShelter = 0;
 
-        $notification->fosterFamily_id = $request->fosterFamily;
+        $notification->fosterFamily_id = Auth::user()->fosterFamily_id;
 
 
         $notification->save();
@@ -55,7 +58,8 @@ class DashBoardController extends Controller
 
         $notification = new Notification;
 
-        $notification->cat_id = $request->cat;
+        if (is_numeric($request->cat)) { $notification->cat_id = $request->cat; }
+        else { $notification->cat_id = null; }
         $notification->type = $request->type;
         $notification->message = $request->message;
 

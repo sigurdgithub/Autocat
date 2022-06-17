@@ -26,10 +26,11 @@ class NotificationController extends Controller
     public function store(Request $request)
     {
         // Validate the request...
- 
+        //$validated = $request->validate(['cat' => 'required|integer', 'type' => 'required', 'message' => 'required']);
+
         $notification = new Notification;
- 
-        $notification->cat_id = $request->cat;
+        if (is_numeric($request->cat)) { $notification->cat_id = $request->cat; }
+        else { $notification->cat_id = null; }
         $notification->type = $request->type;
         $notification->message = $request->message;
         
@@ -50,10 +51,11 @@ class NotificationController extends Controller
     public function storeShelter(Request $request)
     {
         // Validate the request...
- 
+        //$validated = $request->validate(['cat' => 'required|integer', 'type' => 'required', 'message' => 'required']);
         $notification = new Notification;
  
-        $notification->cat_id = $request->cat;
+        if (is_numeric($request->cat)) { $notification->cat_id = $request->cat; }
+        else { $notification->cat_id = null; }
         $notification->type = $request->type;
         $notification->message = $request->message;
         
