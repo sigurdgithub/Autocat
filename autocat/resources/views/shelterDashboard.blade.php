@@ -374,15 +374,15 @@
                         $('#fosterRoommates').append(`<li>${roommate.relation},  ${convertDateToAge(roommate.dateOfBirth)} jaar oud</li>`);
                     });
                     let preferences = data.preferences;
-                    if (preferences.adult) { $('#fosterPreferences').append(`<li>Staat open voor volwassen katten</li>`); }
-                    if (preferences.pregnant) { $('#fosterPreferences').append(`<li>Staat open voor zwangere katten</li>`); }
-                    if (preferences.kitten) { $('#fosterPreferences').append(`<li>Staat open voor kittens</li>`); }
-                    if (preferences.bottleFeeding) { $('#fosterPreferences').append(`<li>Staat open voor het geven van flesvoeding</li>`); }
-                    if (preferences.scared) { $('#fosterPreferences').append(`<li>Staat open voor bange katten</li>`); }
-                    if (preferences.feral) { $('#fosterPreferences').append(`<li>Staat open voor wilde katten</li>`); }
-                    if (preferences.intensiveCare) { $('#fosterPreferences').append(`<li>Staat open voor zieke katten met intensieve verzorging</li>`); }
-                    if (preferences.NoIntensiveCare) { $('#fosterPreferences').append(`<li>Staat open voor zieke katten zonder intensieve verzorging</li>`); }
-                    if (preferences.isolation) { $('#fosterPreferences').append(`<li>Staat open voor katten in isolatie</li>`); }
+                    if (preferences.adult) { $('#fosterPreferences').append(`<li>Volwassen katten</li>`); }
+                    if (preferences.pregnant) { $('#fosterPreferences').append(`<li>Zwangere katten</li>`); }
+                    if (preferences.kitten) { $('#fosterPreferences').append(`<li>Kittens</li>`); }
+                    if (preferences.bottleFeeding) { $('#fosterPreferences').append(`<li>Geven van flesvoeding</li>`); }
+                    if (preferences.scared) { $('#fosterPreferences').append(`<li>Bange katten</li>`); }
+                    if (preferences.feral) { $('#fosterPreferences').append(`<li>Wilde katten</li>`); }
+                    if (preferences.intensiveCare) { $('#fosterPreferences').append(`<li>Zieke katten met intensieve verzorging</li>`); }
+                    if (preferences.NoIntensiveCare) { $('#fosterPreferences').append(`<li>Zieke katten zonder intensieve verzorging</li>`); }
+                    if (preferences.isolation) { $('#fosterPreferences').append(`<li>Katten in isolatie</li>`); }
 
                     $('#emailFoster').empty()
                     $('#emailFoster').append(data.email.email);
