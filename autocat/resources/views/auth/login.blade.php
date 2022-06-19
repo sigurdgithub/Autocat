@@ -64,12 +64,12 @@
                   </label>
                 </div> --}}
                 <div class="flex items-center justify-end mt-4">
-                  @if (Route::has('password.request'))
+                  {{-- @if (Route::has('password.request'))
                   <a class="underline text-sm text-gray-600 hover:text-gray-900" href="{{ route('password.request') }}">
                     {{ __('Wachtwoord vergeten?') }}
                   </a>
-                  @endif
-                  <div class="mt-3">
+                  @endif --}}
+                  <div class="mt-4">
                     <input class="btn btn-gradient-info btn-lg font-weight-medium text-white w-100" type="submit"
                       value="Log In" name="sendLogin">
                   </div>

@@ -16,7 +16,7 @@
       <div><a href="https://www.zooplus.nl/" target="_blank">Zooplus</a></div>
     </div>
     <div class="col-md-3 text-muted mb-4">
-      <p><b>Team Autocat</b></p>
+      <p><b>Team ConCATenate</b></p>
       <div class="row mb-1">
         <div class="col-md-8">
           <b>Jari Boeckstaens</b>
