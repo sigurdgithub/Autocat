@@ -431,6 +431,7 @@
                     </div>
                 </div>
             </div>
+            
             <!-- HEALTH DIARY : VETVISIT -->
             <div class="content-wrapper">
                 <h3 class="text-muted">Dierenarts bezoeken</h3>

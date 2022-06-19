@@ -52,7 +52,8 @@ class CatController extends Controller
 
     }
 
-    public function filterCatsByString($string) {
+    public function filterCatsByString($string) 
+    {
         $cats = DB::table('cats')->select('cats.*')->leftJoin('fosterFamilies', 'cats.fosterFamily_id', '=', 'fosterFamilies.id');
         $cats = $cats->where('cats.name', 'LIKE', '%'.$string.'%');
         $result = $cats->addSelect('fosterFamilies.dateOfBirth AS fosterBirth')->addSelect('fosterFamilies.firstName AS fosterFirstName')->addSelect('fosterFamilies.lastName AS fosterLastName')->get();
@@ -312,6 +313,21 @@ class CatController extends Controller
     {
         return Cat::findOrFail($id);
     }
+
+    public function showEmptyCat()
+    {
+        $cats = CatController::getCats();
+        $adoptionStatus = (['Aangemeld', 'Bij Pleeggezin', 'In Asiel', 'Klaar voor adoptie', 'In optie', 'Adoptie goedgekeurd', 'Bij Adoptiegezin']);
+        $breed = (['Europees korthaar', 'Abessijn', 'Amerikaanse bobtail', 'American Curl', 'American wirehair', 'Amerikaans korthaar', 'Ashera', 'Asian', 'Australian Mist', 'Balinees', 'Bengaal', 'Blauwe Rus', 'Boheemse Rex', 'Bombay', 'Britse korthaar', 'Britse langhaar', 'Burmees', 'Burmilla', 'California Spangled', 'Ceylon', 'Chartreux', 'Cornish Rex', 'Cymric', 'Devon Rex', 'Don Sphynx', 'Dragon Li', 'Egyptische Mau', 'Exotic', 'German Rex', 'Havana Brown', 'Heilige Birmaan', 'Highlander', 'Japanse Bobtail', 'Kanaani', 'Khao Manee', 'Korat', 'Kurillen stompstaartkat', 'LaPerm', 'Lykoi', 'Maine Coon', 'Mandalay', 'Manx', 'Mekong bobtail', 'Munchkin', 'Nebelung', 'Neva Masquerade', 'Noorse boskat', 'Ocicat', 'Ojos Azules', 'Oosters korthaar', 'Oosters langhaar', 'Pers', 'Peterbald', 'Pixie-Bob', 'Ragamuffin', 'Ragdoll', 'Savannah', 'Scottish Fold', 'Selkirk Rex', 'Serengeti', 'Seychellois', 'Siamees', 'Siberische kat', 'Singapura', 'Snowshoe', 'Sokoke', 'Somali', 'Sphynx', 'Thai', 'Tibetaan', 'Tiffanie', 'Tonkanees', 'Turkse Angora', 'Turkse Van', 'Ural Rex', 'York Chocolate']);
+        $furLength = (['Kort', 'Lang']);
+        $gender = (['Kattin', 'Kater']);
+        $socialization = (['Tam', 'Bang', 'Wild']);
+        $reason = (['Vaccinatie', 'Chip', 'Vaccinatie & chip', 'Sterilisatie', 'Algemene checkup', 'Andere']);
+        $fosterFamilies = FosterFamilyController::getFosterFamilies();
+
+        return view('catDetail', compact('cats', 'adoptionStatus', 'breed', 'furLength', 'gender', 'socialization', 'fosterFamilies'));
+    }
+
     public function getPreferenceByCatId($id)
     {
         //dd(Cat::findOrFail($id)->preferences);
@@ -329,6 +345,8 @@ class CatController extends Controller
         ]);
 
         $timestamp = now()->timestamp;
+
+        //Get fosterFamilies
         $foster = (($request->input('fosterFamily_id')==0)?NULL:$request->input('fosterFamily_id'));
 
         // Store
@@ -357,7 +375,8 @@ class CatController extends Controller
             'image' => $request->input('image'),
             'fosterFamily_id' => $foster
             ]);
-
+        
+        //Link catPreferences to cat
         $catPreference = CatPreference::firstOrCreate(
             [
                 'cat_id' => $cat->id,
@@ -377,32 +396,40 @@ class CatController extends Controller
             ]
         );
 
+        //Get all cats to fill buddy dropdown
         $cats = Cat::all();
+        //Dropdown Content
         $adoptionStatus = (['Aangemeld', 'Bij Pleeggezin', 'In Asiel', 'Klaar voor adoptie', 'In optie', 'Adoptie goedgekeurd', 'Bij Adoptiegezin']);
         $breed = (['Europees korthaar', 'Abessijn', 'Amerikaanse bobtail', 'American Curl', 'American wirehair', 'Amerikaans korthaar', 'Ashera', 'Asian', 'Australian Mist', 'Balinees', 'Bengaal', 'Blauwe Rus', 'Boheemse Rex', 'Bombay', 'Britse korthaar', 'Britse langhaar', 'Burmees', 'Burmilla', 'California Spangled', 'Ceylon', 'Chartreux', 'Cornish Rex', 'Cymric', 'Devon Rex', 'Don Sphynx', 'Dragon Li', 'Egyptische Mau', 'Exotic', 'German Rex', 'Havana Brown', 'Heilige Birmaan', 'Highlander', 'Japanse Bobtail', 'Kanaani', 'Khao Manee', 'Korat', 'Kurillen stompstaartkat', 'LaPerm', 'Lykoi', 'Maine Coon', 'Mandalay', 'Manx', 'Mekong bobtail', 'Munchkin', 'Nebelung', 'Neva Masquerade', 'Noorse boskat', 'Ocicat', 'Ojos Azules', 'Oosters korthaar', 'Oosters langhaar', 'Pers', 'Peterbald', 'Pixie-Bob', 'Ragamuffin', 'Ragdoll', 'Savannah', 'Scottish Fold', 'Selkirk Rex', 'Serengeti', 'Seychellois', 'Siamees', 'Siberische kat', 'Singapura', 'Snowshoe', 'Sokoke', 'Somali', 'Sphynx', 'Thai', 'Tibetaan', 'Tiffanie', 'Tonkanees', 'Turkse Angora', 'Turkse Van', 'Ural Rex', 'York Chocolate']);
         $furLength = (['Kort', 'Lang']);
         $gender = (['Kattin', 'Kater']);
         $socialization = (['Tam', 'Bang', 'Wild']);
         $reason = (['Vaccinatie', 'Chip', 'Vaccinatie & chip', 'Sterilisatie', 'Algemene checkup', 'Andere']);
+        //Get Weighings, vetVisits & fosterFamilies
         $weighings = MedicalController::showWeighingsByCatId($cat->id);
         $vetVisits = MedicalController::showVetVisitsByCatId($cat->id);
         $fosterFamilies = FosterFamilyController::getFosterFamilies();
         
+        //Show cat by Id allowing immediate updating
         return redirect()->route('showCatById', ['id' => $cat->id]);
 
     }
 
     public function showCatById($id)
     {
+        //Get cat & catpreferences by CatId
         $cat = Cat::where('id', $id)->firstOrFail();
         $catPreference = CatPreference::where('cat_id', $id)->firstOrFail();
+        //Get all cats to fill buddy dropdown
         $cats = Cat::all();
+        //Dropdown Content
         $adoptionStatus = (['Aangemeld', 'Bij Pleeggezin', 'In Asiel', 'Klaar voor adoptie', 'In optie', 'Adoptie goedgekeurd', 'Bij Adoptiegezin']);
         $breed = (['Europees korthaar', 'Abessijn', 'Amerikaanse bobtail', 'American Curl', 'American wirehair', 'Amerikaans korthaar', 'Ashera', 'Asian', 'Australian Mist', 'Balinees', 'Bengaal', 'Blauwe Rus', 'Boheemse Rex', 'Bombay', 'Britse korthaar', 'Britse langhaar', 'Burmees', 'Burmilla', 'California Spangled', 'Ceylon', 'Chartreux', 'Cornish Rex', 'Cymric', 'Devon Rex', 'Don Sphynx', 'Dragon Li', 'Egyptische Mau', 'Exotic', 'German Rex', 'Havana Brown', 'Heilige Birmaan', 'Highlander', 'Japanse Bobtail', 'Kanaani', 'Khao Manee', 'Korat', 'Kurillen stompstaartkat', 'LaPerm', 'Lykoi', 'Maine Coon', 'Mandalay', 'Manx', 'Mekong bobtail', 'Munchkin', 'Nebelung', 'Neva Masquerade', 'Noorse boskat', 'Ocicat', 'Ojos Azules', 'Oosters korthaar', 'Oosters langhaar', 'Pers', 'Peterbald', 'Pixie-Bob', 'Ragamuffin', 'Ragdoll', 'Savannah', 'Scottish Fold', 'Selkirk Rex', 'Serengeti', 'Seychellois', 'Siamees', 'Siberische kat', 'Singapura', 'Snowshoe', 'Sokoke', 'Somali', 'Sphynx', 'Thai', 'Tibetaan', 'Tiffanie', 'Tonkanees', 'Turkse Angora', 'Turkse Van', 'Ural Rex', 'York Chocolate']);
         $furLength = (['Kort', 'Lang']);
         $gender = (['Kattin', 'Kater']);
         $socialization = (['Tam', 'Bang', 'Wild']);
         $reason = (['Vaccinatie', 'Chip', 'Vaccinatie & chip', 'Sterilisatie', 'Algemene checkup', 'Andere']);
+        //Get Weighings, vetVisits & fosterFamilies
         $weighings = MedicalController::showWeighingsByCatId($id);
         $vetVisits = MedicalController::showVetVisitsByCatId($id);
         $fosterFamilies = FosterFamilyController::getFosterFamilies();
@@ -411,8 +438,10 @@ class CatController extends Controller
     }
 
     public function updateCat(Request $request, $id) 
-    {
+    {   
+        //Find cat by Id
         $cat = Cat::find($id);
+        //Update all catDetail fields
         $cat->breed = $request->input('breed');
         $cat->gender = $request->input('gender');
         $cat->name = $request->input('name');
@@ -437,7 +466,8 @@ class CatController extends Controller
         $cat->fosterFamily_id = $request->input('fosterFamily_id');
         $cat->save();
 
-/*         $catPreference = CatPreference::find($cat->id);*/        
+        //Update all catPreferences fields
+        /* $catPreference = CatPreference::find($cat->id);*/        
         $catPreference = CatPreference::where('cat_id','=',$cat->id)->firstOrFail();
         //dd($cat->id);
         //dd($catPreference);
@@ -456,18 +486,21 @@ class CatController extends Controller
         $catPreference->bedroomAccess = $request->input('bedroomAccess'); 
         $catPreference->save();
 
+        //Get all cats to fill buddy dropdown
         $cats = Cat::all();
+        //Dropdown Content
         $adoptionStatus = (['Aangemeld','Bij Pleeggezin','In Asiel','Klaar voor adoptie','In optie','Adoptie goedgekeurd','Bij Adoptiegezin']);
         $breed = (['Europees korthaar', 'Abessijn', 'Amerikaanse bobtail', 'American Curl', 'American wirehair', 'Amerikaans korthaar', 'Ashera', 'Asian', 'Australian Mist', 'Balinees', 'Bengaal', 'Blauwe Rus', 'Boheemse Rex', 'Bombay', 'Britse korthaar', 'Britse langhaar', 'Burmees', 'Burmilla', 'California Spangled', 'Ceylon', 'Chartreux', 'Cornish Rex', 'Cymric', 'Devon Rex', 'Don Sphynx', 'Dragon Li', 'Egyptische Mau', 'Exotic', 'German Rex', 'Havana Brown', 'Heilige Birmaan', 'Highlander', 'Japanse Bobtail', 'Kanaani', 'Khao Manee', 'Korat', 'Kurillen stompstaartkat', 'LaPerm', 'Lykoi', 'Maine Coon', 'Mandalay', 'Manx', 'Mekong bobtail', 'Munchkin', 'Nebelung', 'Neva Masquerade', 'Noorse boskat', 'Ocicat', 'Ojos Azules', 'Oosters korthaar', 'Oosters langhaar', 'Pers', 'Peterbald', 'Pixie-Bob', 'Ragamuffin', 'Ragdoll', 'Savannah', 'Scottish Fold', 'Selkirk Rex', 'Serengeti', 'Seychellois', 'Siamees', 'Siberische kat', 'Singapura', 'Snowshoe', 'Sokoke', 'Somali', 'Sphynx', 'Thai', 'Tibetaan', 'Tiffanie', 'Tonkanees', 'Turkse Angora', 'Turkse Van', 'Ural Rex', 'York Chocolate']);
         $furLength = (['Kort','Lang']);
         $gender = (['Kattin','Kater']);
         $socialization = (['Tam','Bang','Wild']);
         $reason = (['Vaccinatie','Chip','Vaccinatie & chip','Sterilisatie', 'Algemene checkup', 'Andere']);
+        //Get Weighings, vetVisits & fosterFamilies
         $weighings = MedicalController::showWeighingsByCatId($id);
         $vetVisits = MedicalController::showVetVisitsByCatId($id);
         $fosterFamilies = FosterFamilyController::getFosterFamilies();
 
-
+        //Show cat by Id allowing immediate updating
         return redirect()->route('showCatById', ['id' => $cat->id]);
     }
 

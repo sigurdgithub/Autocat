@@ -25,6 +25,7 @@ class PetsAndRoommatesController extends Controller
 
     public function deletePet($id) {
         $pet = Pet::find($id);
+        //Get fosterFamily Id
         $fosterFamily_id = $pet->fosterFamily_id;
         $pet->delete();
         return redirect()->route('fosterAccount', $fosterFamily_id);
@@ -32,18 +33,20 @@ class PetsAndRoommatesController extends Controller
 
     public function deleteRoommate($id) {
         $roommate = Roommate::find($id);
+        //Get fosterFamily Id
         $fosterFamily_id = $roommate->fosterFamily_id;
         $roommate->delete();
         return redirect()->route('fosterAccount', $fosterFamily_id);
     }
 
     public function storePet(Request $request)
-    {   
+    {   //Validate
         $validation = $request->validate([
             'species'=> 'required',
             'dateOfBirthPet'=>'required',
         ]);
 
+        //Store
         $pet = Pet::firstOrCreate(
             ['fosterFamily_id' => $request->input('fosterFamily_id'),
             'species' => $request->input('species'),
@@ -54,13 +57,14 @@ class PetsAndRoommatesController extends Controller
     }
 
     public function storeRoommate(Request $request)
-    {   
-/*         dd($request);
- */        $validation = $request->validate([
+    {   //Validate    
+        /* dd($request); */        
+        $validation = $request->validate([
             'relation'=> 'required',
             'dateOfBirthRoommate'=>'required',
         ]);
-
+        
+        //Store
         $roommate = Roommate::firstOrCreate(
             ['fosterFamily_id' => $request->input('fosterFamily_id'),
             'relation' => $request->input('relation'),

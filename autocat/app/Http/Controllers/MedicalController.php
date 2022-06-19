@@ -25,6 +25,7 @@ class MedicalController extends Controller
 
     public function deleteWeighing($id) {
         $weighing = Weighing::find($id);
+        //Get cat_id
         $cat_id = $weighing->cat_id;
         $weighing->delete();
         return redirect()->route('showCatById', ['id' => $cat_id]);
@@ -32,19 +33,21 @@ class MedicalController extends Controller
 
     public function deleteVetVisit($id) {
         $vetVisit = VetVisit::find($id);
+        //Get cat_id
         $cat_id = $vetVisit->cat_id;
         $vetVisit->delete();
         return redirect()->route('showCatById', ['id' => $cat_id]);
     }
 
     public function storeWeighing(Request $request)
-    {   
+    {   //Validate
         $validation = $request->validate([
             'date'=> 'required',
             'weight'=>'required',
             'comments'=>'required'
         ]);
 
+        //Store
         $weighing = Weighing::firstOrCreate(
             ['cat_id' => $request->input('cat_id'),
             'date' => $request->input('date'),
@@ -56,13 +59,13 @@ class MedicalController extends Controller
     }
 
     public function storeVetVisit(Request $request)
-    {   
+    {   //Validate
         $validation = $request->validate([
             'date'=> 'required',
             'reason'=>'required',
             'comments'=>'required'
         ]);
-
+        //Store
         $weighing = VetVisit::firstOrCreate(
             ['cat_id' => $request->input('cat_id'),
             'date' => $request->input('date'),

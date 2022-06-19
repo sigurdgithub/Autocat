@@ -67,34 +67,29 @@ Route::middleware('auth')->group(function () {
         return view('auth.fosterAccount', compact('fosterFamily', 'user', 'fosterPreference', 'roommates', 'pets', 'species', 'relation'));
     })->name('fosterAccount');
 
-    Route::get('katDetail', function () {
-        $cats = CatController::getCats();
-        $adoptionStatus = (['Aangemeld', 'Bij Pleeggezin', 'In Asiel', 'Klaar voor adoptie', 'In optie', 'Adoptie goedgekeurd', 'Bij Adoptiegezin']);
-        $breed = (['Europees korthaar', 'Abessijn', 'Amerikaanse bobtail', 'American Curl', 'American wirehair', 'Amerikaans korthaar', 'Ashera', 'Asian', 'Australian Mist', 'Balinees', 'Bengaal', 'Blauwe Rus', 'Boheemse Rex', 'Bombay', 'Britse korthaar', 'Britse langhaar', 'Burmees', 'Burmilla', 'California Spangled', 'Ceylon', 'Chartreux', 'Cornish Rex', 'Cymric', 'Devon Rex', 'Don Sphynx', 'Dragon Li', 'Egyptische Mau', 'Exotic', 'German Rex', 'Havana Brown', 'Heilige Birmaan', 'Highlander', 'Japanse Bobtail', 'Kanaani', 'Khao Manee', 'Korat', 'Kurillen stompstaartkat', 'LaPerm', 'Lykoi', 'Maine Coon', 'Mandalay', 'Manx', 'Mekong bobtail', 'Munchkin', 'Nebelung', 'Neva Masquerade', 'Noorse boskat', 'Ocicat', 'Ojos Azules', 'Oosters korthaar', 'Oosters langhaar', 'Pers', 'Peterbald', 'Pixie-Bob', 'Ragamuffin', 'Ragdoll', 'Savannah', 'Scottish Fold', 'Selkirk Rex', 'Serengeti', 'Seychellois', 'Siamees', 'Siberische kat', 'Singapura', 'Snowshoe', 'Sokoke', 'Somali', 'Sphynx', 'Thai', 'Tibetaan', 'Tiffanie', 'Tonkanees', 'Turkse Angora', 'Turkse Van', 'Ural Rex', 'York Chocolate']);
-        $furLength = (['Kort', 'Lang']);
-        $gender = (['Kattin', 'Kater']);
-        $socialization = (['Tam', 'Bang', 'Wild']);
-        $reason = (['Vaccinatie', 'Chip', 'Vaccinatie & chip', 'Sterilisatie', 'Algemene checkup', 'Andere']);
-        $fosterFamilies = FosterFamilyController::getFosterFamilies();
-
-        return view('catDetail', compact('cats', 'adoptionStatus', 'breed', 'furLength', 'gender', 'socialization', 'fosterFamilies'));
-    });
+    //CatDetail routes
+    Route::get('katDetail', [CatController::class,'showEmptyCat']);
     Route::get('/katDetail/{id}', [CatController::class, 'showCatById'])->name('showCatById');
 
+    //Medical Routes => CatDetail
     Route::get('/weighing_delete/{id}', [MedicalController::class, 'deleteWeighing'])->name('weighing_delete');
     Route::get('/vetVisit_delete/{id}', [MedicalController::class, 'deleteVetVisit'])->name('vetVisit_delete');
 
+    //Pet & roommate routes => Fosterfamily Account
     Route::get('/roommate_delete/{id}', [PetsAndRoommatesController::class, 'deleteRoommate'])->name('roommate_delete');
     Route::get('/pet_delete/{id}', [PetsAndRoommatesController::class, 'deletePet'])->name('pet_delete');
 
     /* --- POST --- */
 
+    //CatDetail routes
     Route::post('/katDetail', [CatController::class, 'storeCat'])->name('storeCat');
     Route::post('/updateCat/{id}', [CatController::class, 'updateCat'])->name('updateCat');
 
+    //Medical Routes => CatDetail
     Route::post('/addWeighing', [MedicalController::class, 'storeWeighing'])->name('storeWeighing');
     Route::post('/addVetVisit', [MedicalController::class, 'storeVetVisit'])->name('storeVetVisit');
 
+    //Pet & roommate routes => Fosterfamily Account
     Route::post('/addRoommate', [PetsAndRoommatesController::class, 'storeRoommate'])->name('storeRoommate');
     Route::post('/addPet', [PetsAndRoommatesController::class, 'storePet'])->name('storePet');
 
