@@ -68,43 +68,45 @@
                     </div>
                 </div>
             </div>
-            <table class="table table-hover">
-                <thead>
-                    <tr>
-                        <th>Kat</th>
-                        <th>Melding Type</th>
-                        <th>Bericht</th>
-                        <th>
-                            <button class="btn btn-icon btn-lg btn-gradient-info" data-bs-toggle="modal"
-                                data-bs-target="#notificationModal">
-                                <i class="mdi mdi-message-plus"></i>
-                            </button>
-                        </th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach ($notifications as $notification)
-                    <tr>
-                        @if (isset($notification->cat))
-                        <td>{{$notification->cat->name}}</td>
-                        @else
-                        <td><span style="font-weight:bold;">Geen kat</span></td>
-                        @endif
-                        <td>{{$notification->type}}</td>
-                        <td>{{$notification->message}}</td>
-                        <td>
-                            <form action="{{route('delete', $notification->id)}}" method="POST">
-                                @method('DELETE')
-                                @csrf
-                                <button class="btn btn-inverse-info btn-icon btn-lg">
-                                    <i class="mdi mdi-delete"></i>
+            <div class="table-responsive">
+                <table class="table table-hover">
+                    <thead>
+                        <tr>
+                            <th>Kat</th>
+                            <th>Melding Type</th>
+                            <th>Bericht</th>
+                            <th>
+                                <button class="btn btn-icon btn-lg btn-gradient-info" data-bs-toggle="modal"
+                                    data-bs-target="#notificationModal">
+                                    <i class="mdi mdi-message-plus"></i>
                                 </button>
-                            </form>
-                        </td>
-                    </tr>
-                    @endforeach
-                </tbody>
-            </table>
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach ($notifications as $notification)
+                        <tr>
+                            @if (isset($notification->cat))
+                            <td>{{$notification->cat->name}}</td>
+                            @else
+                            <td><span style="font-weight:bold;">Geen kat</span></td>
+                            @endif
+                            <td>{{$notification->type}}</td>
+                            <td>{{$notification->message}}</td>
+                            <td>
+                                <form action="{{route('delete', $notification->id)}}" method="POST">
+                                    @method('DELETE')
+                                    @csrf
+                                    <button class="btn btn-inverse-info btn-icon btn-lg">
+                                        <i class="mdi mdi-delete"></i>
+                                    </button>
+                                </form>
+                            </td>
+                        </tr>
+                        @endforeach
+                    </tbody>
+                </table>
+            </div>
         </div>
     </div>
 </div>

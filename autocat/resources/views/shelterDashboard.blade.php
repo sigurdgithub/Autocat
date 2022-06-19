@@ -78,45 +78,47 @@
                     </div>
                 </div>
                 </p>
-                <table class="table table-hover table-responsive-md">
-                    <thead>
-                        <tr>
-                            <th>Pleeggezin</th>
-                            <th>Kat</th>
-                            <th>Melding Type</th>
-                            <th>Bericht</th>
-                            <th>
-                                <button class="btn btn-icon btn-lg btn-gradient-success" data-bs-toggle="modal"
-                                    data-bs-target="#notificationModal">
-                                    <i class="mdi mdi-message-plus"></i>
-                                </button>
-                            </th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @foreach ($notifications as $notification)
+                <div class="table-responsive">
+                    <table class="table table-hover">
+                        <thead>
                             <tr>
-                                <td>{{ $notification->fosterFamily->firstName }} {{ $notification->fosterFamily->lastName }}</td>
-                                @if (isset($notification->cat))
-                                    <td>{{$notification->cat->name}}</td>
-                                @else
-                                    <td><span style="font-weight:bold;">Geen kat</span></td>
-                                @endif
-                                <td>{{ $notification->type }}</td>
-                                <td>{{ $notification->message }}</td>
-                                <td>
-                                    <form action="{{ route('delete', $notification->id) }}" method="POST">
-                                        @method('DELETE')
-                                        @csrf
-                                        <button class="btn btn-inverse-success btn-icon">
-                                            <i class="mdi mdi-delete"></i>
-                                        </button>
-                                    </form>
-                                </td>
+                                <th>Pleeggezin</th>
+                                <th>Kat</th>
+                                <th>Melding Type</th>
+                                <th>Bericht</th>
+                                <th>
+                                    <button class="btn btn-icon btn-lg btn-gradient-success" data-bs-toggle="modal"
+                                        data-bs-target="#notificationModal">
+                                        <i class="mdi mdi-message-plus"></i>
+                                    </button>
+                                </th>
                             </tr>
-                        @endforeach
-                    </tbody>
-                </table>
+                        </thead>
+                        <tbody>
+                            @foreach ($notifications as $notification)
+                                <tr>
+                                    <td>{{ $notification->fosterFamily->firstName }} {{ $notification->fosterFamily->lastName }}</td>
+                                    @if (isset($notification->cat))
+                                        <td>{{$notification->cat->name}}</td>
+                                    @else
+                                        <td><span style="font-weight:bold;">Geen kat</span></td>
+                                    @endif
+                                    <td>{{ $notification->type }}</td>
+                                    <td>{{ $notification->message }}</td>
+                                    <td>
+                                        <form action="{{ route('delete', $notification->id) }}" method="POST">
+                                            @method('DELETE')
+                                            @csrf
+                                            <button class="btn btn-inverse-success btn-icon">
+                                                <i class="mdi mdi-delete"></i>
+                                            </button>
+                                        </form>
+                                    </td>
+                                </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
     </div>
