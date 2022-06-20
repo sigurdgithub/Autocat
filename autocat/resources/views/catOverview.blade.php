@@ -229,7 +229,7 @@
                                     <div class="card-footer card-border-danger">
                                         <div>` + cat.adoptionStatus + `</div>`;
                 if (cat.fosterFamily_id != null) {
-                    if (typeof {{{auth()->user()->shelter_id ?? "undefined"}}} !== "undefined" || {{ auth()->user()->fosterFamily_id}} == cat.fosterFamily_id) {
+                    if (typeof {{{auth()->user()->shelter_id ?? "undefined"}}} !== "undefined" || {{{auth()->user()->fosterFamily_id ?? "undefined"}}} == cat.fosterFamily_id) {
                         string += `<div><a href="/pleeggezinAccount/${cat.fosterHashed}" class="text-black"><u>` + cat.fosterFirstName + ` ` + cat.fosterLastName + `</u></a></div>`;
                     } else if (typeof {{{auth()->user()->fosterFamily_id ?? "undefined"}}} !== "undefined"){
                         string += `<div><a href="" class="text-black"><u>` + cat.fosterFirstName + ` ` + cat
