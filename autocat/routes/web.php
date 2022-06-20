@@ -2,7 +2,6 @@
 
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\NotificationController;
 use App\Http\Controllers\CatController;
 use App\Http\Controllers\CatOverviewController;
 use App\Http\Controllers\DashBoardController;
@@ -10,9 +9,6 @@ use App\Http\Controllers\FosterFamilyController;
 use App\Http\Controllers\MedicalController;
 use App\Http\Controllers\PetsAndRoommatesController;
 use App\Http\Controllers\Auth\RegisteredUserController;
-use App\Models\FosterFamily;
-use App\Http\Middleware\ShelterMiddleware;
-use App\Models\FosterPreference;
 use Illuminate\Support\Facades\Crypt;
 
 /*
@@ -35,7 +31,6 @@ Route::get('/privacyverklaring', function () {
     return view('privacy');
 });
 
-
 // ------- LOGGED IN USERS -------
 Route::middleware('auth')->group(function () {
 
@@ -46,7 +41,6 @@ Route::middleware('auth')->group(function () {
     })->name('fosterDashboard');
 
     Route::get('/notifications/{fosterId}', [DashBoardController::class, 'showByFosterId'])->name('notifications');
-
 
     Route::get('/pleeggezinAccount/{id}', function ($id) {
         $fosterFamilyDecryptID = Crypt::decryptString($id);
@@ -68,7 +62,7 @@ Route::middleware('auth')->group(function () {
     })->name('fosterAccount');
 
     //CatDetail routes
-    Route::get('katDetail', [CatController::class,'showEmptyCat']);
+    Route::get('katDetail', [CatController::class, 'showEmptyCat']);
     Route::get('/katDetail/{id}', [CatController::class, 'showCatById'])->name('showCatById');
 
     //Medical Routes => CatDetail
@@ -79,7 +73,11 @@ Route::middleware('auth')->group(function () {
     Route::get('/roommate_delete/{id}', [PetsAndRoommatesController::class, 'deleteRoommate'])->name('roommate_delete');
     Route::get('/pet_delete/{id}', [PetsAndRoommatesController::class, 'deletePet'])->name('pet_delete');
 
+    Route::get('/kattenOverzicht', [CatOverviewController::class, 'getCats']);
+
     /* --- POST --- */
+
+    Route::post('/cats/ajax', [CatController::class, 'filterCats']);
 
     //CatDetail routes
     Route::post('/katDetail', [CatController::class, 'storeCat'])->name('storeCat');
@@ -101,10 +99,6 @@ Route::middleware('auth')->group(function () {
         ['middleware' => 'foster',],
         function () {
 
-            /* --- GET --- */
-
-            /* --- POST --- */
-
             Route::post('/pleeggezinAccount/{id}', [RegisteredUserController::class, 'updateFoster'], [])->name('updateFoster');
         }
     );
@@ -121,9 +115,6 @@ Route::middleware('auth')->group(function () {
             })->name('shelterDashboard');
             Route::get('/asielDashboard', [DashBoardController::class, 'showShelterNotifications'])->name('shelterNotifications');
 
-            Route::get('/kattenOverzicht', [CatOverviewController::class, 'getCats']);
-
-            // TODO Change this to be used with a a controller if necessary
             Route::get('/pleeggezinnenOverzicht', function () {
                 return view('fosterOverview', ['fosterFamilies' => FosterFamilyController::getFosterFamilies()]);
             });
@@ -135,11 +126,6 @@ Route::middleware('auth')->group(function () {
                 return view('auth.shelterAccount', compact('user', 'shelter'));
             })->name('shelterAccount');
 
-            /* Route::get('/asielAccount', function () {
-        return view('auth.shelterAccount');
-    }); */
-            /* Route::get('/notifications/{fosterId}', [DashBoardController::class, 'showByFosterId'])->name('notifications'); */
-            /* Route::get('/asielDashboard', [DashBoardController::class, 'showShelterNotifications'])->name('shelterNotifications'); */
             Route::get('/asielDashboard/ajax/{fosterId}', [DashBoardController::class, 'getCatsByFosterId']);
             Route::get('/cat/ajax/{id}', [CatController::class, 'getCatById']);
             Route::get('/cats/ajax/{search}', [CatController::class, 'filterCatsByString']);
@@ -151,10 +137,7 @@ Route::middleware('auth')->group(function () {
             /* --- POST --- */
 
             Route::post('/asielAccount/{id}', [RegisteredUserController::class, 'updateShelter'])->name('updateShelter');
-
-            Route::post('/cats/ajax', [CatController::class, 'filterCats']);
             Route::post('/fosterfamilies/ajax', [FosterFamilyController::class, 'filterFosterFamilies']);
-
             Route::post('/addNotificationShelter', [DashBoardController::class, 'storeShelter'])->name('addNotificationShelter');
         }
     );
