@@ -235,102 +235,134 @@
     @if(isset($fosterFamily))
     <div class="mt-5">
         <h3 class="text-muted">Huisgenoten</h3>
-        <div class="card">
-            <div class="card-body">
-                <h5 class="text-muted">Overzicht</h5>
-                <div class="stretch-card grid-margin">
-                    <div class="card-body card-border-info">
-                        @foreach ( $roommates as $roommate)
-                        <ul>
-                            <li class="row">
-                                <div class="col-md-5">Relatie: {{ $roommate->relation }}</div>
-                                <div class="col-md-5">Geboortedatum: {{ $roommate->dateOfBirth }}</div>
-                                <a href='/roommate_delete/{{$roommate->id}}'
-                                    class="col-md-1 btn btn-inverse-info btn-icon btn-lg pt-2"><i
-                                        class="mdi mdi-delete"></i></a>
-                            </li>
-                        </ul>
-                        @endforeach
+        <div class="grid-margin stretch-card">
+            <div class="card">
+                <div class="card-body">
+                    <div class="modal fade" id="roommateModal" tabindex="-1" aria-labelledby="roommateModalLabel" aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="roommateModalLabel">Nieuwe huisgenoot</h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+                                <form action="{{ route('storeRoommate')}}" method="post" enctype="multipart/form" required>
+                                    @csrf
+                                    <input type="hidden" value={{$fosterFamily->id}} name="fosterFamily_id">
+                                    <div class="modal-body">
+                                        <div class="form-group">
+                                            <label class="col-form-label" for="relation">Relatie</label>
+                                            <select class="form-control form-control-sm" name="relation">
+                                                <option value="0">Selecteer</option>
+                                                @foreach ($relation as $relatio)
+                                                <option value="{{$relatio}}">{{$relatio}}</option>
+                                                @endforeach
+                                            </select> 
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-form-label" for="dateOfBirth">Geboortedatum</label>
+                                            <input type="date" class="form-control" name="dateOfBirthRoommate" id="dateOfBirth">
+                                        </div>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="submit" class="btn btn-outline-info">Toevoegen</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>                        
+                    <div class="table-responsive">
+                        <table class="table table-hover">
+                            <thead>
+                                <tr>
+                                    <th>Relatie</th>
+                                    <th>Geboortedatum</th>
+                                    <th>                                
+                                        <button class="btn btn-icon btn-lg btn-gradient-info" data-bs-toggle="modal"
+                                        data-bs-target="#roommateModal">
+                                        <i class="mdi mdi-message-plus"></i>
+                                        </button>
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach ( $roommates as $roommate)
+                                    <tr>
+                                        <td>{{ $roommate->relation }}</td>
+                                        <td>{{ $roommate->dateOfBirth }}</td>
+                                        <td><a href='/roommate_delete/{{$roommate->id}}' class="col-md-1 btn btn-inverse-info btn-icon btn-lg pt-2"><i class="mdi mdi-delete"></i></a></td>               
+                                    </tr>
+                                @endforeach
+                            </tbody>
+                        </table>
                     </div>
                 </div>
-                <form id='roommateForm' method="post" action="{{route('storeRoommate')}}">
-                    @csrf
-                    <input type="hidden" value={{$fosterFamily->id}} name="fosterFamily_id">
-                    <h5 class="text-muted mb-4">Nieuw toevoegen</h5>
-                    <div class="row">
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label class="form-label">Relatie</label>
-                                <select class="form-control form-control-sm" name="relation">
-                                    <option value="0">Selecteer</option>
-                                    @foreach ($relation as $relatio)
-                                    <option value="{{$relatio}}">{{$relatio}}</option>
-                                    @endforeach
-                                </select>
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label class="form-label">Geboortedatum</label>
-                                <input type="date" min="0" class="form-control" name="dateOfBirthRoommate">
-                            </div>
-                        </div>
-                    </div>
-                    <button form='roommateForm' type="submit" class="btn btn-outline-info">
-                        Toevoegen
-                    </button>
-                </form>
             </div>
         </div>
     </div>
     <!-- PETS -->
     <div class="mt-5">
         <h3 class="text-muted">Huisdieren</h3>
-        <div class="card">
-            <div class="card-body">
-                <h5 class="text-muted">Overzicht</h5>
-                <div class="stretch-card grid-margin">
-                    <div class="card-body card-border-info">
-                        @foreach ( $pets as $pet)
-                        <ul>
-                            <li class="row">
-                                <div class="col-md-5">Soort: {{ $pet->species}} </div>
-                                <div class="col-md-5">Geboortedatum: {{ $pet->dateOfBirth }} </div>
-                                <a href='/pet_delete/{{$pet->id}}'
-                                    class="col-md-1 btn btn-inverse-info btn-icon btn-lg pt-2"><i
-                                        class="mdi mdi-delete"></i></a>
-                            </li>
-                        </ul>
-                        @endforeach
+        <div class="grid-margin stretch-card">
+            <div class="card">
+                <div class="card-body">
+                    <div class="modal fade" id="petModal" tabindex="-1" aria-labelledby="petModalLabel" aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="petModalLabel">Nieuw huisdier</h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+                                <form action="{{ route('storePet')}}" method="post" enctype="multipart/form" required>
+                                    @csrf
+                                    <input type="hidden" value={{$fosterFamily->id}} name="fosterFamily_id">
+                                    <div class="modal-body">
+                                        <div class="form-group">
+                                            <label class="col-form-label" for="species">Soort</label>
+                                            <select class="form-control form-control-sm" name="species">
+                                                <option value="0">Selecteer</option>
+                                                @foreach ($species as $specie)
+                                                <option value="{{$specie}}">{{$specie}}</option>
+                                                @endforeach
+                                            </select> 
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-form-label" for="dateOfBirth">Geboortedatum</label>
+                                            <input type="date" class="form-control" name="dateOfBirthPet" id="dateOfBirth">
+                                        </div>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="submit" class="btn btn-outline-info">Toevoegen</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>                        
+                    <div class="table-responsive">
+                        <table class="table table-hover">
+                            <thead>
+                                <tr>
+                                    <th>Soort</th>
+                                    <th>Geboortedatum</th>
+                                    <th>                                
+                                        <button class="btn btn-icon btn-lg btn-gradient-info" data-bs-toggle="modal"
+                                        data-bs-target="#petModal">
+                                        <i class="mdi mdi-message-plus"></i>
+                                        </button>
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach ( $pets as $pet)
+                                    <tr>
+                                        <td>{{ $pet->species }}</td>
+                                        <td>{{ $pet->dateOfBirth }}</td>
+                                        <td><a href='/roommate_delete/{{$pet->id}}' class="col-md-1 btn btn-inverse-info btn-icon btn-lg pt-2"><i class="mdi mdi-delete"></i></a></td>               
+                                    </tr>
+                                @endforeach
+                            </tbody>
+                        </table>
                     </div>
                 </div>
-                <form id='petForm' method="post" action="{{route('storePet')}}">
-                    @csrf
-                    <input type="hidden" value={{$fosterFamily->id}} name="fosterFamily_id">
-                    <h5 class="text-muted mb-4">Nieuw toevoegen</h5>
-                    <div class="row">
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label class="form-label">Soort</label>
-                                <select class="form-control form-control-sm" name="species">
-                                    <option value="0">Selecteer</option>
-                                    @foreach ($species as $specie)
-                                    <option value="{{$specie}}">{{$specie}}</option>
-                                    @endforeach
-                                </select>
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label class="form-label">Geboortedatum</label>
-                                <input type="date" class="form-control" name="dateOfBirthPet">
-                            </div>
-                        </div>
-                    </div>
-                    <button form="petForm" type="submit" class="btn btn-outline-info">
-                        Toevoegen
-                    </button>
-                </form>
             </div>
         </div>
     </div>
