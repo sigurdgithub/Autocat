@@ -362,6 +362,152 @@
                 </div>
             </div>
         </div>
+    </form>
+
+        <!-- HEALTH DIARY : WEIGHING-->
+        @if(isset($cat))
+            <div class="content-wrapper">
+                <h3 class="text-muted">Wegingen</h3>
+                <div class="grid-margin stretch-card">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="modal fade" id="weighingModal" tabindex="-1" aria-labelledby="weighingModalLabel" aria-hidden="true">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="weighingModalLabel">Nieuwe weging</h5>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                        </div>
+                                        <form action="{{ route('storeWeighing')}}" method="post" enctype="multipart/form" required>
+                                            @csrf
+                                            <input type="hidden" value={{$cat->id}} name="cat_id">                          
+                                            <div class="modal-body">
+                                                <div class="form-group">
+                                                    <label class="col-form-label" for="date">Datum</label>
+                                                    <input type="date" class="form-control" name="date" id="date">
+                                                </div>
+                                                <div class="form-group">
+                                                    <label class="col-form-label" for="weight">Gewicht</label>
+                                                    <input type="number" min="0" class="form-control" name="weight" id="weight">
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="comments">Opmerking</label>
+                                                    <textarea class="form-control" name="comments" id="comments" style="height: 100px"></textarea>
+                                                </div>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="submit" class="btn btn-outline-danger">Toevoegen</button>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>                        
+                            <div class="table-responsive">
+                                <table class="table table-hover">
+                                    <thead>
+                                        <tr>
+                                            <th>Datum</th>
+                                            <th>Gewicht</th>
+                                            <th>Opmerking</th>
+                                            <th>                                
+                                                <button class="btn btn-icon btn-lg btn-gradient-danger" data-bs-toggle="modal"
+                                                data-bs-target="#weighingModal">
+                                                <i class="mdi mdi-message-plus"></i>
+                                                </button>
+                                            </th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach ( $weighings as $weighing)
+                                            <tr>
+                                                <td>{{ $weighing->date }}</td>
+                                                <td>{{ $weighing->weight }} g</td>
+                                                <td>{{ $weighing->comments}} </td>  
+                                                <td><a href='/weighing_delete/{{$weighing->id}}' class="col-md-1 btn btn-inverse-danger btn-icon btn-lg pt-2"><i class="mdi mdi-delete"></i></a></td>               
+                                            </tr>
+                                        @endforeach
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- HEALTH DIARY : VETVISIT -->
+            <div class="content-wrapper">
+                <h3 class="text-muted">Dierenarts bezoeken</h3>
+                <div class="grid-margin stretch-card">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="modal fade" id="vetVisitModal" tabindex="-1" aria-labelledby="vetVisitModalLabel" aria-hidden="true">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="vetVisitModalLabel">Nieuw dierenartsbezoek</h5>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                        </div>
+                                        <form action="{{ route('storeVetVisit')}}" method="post" enctype="multipart/form" required>
+                                            @csrf
+                                            <input type="hidden" value={{$cat->id}} name="cat_id">                          
+                                            <div class="modal-body">
+                                                <div class="form-group">
+                                                    <label class="col-form-label" for="date">Datum</label>
+                                                    <input type="date" class="form-control" name="date" id="date">
+                                                </div>
+                                                <div class="form-group">
+                                                    <label class="col-form-label" for="weight">Reden</label>
+                                                    <select class="form-control form-control-sm" name="reason">
+                                                        <option value="0">Selecteer</option>
+                                                        @foreach ($reason as $reaso)
+                                                            <option value="{{$reaso}}">{{$reaso}}</option>
+                                                        @endforeach
+                                                    </select> 
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="comments">Opmerking</label>
+                                                    <textarea class="form-control" name="comments" id="comments" style="height: 100px"></textarea>
+                                                </div>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="submit" class="btn btn-outline-danger">Toevoegen</button>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>                        
+                            <div class="table-responsive">
+                                <table class="table table-hover">
+                                    <thead>
+                                        <tr>
+                                            <th>Datum</th>
+                                            <th>Reden</th>
+                                            <th>Opmerking</th>
+                                            <th>                                
+                                                <button class="btn btn-icon btn-lg btn-gradient-danger" data-bs-toggle="modal"
+                                                data-bs-target="#vetVisitModal">
+                                                <i class="mdi mdi-message-plus"></i>
+                                                </button>
+                                            </th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach ( $vetVisits as $vetVisit)
+                                            <tr>
+                                                <td>{{ $vetVisit->date }}</td>
+                                                <td>{{ $vetVisit->reason }}</td>
+                                                <td>{{ $vetVisit->comments }}</td>  
+                                                <td><a href='/vetVisit_delete/{{$vetVisit->id}}' class="col-md-1 btn btn-inverse-danger btn-icon btn-lg pt-2"><i class="mdi mdi-delete"></i></a></td>               
+                                            </tr>
+                                        @endforeach
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        @endif
         @if(isset($cat))
         <div class="row mt-5">
             <input type="submit" class="btn btn-gradient-danger w-25 mx-auto" value="Update">
@@ -370,124 +516,6 @@
         <div class="row mt-5">
             <input type="submit" class="btn btn-gradient-danger w-25 mx-auto" value="Sla op">
         </div>
-        @endif
-        <!-- BUTTON - UPDATE -->
-{{--         <div class="row mt-5">
-            <button type="submit" class="btn btn-gradient-danger w-25 mx-auto">
-            Sla wijzigingen op
-            </button>
-        </div> --}}
-    </form>
-
-        <!-- HEALTH DIARY : WEIGHING-->
-        @if(isset($cat))
-            <div class="content-wrapper">
-                <h3 class="text-muted">Wegingen</h3>
-                <div class="card">
-                    <div class="card-body">                        
-                        <h5 class="text-muted">Overzicht</h5>
-                        <div class="stretch-card grid-margin">
-                            <div class="card-body card-border-danger">
-                                @foreach ( $weighings as $weighing)
-                                    <ul>
-                                        <li class="row">
-                                            <div class="col-md-3">Datum: {{ $weighing->date }}</div>
-                                            <div class="col-md-3">Gewicht: {{ $weighing->weight }} g</div>
-                                            <div class="col-md-5">Opmerking: {{ $weighing->comments}} </div>  
-                                            <a href='/weighing_delete/{{$weighing->id}}' class="col-md-1 btn btn-inverse-danger btn-icon btn-lg pt-2"><i class="mdi mdi-delete"></i></a>                 
-                                        </li>
-                                    </ul>
-                                @endforeach
-                            </div>
-                        </div>
-                        <form id='weighingForm' method="post" action="{{route('storeWeighing')}}"> 
-                            @csrf
-                            <input type="hidden" value={{$cat->id}} name="cat_id">                          
-                            <h5 class="text-muted mb-4">Nieuw toevoegen</h5>
-                            <div class="row">
-                                <div class="col-md-3">
-                                    <div class="form-group">
-                                        <label class="form-label">Datum</label>
-                                        <input type="date" class="form-control" name="date">
-                                    </div>
-                                </div>
-                                <div class="col-md-3">
-                                    <div class="form-group">
-                                        <label class="form-label">Gewicht (gram)</label>
-                                        <input type="number" min="0" class="form-control" name="weight">
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label class="form-label">Opmerking</label>
-                                        <textarea class="form-control" name="comments"></textarea>
-                                    </div> 
-                                </div>
-                            </div>
-                            <button form='weighingForm' type="submit" class="btn btn-outline-danger">
-                            Toevoegen
-                            </button>
-                        </form>
-                    </div>
-                </div>
-            </div>
-            
-            <!-- HEALTH DIARY : VETVISIT -->
-            <div class="content-wrapper">
-                <h3 class="text-muted">Dierenarts bezoeken</h3>
-                <div class="card">
-                    <div class="card-body">
-                        <h5 class="text-muted">Overzicht</h5>
-                        <div class="stretch-card grid-margin">
-                            <div class="card-body card-border-danger">
-                                @foreach ( $vetVisits as $vetVisit)
-                                    <ul>
-                                        <li class="row">
-                                            <div class="col-md-3">Datum: {{ $vetVisit->date}} </div>
-                                            <div class="col-md-3">Reden: {{ $vetVisit->reason}}</div>
-                                            <div class="col-md-5">Opmerking: {{ $vetVisit->comments }}</div>
-                                            <a href='/vetVisit_delete/{{$vetVisit->id}}' class="col-md-1 btn btn-inverse-danger btn-icon btn-lg pt-2"><i class="mdi mdi-delete"></i></a>                            
-                                        </li>
-                                    </ul>
-                                @endforeach
-                            </div>
-                        </div>
-                        <form id='vetVisitForm' method="post" action="{{route('storeVetVisit')}}"> 
-                            @csrf
-                            <input type="hidden" value={{$cat->id}} name="cat_id">
-                            <h5 class="text-muted mb-4">Nieuw toevoegen</h5>
-                            <div class="row">
-                            <div class="col-md-3">
-                                <div class="form-group">
-                                    <label class="form-label">Datum</label>
-                                    <input type="date" class="form-control" name="date">
-                                </div>
-                            </div>
-                            <div class="col-md-3">
-                                <div class="form-group">
-                                    <label class="form-label">Reden</label>
-                                    <select class="form-control form-control-sm" name="reason">
-                                        <option value="0">Selecteer</option>
-                                        @foreach ($reason as $reaso)
-                                            <option value="{{$reaso}}">{{$reaso}}</option>
-                                        @endforeach
-                                    </select>                                    
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label class="form-label">Opmerking</label>
-                                    <textarea class="form-control" name="comments"></textarea>
-                                </div> 
-                            </div>
-                            </div>
-                            <button id="vetVisitForm" type="submit" class="btn btn-outline-danger">
-                            Toevoegen
-                            </button>
-                        </form>
-                    </div>
-                </div>
-            </div>
         @endif
 
         <!-- PHOTO ALBUM

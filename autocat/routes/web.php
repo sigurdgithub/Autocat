@@ -62,7 +62,7 @@ Route::middleware('auth')->group(function () {
     })->name('fosterAccount');
 
     //CatDetail routes
-    Route::get('katDetail', [CatController::class, 'showEmptyCat']);
+    Route::get('/katDetail', [CatController::class, 'showEmptyCat']);
     Route::get('/katDetail/{id}', [CatController::class, 'showCatById'])->name('showCatById');
 
     //Medical Routes => CatDetail

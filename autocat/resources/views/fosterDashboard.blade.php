@@ -13,7 +13,6 @@
 <div class="grid-margin stretch-card">
     <div class="card">
         <div class="card-body">
-            </p>
             <!-- Modal for creation of new notifications -->
             <div class="modal fade" id="notificationModal" tabindex="-1" aria-labelledby="notificationModalLabel"
                 aria-hidden="true">
