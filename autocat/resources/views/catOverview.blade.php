@@ -229,7 +229,7 @@
                                     <div class="card-footer card-border-danger">
                                         <div>` + cat.adoptionStatus + `</div>`;
                 if (cat.fosterFamily_id != null) {
-                    if ({{auth()->user()->shelter_id}} != null) {
+                    if ({{isset(auth()->user()->shelter_id)}}) {
                         string += `<div><a href="/pleeggezinAccount/${cat.fosterHashed}" class="text-black"><u>` + cat.fosterFirstName + ` ` + cat
                         .fosterLastName + `</u></a></div>`;
                     } else {
