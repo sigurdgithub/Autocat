@@ -24,8 +24,8 @@
 
               @php
               if (isset(auth()->user()->fosterFamily_id)) {
-              $foster_f_name = App\Models\User::with('fosterFamily')->find(1)->fosterFamily->firstName;
-              $foster_l_name = App\Models\User::with('fosterFamily')->find(1)->fosterFamily->lastName;
+              $foster_f_name = App\Models\User::with('fosterFamily')->find(auth()->user()->id)->fosterFamily->firstName;
+              $foster_l_name = App\Models\User::with('fosterFamily')->find(auth()->user()->id)->fosterFamily->lastName;
               }
               elseif (isset(auth()->user()->shelter_id)) {
               $shelter_f_name = App\Models\User::with('shelter')->find(auth()->user()->id)->shelter->shelterFirstName;
@@ -60,9 +60,9 @@
           <form method="POST" action="{{ route('logout') }}">
             @csrf
 
-            <a class="nav-link active active nav-link" :href=""
+            <a class="{{Request::path() === '/'? 'dropdown-item active active':'dropdown-item'}}" :href="/"
               onclick="event.preventDefault();this.closest('form').submit();" id='logout'><i id='logout'
-                class="mdi mdi-power"></i> Log uit </a>
+                class="mdi mdi-power me-2"></i> Log uit </a>
           </form>
       </li>
       <li class="nav-item nav-logout d-none d-lg-block">
