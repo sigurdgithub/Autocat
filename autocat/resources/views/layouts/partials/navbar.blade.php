@@ -22,11 +22,19 @@
           <div class="nav-profile-text">
             <p class="mb-1 text-black">
 
-              {{-- @if(auth()->user()->shelter_id != null)
-              {{$shelter->shelterFirstName}} {{$shelter->shelterLastName}}
+              @php
+              $foster_f_name = App\Models\User::with('fosterFamily')->find(1)->fosterFamily->firstName;
+              $foster_l_name = App\Models\User::with('fosterFamily')->find(1)->fosterFamily->lastName;
+              if (isset(auth()->user()->shelter_id)) {
+              $shelter_f_name = App\Models\User::with('shelter')->find(1)->shelter->shelterFirstName;
+              $shelter_l_name = App\Models\User::with('shelter')->find(1)->shelter->shelterLastName;
+              }
+              @endphp
+              @if(auth()->user()->shelter_id != null)
+              {{$shelter_f_name}} {{$shelter_l_name}}
               @elseif(auth()->user()->fosterFamily_id != null)
-              {{$foster->firstName}} {{$foster->lastName}}
-              --}}
+              {{$foster_f_name}} {{$foster_l_name}}
+              @endif
 
             </p>
           </div>
@@ -51,7 +59,8 @@
             @csrf
 
             <a class="nav-link active active nav-link" :href=""
-              onclick="event.preventDefault();this.closest('form').submit();" id='logout'> Log uit </a>
+              onclick="event.preventDefault();this.closest('form').submit();" id='logout'><i id='logout'
+                class="mdi mdi-power"></i> Log uit </a>
           </form>
       </li>
       <li class="nav-item nav-logout d-none d-lg-block">
