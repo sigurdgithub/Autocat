@@ -96,7 +96,7 @@
             cats.empty();
             console.log(filteredCats);
             filteredCats.forEach(cat => {
-                console.log(cat);
+                //console.log(cat);
                 let string = `<div class="col-md-4 stretch-card grid-margin">
                             <div class="card card-img-holder">
                                 <div class="card">
@@ -107,7 +107,7 @@
                                     <div class="card-footer card-border-info">
                                         <div class="mb-3">` + cat.availableSpots + (cat.availableSpots>1?  ` beschikbare plaatsen`:  ` beschikbare plaats`) + `</div>
                                             {{-- TODO: add route once detail of foster family is available --}}
-                                            <div><a href="${cat.hashed}" class="text-black"><u>Meer info</u></a></div>
+                                            <div><a href="/pleeggezinAccount/${cat.hashed}" class="text-black"><u>Meer info</u></a></div>
                                     </div>
                                 </div>
                             </div>
@@ -167,6 +167,7 @@
                     },
                     dataType: "json",
                     success: function(data) {
+                        console.log(data);
                         createAndFillCards(data, fosterFamilies);
                     }
                 });
