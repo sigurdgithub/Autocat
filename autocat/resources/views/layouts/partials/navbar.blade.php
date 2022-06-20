@@ -23,11 +23,13 @@
             <p class="mb-1 text-black">
 
               @php
+              if (isset(auth()->user()->fosterFamily_id)) {
               $foster_f_name = App\Models\User::with('fosterFamily')->find(1)->fosterFamily->firstName;
               $foster_l_name = App\Models\User::with('fosterFamily')->find(1)->fosterFamily->lastName;
-              if (isset(auth()->user()->shelter_id)) {
-              $shelter_f_name = App\Models\User::with('shelter')->find(1)->shelter->shelterFirstName;
-              $shelter_l_name = App\Models\User::with('shelter')->find(1)->shelter->shelterLastName;
+              }
+              elseif (isset(auth()->user()->shelter_id)) {
+              $shelter_f_name = App\Models\User::with('shelter')->find(auth()->user()->id)->shelter->shelterFirstName;
+              $shelter_l_name = App\Models\User::with('shelter')->find(auth()->user()->id)->shelter->shelterLastName;
               }
               @endphp
               @if(auth()->user()->shelter_id != null)
