@@ -9,7 +9,7 @@
   @endphp
   <ul class="nav ">
     <li class="nav-item info">
-      <a class="{{Request::path() === 'pleeggezinDashboard'? 'nav-link active active':'nav-link'}}"
+      <a class="{{Request::path() === 'notifications'? 'nav-link active active':'nav-link'}}"
         href="/notifications/{{$foster_id_crypt}}">
         <span class="menu-title">Dashboard</span>
         <i class="mdi mdi-view-dashboard menu-icon"></i>
