@@ -53,7 +53,7 @@
             <i class="mdi mdi-account me-2"></i> Account overzicht </a>
           @elseif (auth()->user()->shelter_id != null)
           <a class="{{Request::path() === 'asielAccount'? 'dropdown-item active active':'dropdown-item'}}"
-            href="asielAccount/{{$shelter_id_crypt}}">
+            href="/asielAccount/{{$shelter_id_crypt}}">
             <i class="mdi mdi-account me-2"></i> Account overzicht </a>
           @endif
           <div class="dropdown-divider nav-item nav-logout d-none d-lg-block"></div>
