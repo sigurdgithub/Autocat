@@ -10,10 +10,9 @@
         </h3>
     </div>
     @if(isset($cat))
-    <form method="post" action="/updateCat/{{$cat->id}}" enctype="multipart/form-data">
-    @else
-    <form method="post" action="/katDetail" enctype="multipart/form-data">
+    <form method="POST" action="/updateCat/{{$cat->id}}">
     @endif
+    <form method="POST" action="/katDetail">
         @csrf
         <div class="content-wrapper pt-0">
             <div class="row">
@@ -362,7 +361,18 @@
                 </div>
             </div>
         </div>
+        @if(isset($cat))
+        <div class="row mt-5">
+            <input type="submit" class="btn btn-gradient-danger w-25 mx-auto" value="Update">
+        </div>
+        @else
+        <div class="row mt-5">
+            <input type="submit" class="btn btn-gradient-danger w-25 mx-auto" value="Sla op">
+        </div>
+
+        @endif    
     </form>
+
 
         <!-- HEALTH DIARY : WEIGHING-->
         @if(isset($cat))
@@ -508,20 +518,4 @@
                 </div>
             </div>
         @endif
-        @if(isset($cat))
-        <div class="row mt-5">
-            <input type="submit" class="btn btn-gradient-danger w-25 mx-auto" value="Update">
-        </div>
-        @else
-        <div class="row mt-5">
-            <input type="submit" class="btn btn-gradient-danger w-25 mx-auto" value="Sla op">
-        </div>
-        @endif
-
-        <!-- PHOTO ALBUM
-        <h2>Foto Album</h2>
-        <button type="button" class="btn btn-gradient-danger">Upload foto</button> -->
-
-        <!-- BUTTON - ADD -->
-        
     @endsection
