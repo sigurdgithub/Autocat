@@ -1,5 +1,6 @@
 @extends('layouts.pages.theme')
 @section('content')
+<div class="content-wrapper">
     <!--HERO-->
 
     <div class="page-header">
@@ -142,65 +143,6 @@
                         </div>
                     </div>
                 </div>
-                {{-- <div class="row">
-                    <div class="col-md-4 stretch-card grid-margin">
-                        <div class="card card-img-holder">
-                            <div class="card">
-                                <div class="card-header bg-gradient-danger">
-                                    <img src="assets/images/dashboard/circle.svg" class="card-img-absolute"
-                                        alt="circle-image" />
-                                    <div class="row">
-                                        <h4 class="col-md-6 font-weight-normal mb-3"><b>Izzy</b></h4>
-                                        <h5 class="col-md-6 font-weight-normal mb-3"><b>4 jaar</b></h5>
-                                    </div>
-                                </div>
-                                <div class="card-footer card-border-danger">
-                                    <div>In optie</div>
-                                    <div><a href="" class="text-black"><u>Sophie Coemans</u></a></div>
-                                    <div class="mt-3"><a href=""><u>Meer info</u></a></div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-4 stretch-card grid-margin">
-                        <div class="card card-img-holder">
-                            <div class="card">
-                                <div class="card-header bg-gradient-danger">
-                                    <img src="assets/images/dashboard/circle.svg" class="card-img-absolute"
-                                        alt="circle-image" />
-                                    <div class="row">
-                                        <h4 class="col-md-6 font-weight-normal mb-3"><b>Tux</b></h4>
-                                        <h5 class="col-md-6 font-weight-normal mb-3"><b>1 jaar</b></h5>
-                                    </div>
-                                </div>
-                                <div class="card-footer card-border-danger">
-                                    <div>Bij Pleeggezin</div>
-                                    <div><a href="" class="text-black"><u>Doenja Seykens</u></a></div>
-                                    <div class="mt-3"><a href=""><u>Meer info</u></a></div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-4 stretch-card grid-margin">
-                        <div class="card card-img-holder">
-                            <div class="card">
-                                <div class="card-header bg-gradient-danger">
-                                    <img src="assets/images/dashboard/circle.svg" class="card-img-absolute"
-                                        alt="circle-image" />
-                                    <div class="row">
-                                        <h4 class="col-md-6 font-weight-normal mb-3"><b>Malou</b></h4>
-                                        <h5 class="col-md-6 font-weight-normal mb-3"><b>9 jaar</b></h5>
-                                    </div>
-                                </div>
-                                <div class="card-footer card-border-danger">
-                                    <div>Adoptie goedgekeurd</div>
-                                    <div><a href="" class="text-black"><u>Leentje Bout</u></a></div>
-                                    <div class="mt-3"><a href=""><u>Meer info</u></a></div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div> --}}
             </div>
         </div>
     </div>
@@ -332,4 +274,5 @@
             });
         });
     </script>
+</div>
 @endsection

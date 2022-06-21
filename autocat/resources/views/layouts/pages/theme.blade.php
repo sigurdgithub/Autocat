@@ -39,12 +39,9 @@
 
       <div class="main-panel">
         {{-- @endif --}}
-        <div class="content-wrapper">
-
           <!-- Main -->
           @yield('content')
           <!-- Main End -->
-        </div>
         <!-- content-wrapper ends -->
         <!-- Footer -->
         @include('layouts.partials.footer')

@@ -127,7 +127,7 @@ class RegisteredUserController extends Controller
 
         $foster_id_crypt = Crypt::encryptString(auth()->user()->fosterFamily_id);
 
-        return redirect()->route('notifications', $foster_id_crypt);
+        return redirect()->route('welcome', $foster_id_crypt);
     }
 
     public function updateFoster(Request $request, $user)
@@ -230,7 +230,7 @@ class RegisteredUserController extends Controller
         Auth::login($user);
 
         $shelter_id_crypt = Crypt::encryptString(auth()->user()->shelter_id);
-        return redirect()->route('shelterNotifications', $shelter_id_crypt);
+        return redirect()->route('welcome', $shelter_id_crypt);
     }
 
     public function updateShelter(Request $request)
