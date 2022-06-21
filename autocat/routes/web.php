@@ -1,6 +1,6 @@
 <?php
 
-
+use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CatController;
 use App\Http\Controllers\CatOverviewController;
@@ -9,7 +9,6 @@ use App\Http\Controllers\FosterFamilyController;
 use App\Http\Controllers\MedicalController;
 use App\Http\Controllers\PetsAndRoommatesController;
 use App\Http\Controllers\Auth\RegisteredUserController;
-use Illuminate\Support\Facades\Crypt;
 
 /*
 |--------------------------------------------------------------------------
@@ -21,12 +20,8 @@ use Illuminate\Support\Facades\Crypt;
 | contains the "web" middleware group. Now create something great!
 |
 
-
 // ------- ALL USERS -------*/
 
-Route::get('/welkom', function () {
-    return view('welcome');
-});
 Route::get('/privacyverklaring', function () {
     return view('privacy');
 });
@@ -35,31 +30,13 @@ Route::get('/privacyverklaring', function () {
 Route::middleware('auth')->group(function () {
 
     /* --- GET --- */
-
     Route::get('/pleeggezinDashboard', function () {
         return view('fosterDashboard');
     })->name('fosterDashboard');
 
     Route::get('/notifications/{fosterId}', [DashBoardController::class, 'showByFosterId'])->name('notifications');
 
-    Route::get('/pleeggezinAccount/{id}', function ($id) {
-        $fosterFamilyDecryptID = Crypt::decryptString($id);
-        // dd($fosterFamilyDecryptID);
-        $user = App\Models\User::find(auth()->user()->id);
-        //dd($user->fosterFamily_id);
-        $fosterFamily = App\Models\FosterFamily::where('id', '=', $fosterFamilyDecryptID)->firstOrFail();
-        $fosterPreference = App\Models\FosterPreference::where('fosterFamily_id', '=', $fosterFamily->id)->firstOrFail();
-        //dd($fosterPreference);
-
-        $roommates = PetsAndRoommatesController::showRoommatesByFosterId($fosterFamily->id);
-        //dd($roommates);
-        $pets = PetsAndRoommatesController::showPetsByFosterId($fosterFamily->id);
-        //dd($pets);
-        $species = (['Kat', 'Hond', 'Knaagdier', 'Vogel']);
-        $relation = (['Partner', 'Kind', 'Ouder']);
-
-        return view('auth.fosterAccount', compact('fosterFamily', 'user', 'fosterPreference', 'roommates', 'pets', 'species', 'relation'));
-    })->name('fosterAccount');
+    Route::get('/pleeggezinAccount/{id}', [AuthenticatedSessionController::class, 'getFosterAccount'])->name('fosterAccount');
 
     //CatDetail routes
     Route::get('/katDetail', [CatController::class, 'showEmptyCat']);
@@ -76,7 +53,6 @@ Route::middleware('auth')->group(function () {
     Route::get('/kattenOverzicht', [CatOverviewController::class, 'getCats']);
 
     /* --- POST --- */
-
     Route::post('/cats/ajax', [CatController::class, 'filterCats']);
 
     //CatDetail routes
@@ -94,22 +70,20 @@ Route::middleware('auth')->group(function () {
     Route::delete('/notifications_delete/{id}', [DashBoardController::class, 'delete'])->name('delete');
     Route::post('/addNotification', [DashBoardController::class, 'store'])->name('addNotification');
 
-    // ------- FOSTER USERS ------- */
+    // ------- ONLY FOSTER USERS ------- */
     Route::group(
         ['middleware' => 'foster',],
         function () {
-
             Route::post('/pleeggezinAccount/{id}', [RegisteredUserController::class, 'updateFoster'], [])->name('updateFoster');
         }
     );
 
-    // ------- SHELTER USERS -------
+    // ------- ONLY SHELTER USERS -------
     Route::group(
         ['middleware' => 'shelter',],
         function () {
 
             /* --- GET --- */
-
             Route::get('/asielDashboard', function () {
                 return view('shelterDashboard');
             })->name('shelterDashboard');
@@ -119,12 +93,7 @@ Route::middleware('auth')->group(function () {
                 return view('fosterOverview', ['fosterFamilies' => FosterFamilyController::getFosterFamilies()]);
             });
 
-            Route::get('/asielAccount/{id}', function ($id) {
-                $shelterDecryptID = Crypt::decryptString($id);
-                $user = App\Models\User::find(auth()->user()->id);
-                $shelter = App\Models\Shelter::where('id', '=', $shelterDecryptID)->firstOrFail();
-                return view('auth.shelterAccount', compact('user', 'shelter'));
-            })->name('shelterAccount');
+            Route::get('/asielAccount/{id}', [AuthenticatedSessionController::class, 'getShelterAccount'])->name('shelterAccount');
 
             Route::get('/asielDashboard/ajax/{fosterId}', [DashBoardController::class, 'getCatsByFosterId']);
             Route::get('/cat/ajax/{id}', [CatController::class, 'getCatById']);

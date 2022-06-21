@@ -3,11 +3,15 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Http\Controllers\PetsAndRoommatesController;
 use App\Http\Requests\Auth\LoginRequest;
-use App\Providers\RouteServiceProvider;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Crypt;
+use App\Models\User;
+use App\Models\FosterFamily;
+use App\Models\FosterPreference;
+use App\Models\Shelter;
 
 class AuthenticatedSessionController extends Controller
 {
@@ -30,7 +34,6 @@ class AuthenticatedSessionController extends Controller
     public function store(LoginRequest $request)
     {
         $request->authenticate();
-        //dd($request);
         $request->session()->regenerate();
         // Route to correct dashboard if shelter or foster
         if ($foster_id_crypt = auth()->user()->fosterFamily_id) {
@@ -41,22 +44,6 @@ class AuthenticatedSessionController extends Controller
             return redirect()->route('shelterNotifications', $shelter_id_crypt);
         };
     }
-
-
-    // If fosterFamilt_id is null redirect to shelter dashboard 
-    /*   $input = $request->all();
-
-        (auth()->attempt(array('email' => $input['email'], 'password' => $input['password'])));
-        if (auth()->user()->fosterFamily_id != null) {
-            return redirect()->route('/pleeggezinDashboard');
-        } elseif (auth()->user()->fosterFamily_id == null) {
-            return redirect()->route(RouteServiceProvider::shelterHome);
-        } else {
-            return redirect()->route('login')
-                ->with('error', 'Email-Address And Password Are Wrong.');
-        }
-    } */
-
 
     /**
      * Destroy an authenticated session.
@@ -73,5 +60,31 @@ class AuthenticatedSessionController extends Controller
         $request->session()->regenerateToken();
 
         return redirect('/');
+    }
+
+    // Route to fosterAccount
+    public function getFosterAccount($id)
+    {
+        // Decrypt ID & show fosterfamily details
+        $fosterFamilyDecryptID = Crypt::decryptString($id);
+        $user = User::find(auth()->user()->id);
+        $fosterFamily = FosterFamily::where('id', '=', $fosterFamilyDecryptID)->firstOrFail();
+        $fosterPreference = FosterPreference::where('fosterFamily_id', '=', $fosterFamily->id)->firstOrFail();
+        // Show pets & roommates
+        $roommates = PetsAndRoommatesController::showRoommatesByFosterId($fosterFamily->id);
+        $pets = PetsAndRoommatesController::showPetsByFosterId($fosterFamily->id);
+        $species = (['Kat', 'Hond', 'Knaagdier', 'Vogel']);
+        $relation = (['Partner', 'Kind', 'Ouder']);
+
+        return view('auth.fosterAccount', compact('fosterFamily', 'user', 'fosterPreference', 'roommates', 'pets', 'species', 'relation'));
+    }
+
+    // Route to shelterAccount
+    public function getShelterAccount($id)
+    {
+        $shelterDecryptID = Crypt::decryptString($id);
+        $user = User::find(auth()->user()->id);
+        $shelter = Shelter::where('id', '=', $shelterDecryptID)->firstOrFail();
+        return view('auth.shelterAccount', compact('user', 'shelter'));
     }
 }
