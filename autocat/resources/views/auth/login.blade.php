@@ -34,18 +34,13 @@
               <h4>Welkom!</h4>
               <h5 class="font-weight-light">Log in om verder te gaan</h5>
               <!-- Session Status -->
-
               <x-auth-session-status class="mb-4" :status="session('status')" />
-
               <!-- Validation Errors -->
-
               <x-auth-validation-errors class="mb-4" :errors="$errors" />
               <form class="pt-3" method="POST" action="{{ route('login.store') }}">
                 @csrf
                 {{-- Email Address --}}
                 <div class="form-group">
-                  {{--
-                  <x-label for="email" :value="__('Email')" /> --}}
                   <input type="email" class="form-control form-control-lg" placeholder="E-mail" name="email"
                     value="{{old('email')}}" required autofocus>
                 </div>
@@ -54,21 +49,12 @@
                   <input type="password" class="form-control form-control-lg" placeholder="Wachtwoord" name="password"
                     required autocomplete="current-password">
                 </div>
-                <!-- Remember Me -->
-                {{-- <div class="block mt-4">
-                  <label for="remember_me" class="inline-flex items-center">
-                    <input id="remember_me" type="checkbox"
-                      class="rounded border-gray-300 text-indigo-600 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
-                      name="remember">
-                    <span class="ml-2 text-sm text-gray-600">{{ __('Onthoud mij') }}</span>
-                  </label>
-                </div> --}}
                 <div class="flex items-center justify-end mt-4">
-                  {{-- @if (Route::has('password.request'))
+                  @if (Route::has('password.request'))
                   <a class="underline text-sm text-gray-600 hover:text-gray-900" href="{{ route('password.request') }}">
                     {{ __('Wachtwoord vergeten?') }}
                   </a>
-                  @endif --}}
+                  @endif
                   <div class="mt-4">
                     <input class="btn btn-gradient-info btn-lg font-weight-medium text-white w-100" type="submit"
                       value="Log In" name="sendLogin">
