@@ -27,6 +27,9 @@
                 <div class="row flex-grow">
                     <div class="col-lg-4 mx-auto">
                         <div class="auth-form-light text-left p-5">
+                            <div class="brand-logo">
+                                <img src="assets/images/autoCatLogo/autoCatLogo_horizontaal_grey.png">
+                            </div>
                             <div class="mb-4 text-sm text-gray-600">
                                 {{ __('Wachtwoord vergeten? Geen probleem.
                                 Laat uw e-mail adres achter en wij sturen u
@@ -46,17 +49,11 @@
 
                                 <!-- Email Address -->
                                 <div>
-                                    <x-label for="email" :value="__('Email')" />
-
-                                    <x-input id="email" class="block mt-1 w-full" type="email" name="email"
-                                        :value="old('email')" required autofocus />
+                                    <input id="Email" type="email" name="email" class="form-control form-control-lg" placeholder="E-mail" value="{{old('email')}}" required autofocus>
                                 </div>
-
-                                <div class="flex items-center justify-end mt-4">
-                                    <button class="btn btn-dark" type="submit">
-                                        {{ __('Email Wachtwoord Reset Link') }}
-                                    </button>
-                                </div>
+                                <div class="mt-4">
+                                    <input class="btn btn-gradient-info btn-lg font-weight-medium text-white w-100" type="submit" value="{{ __('Reset Wachtwoord') }}">
+                                  </div>
                             </form>
                         </div>
                     </div>
