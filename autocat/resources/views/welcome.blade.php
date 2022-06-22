@@ -42,7 +42,7 @@
                         <div class="col-md-11">Communiceer via het dashboard met jouw asielbeheerder</div>
                     </h5>
                     <h5 class="row mt-4">
-                        <div class="col-md-1"><a href="/kattenOverzicht"><i class="mdi mdi-paw menu-icon"></i></a></div>
+                        <div class="col-md-1"><a href="/notifications/{{$foster_id_crypt}}"><i class="mdi mdi-view-dashboard menu-icon"></i></a></div>
                         <div class="col-md-11">Hou de gegevens van jouw opvangertjes gemakkelijk bij</div>
                     </h5>
                 @elseif (auth()->user()->shelter_id != null)

@@ -577,5 +577,5 @@
             });
         </script>
     </div>
-</div>
+</
 @endsection

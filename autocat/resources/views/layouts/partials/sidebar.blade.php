@@ -9,10 +9,18 @@
   @endphp
   <ul class="nav ">
     <li class="nav-item info">
-      <a class="{{Request::path() === 'notifications'? 'nav-link active active':'nav-link'}}"
+      {{ Request::path() }}
+      <a class="{{Request::path() === 'notifications/$foster_id_crypt'? 'nav-link active active':'nav-link'}}"
         href="/notifications/{{$foster_id_crypt}}">
         <span class="menu-title">Dashboard</span>
         <i class="mdi mdi-view-dashboard menu-icon"></i>
+      </a>
+    </li>
+    <li class="nav-item danger">
+      <a class="{{Request::path() === 'mijnKatten'? 'nav-link active active':'nav-link'}}"
+        href="/mijnKatten/{{$foster_id_crypt}}">
+        <span class="menu-title">Mijn Katten</span>
+        <i class="mdi mdi-paw menu-icon"></i>
       </a>
     </li>
     <li class="nav-item danger">
@@ -21,13 +29,13 @@
         <i class="mdi mdi-plus-box menu-icon"></i>
       </a>
     </li>
-    <li class="nav-item danger">
+    {{-- <li class="nav-item danger">
       <a class="{{Request::path() === 'kattenOverzicht'? 'nav-link active active':'nav-link'}}" href="/kattenOverzicht">
         <span class="menu-title">Katten Overzicht</span>
         <i class="mdi mdi-paw menu-icon"></i>
       </a>
     </li>
-    {{-- <li class="nav-item info">
+    <li class="nav-item info">
       <a class="{{Request::path() === 'pleeggezinnenOverzicht'? 'nav-link active active':'nav-link'}}"
         href="/pleeggezinnenOverzicht">
         <span class="menu-title">Pleeggezinnen Overzicht</span>
