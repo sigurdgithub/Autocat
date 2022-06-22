@@ -222,7 +222,7 @@ class FosterFamilyController extends Controller
         $fosterFamilies = $fosterFamilies->where('fosterFamilies.firstName', 'LIKE', '%' . $string . '%')
             ->orWhere('fosterFamilies.lastName', 'LIKE', '%' . $string . '%');
         $result = $fosterFamilies->get();
-        $result = json_decode(json_encode($result));
+        $result = json_decode(json_encode($result), true);
         foreach ($result as $row) {
             $row['hashed'] = Crypt::encryptString($row['id']);
         }
