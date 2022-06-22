@@ -26,14 +26,16 @@ Route::get('/privacyverklaring', function () {
     return view('privacy');
 });
 
-Route::get('/welkom', function () {
-    return view('welcome');
-})->name('welcome');
+
 
 // ------- LOGGED IN USERS -------
 Route::middleware('auth')->group(function () {
 
     /* --- GET --- */
+    Route::get('/welkom', function () {
+        return view('welcome');
+    })->name('welcome');
+
     Route::get('/pleeggezinDashboard', function () {
         return view('fosterDashboard');
     })->name('fosterDashboard');
