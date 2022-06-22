@@ -141,7 +141,7 @@ class DashBoardController extends Controller
         if ($catPreferences->intensiveCare) { $filterInput[] = "intensiveCare"; }
         if ($catPreferences->pregnancy) { $filterInput[] = "pregnant"; }
         if ($catPreferences->isolation) { $filterInput[] = "isolation"; }
-        $query = FosterFamilyController::filterByCatPref($filterInput, $query, true);
+        $query = FosterFamilyController::filterByCatPref($filterInput, $query);
         return $query;
     }
 
