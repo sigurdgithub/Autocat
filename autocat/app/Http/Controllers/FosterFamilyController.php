@@ -20,6 +20,17 @@ class FosterFamilyController extends Controller
         $fosterFamilies = FosterFamily::all();
         return $fosterFamilies;
     }
+    public static function getAmountOfCats($fosterFamilyId) {
+        $count =  Cat::where('fosterFamily_id', '=', $fosterFamilyId)
+        ->where(function($subQuery) {
+            $subQuery->where('adoptionStatus', '=', 'Bij Pleeggezin')
+            ->orWhere('adoptionStatus', '=', 'Klaar voor adoptie')
+            ->orWhere('adoptionStatus', '=', 'In optie')
+            ->orWhere('adoptionStatus', '=', 'Adoptie goedgekeurd');
+        });
+        //dd($count->get());
+        return $count->get()->count();
+    }
     public static function getFosterFamiliesByCatId($catId)
     {
         $fosterFamilyId = Cat::find($catId)->fosterFamily_id;
@@ -225,6 +236,7 @@ class FosterFamilyController extends Controller
         $result = json_decode(json_encode($result), true);
         foreach ($result as $row) {
             $row['hashed'] = Crypt::encryptString($row['id']);
+            $row['availableSpots'] -= FosterFamilyController::getAmountOfCats($row['id']);
         }
         return json_encode($result);
     }
@@ -249,7 +261,7 @@ class FosterFamilyController extends Controller
         $final = [];
         foreach ($result as &$row) {
             $row['hashed'] = Crypt::encryptString($row['id']);
-            CatController::getCatsByFosterId($row['id']);
+            $row['availableSpots'] -= FosterFamilyController::getAmountOfCats($row['id']);
             //$row[''];
         }
         //dd($result);

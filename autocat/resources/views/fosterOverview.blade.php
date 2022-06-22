@@ -77,7 +77,7 @@
                                 $foster_id_crypt = Crypt::encryptString($fosterFamily->id);
                                 @endphp
                                 <div class="card-footer card-border-info">
-                                    <div class="mb-3">{{$fosterFamily->availableSpots}} beschikbare plaatsen</div>
+                                    <div class="mb-3">{{$fosterFamily->availableSpots - App\Http\Controllers\FosterFamilyController::getAmountOfCats($fosterFamily->id)}} beschikbare plaatsen</div>
                                     {{-- TODO: add route once detail of foster family is available --}}
                                     <div><a href="pleeggezinAccount/{{$foster_id_crypt}}" class="text-black"><u>Meer
                                                 info</u></a></div>
