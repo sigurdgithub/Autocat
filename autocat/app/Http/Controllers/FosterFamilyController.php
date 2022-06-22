@@ -49,66 +49,84 @@ class FosterFamilyController extends Controller
             $first = true;
             foreach ($value as $val) {
                 if (!strcmp($val, 'adult')) {
-                    if ($first || !$noOr) {
+                    if ($first) {
                         $first = false;
+                        $query = $query->where('foster_preferences.adult', 1);
+                    } else if ($noOr) {
                         $query = $query->where('foster_preferences.adult', 1);
                     } else {
                         $query = $query->orWhere('foster_preferences.adult', 1);
                     }
                 } else if (!strcmp($val, 'pregnant')) {
-                    if ($first || !$noOr) {
+                    if ($first) {
                         $first = false;
+                        $query = $query->where('foster_preferences.pregnant', 1);
+                    } else if ($noOr) {
                         $query = $query->where('foster_preferences.pregnant', 1);
                     } else {
                         $query = $query->orWhere('foster_preferences.pregnant', 1);
                     }
                 } else if (!strcmp($val, 'kitten')) {
-                    if ($first || !$noOr) {
+                    if ($first) {
                         $first = false;
                         $query = $query->where('foster_preferences.kitten', 1);
-                    } else {
+                    } else if ($noOr) {
+                        $query = $query->where('foster_preferences.kitten', 1);
+                    }else {
                         $query = $query->orWhere('foster_preferences.kitten', 1);
                     }
                 } else if (!strcmp($val, 'bottleFeeding')) {
-                    if ($first || !$noOr) {
+                    if ($first) {
                         $first = false;
                         $query = $query->where('foster_preferences.bottleFeeding', 1);
-                    } else {
+                    } else if ($noOr) {
+                        $query = $query->where('foster_preferences.bottleFeeding', 1);
+                    }else {
                         $query = $query->orWhere('foster_preferences.bottleFeeding', 1);
                     }
                 } else if (!strcmp($val, 'scared')) {
-                    if ($first || !$noOr) {
+                    if ($first) {
                         $first = false;
                         $query = $query->where('foster_preferences.scared', 1);
-                    } else {
+                    } else if ($noOr) {
+                        $query = $query->where('foster_preferences.scared', 1);
+                    }else {
                         $query = $query->orWhere('foster_preferences.scared', 1);
                     }
                 } else if (!strcmp($val, 'feral')) {
-                    if ($first || !$noOr) {
+                    if ($first) {
                         $first = false;
                         $query = $query->where('foster_preferences.feral', 1);
-                    } else {
+                    } else if ($noOr) {
+                        $query = $query->where('foster_preferences.feral', 1);
+                    }else {
                         $query = $query->orWhere('foster_preferences.feral', 1);
                     }
                 } else if (!strcmp($val, 'intensiveCare')) {
-                    if ($first || !$noOr) {
+                    if ($first) {
                         $first = false;
                         $query = $query->where('foster_preferences.intensiveCare', 1);
-                    } else {
+                    } else if ($noOr) {
+                        $query = $query->where('foster_preferences.intensiveCare', 1);
+                    }else {
                         $query = $query->orWhere('foster_preferences.intensiveCare', 1);
                     }
                 } else if (!strcmp($val, 'noIntensiveCare')) {
-                    if ($first || !$noOr) {
+                    if ($first) {
                         $first = false;
+                        $query = $query->where('foster_preferences.noIntensiveCare', 1);
+                    } else if ($noOr) {
                         $query = $query->where('foster_preferences.noIntensiveCare', 1);
                     } else {
                         $query = $query->orWhere('foster_preferences.noIntensiveCare', 1);
                     }
                 } else if (!strcmp($val, 'isolation')) {
-                    if ($first || !$noOr) {
+                    if ($first) {
                         $first = false;
                         $query = $query->where('foster_preferences.isolation', 1);
-                    } else {
+                    } else if ($noOr) {
+                        $query = $query->where('foster_preferences.isolation', 1);
+                    }else {
                         $query = $query->orWhere('foster_preferences.isolation', 1);
                     }
                 }
@@ -134,7 +152,7 @@ class FosterFamilyController extends Controller
 
     // TODO: Depends on roommates and pets
     // Returns a collection of all foster families that DON'T comply with the criteria
-    public static function filterHomeSituation($value, $query) {
+    public static function filterHomeSituation($value, $query, $noOr = false) {
         //$query =  DB::table('fosterFamilies')->leftJoin('pets', 'fosterFamilies.id', '=', 'pets.fosterFamily_id')->select('fosterFamilies.*');
         if (is_array($value)) {
             $first = true;
@@ -146,6 +164,8 @@ class FosterFamilyController extends Controller
                     if ($first) {
                         $first = false;
                         $query = $query->whereNotIn('fosterFamilies.id', $subQuery);
+                    } else if ($noOr) {
+                        $query = $query->whereNotIn('fosterFamilies.id', $subQuery);
                     } else {
                         $query = $query->orWhereNotIn('fosterFamilies.id', $subQuery);
                     }
@@ -153,6 +173,8 @@ class FosterFamilyController extends Controller
                     $subQuery = DB::table('fosterFamilies')->join('pets', 'fosterFamilies.id', '=', 'pets.fosterFamily_id')->select('fosterFamilies.id');
                     if ($first) {
                         $first = false;
+                        $query = $query->whereNotIn('fosterFamilies.id', $subQuery);
+                    } else if ($noOr) {
                         $query = $query->whereNotIn('fosterFamilies.id', $subQuery);
                     } else {
                         $query = $query->orWhereNotIn('fosterFamilies.id', $subQuery);
@@ -162,6 +184,8 @@ class FosterFamilyController extends Controller
                     $subQuery =  $subQuery->where('pets.species', '=', 'Hond');
                     if ($first) {
                         $first = false;
+                        $query = $query->whereNotIn('fosterFamilies.id', $subQuery);
+                    } else if ($noOr) {
                         $query = $query->whereNotIn('fosterFamilies.id', $subQuery);
                     } else {
                         $query = $query->orWhereNotIn('fosterFamilies.id', $subQuery);
@@ -173,6 +197,8 @@ class FosterFamilyController extends Controller
                         $first = false;
                         $query = $query->whereNotIn('fosterFamilies.id', $subQuery);
 
+                    } else if ($noOr) {
+                        $query = $query->whereNotIn('fosterFamilies.id', $subQuery);
                     } else {
                         $query = $query->orWhereNotIn('fosterFamilies.id', $subQuery);
                     }
@@ -196,7 +222,7 @@ class FosterFamilyController extends Controller
         $fosterFamilies = $fosterFamilies->where('fosterFamilies.firstName', 'LIKE', '%' . $string . '%')
             ->orWhere('fosterFamilies.lastName', 'LIKE', '%' . $string . '%');
         $result = $fosterFamilies->get();
-        $result = json_decode(json_encode($result));
+        $result = json_decode(json_encode($result), true);
         foreach ($result as $row) {
             $row['hashed'] = Crypt::encryptString($row['id']);
         }
