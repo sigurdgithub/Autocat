@@ -26,8 +26,6 @@ Route::get('/privacyverklaring', function () {
     return view('privacy');
 });
 
-
-
 // ------- LOGGED IN USERS -------
 Route::middleware('auth')->group(function () {
 
@@ -35,10 +33,6 @@ Route::middleware('auth')->group(function () {
     Route::get('/welkom', function () {
         return view('welcome');
     })->name('welcome');
-
-    Route::get('/pleeggezinDashboard', function () {
-        return view('fosterDashboard');
-    })->name('fosterDashboard');
 
     Route::get('/notifications/{fosterId}', [DashBoardController::class, 'showByFosterId'])->name('notifications');
     Route::get('/pleeggezinAccount/{id}', [AuthenticatedSessionController::class, 'getFosterAccount'])->name('fosterAccount');
@@ -70,10 +64,6 @@ Route::middleware('auth')->group(function () {
     Route::post('/addWeighing', [MedicalController::class, 'storeWeighing'])->name('storeWeighing');
     Route::post('/addVetVisit', [MedicalController::class, 'storeVetVisit'])->name('storeVetVisit');
 
-    //Pet & roommate routes => Fosterfamily Account
-    Route::post('/addRoommate', [PetsAndRoommatesController::class, 'storeRoommate'])->name('storeRoommate');
-    Route::post('/addPet', [PetsAndRoommatesController::class, 'storePet'])->name('storePet');
-
     Route::delete('/notifications_delete/{id}', [DashBoardController::class, 'delete'])->name('delete');
     Route::post('/addNotification', [DashBoardController::class, 'store'])->name('addNotification');
 
@@ -82,6 +72,10 @@ Route::middleware('auth')->group(function () {
         ['middleware' => 'foster',],
         function () {
             Route::post('/pleeggezinAccount/{id}', [RegisteredUserController::class, 'updateFoster'], [])->name('updateFoster');
+
+            //Pet & roommate routes => Fosterfamily Account
+            Route::post('/addRoommate', [PetsAndRoommatesController::class, 'storeRoommate'])->name('storeRoommate');
+            Route::post('/addPet', [PetsAndRoommatesController::class, 'storePet'])->name('storePet');
         }
     );
 
@@ -91,9 +85,6 @@ Route::middleware('auth')->group(function () {
         function () {
 
             /* --- GET --- */
-            Route::get('/asielDashboard', function () {
-                return view('shelterDashboard');
-            })->name('shelterDashboard');
             Route::get('/asielDashboard', [DashBoardController::class, 'showShelterNotifications'])->name('shelterNotifications');
 
             Route::get('/pleeggezinnenOverzicht', function () {
