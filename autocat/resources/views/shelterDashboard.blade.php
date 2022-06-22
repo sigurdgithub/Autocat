@@ -100,10 +100,10 @@
                                 <tbody>
                                     @foreach ($notifications as $notification)
                                         <tr>
-                                            <td>{{ $notification->fosterFamily->firstName }}
-                                                {{ $notification->fosterFamily->lastName }}</td>
+                                            <td><a href="/pleeggezinAccount/{{Illuminate\Support\Facades\Crypt::encryptString($notification->fosterFamily->id)}}">{{ $notification->fosterFamily->firstName }}
+                                                {{ $notification->fosterFamily->lastName }}</a></td>
                                             @if (isset($notification->cat))
-                                                <td>{{ $notification->cat->name }}</td>
+                                                <td><a href="/katDetail/{{$notification->cat->id}}">{{ $notification->cat->name }}</a></td>
                                             @else
                                                 <td><span style="font-weight:bold;">Geen kat</span></td>
                                             @endif

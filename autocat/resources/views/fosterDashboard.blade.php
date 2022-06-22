@@ -87,7 +87,7 @@
                                 @foreach ($notifications as $notification)
                                 <tr>
                                     @if (isset($notification->cat))
-                                    <td>{{$notification->cat->name}}</td>
+                                    <td><a href="/katDetail/{{$notification->cat->id}}">{{$notification->cat->name}}</a></td>
                                     @else
                                     <td><span style="font-weight:bold;">Geen kat</span></td>
                                     @endif
