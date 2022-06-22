@@ -133,20 +133,23 @@ class DashBoardController extends Controller
 
     private static function checkFostersOnCatPref($cat, $query) {
         $filterInput = [(CatController::getCatAgeCategory($cat) == "kitten" ? "kitten" : "adult")];
-        $catPreferences = $cat->preferences;
-        if ($cat->socialization == "Bang") { $filterInput[] = "scared"; }
-        if ($cat->socialization == "Wild") { $filterInput[] = "feral"; }
-        if ($catPreferences->bottleFeeding) { $filterInput[] = "bottleFeeding"; }
-        if ($catPreferences->noIntensiveCare){ $filterInput[] = "noIntensiveCare"; }
-        if ($catPreferences->intensiveCare) { $filterInput[] = "intensiveCare"; }
-        if ($catPreferences->pregnancy) { $filterInput[] = "pregnant"; }
-        if ($catPreferences->isolation) { $filterInput[] = "isolation"; }
-        $query = FosterFamilyController::filterByCatPref($filterInput, $query, true);
-        $houseFilter = [];
-        if (!$catPreferences->dogs) { $houseFilter[] = "no dogs"; }
-        if (!$catPreferences->cats) { $houseFilter[] = "no cats"; }
-        if (!$catPreferences->kids) { $houseFilter[] = "no kids"; }
-        if ($houseFilter != []) { $query = FosterFamilyController::filterHomeSituation($houseFilter, $query, true); }
+        if (isset($cat->preferences)) {
+            $catPreferences = $cat->preferences;
+            if ($cat->socialization == "Bang") { $filterInput[] = "scared"; }
+            if ($cat->socialization == "Wild") { $filterInput[] = "feral"; }
+            if ($catPreferences->bottleFeeding) { $filterInput[] = "bottleFeeding"; }
+            if ($catPreferences->noIntensiveCare){ $filterInput[] = "noIntensiveCare"; }
+            if ($catPreferences->intensiveCare) { $filterInput[] = "intensiveCare"; }
+            if ($catPreferences->pregnancy) { $filterInput[] = "pregnant"; }
+            if ($catPreferences->isolation) { $filterInput[] = "isolation"; }
+            $query = FosterFamilyController::filterByCatPref($filterInput, $query, true);
+            $houseFilter = [];
+            if (!$catPreferences->dogs) { $houseFilter[] = "no dogs"; }
+            if (!$catPreferences->cats) { $houseFilter[] = "no cats"; }
+            if (!$catPreferences->kids) { $houseFilter[] = "no kids"; }
+            if ($houseFilter != []) { $query = FosterFamilyController::filterHomeSituation($houseFilter, $query, true); }
+        }
+        
         //dd($query->get());
         return $query;
     }
@@ -174,7 +177,14 @@ class DashBoardController extends Controller
             $selectedCat = Cat::findOrFail($catId);
             $fosterFamilies = DB::table('fosterFamilies')->select("fosterFamilies.*")->leftJoin('foster_preferences', 'fosterFamilies.id', '=', 'foster_preferences.fosterFamily_id');
             $fosterFamilies = DashBoardController::checkFostersOnCatPref($selectedCat, $fosterFamilies);
-            return json_encode($fosterFamilies->get());
+            $tmp = json_decode(json_encode($fosterFamilies->get()), true);
+            $result = [];
+            foreach ($tmp as $foster) {
+                if ($foster['availableSpots']-FosterFamilyController::getAmountOfCats($foster['id']) > 0) {
+                    $result[] = $foster;
+                }
+            }
+            return json_encode($result);
         }
     }
 }

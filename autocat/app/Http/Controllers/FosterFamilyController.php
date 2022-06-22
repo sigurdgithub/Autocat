@@ -42,6 +42,7 @@ class FosterFamilyController extends Controller
         $result = FosterFamily::findOrFail($id);
         $result = json_decode(json_encode($result), true);
         $result['hashed'] = Crypt::encryptString($result['id']);
+        $result['availableSpots'] = $result['availableSpots'] - FosterFamilyController::getAmountOfCats($id);
         return json_encode($result);
     }
 
