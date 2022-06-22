@@ -43,69 +43,69 @@ class FosterFamilyController extends Controller
         return json_encode($result);
     }
 
-    private static function filterByCatPref($value, $query)
+    public static function filterByCatPref($value, $query, $noOr = false)
     {
         if (is_array($value)) {
             $first = true;
             foreach ($value as $val) {
                 if (!strcmp($val, 'adult')) {
-                    if ($first) {
+                    if ($first || !$noOr) {
                         $first = false;
                         $query = $query->where('foster_preferences.adult', 1);
                     } else {
                         $query = $query->orWhere('foster_preferences.adult', 1);
                     }
                 } else if (!strcmp($val, 'pregnant')) {
-                    if ($first) {
+                    if ($first || !$noOr) {
                         $first = false;
                         $query = $query->where('foster_preferences.pregnant', 1);
                     } else {
                         $query = $query->orWhere('foster_preferences.pregnant', 1);
                     }
                 } else if (!strcmp($val, 'kitten')) {
-                    if ($first) {
+                    if ($first || !$noOr) {
                         $first = false;
                         $query = $query->where('foster_preferences.kitten', 1);
                     } else {
                         $query = $query->orWhere('foster_preferences.kitten', 1);
                     }
                 } else if (!strcmp($val, 'bottleFeeding')) {
-                    if ($first) {
+                    if ($first || !$noOr) {
                         $first = false;
                         $query = $query->where('foster_preferences.bottleFeeding', 1);
                     } else {
                         $query = $query->orWhere('foster_preferences.bottleFeeding', 1);
                     }
                 } else if (!strcmp($val, 'scared')) {
-                    if ($first) {
+                    if ($first || !$noOr) {
                         $first = false;
                         $query = $query->where('foster_preferences.scared', 1);
                     } else {
                         $query = $query->orWhere('foster_preferences.scared', 1);
                     }
                 } else if (!strcmp($val, 'feral')) {
-                    if ($first) {
+                    if ($first || !$noOr) {
                         $first = false;
                         $query = $query->where('foster_preferences.feral', 1);
                     } else {
                         $query = $query->orWhere('foster_preferences.feral', 1);
                     }
                 } else if (!strcmp($val, 'intensiveCare')) {
-                    if ($first) {
+                    if ($first || !$noOr) {
                         $first = false;
                         $query = $query->where('foster_preferences.intensiveCare', 1);
                     } else {
                         $query = $query->orWhere('foster_preferences.intensiveCare', 1);
                     }
                 } else if (!strcmp($val, 'noIntensiveCare')) {
-                    if ($first) {
+                    if ($first || !$noOr) {
                         $first = false;
                         $query = $query->where('foster_preferences.noIntensiveCare', 1);
                     } else {
                         $query = $query->orWhere('foster_preferences.noIntensiveCare', 1);
                     }
                 } else if (!strcmp($val, 'isolation')) {
-                    if ($first) {
+                    if ($first || !$noOr) {
                         $first = false;
                         $query = $query->where('foster_preferences.isolation', 1);
                     } else {
@@ -125,7 +125,7 @@ class FosterFamilyController extends Controller
         }
     }
 
-    private static function filterChildren() {
+    public static function filterChildren() {
         $now = Carbon::now()->subYears(12)->toDateString();
         $query =  DB::table('fosterFamilies')->crossJoin('roommates', 'fosterFamilies.id', '=', 'roommates.fosterFamily_id')->select('fosterFamilies.*');
         $result = $query->where('roommates.dateOfBirth', '>', $now)->get();
@@ -134,7 +134,7 @@ class FosterFamilyController extends Controller
 
     // TODO: Depends on roommates and pets
     // Returns a collection of all foster families that DON'T comply with the criteria
-    private static function filterHomeSituation($value, $query) {
+    public static function filterHomeSituation($value, $query) {
         //$query =  DB::table('fosterFamilies')->leftJoin('pets', 'fosterFamilies.id', '=', 'pets.fosterFamily_id')->select('fosterFamilies.*');
         if (is_array($value)) {
             $first = true;

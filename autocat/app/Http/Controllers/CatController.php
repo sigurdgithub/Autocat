@@ -74,7 +74,7 @@ class CatController extends Controller
         return $cats;
     }
 
-    private static function filterPlacement($value, $query)
+    public static function filterPlacement($value, $query)
     {
         if (is_array($value)) {
             $first = true;
@@ -114,7 +114,7 @@ class CatController extends Controller
         }
     }
 
-    private static function filterCharacter($value, $query)
+    public static function filterCharacter($value, $query)
     {
         if (is_array($value)) {
             $query->where(function ($query) use ($value) {
@@ -181,7 +181,7 @@ class CatController extends Controller
             }
         }
     }
-    private static function filterAge($value, $query)
+    public static function filterAge($value, $query)
     {
         if (is_array($value)) {
             $first = true;
@@ -240,25 +240,40 @@ class CatController extends Controller
         }
     }
 
-    private static function basicFilter($value, $query, $columnName)
+    public static function basicFilter($value, $query, $columnName, $optional = false)
     {
         if (!isset($value)) {
             return $query;
         }
         if (is_array($value)) {
             $first = true;
+            $query->where(function($query) use ($columnName, $value, $first, $optional) {
+
+
             foreach ($value as $val) {
-                if ($first) {
+                if ($first || !$optional) {
                     $first  = false;
                     $query = $query->where($columnName, $val);
                 } else {
                     $query = $query->orWhere($columnName, $val);
                 }
             }
+        });
         } else {
             $query = $query->where($columnName, $value);
         }
         return $query;
+    }
+
+    public static function getCatAgeCategory($cat) {
+        $catDate = new Carbon($cat->dateOfBirth);
+        $kittenDate = Carbon::now()->subYear();
+        $adolescentDate = Carbon::now()->subYears(2);
+        $adultDate = Carbon::now()->subYear(8);
+        if ($catDate->greaterThanOrEqualTo($kittenDate) ) { return "kitten"; }
+        else if ($catDate->greaterThanOrEqualTo($adolescentDate) ) { return "adolescent"; }
+        else if ($catDate->greaterThanOrEqualTo($adultDate) ) { return "adult"; }
+        else  { return "senior"; }
     }
 
     public function filterCats(Request $request)
