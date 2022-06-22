@@ -7,7 +7,6 @@ use App\Models\FosterFamily;
 use App\Models\Shelter;
 use App\Models\User;
 use App\Models\FosterPreference;
-use App\Providers\RouteServiceProvider;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -44,7 +43,6 @@ class RegisteredUserController extends Controller
      */
     public function storeFoster(Request $request)
     {
-
         // FOSTERFAMILY TABLE //
         $request->validate([
             'lastName' => ['required', 'string'],
@@ -71,7 +69,6 @@ class RegisteredUserController extends Controller
         ]);
 
         // USER TABLE //
-
         $request->validate([
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', Rules\Password::defaults()],
@@ -87,7 +84,6 @@ class RegisteredUserController extends Controller
         ]);
 
         // FOSTER_PREFERENCES TABLE //
-
         $request->validate([
             'fosterFamily_id' => ['integer'],
             'adult' => ['integer'],
@@ -119,21 +115,17 @@ class RegisteredUserController extends Controller
         Auth::login($user);
 
         $roommates = PetsAndRoommatesController::showRoommatesByFosterId($foster->id);
-        //dd($roommates);
         $pets = PetsAndRoommatesController::showPetsByFosterId($foster->id);
-        //dd($pets);
         $species = (['Kat', 'Hond', 'Knaagdier', 'Vogel']);
         $relation = (['Partner', 'Kind', 'Ouder']);
 
         $foster_id_crypt = Crypt::encryptString(auth()->user()->fosterFamily_id);
-
         return redirect()->route('welcome', $foster_id_crypt);
     }
 
+    // Update FosterAccount page with User, FosterPreference & FosterFamily information
     public function updateFoster(Request $request, $user)
     {
-        //$fosterFamily = FosterFamily::find('id', '=', $user->fosterFamily_id);
-
         $id = $request->input('fosterFamily_id');
         $fosterFamily = FosterFamily::find($id);
         $fosterFamily->lastName = $request->input('lastName');
@@ -149,7 +141,6 @@ class RegisteredUserController extends Controller
 
         $user = User::find(auth()->user()->id);
         $user->email = $request->input('email');
-        /* $user->password = ($request->input('password')); */
         $user->save();
 
         FosterPreference::where('fosterFamily_id', $id)->update([
@@ -164,11 +155,10 @@ class RegisteredUserController extends Controller
         ]);
 
         $roommates = PetsAndRoommatesController::showRoommatesByFosterId($fosterFamily->id);
-        //dd($roommates);
         $pets = PetsAndRoommatesController::showPetsByFosterId($fosterFamily->id);
-        //dd($pets);
         $species = (['Kat', 'Hond', 'Knaagdier', 'Vogel']);
         $relation = (['Partner', 'Kind', 'Ouder']);
+        // Encrypt ID in URL for security purposes
         $foster_id_crypt = Crypt::encryptString(auth()->user()->fosterFamily_id);
 
         return redirect()->route('fosterAccount', $foster_id_crypt);
@@ -176,7 +166,6 @@ class RegisteredUserController extends Controller
 
     public function storeShelter(Request $request)
     {
-
         // SHELTERS TABLE //
         $request->validate([
             'shelterName' => ['required', 'string'],
@@ -228,11 +217,12 @@ class RegisteredUserController extends Controller
         event(new Registered($user));
 
         Auth::login($user);
-
+        // Encrypt ID in URL for security purposes
         $shelter_id_crypt = Crypt::encryptString(auth()->user()->shelter_id);
         return redirect()->route('welcome', $shelter_id_crypt);
     }
 
+    // Update ShelterAccount page with User & Shelter information
     public function updateShelter(Request $request)
     {
         $id = $request->input('shelter_id');

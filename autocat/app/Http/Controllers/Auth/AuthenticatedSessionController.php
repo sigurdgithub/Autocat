@@ -54,11 +54,8 @@ class AuthenticatedSessionController extends Controller
     public function destroy(Request $request)
     {
         Auth::guard('web')->logout();
-
         $request->session()->invalidate();
-
         $request->session()->regenerateToken();
-
         return redirect('/');
     }
 
@@ -82,6 +79,7 @@ class AuthenticatedSessionController extends Controller
     // Route to shelterAccount
     public function getShelterAccount($id)
     {
+        // Decrypt ID & show shelterAccount details
         $shelterDecryptID = Crypt::decryptString($id);
         $user = User::find(auth()->user()->id);
         $shelter = Shelter::where('id', '=', $shelterDecryptID)->firstOrFail();
