@@ -38,10 +38,10 @@ class AuthenticatedSessionController extends Controller
         // Route to correct dashboard if shelter or foster
         if ($foster_id_crypt = auth()->user()->fosterFamily_id) {
             $foster_id_crypt = Crypt::encryptString(auth()->user()->fosterFamily_id);
-            return redirect()->route('notifications', $foster_id_crypt); //['fosterId' => $request->fosterFamily]);
+            return redirect()->route('welcome', $foster_id_crypt); //['fosterId' => $request->fosterFamily]);
         } elseif ($shelter_id_crypt = auth()->user()->shelter_id) {
             $shelter_id_crypt = Crypt::encryptString(auth()->user()->shelter_id);
-            return redirect()->route('shelterNotifications', $shelter_id_crypt);
+            return redirect()->route('welcome', $shelter_id_crypt);
         };
     }
 

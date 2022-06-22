@@ -26,6 +26,10 @@ Route::get('/privacyverklaring', function () {
     return view('privacy');
 });
 
+Route::get('/welkom', function () {
+    return view('welcome');
+})->name('welcome');
+
 // ------- LOGGED IN USERS -------
 Route::middleware('auth')->group(function () {
 
@@ -35,12 +39,13 @@ Route::middleware('auth')->group(function () {
     })->name('fosterDashboard');
 
     Route::get('/notifications/{fosterId}', [DashBoardController::class, 'showByFosterId'])->name('notifications');
-
     Route::get('/pleeggezinAccount/{id}', [AuthenticatedSessionController::class, 'getFosterAccount'])->name('fosterAccount');
 
     //CatDetail routes
     Route::get('/katDetail', [CatController::class, 'showEmptyCat']);
     Route::get('/katDetail/{id}', [CatController::class, 'showCatById'])->name('showCatById');
+    Route::get('/mijnKatten/{fosterId}', [CatController::class, 'showByFosterId']);
+
 
     //Medical Routes => CatDetail
     Route::get('/weighing_delete/{id}', [MedicalController::class, 'deleteWeighing'])->name('weighing_delete');

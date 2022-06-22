@@ -9,6 +9,7 @@ use Illuminate\Database\Eloquent\Builder;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Crypt;
+use Illuminate\Support\Facades\Auth;
 
 class CatController extends Controller
 {
@@ -518,5 +519,10 @@ class CatController extends Controller
         //Show cat by Id allowing immediate updating
         return redirect()->route('showCatById', ['id' => $cat->id]);
     }
-
+    public function showByFosterId($fosterId)
+    {
+        $foster = Auth::user()->fosterFamily_id;
+        $cats = CatController::getCatsByFosterId($foster);
+        return view('fosterCats', ['cats' => $cats, 'fosterFamily' => $foster]);
+    }
 }
