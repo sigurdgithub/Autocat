@@ -122,26 +122,6 @@
                             </div>
                         </div>
                     @endforeach
-
-                    <div class="col-md-4 stretch-card grid-margin">
-                        <div class="card card-img-holder">
-                            <div class="card">
-                                <div class="card-header bg-gradient-danger">
-                                    <img src="assets/images/dashboard/circle.svg" class="card-img-absolute"
-                                        alt="circle-image" />
-                                    <div class="row">
-                                        <h4 class="col-md-6 font-weight-normal mb-3"><b>Jade</b></h4>
-                                        <h5 class="col-md-6 font-weight-normal mb-3"><b>6 maanden</b></h5>
-                                    </div>
-                                </div>
-                                <div class="card-footer card-border-danger">
-                                    <div>In Asiel</div>
-                                    <div><a href="" class="text-black"><u>nvt</u></a></div>
-                                    <div class="mt-3"><a href=""><u>Meer info</u></a></div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
                 </div>
             </div>
         </div>

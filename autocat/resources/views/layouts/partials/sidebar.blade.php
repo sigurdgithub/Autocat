@@ -8,16 +8,15 @@
   $shelter_id_crypt = Crypt::encryptString(auth()->user()->shelter_id);
   @endphp
   <ul class="nav ">
-    <li class="nav-item info">
-      {{ Request::path() }}
-      <a class="{{Request::path() === 'notifications/$foster_id_crypt'? 'nav-link active active':'nav-link'}}"
+    <li class="{{Request::segment(1) == 'notifications'? 'nav-item info active':'nav-item info'}}">
+      <a class="nav-link"
         href="/notifications/{{$foster_id_crypt}}">
         <span class="menu-title">Dashboard</span>
         <i class="mdi mdi-view-dashboard menu-icon"></i>
       </a>
     </li>
-    <li class="nav-item danger">
-      <a class="{{Request::path() === 'mijnKatten'? 'nav-link active active':'nav-link'}}"
+    <li class="{{Request::segment(1) == 'mijnKatten'? 'nav-item danger active':'nav-item danger'}}">
+      <a class="nav-link"
         href="/mijnKatten/{{$foster_id_crypt}}">
         <span class="menu-title">Mijn Katten</span>
         <i class="mdi mdi-paw menu-icon"></i>
