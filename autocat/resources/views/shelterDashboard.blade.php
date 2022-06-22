@@ -143,8 +143,7 @@
                         <h4 class="col-md-8 text-muted">Selecteer hier de kat</h4>
                         <div class="col-md-4">
                             <select id="selectedCatMatch" name="catMatch" class="select-option form-control">
-                                <option class="option">Selecteer</option>
-                                {{ debug_to_console($cats) }}
+                                <option value="-1" class="option">Selecteer</option>
                                 @foreach ($cats as $cat)
                                     {{-- TODO: Make this == whatever the value a cat has for fosterFamily_id if not yet assigned --}}
                                     @if ($cat->fosterFamily_id == null)
@@ -237,7 +236,7 @@
                         <h4 class="col-md-8 text-muted">Selecteer hier het pleeggezin</h4>
                         <div class="col-md-4">
                             <select name="fosterFamilyMatch" class="select-option form-control">
-                                <option class="option">Selecteer</option>
+                                <option value="-1" class="option">Selecteer</option>
                                 @foreach ($fosterFamilies as $family)
                                     {{-- TODO: Make this == whatever the value a cat has for fosterFamily_id if not yet assigned --}}
                                     @if ($family->id != null)
@@ -449,6 +448,7 @@
             });
         }
         $(document).ready(function() {
+            // Notification modal
             $('select[name="fosterFamily"]').on('change', function() {
                 var fosterId = $(this).val();
                 if (fosterId) {
@@ -473,9 +473,11 @@
                     $('select[name="cat"]').empty();
                 }
             });
+
+            // Matchmaker event-handling
             $('select[name="catMatch"]').on('change', function() {
                 var catId = $(this).val();
-                if (catId) {
+                if (catId >= 0) {
                     $.ajax({
                         url: '/cat/ajax/' + catId,
                         type: "GET",
@@ -531,9 +533,10 @@
                     console.log("OOPs");
                 }
             });
+
             $('select[name="fosterFamilyMatch"]').on('change', function() {
                 var fosterFamilyId = $(this).val();
-                if (fosterFamilyId) {
+                if (fosterFamilyId >= 0) {
                     $.ajax({
                         url: '/fosterfamily/ajax/' + fosterFamilyId,
                         type: "GET",
@@ -569,6 +572,43 @@
                     });
                 } else {
                     current_foster = null;
+                }
+            });
+
+            $('select[name="fosterFamilyMatch"]').on('change', function() {
+                var fosterFamilyId = $(this).val();
+                if (fosterFamilyId) {
+                    $.ajax({
+                        url: '/asielDashboard/matchmaker/ajax/' + fosterFamilyId,
+                        type: "GET",
+                        dataType: "json",
+                        success: function(data) {
+                            current_foster = data;
+                            $('select[name="catMatch"]').empty();
+                            $('select[name="catMatch"]').append('<option value="-1" class="option">Selecteer</option>');
+                            data.forEach(element => {
+                                $('select[name="catMatch"]').append(`<option value="${element.id}" class="option">${element.name}</option>`);
+                            });
+                        }
+                    });
+                }
+            });
+            $('select[name="catMatch"]').on('change', function() {
+                var catId = $(this).val();
+                if (catId) {
+                    $.ajax({
+                        url: '/asielDashboard/matchmaker/cat/ajax/' + catId,
+                        type: "GET",
+                        dataType: "json",
+                        success: function(data) {
+                            current_foster = data;
+                            $('select[name="fosterFamilyMatch"]').empty();
+                            $('select[name="fosterFamilyMatch"]').append('<option value="-1" class="option">Selecteer</option>');
+                            data.forEach(element => {
+                                $('select[name="fosterFamilyMatch"]').append(`<option value="${element.id}" class="option">${element.firstName} ${element.lastName}</option>`);
+                            });
+                        }
+                    });
                 }
             });
         });

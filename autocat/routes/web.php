@@ -96,6 +96,8 @@ Route::middleware('auth')->group(function () {
             Route::get('/asielAccount/{id}', [AuthenticatedSessionController::class, 'getShelterAccount'])->name('shelterAccount');
 
             Route::get('/asielDashboard/ajax/{fosterId}', [DashBoardController::class, 'getCatsByFosterId']);
+            Route::get('/asielDashboard/matchmaker/ajax/{fosterId}', [DashBoardController::class, 'getCatsBySelectedFoster']);
+            Route::get('/asielDashboard/matchmaker/cat/ajax/{catId}', [DashBoardController::class, 'getFosterFamiliesBySelectedCat']);
             Route::get('/cat/ajax/{id}', [CatController::class, 'getCatById']);
             Route::get('/cats/ajax/{search}', [CatController::class, 'filterCatsByString']);
             Route::get('/fosterfamilies/ajax/{search}', [FosterFamilyController::class, 'filterFosterFamiliesByString']);
