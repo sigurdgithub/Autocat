@@ -24,7 +24,7 @@ class FosterFamilyController extends Controller
 
     /**
      * Get the amount of cats that a fosterFamily is currently housing
-     * @param integer $fosterFamilyId, the id of the fosterFamily we are interested in
+     * @param integer $fosterFamilyId the id of the fosterFamily we are interested in
      * @return integer the amount of cats that the given fosterFamily is currently housing
      */
     public static function getAmountOfCats($fosterFamilyId)
@@ -42,8 +42,8 @@ class FosterFamilyController extends Controller
 
     /**
      * Get the fosterFamily corresponding to a given cat
-     * @param integer $catId, the id of the cat of which we want to get the fosterFamily
-     * @return FosterFamily $fosterFamily, the fosterFamily corresponding to the given cat
+     * @param integer $catId the id of the cat of which we want to get the fosterFamily
+     * @return FosterFamily the fosterFamily corresponding to the given cat
      */
     public static function getFosterFamiliesByCatId($catId)
     {
@@ -54,8 +54,8 @@ class FosterFamilyController extends Controller
 
     /**
      * Get a fosterFamily with the given id
-     * @param integer $id, the id of the requested fosterFamily
-     * @return array $result, an json-encoded array containing the requested fosterFamily along with the hashed id and the current available spots
+     * @param integer $id the id of the requested fosterFamily
+     * @return array an json-encoded array containing the requested fosterFamily along with the hashed id and the current available spots
      */
     public function getFosterFamilyById($id)
     {
@@ -68,8 +68,8 @@ class FosterFamilyController extends Controller
 
     /**
      * Get all fosterPreferences of a FosterFamily
-     * @param integer $id, the id the FosterFamily that we want the preferences of
-     * @return array $result, a json-encoded array containing the preferences of the given fosterFamily along with their email, pets and roommates
+     * @param integer $id the id the FosterFamily that we want the preferences of
+     * @return array a json-encoded array containing the preferences of the given fosterFamily along with their email, pets and roommates
      */
     public function getPreferenceByFosterId($id)
     {
@@ -83,10 +83,10 @@ class FosterFamilyController extends Controller
 
     /**
      * Filter all fosterFamilies based on the given values for possible catPreferences
-     * @param array $value, an array of strings representing what catPreferences the fosterFamily should accept
-     * @param QueryBuilder $query, the query builder that we need to add aditional where clauses to based on the given values
-     * @param bool $noOr, an optional parameter indicating wether we want to AND instead of OR between our where clauses
-     * @return QueryBuilder $query, the given query builder appended by the where clauses for each given value
+     * @param array $value an array of strings representing what catPreferences the fosterFamily should accept
+     * @param QueryBuilder $query the query builder that we need to add aditional where clauses to based on the given values
+     * @param bool $noOr an optional parameter indicating wether we want to AND instead of OR between our where clauses
+     * @return QueryBuilder the given query builder appended by the where clauses for each given value
      */
     public static function filterByCatPref($value, $query, $noOr = false)
     {
@@ -190,10 +190,10 @@ class FosterFamilyController extends Controller
 
     /**
      * Filter all fosterFamilies based on the given values for their home situation
-     * @param array $value, an array of strings representing what home situations are NOT possible
-     * @param QueryBuilder $query, the query builder that we need to add aditional where clauses to based on the given values
-     * @param bool $noOr, an optional parameter indicating wether we want to AND instead of OR between our where clauses
-     * @return QueryBuilder $query, the given query builder appended by the where clauses for each given value
+     * @param array $value an array of strings representing what home situations are NOT possible
+     * @param QueryBuilder $query the query builder that we need to add aditional where clauses to based on the given values
+     * @param bool $noOr an optional parameter indicating wether we want to AND instead of OR between our where clauses
+     * @return QueryBuilder the given query builder appended by the where clauses for each given value
      */
     public static function filterHomeSituation($value, $query, $noOr = false)
     {
@@ -261,8 +261,8 @@ class FosterFamilyController extends Controller
 
     /**
      * Filter all fosterFamilies based on their name
-     * @param string $string, the string that we try to find in the name of the fosterFamilies
-     * @return array $result, a json-encoded array filled with all fosterFamilies whose name includes the given string
+     * @param string $string the string that we try to find in the name of the fosterFamilies
+     * @return array a json-encoded array filled with all fosterFamilies whose name includes the given string
      */
     public function filterFosterFamiliesByString($string)
     {
@@ -280,8 +280,8 @@ class FosterFamilyController extends Controller
 
     /**
      * Filter all fosterFamilies according to the selected parameters.
-     * @param Request $request, A POST-request object containing a possible parameter (which are arrays) for each filter option
-     * @return array $fosterFamilies, A json-encoded array containing all fosterFamilies that match the selected parameters, with the actual availableSpots and the hashed id
+     * @param Request $request A POST-request object containing a possible parameter (which are arrays) for each filter option
+     * @return array A json-encoded array containing all fosterFamilies that match the selected parameters, with the actual availableSpots and the hashed id
      */
     public function filterFosterFamilies(Request $request)
     {

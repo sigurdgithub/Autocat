@@ -73,6 +73,10 @@ class DashBoardController extends Controller
         return redirect()->route('shelterNotifications');
     }
 
+    /**
+     * Delete a notification
+     * @param integer $id the id of the notification to be deleted
+     */
     public function delete($id)
     {
         $notification = Notification::find($id);
@@ -87,6 +91,7 @@ class DashBoardController extends Controller
         }
     }
 
+    // Show all notifications that are sent to the shelter
     public function showShelterNotifications()
     {
         $notifications = NotificationController::getShelterNotifications();
@@ -96,6 +101,11 @@ class DashBoardController extends Controller
         return view('shelterDashboard', ['notifications' => $notifications, 'cats' => $cats, 'fosterFamilies' => $fosterFamilies]);
     }
 
+    /**
+     * Get the cats that have been assigned to a given fosterFamily in a json-encoded array
+     * @param integer $fosterId the id of the fosterFamily that we want to get the cats from
+     * @return array $cats a json-encoded array containing all cats (the name and id only) assigned to the given fosterFamily
+     */
     public function getCatsByFosterId($fosterId)
     {
         $cats = CatController::getCatsByFosterIdModal($fosterId);
@@ -104,8 +114,14 @@ class DashBoardController extends Controller
 
     // (AJAX) Functions for the matchmaker
 
-
-    private static function checkFostersOnCatPref($cat, $query) {
+    /**
+     * Apply a filter to the given query that filters the fosterFamilies based on the preferences of the cat that is given
+     * @param Cat $cat the cat on whose preferences is to be filtered
+     * @param QueryBuilder $query the query builder that we need to add aditional where clauses to based on the given cat
+     * @return QueryBuilder $query the given query builder appended by the where clauses for each preference of the given cat
+     */
+    private static function checkFostersOnCatPref($cat, $query) 
+    {
         $filterInput = [(CatController::getCatAgeCategory($cat) == "kitten" ? "kitten" : "adult")];
         if (isset($cat->preferences)) {
             $catPreferences = $cat->preferences;
@@ -130,10 +146,11 @@ class DashBoardController extends Controller
 
     /**
      * Get all fosterFamilies that can be matched to the selected cat
-     * @param $catId, The id of the selected cat
-     * @return $cats, Return json_encoded array of the fosterFamilies that can be placed with the selected cat
+     * @param integer $catId The id of the selected cat
+     * @return array $cats Return json_encoded array of the fosterFamilies that can be placed with the selected cat
      */
-    public function getFosterFamiliesBySelectedCat($catId) {
+    public function getFosterFamiliesBySelectedCat($catId) 
+    {
         if ($catId < 0 ) {return json_encode(Cat::whereNull("fosterFamily_id")->get());}
         else {
             $selectedCat = Cat::findOrFail($catId);
