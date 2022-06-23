@@ -13,8 +13,12 @@ use Illuminate\Support\Facades\Auth;
 
 class CatController extends Controller
 {
-    public static function getCatsByFosterId($fosterId)
-    {
+    /**
+     * Get the cats that have been assigned to a given fosterFamily
+     * @param integer $fosterId the id of the fosterFamily that we want to get the cats from
+     * @return array all cats assigned to the given fosterFamily
+     */
+    public static function getCatsByFosterId($fosterId) {
         $matchCase = ['fosterFamily_id' => $fosterId];
         $cats = Cat::where($matchCase)->get();
         //$notifications = Notification::all();
@@ -25,8 +29,12 @@ class CatController extends Controller
 
     }
 
-    public static function getCatAgeString($birthDate)
-    {
+    /**
+     * Convert the date of birth in a human readable string format
+     * @param Date $birthDate the date of birth to be converted in a human readable string format
+     * @return string the date of birth formatted in human readable string
+     */
+    public static function getCatAgeString($birthDate) {
         $carbonBirthDate = Carbon::parse($birthDate);
         $diffYears = $carbonBirthDate->DiffInYears(Carbon::now());
         $diffMonths = $carbonBirthDate->diffInMonths(Carbon::now());
@@ -40,9 +48,12 @@ class CatController extends Controller
         }
     }
 
-
-    public static function getCatsByFosterIdModal($fosterId)
-    {
+    /**
+     * Get the cats that have been assigned to a given fosterFamily, this is only used in the modal of the notifications
+     * @param integer $fosterId the id of the fosterFamily that we want to get the cats from
+     * @return array all cats (the name and id only) assigned to the given fosterFamily
+     */
+    public static function getCatsByFosterIdModal($fosterId) {
         $matchCase = ['fosterFamily_id' => $fosterId];
         $cats = Cat::select('id', 'name')->where($matchCase)->get();
         //$notifications = Notification::all();
@@ -53,8 +64,12 @@ class CatController extends Controller
 
     }
 
-    public function filterCatsByString($string) 
-    {
+    /**
+     * Filter all cats based on their name
+     * @param string $string the string that we try to find in the name of the cats
+     * @return array a json-encoded array filled with all cats whose name includes the given string
+     */
+    public function filterCatsByString($string) {
         $cats = DB::table('cats')->select('cats.*')->leftJoin('fosterFamilies', 'cats.fosterFamily_id', '=', 'fosterFamilies.id');
         $cats = $cats->where('cats.name', 'LIKE', '%'.$string.'%');
         $result = $cats->addSelect('fosterFamilies.dateOfBirth AS fosterBirth')->addSelect('fosterFamilies.firstName AS fosterFirstName')->addSelect('fosterFamilies.lastName AS fosterLastName')->get();
@@ -68,14 +83,19 @@ class CatController extends Controller
         return json_encode($result);
     }
 
-    public static function getCats()
-    {
+    // Returns all cats
+    public static function getCats() {
         $cats = Cat::all();
         return $cats;
     }
 
-    public static function filterPlacement($value, $query)
-    {
+    /**
+     * Apply a filter to the given query that filters on the placement options of the cats based on the given value
+     * @param array $value an array of strings that specify which placement options of cats should be filtered
+     * @param QueryBuilder $query the query builder that we need to add aditional where clauses to based on the given placement options given
+     * @return QueryBuilder the given query builder appended by the where clauses for each given value
+     */
+    public static function filterPlacement($value, $query) {
         if (is_array($value)) {
             $first = true;
             foreach ($value as $val) {
@@ -113,9 +133,13 @@ class CatController extends Controller
             }
         }
     }
-
-    public static function filterCharacter($value, $query)
-    {
+    /**
+     * Apply a filter to the given query that filters on the character of the cats based on the given value
+     * @param array $value an array of strings that specify which characters of cats should be filtered
+     * @param QueryBuilder $query the query builder that we need to add aditional where clauses to based on the given character-strings
+     * @return QueryBuilder the given query builder appended by the where clauses for each given value
+     */
+    public static function filterCharacter($value, $query) {
         if (is_array($value)) {
             $query->where(function ($query) use ($value) {
                 $first = true;
@@ -181,8 +205,13 @@ class CatController extends Controller
             }
         }
     }
-    public static function filterAge($value, $query)
-    {
+    /**
+     * Apply a filter to the given query that filters on the age of the cats based on the given value
+     * @param array $value an array of strings that specify which age categories of cats should be filtered
+     * @param QueryBuilder $query the query builder that we need to add aditional where clauses to based on the given values
+     * @return QueryBuilder the given query builder appended by the where clauses for each given value
+     */
+    public static function filterAge($value, $query) {
         if (is_array($value)) {
             $first = true;
             foreach ($value as $val) {
@@ -239,19 +268,24 @@ class CatController extends Controller
             }
         }
     }
-
-    public static function basicFilter($value, $query, $columnName, $optional = false)
-    {
+    /**
+     * A general filter that can be used to apply a filter on a given query
+     * @param array $value the value(s) that the given column needs to match
+     * @param QueryBuilder $query the query builder that we need to add aditional where clauses to based on the other parameters
+     * @param string $columnName the name of the column that is to be checked
+     * @return QueryBuilder the given query builder appended by the where clauses for each given value
+     */
+    public static function basicFilter($value, $query, $columnName) {
         if (!isset($value)) {
             return $query;
         }
         if (is_array($value)) {
             $first = true;
-            $query->where(function($query) use ($columnName, $value, $first, $optional) {
+            $query->where(function($query) use ($columnName, $value, $first) {
 
 
             foreach ($value as $val) {
-                if ($first || !$optional) {
+                if ($first) {
                     $first  = false;
                     $query = $query->where($columnName, $val);
                 } else {
@@ -265,6 +299,12 @@ class CatController extends Controller
         return $query;
     }
 
+    /**
+     * Get the category of ages in which a given cat is located at this moment in time
+     * @param Cat $cat the cat that we need an age category for
+     * @return string the age category the given cat is in. 
+     * <1year => kitten, <2years => adolescent, <8years => adult, >8years => senior
+     */
     public static function getCatAgeCategory($cat) {
         $catDate = new Carbon($cat->dateOfBirth);
         $kittenDate = Carbon::now()->subYear();
@@ -276,8 +316,12 @@ class CatController extends Controller
         else  { return "senior"; }
     }
 
-    public function filterCats(Request $request)
-    {
+    /**
+     * Filter all cats according to the selected parameters.
+     * @param Request $request A POST-request object containing a possible parameter (which are arrays) for each filter option
+     * @return array A json-encoded array containing all cats that match the selected parameters
+     */
+    public function filterCats(Request $request) {
         /*$validation = $request->validate([
             'status'      => 'required',
             'email'     => 'required',
