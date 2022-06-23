@@ -582,24 +582,6 @@
                         }
                     });
         
-                    $('select[name="fosterFamilyMatch"]').on('change', function() {
-                        var fosterFamilyId = $(this).val();
-                        if (false) { // TODO Fix this
-                            $.ajax({
-                                url: '/asielDashboard/matchmaker/ajax/' + fosterFamilyId,
-                                type: "GET",
-                                dataType: "json",
-                                success: function(data) {
-                                    current_foster = data;
-                                    $('select[name="catMatch"]').empty();
-                                    $('select[name="catMatch"]').append('<option value="-1" class="option">Selecteer</option>');
-                                    data.forEach(element => {
-                                        $('select[name="catMatch"]').append(`<option value="${element.id}" class="option">${element.name}</option>`);
-                                    });
-                                }
-                            });
-                        }
-                    });
                     $('select[name="catMatch"]').on('change', function() {
                         var catId = $(this).val();
                         if (catId) {
