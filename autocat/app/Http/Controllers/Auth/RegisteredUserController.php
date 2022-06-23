@@ -124,6 +124,7 @@ class RegisteredUserController extends Controller
     }
 
     // Update FosterAccount page with User, FosterPreference & FosterFamily information
+    // Same page as registerpage
     public function updateFoster(Request $request, $user)
     {
         $id = $request->input('fosterFamily_id');
@@ -223,6 +224,7 @@ class RegisteredUserController extends Controller
     }
 
     // Update ShelterAccount page with User & Shelter information
+    // Same page as registerpage
     public function updateShelter(Request $request)
     {
         $id = $request->input('shelter_id');

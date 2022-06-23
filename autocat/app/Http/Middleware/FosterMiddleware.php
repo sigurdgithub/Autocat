@@ -14,6 +14,7 @@ class FosterMiddleware
      * @param  \Closure(\Illuminate\Http\Request): (\Illuminate\Http\Response|\Illuminate\Http\RedirectResponse)  $next
      * @return \Illuminate\Http\Response|\Illuminate\Http\RedirectResponse
      */
+    // FosterMiddleware restricts POST actions
     public function handle(Request $request, Closure $next)
     {
         if (!auth()->check() || auth()->user()->fosterFamily_id == null) {

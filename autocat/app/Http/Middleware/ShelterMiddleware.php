@@ -14,6 +14,7 @@ class ShelterMiddleware
      * @param  \Closure(\Illuminate\Http\Request): (\Illuminate\Http\Response|\Illuminate\Http\RedirectResponse)  $next
      * @return \Illuminate\Http\Response|\Illuminate\Http\RedirectResponse
      */
+    // ShelterMiddleware restricts routing to pages for fosters
     public function handle(Request $request, Closure $next)
     {
         if (!auth()->check() || auth()->user()->shelter_id == null) {
